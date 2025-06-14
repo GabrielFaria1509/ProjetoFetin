@@ -17,10 +17,14 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.extension, size: 80, color: Color(0xFF4A90E2)),
-              const SizedBox(height: 16),
+              Image.asset(
+                'assets/images/logo.jpg',
+                height: 120,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 24),
               const Text(
-                'Bem-vindo ao app TISM',
+                'Bem-vindo ao app TISM ',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
