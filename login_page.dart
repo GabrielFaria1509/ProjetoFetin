@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:tism/views/home/home_page.dart'; // Importe a HomePage aqui
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nomeController = TextEditingController();
+    final TextEditingController senhaController = TextEditingController();
+
     return Scaffold(
-      backgroundColor: const Color(0xFFE6F2FF), // Fundo azul claro suave
+      backgroundColor: const Color(0xFFE6F2FF),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.extension, // ícone de peça de quebra-cabeça
-                size: 80,
-                color: Color(0xFF4A90E2), // azul
-              ),
-
+              const Icon(Icons.extension, size: 80, color: Color(0xFF4A90E2)),
               const SizedBox(height: 16),
               const Text(
                 'Bem-vindo ao app TISM',
@@ -30,6 +29,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               TextField(
+                controller: nomeController,
                 decoration: InputDecoration(
                   labelText: 'Nome de usuário',
                   prefixIcon: const Icon(Icons.person),
@@ -42,6 +42,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextField(
+                controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Senha',
@@ -58,22 +59,38 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A90E2), // Azul
+                    backgroundColor: const Color(0xFF4A90E2),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   onPressed: () {
-                    // ação de login
+                    final nome = nomeController.text;
+                    final senha = senhaController.text;
+
+                    if (nome.isNotEmpty && senha == '1234') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(nomeUsuario: nome),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Usuário ou senha inválidos'),
+                        ),
+                      );
+                    }
                   },
                   child: const Text('Entrar', style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(height: 16),
               const Text(
-                'Feito com empatia 💙',
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+                'Tudo o que você precisa saber sobre o TEA em um clique 💙',
+                style: TextStyle(fontSize: 12, color: Colors.black54),
               ),
             ],
           ),
