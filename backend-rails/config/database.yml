@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Configurações básicas para conexão
+  host: localhost
+  username: postgres           # Seu usuário PostgreSQL (troque se necessário)
+  password: postgres
+  port: 5432
+
+development:
+  <<: *default
+  database: tism_development
+
+test:
+  <<: *default
+  database: tism_test
+
+production:
+  <<: *default
+  database: tism_production
+  username: tism
+  password: <%= ENV["TISM_DATABASE_PASSWORD"] %>
+  # Use variável de ambiente para segurança em produção
