@@ -1,4 +1,4 @@
-<img src="frontend-flutter/tism/assets/images/TISM-logo.png" width="700" />
+<img src="frontend-flutter/tism/assets/images/TISM-logo.png" width="699" />
 
 ## *Tudo o que você precisa saber sobre o TEA em um clique 💙*
 
