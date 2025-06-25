@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tism/constants/colors.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
@@ -10,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Página Inicial'),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: tismAqua,
       ),
       body: Center(
         child: Column(

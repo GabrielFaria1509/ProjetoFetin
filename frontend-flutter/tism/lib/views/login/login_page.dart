@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/views/home/home_page.dart'; // Importe a HomePage aqui
+import 'package:tism/constants/colors.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -28,7 +29,7 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF4A90E2),
+                  color: tismAqua,
                 ),
               ),
               const SizedBox(height: 32),
@@ -43,7 +44,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                      borderSide: const BorderSide(color: tismAqua, width: 2),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -66,7 +67,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                      borderSide: const BorderSide(color: tismAqua, width: 2),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -81,7 +82,7 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A90E2),
+                    backgroundColor: tismAqua,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),

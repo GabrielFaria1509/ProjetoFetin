@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tism/constants/colors.dart';
 import 'package:tism/views/login/login_page.dart';
 import 'package:tism/views/home/home_page.dart'; // Importe sua HomePage
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TISM App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: tismAqua),
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginPage(),

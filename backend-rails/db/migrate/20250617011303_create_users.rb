@@ -9,6 +9,10 @@ class CreateUsers < ActiveRecord::Migration[7.2]
       t.string :bio
       t.string :location
       t.string :website
+      t.boolean :is_admin, default: false
+      t.boolean :is_active, default: true
+      t.datetime :last_login_at
+      t.date :date_of_birth
       t.timestamps
     end
   end
