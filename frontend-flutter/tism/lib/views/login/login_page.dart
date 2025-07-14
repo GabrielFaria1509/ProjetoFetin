@@ -1,15 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:tism/views/home/home_page.dart'; // Importe a HomePage aqui
 import 'package:tism/constants/colors.dart';
+import 'package:tism/views/home/home_page.dart';
+import 'package:tism/views/login/register_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController nomeController = TextEditingController();
-    final TextEditingController senhaController = TextEditingController();
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
+
+  final List<Map<String, String>> usuarios = [];
+
+  void _registrarUsuario(String nome, String senha) {
+    setState(() {
+      usuarios.add({'nome': nome, 'senha': senha});
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Usuário cadastrado com sucesso!')),
+    );
+  }
+
+  void _tentarLogin() {
+    final nome = nomeController.text.trim();
+    final senha = senhaController.text;
+
+    final usuarioValido = usuarios.any(
+      (u) => u['nome'] == nome && u['senha'] == senha,
+    );
+
+    if (usuarioValido) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(nomeUsuario: nome)),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Usuário ou senha inválidos')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE6F2FF),
       body: Center(
@@ -18,11 +55,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/TISM-logo.png',
-                height: 80,
-                fit: BoxFit.contain,
-              ),
+              Image.asset('assets/images/TISM-logo.png', height: 80),
               const SizedBox(height: 24),
               const Text(
                 'Olá, seja bem vindo(a)!',
@@ -39,17 +72,13 @@ class LoginPage extends StatelessWidget {
                   labelText: 'Nome de usuário',
                   prefixIcon: const Icon(Icons.person),
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: tismAqua, width: 2),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: Colors.black),
-                    ),
+                    borderRadius: BorderRadius.circular(24),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24),
+                    borderSide: const BorderSide(color: tismAqua, width: 2),
+                  ),
                   filled: true,
                   fillColor: Colors.white,
                 ),
@@ -59,20 +88,16 @@ class LoginPage extends StatelessWidget {
                 controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    labelText: 'Senha',
-                    prefixIcon: const Icon(Icons.lock),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: Colors.black),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: tismAqua, width: 2),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: Colors.black),
-                    ),
+                  labelText: 'Senha',
+                  prefixIcon: const Icon(Icons.lock),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24),
+                    borderSide: const BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24),
+                    borderSide: const BorderSide(color: tismAqua, width: 2),
+                  ),
                   filled: true,
                   fillColor: Colors.white,
                 ),
@@ -88,30 +113,25 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {
-                    final nome = nomeController.text;
-                    final senha = senhaController.text;
-
-                    if (nome.isNotEmpty && senha == '1234') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(nomeUsuario: nome),
-                        ),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Usuário ou senha inválidos'),
-                        ),
-                      );
-                    }
-                  },
+                  onPressed: _tentarLogin,
                   child: const Text(
-                    'Entrar', 
+                    'Entrar',
                     style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
+                  ),
                 ),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          RegisterPage(onRegister: _registrarUsuario),
+                    ),
+                  );
+                },
+                child: const Text('Ainda não tem conta? Cadastre-se'),
               ),
               const SizedBox(height: 16),
               const Text(
