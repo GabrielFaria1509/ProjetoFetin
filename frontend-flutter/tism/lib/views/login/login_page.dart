@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   );
                 },
-                child: const Text('Ainda não tem conta? Cadastre-se'),
+                child: const Text('Ainda não tem conta ? Cadastre-se'),
               ),
               const SizedBox(height: 16),
               const Text(
