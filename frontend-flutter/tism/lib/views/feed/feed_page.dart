@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/views/feed/resources_tab.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -9,9 +8,7 @@ class FeedPage extends StatefulWidget {
   State<FeedPage> createState() => _FeedPageState();
 }
 
-class _FeedPageState extends State<FeedPage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _FeedPageState extends State<FeedPage> {
   String selectedCategory = 'Todos';
   final List<String> categories = [
     'Todos',
@@ -21,17 +18,7 @@ class _FeedPageState extends State<FeedPage>
     'Educação',
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
 
   final List<Map<String, dynamic>> mockContent = [
     {
@@ -73,18 +60,8 @@ class _FeedPageState extends State<FeedPage>
       appBar: AppBar(
         title: const Text('Feed Educativo'),
         backgroundColor: tismAqua,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'Artigos'),
-            Tab(text: 'Recursos'),
-          ],
-        ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [_buildArticlesTab(), const ResourcesTab()],
-      ),
+      body: _buildArticlesTab(),
     );
   }
 

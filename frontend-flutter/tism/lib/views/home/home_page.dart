@@ -33,9 +33,10 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 32),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 2,
+                crossAxisCount: 1,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
+                childAspectRatio: 3,
                 children: [
                   _buildMenuCard(
                     context,
@@ -52,14 +53,7 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => const ChatScreen()),
                     ),
                   ),
-                  _buildMenuCard(
-                    context,
-                    'Recursos',
-                    Icons.library_books,
-                    () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Em breve!')),
-                    ),
-                  ),
+
                   _buildMenuCard(
                     context,
                     'Perfil',
