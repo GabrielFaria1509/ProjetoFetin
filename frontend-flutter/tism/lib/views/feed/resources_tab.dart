@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:tism/views/pdf/pdf_viewer.dart';
 
 class ResourcesTab extends StatefulWidget {
   const ResourcesTab({super.key});
@@ -11,42 +11,91 @@ class ResourcesTab extends StatefulWidget {
 
 class _ResourcesTabState extends State<ResourcesTab> {
   String selectedType = 'Todos';
-  final List<String> resourceTypes = ['Todos', 'Guias', 'Checklists', 'Artigos', 'Manuais'];
+  final List<String> resourceTypes = ['Todos', 'Guias', 'Checklists', 'Manuais', 'Artigos'];
 
   final List<Map<String, dynamic>> mockResources = [
     {
-      'title': 'Pasta Completa - Recursos TEA',
-      'description': 'Acesso a todos os documentos sobre TEA',
-      'type': 'Todos',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
-      'icon': Icons.folder_open
-    },
-    {
-      'title': 'Cartilha dos Direitos',
-      'description': 'Direitos fundamentais da pessoa com autismo',
+      'title': 'Guia TEA Completo',
+      'description': 'Manual abrangente sobre TEA',
       'type': 'Guias',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
-      'icon': Icons.gavel
+      'assetPath': 'assets/pdfs/guia-tea.pdf',
+      'icon': Icons.book
     },
     {
-      'title': 'Protocolos de Diagnóstico',
-      'description': 'Ferramentas para identificação precoce',
-      'type': 'Checklists',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
-      'icon': Icons.checklist_rtl
-    },
-    {
-      'title': 'Manuais de Intervenção',
-      'description': 'Estratégias terapêuticas comprovadas',
-      'type': 'Manuais',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
+      'title': 'Compreendendo o Autismo',
+      'description': 'Fundamentos e características',
+      'type': 'Guias',
+      'assetPath': 'assets/pdfs/Compreendendo o Autismo.pdf',
       'icon': Icons.psychology
     },
     {
-      'title': 'Artigos Científicos',
-      'description': 'Pesquisas e estudos atualizados',
+      'title': 'Primeiros Sintomas',
+      'description': 'Identificação precoce do TEA',
+      'type': 'Checklists',
+      'assetPath': 'assets/pdfs/primeirosSintomas .pdf',
+      'icon': Icons.checklist_rtl
+    },
+    {
+      'title': 'Intervenções Psicoeducacionais',
+      'description': 'Estratégias terapêuticas',
+      'type': 'Manuais',
+      'assetPath': 'assets/pdfs/intervencoes_psicoeducacionais.pdf',
+      'icon': Icons.healing
+    },
+    {
+      'title': 'Escolarização de Alunos com Autismo',
+      'description': 'Inclusão escolar e adaptações',
+      'type': 'Manuais',
+      'assetPath': 'assets/pdfs/escolarizacaoAlunosComAutismo.pdf',
+      'icon': Icons.school
+    },
+    {
+      'title': 'Família e Autismo',
+      'description': 'Orientações para familiares',
+      'type': 'Guias',
+      'assetPath': 'assets/pdfs/familia e autismo.pdf',
+      'icon': Icons.family_restroom
+    },
+    {
+      'title': 'Competência Social no Autismo',
+      'description': 'Desenvolvimento de habilidades sociais',
+      'type': 'Manuais',
+      'assetPath': 'assets/pdfs/competenciasocialautismo.pdf',
+      'icon': Icons.people
+    },
+    {
+      'title': 'Políticas de Autismo no Brasil',
+      'description': 'Legislação e políticas públicas',
       'type': 'Artigos',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
+      'assetPath': 'assets/pdfs/politicasAutismonoBrasil.pdf',
+      'icon': Icons.gavel
+    },
+    {
+      'title': 'Visão Geral: Autismo e Asperger',
+      'description': 'Diferenças e características',
+      'type': 'Artigos',
+      'assetPath': 'assets/pdfs/visa~o geral autismo e asperger.pdf',
+      'icon': Icons.visibility
+    },
+    {
+      'title': 'Um Olhar Sobre o Autismo',
+      'description': 'Especificações e características',
+      'type': 'Artigos',
+      'assetPath': 'assets/pdfs/UM-OLHAR-SOBRE-O-AUTISMO-E-SUAS-ESPECIFICACｸO~ES.pdf',
+      'icon': Icons.remove_red_eye
+    },
+    {
+      'title': 'Autismo: Perda de Contato',
+      'description': 'Aspectos comportamentais',
+      'type': 'Artigos',
+      'assetPath': 'assets/pdfs/Autismo_Perda_de_contato_com_a_realizade.pdf',
+      'icon': Icons.psychology_alt
+    },
+    {
+      'title': 'Pesquisa Científica TEA',
+      'description': 'Estudo acadêmico sobre TEA',
+      'type': 'Artigos',
+      'assetPath': 'assets/pdfs/Viana+et+al.+-+5+RSD.pdf',
       'icon': Icons.science
     },
   ];
@@ -94,7 +143,7 @@ class _ResourcesTabState extends State<ResourcesTab> {
                 resource['title'],
                 resource['description'],
                 resource['icon'],
-                () => _openPDF(resource['url']),
+                () => _openPDF(resource['title'], resource['assetPath']),
               );
             },
           ),
@@ -131,36 +180,15 @@ class _ResourcesTabState extends State<ResourcesTab> {
     );
   }
 
-  Future<void> _openPDF(String url) async {
-    try {
-      final Uri uri = Uri.parse(url);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(
-          uri,
-          mode: LaunchMode.externalApplication,
-        );
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Abrindo Google Drive...'),
-              backgroundColor: tismAqua,
-              duration: const Duration(seconds: 2),
-            ),
-          );
-        }
-      } else {
-        throw 'Não foi possível abrir o link';
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Erro ao abrir. Verifique se tem o Google Drive instalado.'),
-            backgroundColor: Colors.red,
-            duration: Duration(seconds: 3),
-          ),
-        );
-      }
-    }
+  void _openPDF(String title, String assetPath) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFViewer(
+          title: title,
+          assetPath: assetPath,
+        ),
+      ),
+    );
   }
 }

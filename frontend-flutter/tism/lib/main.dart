@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkLoginStatus() async {
     final user = await UserService.getUser();
-    
+
     if (mounted) {
       if (user != null) {
         Navigator.pushReplacement(
@@ -60,9 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: tismAqua,
-      body: const Center(
-        child: CircularProgressIndicator(color: Colors.white),
-      ),
+      body: const Center(child: CircularProgressIndicator(color: Colors.white)),
     );
   }
 }
