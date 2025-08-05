@@ -15,46 +15,39 @@ class _ResourcesTabState extends State<ResourcesTab> {
 
   final List<Map<String, dynamic>> mockResources = [
     {
-      'title': 'Cartilha dos Direitos da Pessoa com Autismo',
-      'description': 'Direitos fundamentais e legislação',
+      'title': 'Pasta Completa - Recursos TEA',
+      'description': 'Acesso a todos os documentos sobre TEA',
+      'type': 'Todos',
+      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
+      'icon': Icons.folder_open
+    },
+    {
+      'title': 'Cartilha dos Direitos',
+      'description': 'Direitos fundamentais da pessoa com autismo',
       'type': 'Guias',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB',
+      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
       'icon': Icons.gavel
     },
     {
-      'title': 'Protocolo de Identificação Precoce',
-      'description': 'Sinais de alerta e diagnóstico',
+      'title': 'Protocolos de Diagnóstico',
+      'description': 'Ferramentas para identificação precoce',
       'type': 'Checklists',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB',
+      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
       'icon': Icons.checklist_rtl
     },
     {
-      'title': 'Estratégias de Intervenção',
-      'description': 'Técnicas terapêuticas e educacionais',
+      'title': 'Manuais de Intervenção',
+      'description': 'Estratégias terapêuticas comprovadas',
       'type': 'Manuais',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB',
+      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
       'icon': Icons.psychology
     },
     {
-      'title': 'Pesquisas e Estudos Científicos',
-      'description': 'Artigos acadêmicos atualizados',
+      'title': 'Artigos Científicos',
+      'description': 'Pesquisas e estudos atualizados',
       'type': 'Artigos',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB',
+      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB?usp=sharing',
       'icon': Icons.science
-    },
-    {
-      'title': 'Orientações para Famílias',
-      'description': 'Suporte e acompanhamento familiar',
-      'type': 'Guias',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB',
-      'icon': Icons.family_restroom
-    },
-    {
-      'title': 'Inclusão Escolar e Social',
-      'description': 'Práticas inclusivas e adaptações',
-      'type': 'Manuais',
-      'url': 'https://drive.google.com/drive/folders/1WAolw5u1-G3S08tMFuwGZJXBRPM7qgoB',
-      'icon': Icons.school
     },
   ];
 
@@ -142,17 +135,29 @@ class _ResourcesTabState extends State<ResourcesTab> {
     try {
       final Uri uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Abrindo Google Drive...'),
+              backgroundColor: tismAqua,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
       } else {
-        throw 'Não foi possível abrir';
+        throw 'Não foi possível abrir o link';
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Abrindo pasta de recursos...'),
-            backgroundColor: tismAqua,
-            duration: const Duration(seconds: 2),
+          const SnackBar(
+            content: Text('Erro ao abrir. Verifique se tem o Google Drive instalado.'),
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 3),
           ),
         );
       }
