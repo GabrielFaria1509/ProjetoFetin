@@ -32,11 +32,8 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 1,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 3,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 children: [
                   _buildMenuCard(
                     context,
@@ -75,24 +72,25 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildMenuCard(BuildContext context, String title, IconData icon, VoidCallback onTap) {
-    return Card(
-      elevation: 4,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 48, color: tismAqua),
-              const SizedBox(height: 12),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center,
-              ),
-            ],
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Card(
+        elevation: 4,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(8),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: [
+                Icon(icon, size: 40, color: tismAqua),
+                const SizedBox(width: 16),
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ),
         ),
       ),
