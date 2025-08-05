@@ -19,7 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     // Mensagem de boas-vindas
     _messages.add(ChatMessage(
-      text: '👋 Oi! Que bom ter você aqui! \n\nSou seu assistente especializado em autismo e estou aqui para te apoiar com informações práticas e acolhedoras sobre TEA.\n\n💡 Pode me perguntar sobre:\n• Primeiros sinais e diagnóstico\n• Terapias que realmente funcionam\n• Dicas para escola e inclusão\n• Apoio para famílias\n• Direitos e benefícios\n\n🗣️ Seja específico nas suas perguntas - assim posso te ajudar melhor!',
+      text: '👋 Oi! Sou especialista em TEA.\n\nPosso ajudar com:\n• Sintomas e diagnóstico\n• Terapias\n• Escola\n• Família\n• Direitos\n\n💡 Seja direto: "Como identificar autismo?" ou "Que terapias funcionam?"',
       isUser: false,
     ));
   }

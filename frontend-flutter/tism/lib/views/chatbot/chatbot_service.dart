@@ -29,64 +29,64 @@ class ChatbotService {
     
     // Saudações
     if (msg.contains('oi') || msg.contains('olá') || msg.contains('bom dia') || msg.contains('boa tarde') || msg.contains('boa noite')) {
-      return '👋 Olá! Que bom ter você aqui! Sou seu assistente especializado em autismo e estou aqui para te apoiar. Pode me perguntar qualquer coisa sobre TEA - desde os primeiros sinais até dicas práticas do dia a dia. O que você gostaria de saber?';
+      return '👋 Oi! Sou especialista em TEA. Pode perguntar sobre sintomas, diagnóstico, terapias, escola ou direitos. Como posso ajudar?';
     }
     
     // Agradecimentos
     if (msg.contains('obrigad') || msg.contains('valeu') || msg.contains('brigad')) {
-      return '😊 Fico muito feliz em poder ajudar! Lembre-se: você não está sozinho nessa jornada. Cada pessoa com autismo é única e especial, e cada pequeno passo é uma grande conquista. Sempre que precisar, estarei aqui!';
+      return '😊 Por nada! Sempre que precisar, estarei aqui. Cada pessoa com autismo é única e especial!';
     }
     
-    // TEA Geral - Explicação acessível
-    if (msg.contains('o que é') && (msg.contains('autismo') || msg.contains('tea'))) {
-      return '💙 O autismo (TEA) é uma forma diferente de ver e sentir o mundo. Imagine que cada pessoa tem um "sistema operacional" único no cérebro:\n\n🧠 Algumas pessoas processam informações de forma diferente\n💬 Podem se comunicar de maneiras únicas\n👥 Têm seu próprio jeito de se relacionar\n🎯 Podem ter interesses super intensos em coisas específicas\n\nNão é doença - é uma condição neurológica que faz parte de quem a pessoa é. E cada pessoa com autismo é completamente única!';
+    // TEA Geral
+    if ((msg.contains('o que é') || msg.contains('que é')) && (msg.contains('autismo') || msg.contains('tea'))) {
+      return '🧠 TEA é uma condição neurológica que afeta:\n• Comunicação\n• Interação social\n• Comportamentos\n\nCada pessoa é única - não é doença, é uma forma diferente de ver o mundo!';
     }
     
     if (msg.contains('autismo') || msg.contains('tea')) {
-      return '🌟 O autismo é como ter um cérebro que funciona de forma especial! Pessoas com TEA podem ter talentos incríveis, memória fantástica, atenção aos detalhes e formas únicas de ver o mundo. É uma diferença, não um defeito!';
+      return '💙 Autismo é ter um cérebro especial! Pessoas com TEA podem ter talentos incríveis e formas únicas de ver o mundo.';
     }
     
-    // Sintomas - Linguagem mais humana
-    if (msg.contains('sintoma') || msg.contains('sinal') || msg.contains('como identificar') || msg.contains('como saber')) {
-      return '🔍 Sinais que podem indicar autismo (lembre-se: só um profissional pode confirmar):\n\n👀 **Comunicação:**\n• Pouco contato visual\n• Demora para falar ou fala de forma diferente\n• Repete palavras ou frases\n\n🤝 **Relacionamento:**\n• Prefere brincar sozinho\n• Dificuldade para fazer amigos\n• Não aponta para mostrar coisas\n\n🔄 **Comportamentos:**\n• Movimentos repetitivos (balançar, bater palmas)\n• Rotinas muito rígidas\n• Interesses muito específicos\n\n💡 Cada criança é única - alguns sinais podem aparecer, outros não!';
+    // Sintomas
+    if (msg.contains('sintoma') || msg.contains('sinal') || msg.contains('identificar') || msg.contains('como saber')) {
+      return '🔍 Principais sinais:\n\n👀 Comunicação:\n• Pouco contato visual\n• Atraso na fala\n• Repete palavras\n\n🤝 Social:\n• Prefere brincar sozinho\n• Dificuldade para fazer amigos\n\n🔄 Comportamento:\n• Movimentos repetitivos\n• Rotinas rígidas\n• Interesses específicos\n\n⚠️ Só profissional pode diagnosticar!';
     }
     
-    // Diagnóstico - Mais acolhedor
-    if (msg.contains('diagnóstico') || msg.contains('como diagnosticar') || msg.contains('médico')) {
-      return '🏥 **Como funciona o diagnóstico:**\n\nO diagnóstico é como montar um quebra-cabeças - o profissional observa vários aspectos da vida da pessoa:\n\n👨‍⚕️ **Quem procurar:**\n• Neuropediatra (para crianças)\n• Psiquiatra ou psicólogo especializado\n• Equipe multidisciplinar\n\n📋 **O que acontece:**\n• Conversas com a família\n• Observação do comportamento\n• Testes específicos (quando necessário)\n• Acompanhamento ao longo do tempo\n\n⏰ **Quando:** Pode ser feito desde bem pequeno (18 meses)\n\n💙 Lembre-se: o diagnóstico é o primeiro passo para conseguir o apoio certo!';
+    // Diagnóstico
+    if (msg.contains('diagnóstico') || msg.contains('médico') || msg.contains('profissional')) {
+      return '🏥 Diagnóstico:\n\n👨‍⚕️ Procure:\n• Neuropediatra\n• Psiquiatra\n• Psicólogo especializado\n\n📋 Processo:\n• Conversa com família\n• Observação comportamental\n• Testes específicos\n\n⏰ Pode ser feito desde 18 meses\n💙 É o primeiro passo para apoio adequado!';
     }
     
-    // Terapias - Explicação prática
+    // Terapias
     if (msg.contains('terapia') || msg.contains('tratamento') || msg.contains('aba') || msg.contains('ajuda')) {
-      return '🎯 **Terapias que podem ajudar muito:**\n\n🧩 **ABA (Análise do Comportamento):**\nEnsina habilidades do dia a dia de forma divertida e estruturada\n\n🗣️ **Fonoaudiologia:**\nAjuda na comunicação - falar, entender e se expressar\n\n🤲 **Terapia Ocupacional:**\nEnsina atividades práticas como escovar dentes, amarrar sapatos\n\n💭 **Psicoterapia:**\nAjuda com sentimentos e emoções\n\n🎵 **Outras opções:**\nMusicoterapia, equoterapia, natação...\n\n✨ **O segredo:** Cada pessoa precisa de um "mix" diferente de terapias. O importante é começar cedo e ser consistente!';
+      return '🎯 Terapias principais:\n\n🧩 ABA - ensina habilidades práticas\n🗣️ Fonoaudiologia - comunicação\n🤲 Terapia Ocupacional - atividades diárias\n💭 Psicoterapia - emoções\n🎵 Outras: música, equoterapia, natação\n\n✨ Cada pessoa precisa de um mix diferente!';
     }
     
-    // Educação - Mais esperançoso
+    // Educação
     if (msg.contains('escola') || msg.contains('educação') || msg.contains('inclusão') || msg.contains('estudar')) {
-      return '🏫 **Escola e autismo - sim, é possível!**\n\n📚 **Seus direitos:**\n• Toda criança tem direito à educação\n• A escola deve se adaptar à criança\n• Apoio especializado quando necessário\n\n👩‍🏫 **Como funciona:**\n• Professor de apoio (se precisar)\n• Adaptações nas atividades\n• Ambiente mais tranquilo para provas\n• Comunicação constante família-escola\n\n💡 **Dicas importantes:**\n• Converse sempre com os professores\n• Explique as necessidades do seu filho\n• Celebre cada conquista, por menor que seja\n• Lembre-se: cada criança aprende no seu tempo\n\n🌟 Muitas crianças com autismo se dão super bem na escola!';
+      return '🏫 Escola e autismo:\n\n📚 Direitos:\n• Educação garantida por lei\n• Escola deve se adaptar\n• Professor de apoio se necessário\n\n💡 Dicas:\n• Converse com professores\n• Explique necessidades da criança\n• Celebre cada conquista\n\n🌟 Muitas crianças com TEA se dão bem na escola!';
     }
     
-    // Família - Mais acolhedor e prático
-    if (msg.contains('família') || msg.contains('pais') || msg.contains('como ajudar') || msg.contains('mãe') || msg.contains('pai')) {
-      return '👨‍👩‍👧‍👦 **Para famílias - vocês são incríveis!**\n\n💙 **Primeiros passos:**\n• Aceite que seu filho é perfeito do jeito que é\n• Aprenda sobre autismo, mas lembre-se: seu filho é único\n• Conecte-se com outras famílias\n\n🏠 **No dia a dia:**\n• Crie rotinas previsíveis (café da manhã, banho, dormir)\n• Use comunicação visual (desenhos, fotos)\n• Celebre pequenas conquistas\n• Tenha paciência - desenvolvimento leva tempo\n\n🤝 **Cuidando de você:**\n• Peça ajuda quando precisar\n• Reserve tempo para si mesmo\n• Não se compare com outras famílias\n• Confie no seu instinto de pai/mãe\n\n🌟 Você conhece seu filho melhor que ninguém!';
+    // Família
+    if (msg.contains('família') || msg.contains('pais') || msg.contains('mãe') || msg.contains('pai') || msg.contains('como ajudar')) {
+      return '👨‍👩‍👧‍👦 Para famílias:\n\n💙 Aceite seu filho como ele é\n🏠 Crie rotinas previsíveis\n📸 Use comunicação visual\n🎉 Celebre pequenas conquistas\n🤝 Conecte-se com outras famílias\n⏰ Tenha paciência\n\n🌟 Você conhece seu filho melhor que ninguém!';
     }
     
-    // Comportamentos - Mais empático
+    // Comportamentos
     if (msg.contains('comportamento') || msg.contains('crise') || msg.contains('birra') || msg.contains('agressivo')) {
-      return '🧘‍♀️ **Entendendo comportamentos difíceis:**\n\nPrimeiro: comportamentos "difíceis" são formas de comunicação!\n\n🔍 **Por que acontece:**\n• Sobrecarga sensorial (muito barulho, luz)\n• Mudança na rotina\n• Frustração por não conseguir se expressar\n• Cansaço ou fome\n\n😌 **O que fazer:**\n• Mantenha a calma (respire fundo!)\n• Tente identificar o que causou\n• Ofereça um ambiente mais calmo\n• Use poucas palavras, tom suave\n• Dê tempo para a pessoa se acalmar\n\n💡 **Prevenção:**\n• Mantenha rotinas\n• Avise sobre mudanças com antecedência\n• Ensine formas de pedir ajuda\n\n🤗 Lembre-se: não é birra, é comunicação!';
+      return '🧘‍♀️ Comportamentos difíceis:\n\n🔍 Causas:\n• Sobrecarga sensorial\n• Mudança na rotina\n• Frustração\n• Cansaço/fome\n\n😌 O que fazer:\n• Mantenha calma\n• Identifique a causa\n• Ambiente mais calmo\n• Poucas palavras, tom suave\n\n🤗 Não é birra, é comunicação!';
     }
     
-    // Direitos - Mais empoderador
+    // Direitos
     if (msg.contains('direito') || msg.contains('lei') || msg.contains('benefício') || msg.contains('gratuito')) {
-      return '⚖️ **Seus direitos - conheça e use!**\n\n🎫 **Prioridade em filas e atendimentos**\n(Cartão de identificação da pessoa com TEA)\n\n🚌 **Transporte gratuito**\n(Passe livre intermunicipal)\n\n💰 **BPC - Benefício de Prestação Continuada**\n(1 salário mínimo mensal)\n\n🏥 **Atendimento de saúde especializado**\n(Pelo SUS, sem fila de espera)\n\n🏫 **Educação inclusiva garantida**\n(Professor de apoio quando necessário)\n\n💼 **Cotas no mercado de trabalho**\n(Para jovens e adultos)\n\n📋 **Base legal:** Lei 12.764/2012 (Lei Berenice Piana)\n\n💪 Não tenha vergonha de usar seus direitos!';
+      return '⚖️ Seus direitos:\n\n🎫 Prioridade em filas\n🚌 Transporte gratuito\n💰 BPC (1 salário mínimo)\n🏥 Atendimento especializado\n🏫 Educação inclusiva\n💼 Cotas no trabalho\n\n📋 Lei 12.764/2012 (Berenice Piana)\n💪 Use seus direitos!';
     }
     
-    // Desenvolvimento - Mais motivador
+    // Desenvolvimento
     if (msg.contains('desenvolvimento') || msg.contains('habilidade') || msg.contains('progresso') || msg.contains('melhora')) {
-      return '🌱 **Desenvolvimento no autismo - cada conquista importa!**\n\n🧠 **A verdade:**\n• Cada pessoa tem seu próprio ritmo\n• Desenvolvimento pode acontecer a vida toda\n• Pequenos passos são grandes vitórias\n\n💪 **Foque nas potencialidades:**\n• Memória incrível para detalhes\n• Honestidade e lealdade\n• Talentos especiais em áreas específicas\n• Forma única de ver o mundo\n\n🎯 **Como estimular:**\n• Use os interesses da pessoa como ponte\n• Ensine habilidades sociais de forma prática\n• Trabalhe comunicação todos os dias\n• Crie oportunidades de interação\n\n⏰ **Tenha paciência:**\n• Progressos podem ser lentos, mas são reais\n• Às vezes há retrocessos - é normal\n• Cada pessoa tem seu tempo\n\n✨ Acredite no potencial - ele existe!';
+      return '🌱 Desenvolvimento:\n\n🧠 Cada pessoa tem seu ritmo\n💪 Foque nas potencialidades\n🎯 Use interesses como ponte\n🗣️ Trabalhe comunicação diariamente\n⏰ Tenha paciência\n\n✨ Pequenos passos são grandes vitórias!';
     }
     
-    // Resposta padrão mais acolhedora
-    return '🤗 Entendi que você quer saber mais sobre autismo! Estou aqui para te ajudar de forma prática e acolhedora.\n\n💡 **Posso te ajudar com:**\n• Como identificar sinais\n• Processo de diagnóstico\n• Terapias que funcionam\n• Dicas para escola\n• Apoio para família\n• Direitos e benefícios\n• Desenvolvimento e habilidades\n\n🗣️ **Dica:** Seja mais específico na sua pergunta! Por exemplo:\n"Como saber se meu filho tem autismo?"\n"Que terapias ajudam?"\n"Como lidar com crises?"\n\n📚 Também temos artigos completos no Feed Educativo!';
+    // Resposta padrão
+    return '🤖 Posso ajudar com:\n\n• Sintomas e diagnóstico\n• Terapias\n• Escola\n• Família\n• Direitos\n• Desenvolvimento\n\n💡 Seja específico: "Como identificar autismo?" ou "Que terapias ajudam?"\n\n📚 Veja também o Feed Educativo!';
   }
 }
