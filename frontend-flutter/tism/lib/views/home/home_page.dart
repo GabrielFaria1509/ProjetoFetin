@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/feed/feed_page.dart';
+import 'package:tism/views/profile/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
@@ -61,7 +62,12 @@ class HomePage extends StatelessWidget {
                     context,
                     'Perfil',
                     Icons.person,
-                    () => Navigator.pop(context),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(nomeUsuario: nomeUsuario),
+                      ),
+                    ),
                   ),
                 ],
               ),
