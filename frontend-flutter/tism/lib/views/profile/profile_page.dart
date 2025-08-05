@@ -146,11 +146,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 value: 'Responsável',
                 groupValue: _userType,
                 onChanged: (value) async {
-                  setState(() {
-                    _userType = value!;
-                  });
-                  await UserService.updateUserType(value!);
-                  if (mounted) Navigator.pop(context);
+                  if (value != null) {
+                    setState(() {
+                      _userType = value;
+                    });
+                    await UserService.updateUserType(value);
+                    if (context.mounted) Navigator.pop(context);
+                  }
                 },
               ),
               RadioListTile<String>(
@@ -159,11 +161,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 value: 'Professor',
                 groupValue: _userType,
                 onChanged: (value) async {
-                  setState(() {
-                    _userType = value!;
-                  });
-                  await UserService.updateUserType(value!);
-                  if (mounted) Navigator.pop(context);
+                  if (value != null) {
+                    setState(() {
+                      _userType = value;
+                    });
+                    await UserService.updateUserType(value);
+                    if (context.mounted) Navigator.pop(context);
+                  }
                 },
               ),
             ],
