@@ -19,7 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     // Mensagem de boas-vindas
     _messages.add(ChatMessage(
-      text: '👋 Olá! Sou o assistente TISM! \n\nPosso ajudar com informações sobre TEA, como:\n• Sintomas e diagnóstico\n• Terapias e tratamentos\n• Educação inclusiva\n• Direitos e benefícios\n\nO que gostaria de saber?',
+      text: '👋 Oi! Que bom ter você aqui! \n\nSou seu assistente especializado em autismo e estou aqui para te apoiar com informações práticas e acolhedoras sobre TEA.\n\n💡 Pode me perguntar sobre:\n• Primeiros sinais e diagnóstico\n• Terapias que realmente funcionam\n• Dicas para escola e inclusão\n• Apoio para famílias\n• Direitos e benefícios\n\n🗣️ Seja específico nas suas perguntas - assim posso te ajudar melhor!',
       isUser: false,
     ));
   }
