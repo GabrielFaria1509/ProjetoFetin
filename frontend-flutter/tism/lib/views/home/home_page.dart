@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
+import 'package:tism/views/chatbot/chat_screen.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
@@ -46,8 +47,9 @@ class HomePage extends StatelessWidget {
                     context,
                     'Chatbot',
                     Icons.chat,
-                    () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Em breve!')),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ChatScreen()),
                     ),
                   ),
                   _buildMenuCard(
