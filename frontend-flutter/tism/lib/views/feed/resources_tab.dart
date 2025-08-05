@@ -116,7 +116,7 @@ class _ResourcesTabState extends State<ResourcesTab> {
       elevation: 2,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: tismAqua.withOpacity(0.1),
+          backgroundColor: tismAqua.withAlpha(25),
           child: Icon(icon, color: tismAqua, size: 24),
         ),
         title: Text(

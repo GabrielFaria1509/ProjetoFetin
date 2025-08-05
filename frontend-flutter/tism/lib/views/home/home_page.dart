@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/views/feed/feed_page.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
