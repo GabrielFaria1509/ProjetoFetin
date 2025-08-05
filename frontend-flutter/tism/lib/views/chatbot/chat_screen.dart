@@ -15,6 +15,16 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _isLoading = false;
 
   @override
+  void initState() {
+    super.initState();
+    // Mensagem de boas-vindas
+    _messages.add(ChatMessage(
+      text: '👋 Olá! Sou o assistente TISM! \n\nPosso ajudar com informações sobre TEA, como:\n• Sintomas e diagnóstico\n• Terapias e tratamentos\n• Educação inclusiva\n• Direitos e benefícios\n\nO que gostaria de saber?',
+      isUser: false,
+    ));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: TextField(
               controller: _controller,
               decoration: InputDecoration(
-                hintText: 'Pergunte sobre TEA...',
+                hintText: 'Ex: O que é autismo? Como identificar?',
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               ),
