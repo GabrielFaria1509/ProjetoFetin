@@ -3,6 +3,8 @@ import 'package:tism/constants/colors.dart';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
 import 'package:tism/views/chatbot/chat_screen.dart';
+import 'package:tism/views/routine/routine_screen.dart';
+import 'package:tism/views/diary/diary_screen.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
@@ -40,6 +42,24 @@ class HomePage extends StatelessWidget {
                     'Feed Educativo',
                     Icons.article,
                     () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedPage())),
+                  ),
+                  _buildMenuCard(
+                    context,
+                    'Rotina Personalizada',
+                    Icons.schedule,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RoutineScreen()),
+                    ),
+                  ),
+                  _buildMenuCard(
+                    context,
+                    'Diário de Observações',
+                    Icons.book,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const DiaryScreen()),
+                    ),
                   ),
                   _buildMenuCard(
                     context,
