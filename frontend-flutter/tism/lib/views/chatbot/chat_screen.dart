@@ -114,7 +114,7 @@ class ChatBubble extends StatelessWidget {
       child: Row(
         mainAxisAlignment: message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
-          if (!message.isUser) const CircleAvatar(child: Icon(Icons.smart_toy), radius: 16),
+          if (!message.isUser) const CircleAvatar(radius: 16, child: Icon(Icons.smart_toy)),
           const SizedBox(width: 8),
           Flexible(
             child: Container(
@@ -132,7 +132,7 @@ class ChatBubble extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          if (message.isUser) const CircleAvatar(child: Icon(Icons.person), radius: 16),
+          if (message.isUser) const CircleAvatar(radius: 16, child: Icon(Icons.person)),
         ],
       ),
     );
