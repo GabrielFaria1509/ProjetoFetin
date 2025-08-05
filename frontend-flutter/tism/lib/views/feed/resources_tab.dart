@@ -74,14 +74,14 @@ class _ResourcesTabState extends State<ResourcesTab> {
       'title': 'Visão Geral: Autismo e Asperger',
       'description': 'Diferenças e características',
       'type': 'Artigos',
-      'assetPath': 'assets/pdfs/visa~o geral autismo e asperger.pdf',
+      'assetPath': 'assets/pdfs/visão geral autismo e asperger.pdf',
       'icon': Icons.visibility
     },
     {
       'title': 'Um Olhar Sobre o Autismo',
       'description': 'Especificações e características',
       'type': 'Artigos',
-      'assetPath': 'assets/pdfs/UM-OLHAR-SOBRE-O-AUTISMO-E-SUAS-ESPECIFICACｸO~ES.pdf',
+      'assetPath': 'assets/pdfs/UM-OLHAR-SOBRE-O-AUTISMO-E-SUAS-ESPECIFICAÇÕES.pdf',
       'icon': Icons.remove_red_eye
     },
     {
