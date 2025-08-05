@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
+import 'package:tism/services/user_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,33 +15,25 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
 
-  final List<Map<String, String>> usuarios = [];
 
-  void _registrarUsuario(String nome, String senha) {
-    setState(() {
-      usuarios.add({'nome': nome, 'senha': senha});
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Usuário cadastrado com sucesso!')),
-    );
-  }
 
-  void _tentarLogin() {
+  Future<void> _tentarLogin() async {
     final nome = nomeController.text.trim();
     final senha = senhaController.text;
 
-    final usuarioValido = usuarios.any(
-      (u) => u['nome'] == nome && u['senha'] == senha,
-    );
+    if (nome.isEmpty || senha.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha todos os campos')),
+      );
+      return;
+    }
 
-    if (usuarioValido) {
-      Navigator.push(
+    await UserService.saveUser(username: nome);
+    
+    if (mounted) {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage(nomeUsuario: nome)),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Usuário ou senha inválidos')),
       );
     }
   }
@@ -125,10 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          RegisterPage(onRegister: _registrarUsuario),
-                    ),
+                    MaterialPageRoute(builder: (_) => const RegisterPage()),
                   );
                 },
                 child: const Text('Ainda não tem conta ? Cadastre-se'),

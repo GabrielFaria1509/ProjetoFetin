@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tism/services/user_service.dart';
+import 'package:tism/views/login/login_page.dart';
 import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
@@ -17,22 +19,49 @@ class _ProfilePageState extends State<ProfilePage> {
   String _userType = 'Responsável';
   final ImagePicker _picker = ImagePicker();
 
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final user = await UserService.getUser();
+    if (user != null) {
+      setState(() {
+        _userType = user['userType'];
+        if (user['profileImagePath'] != null) {
+          _profileImage = File(user['profileImagePath']);
+        }
+      });
+    }
+  }
+
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
         _profileImage = File(image.path);
       });
+      await UserService.updateProfileImage(image.path);
+    }
+  }
+
+  Future<void> _logout() async {
+    await UserService.logout();
+    if (mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+        (route) => false,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfil'),
-        backgroundColor: tismAqua,
-      ),
+      appBar: AppBar(title: const Text('Perfil'), backgroundColor: tismAqua),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -44,7 +73,9 @@ class _ProfilePageState extends State<ProfilePage> {
               child: CircleAvatar(
                 radius: 60,
                 backgroundColor: Colors.grey[300],
-                backgroundImage: _profileImage != null ? FileImage(_profileImage!) : null,
+                backgroundImage: _profileImage != null
+                    ? FileImage(_profileImage!)
+                    : null,
                 child: _profileImage == null
                     ? Icon(Icons.camera_alt, size: 40, color: Colors.grey[600])
                     : null,
@@ -56,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
               style: TextStyle(color: Colors.grey[600], fontSize: 12),
             ),
             const SizedBox(height: 30),
-            
+
             // Nome do usuário
             Card(
               child: ListTile(
@@ -65,9 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 subtitle: Text(widget.nomeUsuario),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Tipo de usuário
             Card(
               child: ListTile(
@@ -78,9 +109,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 onTap: _showUserTypeDialog,
               ),
             ),
-            
+
             const SizedBox(height: 30),
-            
+
             // Botão sair
             SizedBox(
               width: double.infinity,
@@ -90,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                onPressed: _logout,
                 child: const Text('Sair do App'),
               ),
             ),
@@ -114,11 +145,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 subtitle: const Text('Pai, mãe ou cuidador'),
                 value: 'Responsável',
                 groupValue: _userType,
-                onChanged: (value) {
+                onChanged: (value) async {
                   setState(() {
                     _userType = value!;
                   });
-                  Navigator.pop(context);
+                  await UserService.updateUserType(value!);
+                  if (mounted) Navigator.pop(context);
                 },
               ),
               RadioListTile<String>(
@@ -126,11 +158,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 subtitle: const Text('Educador ou profissional'),
                 value: 'Professor',
                 groupValue: _userType,
-                onChanged: (value) {
+                onChanged: (value) async {
                   setState(() {
                     _userType = value!;
                   });
-                  Navigator.pop(context);
+                  await UserService.updateUserType(value!);
+                  if (mounted) Navigator.pop(context);
                 },
               ),
             ],

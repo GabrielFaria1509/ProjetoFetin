@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/user_service.dart';
+import 'package:tism/views/home/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
-  final Function(String nome, String senha) onRegister;
-
-  const RegisterPage({super.key, required this.onRegister});
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -17,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController();
   String? erro;
 
-  void _registrar() {
+  Future<void> _registrar() async {
     final nome = nomeController.text.trim();
     final senha = senhaController.text;
     final confirmar = confirmarSenhaController.text;
@@ -32,8 +32,16 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    widget.onRegister(nome, senha);
-    Navigator.pop(context);
+    await UserService.saveUser(username: nome);
+    
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(nomeUsuario: nome),
+        ),
+      );
+    }
   }
 
   @override
