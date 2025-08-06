@@ -1,6 +1,5 @@
 class MemoryOptimizedCache {
   static const int _maxCacheSize = 20; // Limite para economizar RAM
-  static const int _maxMessageHistory = 50; // Histórico limitado
   
   final Map<String, String> _responseCache = {};
   final List<String> _cacheKeys = [];

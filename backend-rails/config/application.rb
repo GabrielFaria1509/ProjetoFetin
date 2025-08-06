@@ -32,10 +32,11 @@ module Tism
     # Configuração CORS deve ficar dentro da Application
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
+        origins 'localhost:3000', '127.0.0.1:3000', /\Ahttp:\/\/localhost:\d+\z/
         resource '*',
           headers: :any,
-          methods: [:get, :post, :put, :patch, :delete, :options, :head]
+          methods: [:get, :post, :put, :patch, :delete, :options, :head],
+          credentials: false
       end
     end
   end

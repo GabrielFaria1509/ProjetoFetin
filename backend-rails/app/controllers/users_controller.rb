@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :exception, except: [:create, :login]
+  skip_before_action :verify_authenticity_token, only: [:create, :login]
 
   def create
     user = User.new(user_params)
@@ -12,7 +13,10 @@ class UsersController < ApplicationController
   end
 
   def login
-    user = User.find_by(email: params[:email])
+    return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
+    return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
+    
+    user = User.find_by(email: params[:email].to_s.strip.downcase)
 
     if user && user.authenticate(params[:password])
       render json: { message: "Login realizado com sucesso", user: user }, status: :ok

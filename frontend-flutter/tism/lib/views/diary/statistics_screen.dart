@@ -144,7 +144,7 @@ class StatisticsScreen extends StatelessWidget {
             Text('Observações nos últimos 7 dias: $recentEntries'),
             const SizedBox(height: 8),
             LinearProgressIndicator(
-              value: recentEntries / (entries.length > 0 ? entries.length : 1),
+              value: recentEntries / (entries.isNotEmpty ? entries.length : 1),
               backgroundColor: Colors.grey[300],
               valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
             ),

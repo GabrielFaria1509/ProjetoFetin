@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tism/constants/colors.dart';
 
 class QuickSuggestions extends StatelessWidget {
   final Function(String) onSuggestionTap;
