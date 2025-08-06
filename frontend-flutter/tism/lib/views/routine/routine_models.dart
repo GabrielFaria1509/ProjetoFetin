@@ -6,7 +6,6 @@ class RoutineActivity {
   final String description;
   final bool isCompleted;
   final String category;
-  final String difficulty;
 
   RoutineActivity({
     required this.id,
@@ -16,7 +15,6 @@ class RoutineActivity {
     required this.description,
     this.isCompleted = false,
     required this.category,
-    this.difficulty = 'média',
   });
 
   RoutineActivity copyWith({bool? isCompleted}) {
@@ -28,7 +26,6 @@ class RoutineActivity {
       description: description,
       isCompleted: isCompleted ?? this.isCompleted,
       category: category,
-      difficulty: difficulty,
     );
   }
 }

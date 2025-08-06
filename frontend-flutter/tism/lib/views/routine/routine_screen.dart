@@ -16,7 +16,6 @@ class _RoutineScreenState extends State<RoutineScreen> {
   List<RoutineActivity> filteredActivities = [];
   ChildProfile? profile;
   String? selectedCategory;
-  String? selectedDifficulty;
   bool showCompleted = true;
 
   @override
@@ -49,10 +48,6 @@ class _RoutineScreenState extends State<RoutineScreen> {
         filteredActivities = RoutineService.filterByCategory(filteredActivities, selectedCategory);
       }
       
-      if (selectedDifficulty != null) {
-        filteredActivities = RoutineService.filterByDifficulty(filteredActivities, selectedDifficulty);
-      }
-      
       if (!showCompleted) {
         filteredActivities = filteredActivities.where((a) => !a.isCompleted).toList();
       }
@@ -69,10 +64,6 @@ class _RoutineScreenState extends State<RoutineScreen> {
           IconButton(
             icon: const Icon(Icons.person_add),
             onPressed: _showProfileSetup,
-          ),
-          IconButton(
-            icon: const Icon(Icons.filter_list),
-            onPressed: _showFilterDialog,
           ),
         ],
       ),
@@ -100,11 +91,11 @@ class _RoutineScreenState extends State<RoutineScreen> {
   
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       color: Colors.blue[50],
       child: Row(
         children: [
-          const Icon(Icons.schedule, color: Colors.blue),
+          const Icon(Icons.schedule, color: Colors.blue, size: 20),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -112,11 +103,13 @@ class _RoutineScreenState extends State<RoutineScreen> {
               children: [
                 Text(
                   'Rotina de ${profile?.name ?? "Criança"}',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   '${profile?.age} anos • Suporte ${profile?.supportLevel}',
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -127,26 +120,73 @@ class _RoutineScreenState extends State<RoutineScreen> {
   }
   
   Widget _buildFilterChips() {
+    final categories = ['manhã', 'educação', 'alimentação', 'lazer', 'bem-estar', 'noite'];
+    
     return Container(
-      height: 50,
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          FilterChip(
-            label: Text('Todas (${allActivities.length})'),
-            selected: selectedCategory == null,
-            onSelected: (_) => _updateCategoryFilter(null),
-          ),
-          const SizedBox(width: 8),
-          ...['manhã', 'educação', 'lazer', 'bem-estar', 'noite'].map(
-            (category) => Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: FilterChip(
-                label: Text(_getCategoryDisplayName(category)),
-                selected: selectedCategory == category,
-                onSelected: (_) => _updateCategoryFilter(category),
+          // Toggle para mostrar concluídas
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Flexible(
+                child: Text('Filtrar por categoria:', 
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Switch(
+                    value: showCompleted,
+                    onChanged: (value) {
+                      showCompleted = value;
+                      _applyFilters();
+                    },
+                  ),
+                  const Flexible(
+                    child: Text('Concluídas', 
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // Chips de categoria
+          SizedBox(
+            height: 40,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                FilterChip(
+                  label: Text('Todas (${allActivities.length})',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  selected: selectedCategory == null,
+                  onSelected: (_) => _updateCategoryFilter(null),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                const SizedBox(width: 8),
+                ...categories.map(
+                  (category) => Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: FilterChip(
+                      label: Text(
+                        '${_getCategoryDisplayName(category)} (${_getCategoryCount(category)})',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      selected: selectedCategory == category,
+                      onSelected: (_) => _updateCategoryFilter(category),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -160,21 +200,31 @@ class _RoutineScreenState extends State<RoutineScreen> {
     final progress = total > 0 ? completed / total : 0.0;
     
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Progresso do dia: $completed/$total'),
-              Text('${(progress * 100).toInt()}%'),
+              Flexible(
+                child: Text(
+                  'Progresso: $completed/$total',
+                  style: const TextStyle(fontSize: 13),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Text(
+                '${(progress * 100).toInt()}%',
+                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           LinearProgressIndicator(
             value: progress,
             backgroundColor: Colors.grey[300],
             valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
+            minHeight: 6,
           ),
         ],
       ),
@@ -200,60 +250,51 @@ class _RoutineScreenState extends State<RoutineScreen> {
   }
 
   Widget _buildActivityCard(RoutineActivity activity, int index) {
-    final difficultyColor = _getDifficultyColor(activity.difficulty);
-    
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       elevation: activity.isCompleted ? 1 : 3,
       child: ListTile(
-        leading: Stack(
-          children: [
-            CircleAvatar(
-              backgroundColor: activity.isCompleted ? Colors.green : tismAqua,
-              child: Text(
-                activity.icon,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  color: difficultyColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 1),
-                ),
-              ),
-            ),
-          ],
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        leading: CircleAvatar(
+          radius: 20,
+          backgroundColor: activity.isCompleted ? Colors.green : _getCategoryColor(activity.category),
+          child: Text(
+            activity.icon,
+            style: const TextStyle(fontSize: 18),
+          ),
         ),
         title: Text(
           activity.title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            fontSize: 14,
             decoration: activity.isCompleted ? TextDecoration.lineThrough : null,
             color: activity.isCompleted ? Colors.grey : null,
           ),
+          overflow: TextOverflow.ellipsis,
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 4),
             Row(
               children: [
-                Text('⏰ ${activity.time}'),
+                Flexible(
+                  child: Text(
+                    '⏰ ${activity.time}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                   decoration: BoxDecoration(
                     color: _getCategoryColor(activity.category),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
                     activity.category,
-                    style: const TextStyle(fontSize: 10, color: Colors.white),
+                    style: const TextStyle(fontSize: 9, color: Colors.white),
                   ),
                 ),
               ],
@@ -262,23 +303,29 @@ class _RoutineScreenState extends State<RoutineScreen> {
             Text(
               activity.description,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 11,
                 color: activity.isCompleted ? Colors.grey : Colors.grey[700],
               ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
-        trailing: Checkbox(
-          value: activity.isCompleted,
-          onChanged: (value) {
-            setState(() {
-              final activityIndex = allActivities.indexWhere((a) => a.id == activity.id);
-              if (activityIndex != -1) {
-                allActivities[activityIndex] = activity.copyWith(isCompleted: value);
-                _applyFilters();
-              }
-            });
-          },
+        trailing: SizedBox(
+          width: 40,
+          child: Checkbox(
+            value: activity.isCompleted,
+            onChanged: (value) {
+              setState(() {
+                final activityIndex = allActivities.indexWhere((a) => a.id == activity.id);
+                if (activityIndex != -1) {
+                  allActivities[activityIndex] = activity.copyWith(isCompleted: value);
+                  _applyFilters();
+                }
+              });
+            },
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
         ),
       ),
     );
@@ -300,49 +347,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
     );
   }
   
-  void _showFilterDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Filtros'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DropdownButtonFormField<String>(
-              value: selectedDifficulty,
-              decoration: const InputDecoration(labelText: 'Dificuldade'),
-              items: const [
-                DropdownMenuItem(value: null, child: Text('Todas')),
-                DropdownMenuItem(value: 'baixa', child: Text('Baixa')),
-                DropdownMenuItem(value: 'média', child: Text('Média')),
-                DropdownMenuItem(value: 'alta', child: Text('Alta')),
-              ],
-              onChanged: (value) => selectedDifficulty = value,
-            ),
-            const SizedBox(height: 16),
-            SwitchListTile(
-              title: const Text('Mostrar concluídas'),
-              value: showCompleted,
-              onChanged: (value) => showCompleted = value,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _applyFilters();
-            },
-            child: const Text('Aplicar'),
-          ),
-        ],
-      ),
-    );
-  }
+
   
   void _updateCategoryFilter(String? category) {
     selectedCategory = category;
@@ -351,9 +356,12 @@ class _RoutineScreenState extends State<RoutineScreen> {
   
   void _clearFilters() {
     selectedCategory = null;
-    selectedDifficulty = null;
     showCompleted = true;
     _applyFilters();
+  }
+  
+  int _getCategoryCount(String category) {
+    return allActivities.where((a) => a.category == category).length;
   }
   
   String _getCategoryDisplayName(String category) {
@@ -367,21 +375,13 @@ class _RoutineScreenState extends State<RoutineScreen> {
     }
   }
   
-  Color _getDifficultyColor(String difficulty) {
-    switch (difficulty) {
-      case 'baixa': return Colors.green;
-      case 'média': return Colors.orange;
-      case 'alta': return Colors.red;
-      default: return Colors.grey;
-    }
-  }
-  
   Color _getCategoryColor(String category) {
     switch (category) {
       case 'manhã': return Colors.orange;
       case 'educação': return Colors.blue;
+      case 'alimentação': return Colors.green;
       case 'lazer': return Colors.purple;
-      case 'bem-estar': return Colors.green;
+      case 'bem-estar': return Colors.teal;
       case 'noite': return Colors.indigo;
       default: return Colors.grey;
     }
