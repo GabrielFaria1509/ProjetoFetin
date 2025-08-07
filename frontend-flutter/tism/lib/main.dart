@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:tism/constants/colors.dart';
-import 'package:tism/views/login/login_page.dart';
-import 'package:tism/views/home/home_page.dart';
-import 'package:tism/services/user_service.dart';
+import 'package:flutter/material.dart'; //importações necessárias para o MaterialApp e widgets
+import 'package:tism/constants/colors.dart'; //importações necessárias para as cores
+import 'package:tism/views/login/login_page.dart'; //importações necessárias para o LoginPage
+import 'package:tism/views/home/home_page.dart'; //importações necessárias para o LoginPage e HomePage
+import 'package:tism/services/user_service.dart'; //importe necessário para o UserService
 
 void main() {
   runApp(const MyApp());

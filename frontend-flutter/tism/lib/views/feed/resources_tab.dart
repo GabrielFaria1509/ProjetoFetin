@@ -220,7 +220,7 @@ class _ResourcesTabState extends State<ResourcesTab> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: tismAqua.withOpacity(0.1),
+                        color: tismAqua.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Row(
