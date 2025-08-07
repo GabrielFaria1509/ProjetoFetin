@@ -98,6 +98,20 @@ class _ResourcesTabState extends State<ResourcesTab> {
       'assetPath': 'assets/pdfs/Viana+et+al.+-+5+RSD.pdf',
       'icon': Icons.science
     },
+    {
+      'title': 'Autismo - Informações Básicas',
+      'description': 'Conceitos fundamentais sobre TEA',
+      'type': 'Guias',
+      'assetPath': 'assets/pdfs/autismo.pdf',
+      'icon': Icons.info
+    },
+    {
+      'title': 'Autismo - Material Complementar',
+      'description': 'Recursos adicionais sobre TEA',
+      'type': 'Guias',
+      'assetPath': 'assets/pdfs/autismo2.pdf',
+      'icon': Icons.library_books
+    },
   ];
 
   List<Map<String, dynamic>> get filteredResources {
@@ -181,14 +195,23 @@ class _ResourcesTabState extends State<ResourcesTab> {
   }
 
   void _openPDF(String title, String assetPath) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PDFViewer(
-          title: title,
-          assetPath: assetPath,
+    try {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PDFViewer(
+            title: title,
+            assetPath: assetPath,
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro ao abrir PDF: $title'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }
