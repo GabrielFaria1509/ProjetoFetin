@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/pdf/pdf_viewer.dart';
+import 'package:tism/widgets/pdf_cover_generator.dart';
 
 class ResourcesTab extends StatefulWidget {
   const ResourcesTab({super.key});
@@ -167,29 +168,92 @@ class _ResourcesTabState extends State<ResourcesTab> {
   }
 
   Widget _buildResourceCard(String title, String description, IconData icon, VoidCallback onTap) {
+    final resource = filteredResources.firstWhere(
+      (r) => r['title'] == title,
+      orElse: () => {'type': 'Guias'},
+    );
+    
     return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      elevation: 2,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: tismAqua.withAlpha(25),
-          child: Icon(icon, color: tismAqua, size: 24),
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          description,
-          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        trailing: Icon(Icons.folder_open, color: Colors.grey[400], size: 20),
+      margin: const EdgeInsets.only(bottom: 12),
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
         onTap: onTap,
-        dense: true,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              PDFCoverGenerator(
+                title: title,
+                type: resource['type'] ?? 'Guias',
+                icon: icon,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: tismAqua.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.picture_as_pdf,
+                            size: 16,
+                            color: tismAqua,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Abrir PDF',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: tismAqua,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: Colors.grey[400],
+                size: 24,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

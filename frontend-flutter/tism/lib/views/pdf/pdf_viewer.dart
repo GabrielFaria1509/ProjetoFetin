@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 import 'package:tism/constants/colors.dart';
-import 'dart:typed_data';
 
 class PDFViewer extends StatefulWidget {
   final String title;
@@ -14,9 +16,12 @@ class PDFViewer extends StatefulWidget {
 }
 
 class _PDFViewerState extends State<PDFViewer> {
-  Uint8List? pdfData;
+  String? localPath;
   bool isLoading = true;
   String? errorMessage;
+  int currentPage = 0;
+  int totalPages = 0;
+  PDFViewController? pdfController;
 
   @override
   void initState() {
@@ -27,15 +32,23 @@ class _PDFViewerState extends State<PDFViewer> {
   Future<void> _loadPDF() async {
     try {
       final bytes = await rootBundle.load(widget.assetPath);
-      setState(() {
-        pdfData = bytes.buffer.asUint8List();
-        isLoading = false;
-      });
+      final dir = await getTemporaryDirectory();
+      final file = File('${dir.path}/${widget.title}.pdf');
+      await file.writeAsBytes(bytes.buffer.asUint8List());
+      
+      if (mounted) {
+        setState(() {
+          localPath = file.path;
+          isLoading = false;
+        });
+      }
     } catch (e) {
-      setState(() {
-        errorMessage = 'Arquivo não encontrado: ${widget.assetPath}';
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          errorMessage = 'Erro ao carregar PDF: ${e.toString()}';
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -46,10 +59,15 @@ class _PDFViewerState extends State<PDFViewer> {
         title: Text(widget.title, style: const TextStyle(fontSize: 16)),
         backgroundColor: tismAqua,
         actions: [
-          if (pdfData != null)
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: _showPDFInfo,
+          if (totalPages > 0)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Text(
+                  '${currentPage + 1}/$totalPages',
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ),
             ),
         ],
       ),
@@ -66,7 +84,44 @@ class _PDFViewerState extends State<PDFViewer> {
             )
           : errorMessage != null
               ? _buildErrorView()
-              : _buildPDFContent(),
+              : _buildPDFView(),
+      bottomNavigationBar: localPath != null && totalPages > 1
+          ? Container(
+              height: 60,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: currentPage > 0
+                        ? () => pdfController?.setPage(currentPage - 1)
+                        : null,
+                    icon: const Icon(Icons.chevron_left),
+                  ),
+                  Text(
+                    'Página ${currentPage + 1} de $totalPages',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  IconButton(
+                    onPressed: currentPage < totalPages - 1
+                        ? () => pdfController?.setPage(currentPage + 1)
+                        : null,
+                    icon: const Icon(Icons.chevron_right),
+                  ),
+                ],
+              ),
+            )
+          : null,
     );
   }
 
@@ -106,81 +161,40 @@ class _PDFViewerState extends State<PDFViewer> {
     );
   }
 
-  Widget _buildPDFContent() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.picture_as_pdf, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
-            Text(
-              widget.title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'PDF carregado com sucesso!',
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Tamanho: ${(pdfData!.length / 1024).toStringAsFixed(1)} KB',
-              style: TextStyle(color: Colors.grey[500], fontSize: 12),
-            ),
-            const SizedBox(height: 24),
-            const Card(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Icon(Icons.info, color: Colors.blue),
-                    SizedBox(height: 8),
-                    Text(
-                      'Visualizador de PDF em desenvolvimento',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'O conteúdo foi carregado e está disponível para visualização.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showPDFInfo() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Informações do PDF'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Título: ${widget.title}'),
-            const SizedBox(height: 8),
-            Text('Caminho: ${widget.assetPath}'),
-            const SizedBox(height: 8),
-            Text('Tamanho: ${(pdfData!.length / 1024).toStringAsFixed(1)} KB'),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Fechar'),
-          ),
-        ],
-      ),
+  Widget _buildPDFView() {
+    return PDFView(
+      filePath: localPath!,
+      enableSwipe: true,
+      swipeHorizontal: false,
+      autoSpacing: false,
+      pageFling: true,
+      pageSnap: true,
+      defaultPage: currentPage,
+      fitPolicy: FitPolicy.BOTH,
+      preventLinkNavigation: false,
+      onRender: (pages) {
+        setState(() {
+          totalPages = pages ?? 0;
+        });
+      },
+      onViewCreated: (PDFViewController controller) {
+        pdfController = controller;
+      },
+      onPageChanged: (int? page, int? total) {
+        setState(() {
+          currentPage = page ?? 0;
+        });
+      },
+      onError: (error) {
+        setState(() {
+          errorMessage = 'Erro na visualização: $error';
+        });
+      },
+      onPageError: (page, error) {
+        setState(() {
+          errorMessage = 'Erro na página $page: $error';
+        });
+      },
     );
   }
 }
