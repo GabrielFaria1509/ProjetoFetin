@@ -15,14 +15,13 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
-  static const int _maxMessages = 50; // Limite para economizar RAM
+  static const int _maxMessages = 30; // Otimizado para 8GB RAM
 
   @override
   void initState() {
     super.initState();
-    // Mensagem de boas-vindas otimizada
     _messages.add(ChatMessage(
-      text: '👋 **Olá! Sou especialista em TEA**\n\n🎯 **Posso ajudar com:**\n• Identificar sintomas\n• Diagnóstico e profissionais\n• Terapias (ABA, fono, TO)\n• Inclusão escolar\n• Apoio à família\n• Direitos e benefícios\n\n💡 **Exemplos:** "Como identificar autismo?" ou "Meu filho tem 3 anos e não fala"',
+      text: '💙 **Olá! Estou aqui para apoiar você.**\n\n🎯 **Posso ajudar com:**\n• Identificar sinais do TEA\n• Orientar sobre diagnóstico\n• Sugerir terapias\n• Apoiar inclusão escolar\n• Oferecer suporte emocional\n\n💬 **Seja específico:** "Meu filho tem 3 anos e não fala" ou "Como lidar com crises?"\n\n🤗 **Você não está sozinho(a) nessa jornada.**',
       isUser: false,
     ));
   }

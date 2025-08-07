@@ -1,50 +1,53 @@
 class AutismKnowledgeBase {
+  static final Map<String, String> _responseCache = <String, String>{};
+  static const int _maxCacheSize = 20;
+  
   static const Map<String, Map<String, dynamic>> _knowledge = {
     'definicao': {
-      'keywords': ['o que é', 'que é', 'definição', 'conceito', 'autismo', 'tea'],
+      'keywords': ['o que é', 'que é', 'definição', 'conceito', 'autismo', 'tea', 'o que é autismo', 'o que é tea', 'defina autismo', 'explique autismo'],
       'response': '🧠 **TEA (Transtorno do Espectro Autista)**\n\nÉ uma condição neurológica que afeta:\n• **Comunicação** - verbal e não-verbal\n• **Interação social** - relacionamentos\n• **Comportamentos** - padrões repetitivos\n\n💙 Não é doença - é uma forma diferente de processar o mundo!',
       'follow_up': ['sintomas', 'diagnostico', 'causas']
     },
     
     'sintomas_precoces': {
-      'keywords': ['sintomas', 'sinais', 'identificar', 'como saber', 'primeiros sinais', 'bebê', 'criança pequena'],
-      'response': '👶 **Sinais Precoces (0-3 anos)**\n\n**Comunicação:**\n• Pouco contato visual\n• Não responde ao nome\n• Atraso na fala ou perda de palavras\n• Não aponta para mostrar interesse\n\n**Social:**\n• Não sorri socialmente\n• Prefere brincar sozinho\n• Não imita gestos\n\n**Comportamento:**\n• Movimentos repetitivos\n• Fixação em objetos\n• Resistência a mudanças\n\n⚠️ **Importante:** Apenas profissionais podem diagnosticar!',
+      'keywords': ['sintomas', 'sinais', 'identificar', 'como saber', 'primeiros sinais', 'bebê', 'criança pequena', 'sintoma', 'sinal', 'como identificar', 'quais sintomas', 'que sintomas', 'tem sintomas', 'apresenta sintomas'],
+      'response': '👶 **Sinais Precoces do TEA (0-3 anos)**\n\n**🗣️ Comunicação:**\n• **Contato visual limitado** - evita olhar nos olhos, mesmo durante brincadeiras\n• **Não responde ao nome** - parece não ouvir quando chamado\n• **Atraso ou ausência da fala** - não fala palavras aos 12 meses, frases aos 24 meses\n• **Não aponta** - não usa gestos para mostrar interesse ou pedir algo\n• **Perda de habilidades** - para de usar palavras que já sabia\n\n**👥 Interação Social:**\n• **Sorriso social ausente** - não sorri de volta aos 6 meses\n• **Preferência por brincar sozinho** - não busca compartilhar brincadeiras\n• **Não imita** - não copia gestos simples como "tchau"\n• **Dificuldade com afeto** - não busca ou evita carinho\n\n**🔄 Comportamentos:**\n• **Movimentos repetitivos** - balançar, bater palmas, girar objetos\n• **Fixação intensa** - obsessão por objetos específicos (rodas, luzes)\n• **Resistência a mudanças** - choro intenso com alterações na rotina\n• **Sensibilidades sensoriais** - reações extremas a sons, texturas ou luzes\n\n📝 **Marcos Importantes:**\n• 6 meses: deve sorrir socialmente\n• 12 meses: deve apontar e usar gestos\n• 18 meses: deve falar pelo menos 6 palavras\n• 24 meses: deve combinar 2 palavras\n\n⚠️ **Lembre-se:** Cada criança se desenvolve no seu ritmo, mas se você observa vários destes sinais, procure avaliação profissional. Diagnóstico precoce permite intervenções mais eficazes!',
       'follow_up': ['diagnostico', 'profissionais', 'quando_procurar']
     },
     
     'sintomas_escolares': {
-      'keywords': ['escola', 'sintomas escola', 'professor', 'sala de aula', 'escolar'],
+      'keywords': ['escola', 'sintomas escola', 'professor', 'sala de aula', 'escolar', 'na escola', 'sintomas na escola', 'sinais na escola', 'comportamento escola'],
       'response': '🏫 **Sinais na Escola**\n\n**Para Professores:**\n• Dificuldade em seguir instruções complexas\n• Evita atividades em grupo\n• Comportamentos repetitivos\n• Sensibilidade a ruídos/luzes\n• Interesses muito específicos\n• Dificuldade com mudanças na rotina\n\n**Estratégias:**\n• Use comunicação visual\n• Mantenha rotinas previsíveis\n• Ofereça pausas sensoriais\n• Valorize os pontos fortes\n\n📚 Cada criança é única!',
       'follow_up': ['inclusao_escolar', 'estrategias_ensino', 'direitos_escola']
     },
     
     'sintomas_mais_velhos': {
-      'keywords': ['filho mais velho', 'criança mais velha', 'sintomas mais velho', 'mais velho', 'idade escolar', '6 anos', '7 anos', '8 anos', '9 anos', '10 anos', 'sintomas filho mais velho'],
-      'response': '🧒 **Sintomas em Crianças Mais Velhas (6+ anos)**\n\n**Comunicação:**\n• Linguagem literal, não entende ironias\n• Dificuldade em conversas recíprocas\n• Repete frases ou palavras\n• Voz monótona ou diferente\n\n**Social:**\n• Dificuldade para fazer amigos\n• Não entende regras sociais\n• Prefere brincar sozinho\n• Não compartilha interesses\n\n**Comportamento:**\n• Rotinas rígidas\n• Interesses obsessivos\n• Movimentos repetitivos\n• Resistência a mudanças\n\n**Na Escola:**\n• Dificuldade de concentração\n• Problemas com trabalhos em grupo\n• Sensibilidade sensorial\n\n👩‍⚕️ **Procure avaliação profissional!**',
+      'keywords': ['filho mais velho', 'criança mais velha', 'sintomas mais velho', 'mais velho', 'idade escolar', '6 anos', '7 anos', '8 anos', '9 anos', '10 anos', 'sintomas filho mais velho', 'criança grande', 'filho grande', 'adolescente', 'pré-adolescente'],
+      'response': '🧒 **Sintomas em Crianças Mais Velhas (6+ anos)**\n\n**Comunicação:**\n• Linguagem literal, não entende ironias\n• Dificuldade em conversas recíprocas\n• Repete frases ou palavras\n• Voz monótona ou diferente\n\n**Social:**\n• Dificuldade para fazer amigos\n• Não entende regras sociais\n• Prefere brincar sozinho\n• Não compartilha interesses\n\n**Comportamento:**\n• Rotinas rígidas\n• Interesses obsessivos\n• Movimentos repetitivos\n• Resistência a mudanças\n\n**Na Escola:**\n• Dificuldade de concentração\n• Problemas com trabalhos em grupo\n• Sensibilidade sensorial\n\n👩⚕️ **Procure avaliação profissional!**',
       'follow_up': ['diagnostico', 'escola', 'terapias']
     },
     
     'diagnostico': {
       'keywords': ['diagnóstico', 'médico', 'profissional', 'como diagnosticar', 'exames'],
-      'response': '🏥 **Diagnóstico do TEA**\n\n**Profissionais:**\n• Neuropediatra\n• Psiquiatra infantil\n• Psicólogo especializado\n• Equipe multidisciplinar\n\n**Processo:**\n• Entrevista com família\n• Observação comportamental\n• Escalas padronizadas (CARS, ADI-R, ADOS)\n• Histórico do desenvolvimento\n\n**Idade:** Pode ser feito a partir dos 18 meses\n\n⏰ **Diagnóstico precoce = intervenção mais eficaz!**',
+      'response': '🏥 **Diagnóstico do TEA - Processo Completo**\n\n**👩⚕️ Profissionais Qualificados:**\n• **Neuropediatra** - especialista em desenvolvimento neurológico infantil\n• **Psiquiatra infantil** - foco em saúde mental da criança\n• **Psicólogo especializado** - com formação em TEA e desenvolvimento\n• **Equipe multidisciplinar** - fonoaudiólogo, terapeuta ocupacional, psicopedagogo\n\n**📋 Processo Diagnóstico:**\n• **Anamnese detalhada** - histórico familiar, gravidez, parto, desenvolvimento\n• **Observação clínica** - comportamento da criança em diferentes situações\n• **Escalas padronizadas:**\n  - CARS (Childhood Autism Rating Scale)\n  - ADI-R (Autism Diagnostic Interview-Revised)\n  - ADOS (Autism Diagnostic Observation Schedule)\n• **Avaliação do desenvolvimento** - marcos motores, cognitivos, sociais\n• **Exames complementares** - quando necessário descartar outras condições\n\n**📅 Linha do Tempo:**\n• **18 meses:** idade mínima para diagnóstico confiável\n• **2-3 anos:** período ideal para identificação\n• **Qualquer idade:** nunca é tarde para buscar avaliação\n\n**📝 O que Levar na Consulta:**\n• Caderneta de vacinação\n• Relatórios escolares\n• Vídeos do comportamento da criança\n• Lista de preocupações observadas\n\n⏰ **Por que o diagnóstico precoce é crucial?**\n• Permite intervenções mais eficazes\n• Melhora prognóstico de desenvolvimento\n• Facilita adaptações escolares\n• Orienta a família adequadamente',
       'follow_up': ['terapias', 'intervencao_precoce', 'onde_buscar_ajuda']
     },
     
     'terapias': {
       'keywords': ['terapia', 'tratamento', 'aba', 'intervenção', 'ajuda', 'como tratar'],
-      'response': '🎯 **Principais Terapias**\n\n**ABA (Análise do Comportamento Aplicada):**\n• Ensina habilidades práticas\n• Reduz comportamentos inadequados\n• Baseada em evidências científicas\n\n**Fonoaudiologia:**\n• Desenvolve comunicação\n• Trabalha linguagem verbal/não-verbal\n\n**Terapia Ocupacional:**\n• Atividades da vida diária\n• Integração sensorial\n\n**Psicoterapia:**\n• Regulação emocional\n• Habilidades sociais\n\n**Outras:** Musicoterapia, equoterapia, natação\n\n✨ **Cada pessoa precisa de um plano individualizado!**',
+      'response': '🎯 **Terapias Baseadas em Evidências para TEA**\n\n**🧠 ABA (Análise do Comportamento Aplicada):**\n• **O que é:** Método científico que ensina habilidades através de reforço positivo\n• **Como funciona:** Quebra habilidades complexas em passos pequenos\n• **Benefícios:** Melhora comunicação, comportamento social, autonomia\n• **Intensidade:** 20-40 horas semanais para melhores resultados\n• **Idade ideal:** Quanto mais cedo, melhor (2-6 anos)\n\n**🗣️ Fonoaudiologia:**\n• **Comunicação verbal:** Desenvolvimento da fala e linguagem\n• **Comunicação alternativa:** PECS, gestos, dispositivos eletrônicos\n• **Pragmática:** Uso social da linguagem, conversação\n• **Deglutição:** Problemas alimentares e seletividade\n\n**🤲 Terapia Ocupacional:**\n• **Integração sensorial:** Processamento de estímulos (tato, som, movimento)\n• **Atividades diárias:** Vestir, comer, higiene pessoal\n• **Coordenação motora:** Habilidades finas e grossas\n• **Autorregulação:** Técnicas para controle emocional\n\n**🧘 Psicoterapia:**\n• **Terapia Cognitivo-Comportamental:** Para ansiedade e comportamentos\n• **Habilidades sociais:** Interação, amizades, regras sociais\n• **Regulação emocional:** Reconhecer e expressar sentimentos\n• **Apoio familiar:** Orientação para pais e irmãos\n\n**🎵 Terapias Complementares:**\n• **Musicoterapia:** Desenvolvimento social e emocional\n• **Equoterapia:** Melhora equilíbrio, coordenação e autoestima\n• **Natação:** Exercício físico e relaxamento\n• **Arteterapia:** Expressão criativa e comunicação\n\n📝 **Plano Individualizado:**\nCada pessoa com TEA é única. O plano terapêutico deve considerar:\n• Nível de funcionamento\n• Idade e interesses\n• Necessidades específicas\n• Recursos familiares\n\n✨ **Dica:** Combine diferentes terapias para resultados mais eficazes!',
       'follow_up': ['aba_detalhes', 'fonoaudiologia', 'terapia_ocupacional']
     },
     
     'comportamentos_dificeis': {
       'keywords': ['crise', 'birra', 'agressivo', 'comportamento difícil', 'meltdown', 'autolesão'],
-      'response': '🧘‍♀️ **Comportamentos Desafiadores**\n\n**Possíveis Causas:**\n• Sobrecarga sensorial\n• Mudança na rotina\n• Frustração/comunicação\n• Fome, sono, dor\n• Ansiedade\n\n**Como Ajudar:**\n• Mantenha-se calmo\n• Identifique o gatilho\n• Reduza estímulos\n• Use poucas palavras, tom suave\n• Ofereça alternativas\n• Valide os sentimentos\n\n**Prevenção:**\n• Rotinas previsíveis\n• Comunicação visual\n• Pausas regulares\n• Ambiente organizado\n\n💙 **Não é birra - é comunicação!**',
+      'response': '🧘♀️ **Comportamentos Desafiadores**\n\n**Possíveis Causas:**\n• Sobrecarga sensorial\n• Mudança na rotina\n• Frustração/comunicação\n• Fome, sono, dor\n• Ansiedade\n\n**Como Ajudar:**\n• Mantenha-se calmo\n• Identifique o gatilho\n• Reduza estímulos\n• Use poucas palavras, tom suave\n• Ofereça alternativas\n• Valide os sentimentos\n\n**Prevenção:**\n• Rotinas previsíveis\n• Comunicação visual\n• Pausas regulares\n• Ambiente organizado\n\n💙 **Não é birra - é comunicação!**',
       'follow_up': ['estrategias_comportamento', 'sobrecarga_sensorial', 'rotinas']
     },
     
     'familia_apoio': {
       'keywords': ['família', 'pais', 'mãe', 'pai', 'como ajudar família', 'apoio'],
-      'response': '👨‍👩‍👧‍👦 **Apoio à Família**\n\n**Para Pais:**\n• Aceite seu filho como ele é\n• Celebre pequenas conquistas\n• Busque informação confiável\n• Conecte-se com outras famílias\n• Cuide da sua saúde mental\n\n**Estratégias Práticas:**\n• Crie rotinas visuais\n• Use interesses da criança\n• Tenha paciência com o desenvolvimento\n• Documente progressos\n\n**Rede de Apoio:**\n• Grupos de pais\n• Associações de autismo\n• Terapeutas\n• Escola\n\n💪 **Você conhece seu filho melhor que ninguém!**',
+      'response': '👨👩👧👦 **Apoio à Família**\n\n**Para Pais:**\n• Aceite seu filho como ele é\n• Celebre pequenas conquistas\n• Busque informação confiável\n• Conecte-se com outras famílias\n• Cuide da sua saúde mental\n\n**Estratégias Práticas:**\n• Crie rotinas visuais\n• Use interesses da criança\n• Tenha paciência com o desenvolvimento\n• Documente progressos\n\n**Rede de Apoio:**\n• Grupos de pais\n• Associações de autismo\n• Terapeutas\n• Escola\n\n💪 **Você conhece seu filho melhor que ninguém!**',
       'follow_up': ['grupos_apoio', 'autocuidado_pais', 'irmãos_autismo']
     },
     
@@ -121,63 +124,72 @@ class AutismKnowledgeBase {
     'até mais': '👋 Até mais! Estarei sempre aqui quando precisar.',
     'ajuda': '💡 Posso ajudar com: sintomas, diagnóstico, terapias, escola, família, direitos e desenvolvimento. Seja específico!',
     'não sei': '🤔 Sem problemas! Me conte o que está acontecendo ou qual sua preocupação. Vamos descobrir juntos!',
-    'estou perdido': '🦭 Não se preocupe! É normal se sentir assim. Vamos começar pelo básico. O que você gostaria de saber?',
+    'estou perdido': '🤭 Não se preocupe! É normal se sentir assim. Vamos começar pelo básico. O que você gostaria de saber?',
     'urgente': '⚠️ Se for emergência médica, procure ajuda imediata! Para dúvidas sobre TEA, estou aqui para ajudar.',
-    'crise': '🆘 Em situações de crise: mantenha calma, reduza estímulos, use voz suave. Precisa de mais orientações?'
+    'crise': '🆘 Em situações de crise: mantenha calma, reduza estímulos, use voz suave. Precisa de mais orientações?',
+    'sintomas': '👶 **Sintomas do TEA por Faixa Etária:**\n\n• **0-3 anos:** Pouco contato visual, não responde ao nome, atraso na fala\n• **3-6 anos:** Dificuldades sociais, comportamentos repetitivos, resistência a mudanças\n• **6+ anos:** Linguagem literal, interesses obsessivos, dificuldades de amizade\n• **Adolescentes:** Ansiedade social, dificuldades acadêmicas, isolamento\n\n📝 **Importante:** Sintomas variam muito entre indivíduos. Alguns podem ser mais sutis.\n\nSobre qual idade você gostaria de saber mais detalhes?',
+    'sinais': '🔍 **Principais Sinais do TEA (Tríade Clássica):**\n\n**1️⃣ Comunicação:**\n• Atraso ou ausência da fala\n• Dificuldade para iniciar/manter conversas\n• Uso repetitivo da linguagem (ecolalia)\n\n**2️⃣ Interação Social:**\n• Dificuldade em fazer amigos\n• Não compartilha interesses\n• Problemas com contato visual\n\n**3️⃣ Comportamentos Repetitivos:**\n• Movimentos estereotipados\n• Insistência em rotinas\n• Interesses restritos e intensos\n\n**Plus:** Sensibilidades sensoriais (hiper/hiposensibilidade)\n\nQuer detalhes sobre algum sinal específico?'
   };
 
   static String? findResponse(String message) {
     final msg = message.toLowerCase().trim();
     
-    // Respostas rápidas primeiro
+    if (_responseCache.containsKey(msg)) {
+      return _responseCache[msg];
+    }
+    
     for (final entry in _quickResponses.entries) {
-      if (msg == entry.key || msg.startsWith(entry.key)) {
+      if (msg.contains(entry.key)) {
+        _cacheResponse(msg, entry.value);
         return entry.value;
       }
     }
     
-    // Busca inteligente com prioridade para correspondências mais específicas
     String? bestMatch;
-    int maxMatches = 0;
-    double bestScore = 0.0;
+    int bestScore = 0;
     
     for (final entry in _knowledge.entries) {
       final keywords = entry.value['keywords'] as List<String>;
-      int matches = 0;
-      double score = 0.0;
+      int score = 0;
       
       for (final keyword in keywords) {
         final keywordLower = keyword.toLowerCase();
         if (msg.contains(keywordLower)) {
-          matches++;
-          // Pontuação maior para correspondências mais específicas
           if (msg == keywordLower) {
-            score += 10.0; // Correspondência exata
+            score += 10;
           } else if (msg.startsWith(keywordLower) || msg.endsWith(keywordLower)) {
-            score += 5.0; // Começa ou termina com a palavra
+            score += 5;
           } else {
-            score += 1.0; // Contém a palavra
+            score += 2;
           }
-          
-          // Bonus para frases mais longas e específicas
-          score += keywordLower.split(' ').length * 0.5;
+          score += keywordLower.split(' ').length;
         }
       }
       
-      if (matches > 0 && (matches > maxMatches || (matches == maxMatches && score > bestScore))) {
-        maxMatches = matches;
+      if (score > bestScore) {
         bestScore = score;
         bestMatch = entry.value['response'] as String;
       }
     }
     
+    if (bestMatch != null) {
+      _cacheResponse(msg, bestMatch);
+    }
+    
     return bestMatch;
+  }
+  
+  static void _cacheResponse(String message, String response) {
+    if (_responseCache.length >= _maxCacheSize) {
+      final firstKey = _responseCache.keys.first;
+      _responseCache.remove(firstKey);
+    }
+    _responseCache[message] = response;
   }
   
   static List<String> getFollowUpSuggestions(String message) {
     final msg = message.toLowerCase().trim();
     
-    // Busca sugestões baseadas na melhor correspondência
     String? bestTopic;
     int maxMatches = 0;
     
@@ -201,28 +213,36 @@ class AutismKnowledgeBase {
       return List<String>.from(_knowledge[bestTopic]!['follow_up'] ?? []);
     }
     
-    // Sugestões padrão se não encontrar correspondência
     return ['Como identificar autismo?', 'Que terapias funcionam?', 'Direitos da pessoa com TEA'];
   }
   
   static String getDefaultResponse() {
-    return '🤖 **Olá! Sou seu assistente especializado em TEA!**\n\n🎯 **Estou aqui para ajudar com:**\n\n**🔍 Identificação:**\n• Sintomas por idade\n• Sinais de alerta\n• Quando procurar ajuda\n\n**🏥 Diagnóstico:**\n• Profissionais indicados\n• Processo de avaliação\n• Recursos gratuitos\n\n**🎯 Intervenções:**\n• Terapias eficazes\n• Estratégias práticas\n• Apoio familiar\n\n**🏫 Educação:**\n• Direitos escolares\n• Inclusão\n• Adaptações\n\n**💡 Exemplos práticos:**\n• "Meu filho de 4 anos não fala"\n• "Como lidar com crises"\n• "Recursos gratuitos na minha cidade"\n• "Direitos na escola"\n\n💙 **Cada pergunta é importante. Como posso ajudar hoje?**';
+    return '💙 **Olá! Estou aqui para apoiar você nessa jornada.**\n\n🎯 **Posso ajudar com:**\n• Identificar sinais do TEA\n• Orientar sobre diagnóstico\n• Sugerir terapias eficazes\n• Apoiar a inclusão escolar\n• Esclarecer direitos\n• Oferecer suporte emocional\n\n**💡 Seja específico:**\n• "Meu filho tem 3 anos e não fala"\n• "Como lidar com birras?"\n• "Preciso de ajuda gratuita"\n\n🤗 **Você não está sozinho(a). Vamos conversar?**';
+  }
+  
+  static void clearCache() {
+    _responseCache.clear();
   }
   
   static List<String> getSmartSuggestions() {
     return [
-      'Como identificar sinais precoces?',
-      'Meu filho não fala, é autismo?',
-      'Como lidar com crises?',
-      'Que terapias são mais eficazes?',
+      'Sinais de autismo por idade',
+      'Meu filho não fala',
+      'Como lidar com crises',
+      'Terapias que funcionam',
       'Direitos na escola',
-      'Seletividade alimentar',
+      'Ajuda gratuita disponível',
       'Problemas de sono',
-      'Apps para comunicação',
-      'Como conseguir diagnóstico?',
-      'Apoio para a família',
-      'Recursos gratuitos disponíveis',
-      'Sintomas em crianças mais velhas'
+      'Seletividade alimentar'
     ];
+  }
+  
+  static void optimizeMemory() {
+    if (_responseCache.length > _maxCacheSize ~/ 2) {
+      final keysToRemove = _responseCache.keys.take(_responseCache.length ~/ 2).toList();
+      for (final key in keysToRemove) {
+        _responseCache.remove(key);
+      }
+    }
   }
 }
