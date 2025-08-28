@@ -60,9 +60,10 @@ class _RoutineScreenState extends State<RoutineScreen> {
       appBar: AppBar(
         title: const Text('Rotina Personalizada'),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_add),
+            icon: const Icon(Icons.person_add, color: Colors.white),
             onPressed: _showProfileSetup,
           ),
         ],
@@ -90,12 +91,17 @@ class _RoutineScreenState extends State<RoutineScreen> {
   }
   
   Widget _buildHeader() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(12),
-      color: Colors.blue[50],
+      color: isDark ? const Color(0xFF2A2A2A) : Colors.blue[50],
       child: Row(
         children: [
-          const Icon(Icons.schedule, color: Colors.blue, size: 20),
+          Icon(
+            Icons.schedule, 
+            color: isDark ? tismAqua : Colors.blue, 
+            size: 20
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -236,7 +242,13 @@ class _RoutineScreenState extends State<RoutineScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.search_off, size: 64, color: Colors.grey),
+          Icon(
+            Icons.search_off, 
+            size: 64, 
+            color: Theme.of(context).brightness == Brightness.dark 
+              ? Colors.grey[400] 
+              : Colors.grey
+          ),
           const SizedBox(height: 16),
           const Text('Nenhuma atividade encontrada'),
           const SizedBox(height: 8),

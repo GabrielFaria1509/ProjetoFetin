@@ -34,26 +34,33 @@ class _DiaryScreenState extends State<DiaryScreen> {
       appBar: AppBar(
         title: const Text('Diário de Observações'),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.bar_chart),
+            icon: const Icon(Icons.bar_chart, color: Colors.white),
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const StatisticsScreen()),
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.share),
+            icon: const Icon(Icons.share, color: Colors.white),
             onPressed: _exportReport,
           ),
         ],
       ),
       body: entries.isEmpty
-          ? const Center(
+          ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.book, size: 64, color: Colors.grey),
+                  Icon(
+                    Icons.book, 
+                    size: 64, 
+                    color: Theme.of(context).brightness == Brightness.dark 
+                      ? Colors.grey[400] 
+                      : Colors.grey
+                  ),
                   SizedBox(height: 16),
                   Text('Nenhuma observação ainda'),
                   Text('Toque no + para começar'),

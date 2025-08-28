@@ -39,9 +39,10 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: const Text('Assistente TEA'),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline, color: Colors.white),
             onPressed: () => _showInfoDialog(),
           ),
         ],
@@ -87,11 +88,15 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildInputArea() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.grey.shade200, blurRadius: 1)],
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        boxShadow: [BoxShadow(
+          color: isDark ? Colors.black26 : Colors.grey.shade200, 
+          blurRadius: 1
+        )],
       ),
       child: SafeArea(
         child: Row(
@@ -114,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   filled: true,
-                  fillColor: Colors.grey[50],
+                  fillColor: isDark ? const Color(0xFF2A2A2A) : Colors.grey[50],
                 ),
                 onSubmitted: _isLoading ? null : _sendMessage,
               ),
@@ -127,7 +132,11 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               child: IconButton(
                 onPressed: _isLoading ? null : () => _sendMessage(_controller.text),
-                icon: const Icon(Icons.send, color: Colors.white, size: 20),
+                icon: Icon(
+                  Icons.send, 
+                  color: _isLoading ? Colors.grey : Colors.white, 
+                  size: 20
+                ),
                 padding: const EdgeInsets.all(8),
               ),
             ),

@@ -72,13 +72,15 @@ class AppTheme {
     
     appBarTheme: AppBarTheme(
       backgroundColor: const Color(0xFF1E1E1E),
-      foregroundColor: tismAqua,
+      foregroundColor: Colors.white,
+      iconTheme: const IconThemeData(color: Colors.white),
+      actionsIconTheme: const IconThemeData(color: Colors.white),
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: TextStyle(
+      titleTextStyle: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
-        color: tismAqua,
+        color: Colors.white,
       ),
     ),
     
@@ -113,7 +115,7 @@ class AppTheme {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: const Color(0xFF1E1E1E),
       selectedItemColor: tismAqua,
-      unselectedItemColor: Colors.grey[400],
+      unselectedItemColor: Colors.grey[300],
       type: BottomNavigationBarType.fixed,
       elevation: 8,
     ),
@@ -123,6 +125,25 @@ class AppTheme {
       brightness: Brightness.dark,
       surface: const Color(0xFF1E1E1E),
       onSurface: Colors.white,
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+    ),
+    
+    // Configurações específicas para ícones no modo escuro
+    iconTheme: const IconThemeData(
+      color: Colors.white,
+    ),
+    
+    // Configuração para TabBar no modo escuro
+    tabBarTheme: const TabBarThemeData(
+      labelColor: Colors.white,
+      unselectedLabelColor: Colors.grey,
+      indicatorColor: Colors.white,
+    ),
+    
+    // Configuração para FloatingActionButton no modo escuro
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      foregroundColor: Colors.white,
     ),
   );
 }

@@ -61,7 +61,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Perfil'), backgroundColor: tismAqua),
+      appBar: AppBar(
+        title: const Text('Perfil'), 
+        backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -77,7 +82,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     ? FileImage(_profileImage!)
                     : null,
                 child: _profileImage == null
-                    ? Icon(Icons.camera_alt, size: 40, color: Colors.grey[600])
+                    ? Icon(
+                        Icons.camera_alt, 
+                        size: 40, 
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[300] 
+                          : Colors.grey[600]
+                      )
                     : null,
               ),
             ),
@@ -91,7 +102,12 @@ class _ProfilePageState extends State<ProfilePage> {
             // Nome do usuário
             Card(
               child: ListTile(
-                leading: const Icon(Icons.person),
+                leading: Icon(
+                  Icons.person,
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.white 
+                    : null,
+                ),
                 title: const Text('Nome'),
                 subtitle: Text(widget.nomeUsuario),
               ),
@@ -102,10 +118,20 @@ class _ProfilePageState extends State<ProfilePage> {
             // Tipo de usuário
             Card(
               child: ListTile(
-                leading: const Icon(Icons.work),
+                leading: Icon(
+                  Icons.work,
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.white 
+                    : null,
+                ),
                 title: const Text('Tipo de usuário'),
                 subtitle: Text(_userType),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.white 
+                    : null,
+                ),
                 onTap: _showUserTypeDialog,
               ),
             ),

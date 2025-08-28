@@ -32,9 +32,18 @@ class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin
         backgroundColor: tismAqua,
         bottom: TabBar(
           controller: _tabController,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
           tabs: const [
-            Tab(text: 'Artigos', icon: Icon(Icons.article)),
-            Tab(text: 'Biblioteca Digital', icon: Icon(Icons.library_books)),
+            Tab(
+              text: 'Artigos', 
+              icon: Icon(Icons.article, color: Colors.white),
+            ),
+            Tab(
+              text: 'Biblioteca Digital', 
+              icon: Icon(Icons.library_books, color: Colors.white),
+            ),
           ],
         ),
       ),

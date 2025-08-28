@@ -58,6 +58,8 @@ class _PDFViewerState extends State<PDFViewer> {
       appBar: AppBar(
         title: Text(widget.title, style: const TextStyle(fontSize: 16)),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           if (totalPages > 0)
             Center(
@@ -65,7 +67,7 @@ class _PDFViewerState extends State<PDFViewer> {
                 padding: const EdgeInsets.only(right: 16),
                 child: Text(
                   '${currentPage + 1}/$totalPages',
-                  style: const TextStyle(fontSize: 14),
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
                 ),
               ),
             ),
@@ -90,7 +92,9 @@ class _PDFViewerState extends State<PDFViewer> {
               height: 60,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark 
+                  ? const Color(0xFF1E1E1E) 
+                  : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.1),
@@ -106,17 +110,32 @@ class _PDFViewerState extends State<PDFViewer> {
                     onPressed: currentPage > 0
                         ? () => pdfController?.setPage(currentPage - 1)
                         : null,
-                    icon: const Icon(Icons.chevron_left),
+                    icon: Icon(
+                      Icons.chevron_left,
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.white 
+                        : null,
+                    ),
                   ),
                   Text(
                     'Página ${currentPage + 1} de $totalPages',
-                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.white 
+                        : null,
+                    ),
                   ),
                   IconButton(
                     onPressed: currentPage < totalPages - 1
                         ? () => pdfController?.setPage(currentPage + 1)
                         : null,
-                    icon: const Icon(Icons.chevron_right),
+                    icon: Icon(
+                      Icons.chevron_right,
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.white 
+                        : null,
+                    ),
                   ),
                 ],
               ),

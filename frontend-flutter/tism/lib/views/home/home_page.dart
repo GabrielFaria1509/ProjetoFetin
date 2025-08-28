@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
               return IconButton(
                 icon: Icon(
                   themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                  color: Colors.white,
                 ),
                 onPressed: () => themeService.toggleTheme(),
                 tooltip: themeService.isDarkMode ? 'Modo Claro' : 'Modo Escuro',
@@ -117,7 +118,11 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Row(
               children: [
-                Icon(icon, size: 40, color: tismAqua),
+                Icon(
+                  icon, 
+                  size: 40, 
+                  color: tismAqua,
+                ),
                 const SizedBox(width: 16),
                 Text(
                   title,

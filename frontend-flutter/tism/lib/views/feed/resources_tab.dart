@@ -248,7 +248,9 @@ class _ResourcesTabState extends State<ResourcesTab> {
               ),
               Icon(
                 Icons.chevron_right,
-                color: Colors.grey[400],
+                color: Theme.of(context).brightness == Brightness.dark 
+                  ? Colors.grey[300] 
+                  : Colors.grey[400],
                 size: 24,
               ),
             ],
