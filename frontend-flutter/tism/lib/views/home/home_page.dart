@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
 import 'package:tism/views/chatbot/chat_screen.dart';
 import 'package:tism/views/routine/routine_screen.dart';
 import 'package:tism/views/diary/diary_screen.dart';
+import 'package:tism/services/theme_service.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
@@ -16,7 +18,19 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TISM - Guia TEA'),
-        backgroundColor: tismAqua,
+        actions: [
+          Consumer<ThemeService>(
+            builder: (context, themeService, child) {
+              return IconButton(
+                icon: Icon(
+                  themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                ),
+                onPressed: () => themeService.toggleTheme(),
+                tooltip: themeService.isDarkMode ? 'Modo Claro' : 'Modo Escuro',
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

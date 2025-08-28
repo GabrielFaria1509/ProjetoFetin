@@ -1,11 +1,18 @@
-import 'package:flutter/material.dart'; //importações necessárias para o MaterialApp e widgets
-import 'package:tism/constants/colors.dart'; //importações necessárias para as cores
-import 'package:tism/views/login/login_page.dart'; //importações necessárias para o LoginPage
-import 'package:tism/views/home/home_page.dart'; //importações necessárias para o LoginPage e HomePage
-import 'package:tism/services/user_service.dart'; //importe necessário para o UserService
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tism/constants/theme.dart';
+import 'package:tism/views/login/login_page.dart';
+import 'package:tism/views/home/home_page.dart';
+import 'package:tism/services/user_service.dart';
+import 'package:tism/services/theme_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeService(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,11 +20,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TISM App',
-      theme: ThemeData(primarySwatch: tismAqua),
-      home: const SplashScreen(),
-      debugShowCheckedModeBanner: false,
+    return Consumer<ThemeService>(
+      builder: (context, themeService, child) {
+        return MaterialApp(
+          title: 'TISM App',
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: themeService.themeMode,
+          home: const SplashScreen(),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
