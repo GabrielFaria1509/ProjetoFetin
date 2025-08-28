@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tism/constants/theme.dart';
+import 'package:tism/constants/colors.dart';
 import 'package:tism/views/login/login_page.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/services/user_service.dart';
