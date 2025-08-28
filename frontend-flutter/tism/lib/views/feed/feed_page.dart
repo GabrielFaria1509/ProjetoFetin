@@ -30,6 +30,11 @@ class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin
       appBar: AppBar(
         title: const Text('Feed Educativo'),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 24),
+          onPressed: () => Navigator.pop(context),
+        ),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.white,
