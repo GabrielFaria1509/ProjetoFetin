@@ -34,6 +34,8 @@ class QuickSuggestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -48,11 +50,16 @@ class QuickSuggestions extends StatelessWidget {
               avatar: Text(suggestion['icon']!, style: const TextStyle(fontSize: 16)),
               label: Text(
                 suggestion['text']!,
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: isDark ? Colors.white : Colors.black87,
+                ),
               ),
               onPressed: () => onSuggestionTap(suggestion['text']!),
-              backgroundColor: Colors.grey[100],
-              side: BorderSide(color: Colors.grey[300]!),
+              backgroundColor: isDark ? const Color(0xFF2A2A2A) : Colors.grey[100],
+              side: BorderSide(
+                color: isDark ? Colors.grey[600]! : Colors.grey[300]!,
+              ),
             ),
           );
         },
