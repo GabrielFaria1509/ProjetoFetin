@@ -39,9 +39,13 @@ class UserService {
     await prefs.setString(_keyUserType, userType);
   }
 
-  static Future<void> updateProfileImage(String imagePath) async {
+  static Future<void> updateProfileImage(String? imagePath) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_keyProfileImage, imagePath);
+    if (imagePath != null) {
+      await prefs.setString(_keyProfileImage, imagePath);
+    } else {
+      await prefs.remove(_keyProfileImage);
+    }
   }
 
   static Future<void> logout() async {

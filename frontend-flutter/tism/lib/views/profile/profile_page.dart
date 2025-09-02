@@ -74,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 20),
             // Foto de perfil
             GestureDetector(
-              onTap: _pickImage,
+              onTap: _profileImage == null ? _pickImage : _showImageOptions,
               child: CircleAvatar(
                 radius: 60,
                 backgroundColor: Colors.grey[300],
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Toque para alterar foto',
+              _profileImage == null ? 'Toque para adicionar foto' : 'Toque para alterar/remover',
               style: TextStyle(color: Colors.grey[600], fontSize: 12),
             ),
             const SizedBox(height: 30),
@@ -155,6 +155,43 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  void _showImageOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Alterar foto'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _pickImage();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.delete, color: Colors.red),
+                title: const Text('Remover foto', style: TextStyle(color: Colors.red)),
+                onTap: () {
+                  Navigator.pop(context);
+                  _removeImage();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _removeImage() async {
+    setState(() {
+      _profileImage = null;
+    });
+    await UserService.updateProfileImage(null);
   }
 
   void _showUserTypeDialog() {
