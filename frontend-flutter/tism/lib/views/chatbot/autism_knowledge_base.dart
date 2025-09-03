@@ -1,19 +1,43 @@
 class AutismKnowledgeBase {
-  static final Map<String, String> _responseCache = <String, String>{};
-  static final Map<String, List<String>> _contextCache = <String, List<String>>{};
-  static final Map<String, String> _semanticCache = <String, String>{};
-  static final Map<String, double> _confidenceCache = <String, double>{};
-  static const int _maxCacheSize = 10000;
-  
   static const Map<String, Map<String, dynamic>> _knowledge = {
     'compreendendo_autismo': {
-      'keywords': ['o que é', 'que é', 'definição', 'conceito', 'autismo', 'tea', 'transtorno espectro autista', 'compreendendo', 'entender', 'explique', 'significa', 'característica', 'condição', 'neurológico', 'desenvolvimento'],
-      'response': '**Compreendendo o Autismo (TEA)**\n\nO Transtorno do Espectro Autista é uma condição neurológica complexa que:\n\n**Características Principais:**\n• Afeta o desenvolvimento da comunicação verbal e não-verbal\n• Apresenta desafios na interação social recíproca\n• Manifesta padrões restritos e repetitivos de comportamento\n• Inclui sensibilidades sensoriais diferenciadas\n• Não é causado por fatores psicológicos ou educacionais\n• Manifesta-se de forma única em cada pessoa\n\n**Aspectos Importantes:**\n• É uma condição neurológica, não uma doença\n• Afeta aproximadamente 1 em cada 100 pessoas\n• Pode ser diagnosticado em qualquer idade\n• Cada pessoa no espectro tem habilidades e desafios únicos\n• Com apoio adequado, pessoas com TEA podem ter vidas plenas\n\n*Baseado no material "Compreendendo o Autismo"*',
-      'follow_up': ['sintomas_faixa_etaria', 'causas_autismo', 'diagnostico']
+      'keywords': ['o que é', 'que é', 'definição', 'conceito', 'autismo', 'tea'],
+      'response': '**Compreendendo o Autismo (TEA)**\n\nO Transtorno do Espectro Autista é uma condição neurológica que afeta:\n• Comunicação\n• Interação social\n• Comportamentos repetitivos\n• Sensibilidades sensoriais',
+      'follow_up': ['sintomas', 'diagnostico', 'tratamento']
     },
+  };
+
+  static String findResponse(String query) {
+    final lowerQuery = query.toLowerCase();
     
-    'sintomas_faixa_etaria': {
-      'keywords': ['sintomas', 'sinais', 'identificar', 'primeiros sintomas', 'bebê', 'criança', 'adolescente', 'jovem', 'como saber', 'detectar', 'sinais precoces', 'marcos desenvolvimento', 'atraso', 'não fala', 'não olha', 'isolamento', 'suspeita', 'reconhecer', 'idade'],
-      'response': '**Sintomas do TEA por Faixa Etária**\n\n**🍼 PRIMEIRA INFÂNCIA (0-24 meses):**\n\n**Comunicação:**\n• Ausência de balbucio aos 12 meses\n• Não responde ao nome consistentemente\n• Perda de palavras já adquiridas\n• Não aponta para compartilhar interesse (18 meses)\n• Ausência de gestos comunicativos\n• Ecolalia precoce\n\n**Social:**\n• Contato visual reduzido ou ausente\n• Não sorri socialmente aos 6 meses\n• Não imita expressões faciais\n• Preferência por isolamento\n• Não demonstra interesse em outras crianças\n• Dificuldade em jogos de imitação\n\n**Comportamental:**\n• Movimentos repetitivos (balançar, girar)\n• Fixação em objetos que giram\n• Resistência a mudanças na rotina\n• Reações incomuns a estímulos sensoriais\n• Interesses restritos e intensos\n\n**👶 PRÉ-ESCOLAR (2-5 anos):**\n\n**Comunicação:**\n• Atraso significativo na fala\n• Ecolalia persistente\n• Dificuldade em iniciar conversas\n• Uso inadequado de pronomes\n• Linguagem repetitiva ou estereotipada\n• Dificuldade em compreender instruções complexas\n\n**Social:**\n• Dificuldade em brincar com outras crianças\n• Não compartilha interesses ou emoções\n• Dificuldade em fazer amizades\n• Não compreende regras sociais básicas\n• Preferência por brincadeiras solitárias\n• Dificuldade em demonstrar empatia\n\n**Comportamental:**\n• Rituais e rotinas rígidas\n• Comportamentos repetitivos mais complexos\n• Interesses obsessivos por temas específicos\n• Dificuldade com transições\n• Comportamentos autolesivos\n• Crises frequentes com mudanças\n\n**🎒 ESCOLAR (6-12 anos):**\n\n**Acadêmico:**\n• Dificuldades de aprendizagem específicas\n• Problemas de atenção e concentração\n• Dificuldade em trabalhos em grupo\n• Interpretação literal de instruções\n• Dificuldade com conceitos abstratos\n• Habilidades desiguais entre áreas\n\n**Social:**\n• Isolamento social na escola\n• Dificuldade em fazer e manter amizades\n• Problemas com bullying\n• Não compreende piadas ou sarcasmo\n• Dificuldade em atividades esportivas em grupo\n• Comportamentos sociais inadequados\n\n**Comportamental:**\n• Interesses especiais muito intensos\n• Dificuldade com mudanças de rotina escolar\n• Comportamentos repetitivos em sala de aula\n• Dificuldade em regular emoções\n• Ansiedade em situações sociais\n• Necessidade de previsibilidade\n\n**🧑 ADOLESCÊNCIA (13-18 anos):**\n\n**Social:**\n• Isolamento social aumentado\n• Dificuldade com relacionamentos românticos\n• Não compreende códigos sociais adolescentes\n• Dificuldade com mudanças corporais\n• Ansiedade social intensa\n• Dificuldade em grupos de pares\n\n**Emocional:**\n• Ansiedade e depressão\n• Dificuldade com identidade pessoal\n• Baixa autoestima\n• Dificuldade em expressar emoções\n• Comportamentos de risco reduzidos\n• Necessidade de apoio emocional\n\n**Comportamental:**\n• Interesses especiais podem dominar a vida\n• Dificuldade com independência\n• Resistência a mudanças desenvolvimentais\n• Comportamentos repetitivos persistentes\n• Dificuldade com planejamento futuro\n• Necessidade de estrutura continuada\n\n**🎓 JOVEM ADULTO (19-21 anos):**\n\n**Transição:**\n• Dificuldade com transição para vida adulta\n• Ansiedade com responsabilidades\n• Necessidade de apoio para decisões\n• Dificuldade com mudanças de ambiente\n• Desafios com independência financeira\n• Necessidade de suporte continuado\n\n**Profissional/Acadêmico:**\n• Dificuldade em entrevistas de emprego\n• Desafios no ambiente de trabalho\n• Dificuldade com ensino superior\n• Necessidade de adaptações acadêmicas\n• Dificuldade com networking\n• Habilidades específicas podem ser pontos fortes\n\n**Social:**\n• Isolamento social continuado\n• Dificuldade com relacionamentos íntimos\n• Desafios com vida social adulta\n• Necessidade de grupos de apoio\n• Dificuldade com habilidades sociais complexas\n• Possível desenvolvimento de relacionamentos significativos\n\n**⚠️ SINAIS DE ALERTA EM QUALQUER IDADE:**\n• Perda de habilidades já adquiridas\n• Isolamento social extremo\n• Comportamentos autolesivos\n• Ansiedade ou depressão severa\n• Dificuldades funcionais significativas\n• Necessidade de apoio em atividades básicas\n\n**📋 MARCOS IMPORTANTES:**\n• 6 meses: sorriso social\n• 12 meses: apontar, balbucio\n• 18 meses: primeiras palavras\n• 24 meses: frases de 2 palavras\n• 3 anos: brincadeira simbólica\n• 5 anos: interação social básica\n• 12 anos: amizades recíprocas\n• 18 anos: preparação para independência\n\n**Importante:** Sintomas variam muito entre indivíduos. Identificação precoce permite melhores resultados com intervenção adequada.\n\n*Baseado no material "Sintomas por Faixa Etária"*',
-      'follow_up': ['diagnostico', 'intervencoes_precoces', 'quando_procurar_ajuda']
-    },
+    for (final entry in _knowledge.values) {
+      final keywords = entry['keywords'] as List<String>;
+      for (final keyword in keywords) {
+        if (lowerQuery.contains(keyword.toLowerCase())) {
+          return entry['response'] as String;
+        }
+      }
+    }
+    
+    return getDefaultResponse();
+  }
+
+  static String getDefaultResponse() {
+    return '💙 **Olá! Estou aqui para ajudar com informações sobre TEA.**\n\n'
+           'Posso orientar sobre:\n'
+           '• Sinais e sintomas do autismo\n'
+           '• Processo de diagnóstico\n'
+           '• Terapias e intervenções\n'
+           '• Direitos e inclusão\n'
+           '• Apoio familiar\n\n'
+           'Como posso ajudar você hoje?';
+  }
+
+  static List<String> getFollowUpSuggestions(String response) {
+    return [
+      'Como identificar sinais precoces?',
+      'Quais terapias são mais eficazes?',
+      'Como conseguir diagnóstico?'
+    ];
+  }
+}

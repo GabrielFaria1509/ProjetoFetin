@@ -23,9 +23,9 @@ class UserService {
   static Future<Map<String, dynamic>?> getUser() async {
     final prefs = await SharedPreferences.getInstance();
     final isLoggedIn = prefs.getBool(_keyIsLoggedIn) ?? false;
-    
+
     if (!isLoggedIn) return null;
-    
+
     return {
       'username': prefs.getString(_keyUsername) ?? '',
       'userType': prefs.getString(_keyUserType) ?? 'Responsável',

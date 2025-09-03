@@ -23,8 +23,7 @@ class ChatbotService {
 
 
   static String _getLocalResponse(String message) {
-    final response = AutismKnowledgeBase.findResponse(message);
-    return response ?? AutismKnowledgeBase.getDefaultResponse();
+    return AutismKnowledgeBase.findResponse(message);
   }
   
 
