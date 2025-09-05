@@ -1,13 +1,11 @@
 class AutismKnowledgeBase {
-  static final Map<String, String> _responseCache = <String, String>{};
-  static const int _maxCacheSize = 20;
-  
   static const Map<String, Map<String, dynamic>> _knowledge = {
-    'definicao': {
-      'keywords': ['o que é', 'que é', 'definição', 'conceito', 'autismo', 'tea', 'o que é autismo', 'o que é tea', 'defina autismo', 'explique autismo'],
-      'response': '**TEA (Transtorno do Espectro Autista)**\n\nÉ uma condição neurológica que afeta:\n• Comunicação verbal e não-verbal\n• Interação social e relacionamentos\n• Comportamentos com padrões repetitivos\n\nNão é doença - é uma forma diferente de processar o mundo.',
-      'follow_up': ['sintomas', 'diagnostico', 'causas']
+    'compreendendo_autismo': {
+      'keywords': ['o que é', 'que é', 'definição', 'conceito', 'autismo', 'tea'],
+      'response': '**Compreendendo o Autismo (TEA)**\n\nO Transtorno do Espectro Autista é uma condição neurológica que afeta:\n• Comunicação\n• Interação social\n• Comportamentos repetitivos\n• Sensibilidades sensoriais',
+      'follow_up': ['sintomas', 'diagnostico', 'tratamento']
     },
+<<<<<<< HEAD
     
     'sintomas_precoces': {
       'keywords': ['sintomas', 'sinais', 'identificar', 'como saber', 'primeiros sinais', 'bebê', 'criança pequena', 'sintoma', 'sinal', 'como identificar', 'quais sintomas', 'que sintomas', 'tem sintomas', 'apresenta sintomas'],
@@ -428,139 +426,41 @@ class AutismKnowledgeBase {
       'response': '**Coleções e Organização no TEA**\n\n**Valor das Coleções:**\n• Satisfação sensorial\n• Controle e previsibilidade\n• Desenvolvimento de expertise\n• Habilidades de classificação\n• Autoestima\n• Interesse especial positivo\n\n**Tipos de Coleções:**\n• Carros em miniatura\n• Pedras e minerais\n• Adesivos e figurinhas\n• Livros sobre tema específico\n• Objetos de personagens\n• Itens da natureza\n\n**Habilidades Desenvolvidas:**\n• Categorização\n• Sequenciação\n• Matemática (contagem)\n• Organização espacial\n• Memória\n• Atenção aos detalhes\n\n**Sistemas de Organização:**\n• Por cor\n• Por tamanho\n• Por categoria\n• Por data de aquisição\n• Por raridade\n• Por preferência pessoal\n\n**Benefícios Educativos:**\n• Pesquisa e aprendizado\n• Habilidades de apresentação\n• Compartilhamento de conhecimento\n• Conexões sociais\n• Responsabilidade\n\n**Apoio Familiar:**\n• Respeite o interesse\n• Ajude na organização\n• Celebre descobertas\n• Estabeleça limites saudáveis\n• Use como ferramenta educativa\n\nOrganizar é terapêutico!',
       'follow_up': ['espacos_colecoes', 'catalogacao_digital', 'grupos_colecionadores']
     }
+=======
+>>>>>>> c54f39d98d3262fb7c18c17146c9aaab408644a0
   };
 
-  static const Map<String, String> _quickResponses = {
-    'oi': 'Oi! Sou especialista em TEA. Como posso ajudar hoje?',
-    'olá': 'Olá! Estou aqui para esclarecer suas dúvidas sobre autismo.',
-    'bom dia': 'Bom dia! Pronto para ajudar com informações sobre TEA.',
-    'boa tarde': 'Boa tarde! Como posso auxiliar sobre autismo hoje?',
-    'boa noite': 'Boa noite! Estou disponível para suas perguntas sobre TEA.',
-    'obrigado': 'Por nada! Sempre aqui para ajudar. Cada pessoa com autismo é especial!',
-    'obrigada': 'Fico feliz em ajudar! Juntos construimos mais inclusão.',
-    'tchau': 'Até logo! Lembre-se: você não está sozinho nessa jornada!',
-    'até mais': 'Até mais! Estarei sempre aqui quando precisar.',
-    'ajuda': 'Posso ajudar com: sintomas, diagnóstico, terapias, escola, família, direitos e desenvolvimento. Seja específico!',
-    'não sei': 'Sem problemas! Me conte o que está acontecendo ou qual sua preocupação. Vamos descobrir juntos!',
-    'estou perdido': 'Não se preocupe! É normal se sentir assim. Vamos começar pelo básico. O que você gostaria de saber?',
-    'urgente': 'Se for emergência médica, procure ajuda imediata! Para dúvidas sobre TEA, estou aqui para ajudar.',
-    'crise': 'Em situações de crise: mantenha calma, reduza estímulos, use voz suave. Precisa de mais orientações?',
-    'sintomas': '**Sintomas do TEA por Faixa Etária:**\n\n• 0-3 anos: Pouco contato visual, não responde ao nome, atraso na fala\n• 3-6 anos: Dificuldades sociais, comportamentos repetitivos, resistência a mudanças\n• 6+ anos: Linguagem literal, interesses obsessivos, dificuldades de amizade\n• Adolescentes: Ansiedade social, dificuldades acadêmicas, isolamento\n\n**Importante:** Sintomas variam muito entre indivíduos. Alguns podem ser mais sutis.\n\nSobre qual idade você gostaria de saber mais detalhes?',
-    'sinais': '**Principais Sinais do TEA (Tríade Clássica):**\n\n**1. Comunicação:**\n• Atraso ou ausência da fala\n• Dificuldade para iniciar/manter conversas\n• Uso repetitivo da linguagem (ecolalia)\n\n**2. Interação Social:**\n• Dificuldade em fazer amigos\n• Não compartilha interesses\n• Problemas com contato visual\n\n**3. Comportamentos Repetitivos:**\n• Movimentos estereotipados\n• Insistência em rotinas\n• Interesses restritos e intensos\n\n**Plus:** Sensibilidades sensoriais (hiper/hiposensibilidade)\n\nQuer detalhes sobre algum sinal específico?'
-  };
+  static String findResponse(String query) {
+    final lowerQuery = query.toLowerCase();
+    
+    for (final entry in _knowledge.values) {
+      final keywords = entry['keywords'] as List<String>;
+      for (final keyword in keywords) {
+        if (lowerQuery.contains(keyword.toLowerCase())) {
+          return entry['response'] as String;
+        }
+      }
+    }
+    
+    return getDefaultResponse();
+  }
 
-  static String? findResponse(String message) {
-    final msg = message.toLowerCase().trim();
-    
-    if (_responseCache.containsKey(msg)) {
-      return _responseCache[msg];
-    }
-    
-    for (final entry in _quickResponses.entries) {
-      if (msg.contains(entry.key)) {
-        _cacheResponse(msg, entry.value);
-        return entry.value;
-      }
-    }
-    
-    String? bestMatch;
-    int bestScore = 0;
-    
-    for (final entry in _knowledge.entries) {
-      final keywords = entry.value['keywords'] as List<String>;
-      int score = 0;
-      
-      for (final keyword in keywords) {
-        final keywordLower = keyword.toLowerCase();
-        if (msg.contains(keywordLower)) {
-          if (msg == keywordLower) {
-            score += 10;
-          } else if (msg.startsWith(keywordLower) || msg.endsWith(keywordLower)) {
-            score += 5;
-          } else {
-            score += 2;
-          }
-          score += keywordLower.split(' ').length;
-        }
-      }
-      
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = entry.value['response'] as String;
-      }
-    }
-    
-    if (bestMatch != null) {
-      _cacheResponse(msg, bestMatch);
-    }
-    
-    return bestMatch;
-  }
-  
-  static void _cacheResponse(String message, String response) {
-    if (_responseCache.length >= _maxCacheSize) {
-      final firstKey = _responseCache.keys.first;
-      _responseCache.remove(firstKey);
-    }
-    _responseCache[message] = response;
-  }
-  
-  static List<String> getFollowUpSuggestions(String message) {
-    final msg = message.toLowerCase().trim();
-    
-    String? bestTopic;
-    int maxMatches = 0;
-    
-    for (final entry in _knowledge.entries) {
-      final keywords = entry.value['keywords'] as List<String>;
-      int matches = 0;
-      
-      for (final keyword in keywords) {
-        if (msg.contains(keyword.toLowerCase())) {
-          matches++;
-        }
-      }
-      
-      if (matches > maxMatches) {
-        maxMatches = matches;
-        bestTopic = entry.key;
-      }
-    }
-    
-    if (bestTopic != null) {
-      return List<String>.from(_knowledge[bestTopic]!['follow_up'] ?? []);
-    }
-    
-    return ['Como identificar autismo?', 'Que terapias funcionam?', 'Direitos da pessoa com TEA'];
-  }
-  
   static String getDefaultResponse() {
-    return '**Olá! Estou aqui para apoiar você nessa jornada.**\n\n**Posso ajudar com:**\n• Identificar sinais do TEA\n• Orientar sobre diagnóstico\n• Sugerir terapias eficazes\n• Apoiar a inclusão escolar\n• Esclarecer direitos\n• Oferecer suporte emocional\n\n**Seja específico:**\n• "Meu filho tem 3 anos e não fala"\n• "Como lidar com birras?"\n• "Preciso de ajuda gratuita"\n\nVocê não está sozinho(a). Vamos conversar?';
+    return '💙 **Olá! Estou aqui para ajudar com informações sobre TEA.**\n\n'
+           'Posso orientar sobre:\n'
+           '• Sinais e sintomas do autismo\n'
+           '• Processo de diagnóstico\n'
+           '• Terapias e intervenções\n'
+           '• Direitos e inclusão\n'
+           '• Apoio familiar\n\n'
+           'Como posso ajudar você hoje?';
   }
-  
-  static void clearCache() {
-    _responseCache.clear();
-  }
-  
-  static List<String> getSmartSuggestions() {
+
+  static List<String> getFollowUpSuggestions(String response) {
     return [
-      'Sinais de autismo por idade',
-      'Meu filho não fala',
-      'Como lidar com crises',
-      'Terapias que funcionam',
-      'Direitos na escola',
-      'Ajuda gratuita disponível',
-      'Problemas de sono',
-      'Seletividade alimentar'
+      'Como identificar sinais precoces?',
+      'Quais terapias são mais eficazes?',
+      'Como conseguir diagnóstico?'
     ];
-  }
-  
-  static void optimizeMemory() {
-    if (_responseCache.length > _maxCacheSize ~/ 2) {
-      final keysToRemove = _responseCache.keys.take(_responseCache.length ~/ 2).toList();
-      for (final key in keysToRemove) {
-        _responseCache.remove(key);
-      }
-    }
   }
 }
