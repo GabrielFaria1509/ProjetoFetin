@@ -128,11 +128,22 @@ class _DiaryScreenState extends State<DiaryScreen> {
           child: Text('${entry.intensity}', 
                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         ),
+        onTap: () => _editEntry(entry),
       ),
     );
   }
 
 
+
+  void _editEntry(DiaryEntry entry) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddEntryScreen(entryToEdit: entry),
+      ),
+    );
+    _loadEntries();
+  }
 
   void _exportReport() {
     final report = DiaryService.generateReport();

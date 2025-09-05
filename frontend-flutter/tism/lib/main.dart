@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tism/constants/theme.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/login/login_page.dart';
@@ -7,7 +8,15 @@ import 'package:tism/views/home/home_page.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/services/theme_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    debugPrint('Erro ao carregar .env: $e');
+  }
+  
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeService(),
@@ -72,9 +81,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: tismAqua,
-      body: const Center(child: CircularProgressIndicator(color: Colors.white)),
+      backgroundColor: isDark ? const Color(0xFF1E1E1E) : tismAqua,
+      body: Center(
+        child: CircularProgressIndicator(
+          color: isDark ? tismAqua : Colors.white,
+        ),
+      ),
     );
   }
 }

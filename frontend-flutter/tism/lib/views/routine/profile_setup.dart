@@ -4,8 +4,9 @@ import 'routine_models.dart';
 
 class ProfileSetup extends StatefulWidget {
   final Function(ChildProfile) onProfileCreated;
+  final ChildProfile? existingProfile;
   
-  const ProfileSetup({super.key, required this.onProfileCreated});
+  const ProfileSetup({super.key, required this.onProfileCreated, this.existingProfile});
 
   @override
   State<ProfileSetup> createState() => _ProfileSetupState();
@@ -13,17 +14,37 @@ class ProfileSetup extends StatefulWidget {
 
 class _ProfileSetupState extends State<ProfileSetup> {
   final _nameController = TextEditingController();
-  int _age = 3;
+  String _ageDisplay = '3 anos';
+  int _ageInMonths = 36;
   String _supportLevel = 'leve';
   final Set<String> _sensoryPreferences = {};
   final Set<String> _interests = {};
+  
+  @override
+  void initState() {
+    super.initState();
+    if (widget.existingProfile != null) {
+      _loadExistingProfile();
+    }
+  }
+  
+  void _loadExistingProfile() {
+    final profile = widget.existingProfile!;
+    _nameController.text = profile.name;
+    _ageDisplay = profile.ageDisplay;
+    _ageInMonths = profile.ageInMonths;
+    _supportLevel = profile.supportLevel;
+    _sensoryPreferences.addAll(profile.sensoryPreferences);
+    _interests.addAll(profile.interests);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Configurar Perfil'),
+        title: Text(widget.existingProfile != null ? 'Editar Perfil' : 'Configurar Perfil'),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -69,20 +90,44 @@ class _ProfileSetupState extends State<ProfileSetup> {
   }
 
   Widget _buildAgeSelector() {
+    final ageOptions = [
+      '1 mês', '2 meses', '3 meses', '4 meses', '5 meses', '6 meses',
+      '7 meses', '8 meses', '9 meses', '10 meses', '11 meses',
+      '1 ano', '2 anos', '3 anos', '4 anos', '5 anos', '6 anos',
+      '7 anos', '8 anos', '9 anos', '10 anos', '11 anos', '12 anos',
+      '13 anos', '14 anos', '15 anos', '16 anos', '17 anos', '18 anos'
+    ];
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Idade: ', style: TextStyle(fontWeight: FontWeight.bold)),
-        Slider(
-          value: _age.toDouble(),
-          min: 1,
-          max: 12,
-          divisions: 11,
-          label: '$_age anos',
-          onChanged: (value) => setState(() => _age = value.round()),
+        Text('Idade: $_ageDisplay', style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        DropdownButton<String>(
+          value: _ageDisplay,
+          isExpanded: true,
+          items: ageOptions.map((age) => DropdownMenuItem(
+            value: age,
+            child: Text(age),
+          )).toList(),
+          onChanged: (value) {
+            setState(() {
+              _ageDisplay = value!;
+              _ageInMonths = _getAgeInMonths(value);
+            });
+          },
         ),
       ],
     );
+  }
+  
+  int _getAgeInMonths(String ageDisplay) {
+    if (ageDisplay.contains('mês') || ageDisplay.contains('meses')) {
+      return int.parse(ageDisplay.split(' ')[0]);
+    } else {
+      final years = int.parse(ageDisplay.split(' ')[0]);
+      return years * 12;
+    }
   }
 
   Widget _buildSupportLevelSelector() {
@@ -145,7 +190,8 @@ class _ProfileSetupState extends State<ProfileSetup> {
   void _createProfile() {
     final profile = ChildProfile(
       name: _nameController.text.isEmpty ? 'Criança' : _nameController.text,
-      age: _age,
+      ageDisplay: _ageDisplay,
+      ageInMonths: _ageInMonths,
       supportLevel: _supportLevel,
       sensoryPreferences: _sensoryPreferences.toList(),
       interests: _interests.toList(),

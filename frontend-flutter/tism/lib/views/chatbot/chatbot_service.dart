@@ -1,5 +1,7 @@
 import 'autism_knowledge_base.dart';
 import 'memory_optimized_cache.dart';
+import '../../services/gemini_service.dart';
+import '../../config/chatbot_config.dart';
 
 class ChatbotService {
   static final MemoryOptimizedCache _cache = MemoryOptimizedCache();
@@ -11,22 +13,28 @@ class ChatbotService {
       return cachedResponse;
     }
     
-    // Usa apenas base local - sem HTTP para velocidade
-    final response = _getLocalResponse(message);
+    String response;
     
-    // Cache imediato
+    if (ChatbotConfig.USE_AI) {
+      // Modo IA: usa apenas Gemini AI
+      try {
+        response = await GeminiService.generateCustomResponse(message);
+      } catch (e) {
+        response = await GeminiService.generateFallbackResponse(message);
+      }
+    } else {
+      // Modo Local: usa apenas base de conhecimento
+      response = _getLocalResponse(message);
+    }
+    
     _cache.cacheResponse(message, response);
-    
     return response;
   }
   
-
-
   static String _getLocalResponse(String message) {
-    return AutismKnowledgeBase.findResponse(message);
+    final response = AutismKnowledgeBase.findResponse(message);
+    return response ?? AutismKnowledgeBase.getDefaultResponse();
   }
-  
-
   
   static List<String> getSuggestions(String message) {
     return AutismKnowledgeBase.getFollowUpSuggestions(message);

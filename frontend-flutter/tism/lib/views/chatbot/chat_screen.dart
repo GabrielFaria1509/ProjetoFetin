@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tism/constants/colors.dart';
 import 'chatbot_service.dart';
 import 'quick_suggestions.dart';
@@ -102,26 +104,39 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Row(
           children: [
             Expanded(
-              child: TextField(
-                controller: _controller,
-                maxLines: null,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  hintText: 'Ex: "Meu filho não fala, pode ser autismo?"',
-                  hintStyle: TextStyle(color: Colors.grey[500], fontSize: 13),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.grey[300]!),
+              child: RawKeyboardListener(
+                focusNode: FocusNode(),
+                onKey: (RawKeyEvent event) {
+                  if (event is RawKeyDownEvent) {
+                    final isEnter = event.logicalKey == LogicalKeyboardKey.enter;
+                    final isCtrlPressed = event.isControlPressed;
+                    
+                    if (isEnter && !isCtrlPressed) {
+                      if (!_isLoading) _sendMessage(_controller.text);
+                    }
+                  }
+                },
+                child: TextField(
+                  controller: _controller,
+                  maxLines: null,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    hintText: 'Digite sua mensagem... (Enter: enviar, Ctrl+Enter: nova linha)',
+                    hintStyle: TextStyle(color: Colors.grey[500], fontSize: 13),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.grey[300]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: tismAqua),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    filled: true,
+                    fillColor: isDark ? const Color(0xFF2A2A2A) : Colors.grey[50],
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: tismAqua),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  filled: true,
-                  fillColor: isDark ? const Color(0xFF2A2A2A) : Colors.grey[50],
+                  keyboardType: TextInputType.multiline,
                 ),
-                onSubmitted: _isLoading ? null : _sendMessage,
               ),
             ),
             const SizedBox(width: 8),
@@ -254,14 +269,66 @@ class ChatBubble extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: message.isUser ? null : Border.all(color: Colors.grey[300]!),
               ),
-              child: Text(
-                message.text,
-                style: TextStyle(
-                  color: message.isUser ? Colors.white : Colors.black87,
-                  fontSize: 14,
-                  height: 1.3,
-                ),
-              ),
+              child: message.isUser 
+                ? SelectableText(
+                    message.text,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      height: 1.3,
+                    ),
+                  )
+                : MarkdownBody(
+                    data: message.text,
+                    selectable: true,
+                    styleSheet: MarkdownStyleSheet(
+                      p: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 14,
+                        height: 1.3,
+                      ),
+                      strong: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      em: const TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black87,
+                      ),
+                      listBullet: TextStyle(
+                        color: tismAqua,
+                        fontSize: 14,
+                      ),
+                      h1: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: tismAqua,
+                      ),
+                      h2: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: tismAqua,
+                      ),
+                      h3: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      code: TextStyle(
+                        backgroundColor: Colors.grey[200],
+                        fontFamily: 'monospace',
+                        fontSize: 13,
+                      ),
+                      codeblockDecoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      blockquote: TextStyle(
+                        color: Colors.grey[600],
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
             ),
           ),
           const SizedBox(width: 6),

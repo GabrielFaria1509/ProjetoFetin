@@ -9,6 +9,18 @@ class DiaryService {
     _entries.add(entry);
     _entries.sort((a, b) => b.date.compareTo(a.date));
   }
+  
+  static void updateEntry(DiaryEntry updatedEntry) {
+    final index = _entries.indexWhere((entry) => entry.id == updatedEntry.id);
+    if (index != -1) {
+      _entries[index] = updatedEntry;
+      _entries.sort((a, b) => b.date.compareTo(a.date));
+    }
+  }
+  
+  static void deleteEntry(String id) {
+    _entries.removeWhere((entry) => entry.id == id);
+  }
 
   static List<ProgressData> getProgressData() {
     final data = <ProgressData>[];

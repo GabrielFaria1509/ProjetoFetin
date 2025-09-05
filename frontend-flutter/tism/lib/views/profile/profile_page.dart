@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/views/login/login_page.dart';
+import 'package:tism/utils/name_formatter.dart';
 import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
@@ -17,7 +19,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   File? _profileImage;
   String _userType = 'Responsável';
+  String _userName = '';
   final ImagePicker _picker = ImagePicker();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   void initState() {
@@ -29,21 +33,42 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = await UserService.getUser();
     if (user != null) {
       setState(() {
+        _userName = user['username'] ?? widget.nomeUsuario;
         _userType = user['userType'];
         if (user['profileImagePath'] != null) {
           _profileImage = File(user['profileImagePath']);
         }
       });
+      _nameController.text = _userName;
     }
   }
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      setState(() {
-        _profileImage = File(image.path);
-      });
-      await UserService.updateProfileImage(image.path);
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: image.path,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Editar Foto',
+            toolbarColor: tismAqua,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true,
+          ),
+          IOSUiSettings(
+            title: 'Editar Foto',
+          ),
+        ],
+      );
+      
+      if (croppedFile != null) {
+        setState(() {
+          _profileImage = File(croppedFile.path);
+        });
+        await UserService.updateProfileImage(croppedFile.path);
+      }
     }
   }
 
@@ -109,7 +134,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     : null,
                 ),
                 title: const Text('Nome'),
-                subtitle: Text(widget.nomeUsuario),
+                subtitle: Text(_userName.isNotEmpty ? _userName : widget.nomeUsuario),
+                trailing: Icon(
+                  Icons.edit,
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.white 
+                    : null,
+                ),
+                onTap: _showEditNameDialog,
               ),
             ),
 
@@ -156,6 +188,44 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+  
+  void _showEditNameDialog() {
+    _nameController.text = _userName.isNotEmpty ? _userName : widget.nomeUsuario;
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Editar Nome'),
+        content: TextField(
+          controller: _nameController,
+          decoration: const InputDecoration(
+            labelText: 'Nome completo',
+            border: OutlineInputBorder(),
+          ),
+          textCapitalization: TextCapitalization.words,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final newName = NameFormatter.formatName(_nameController.text.trim());
+              if (newName.isNotEmpty) {
+                setState(() {
+                  _userName = newName;
+                });
+                await UserService.updateUsername(newName);
+                if (context.mounted) Navigator.pop(context);
+              }
+            },
+            child: const Text('Salvar'),
+          ),
+        ],
+      ),
+    );
+  }
 
   void _showImageOptions() {
     showModalBottomSheet(
@@ -170,6 +240,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.crop),
+                title: const Text('Editar foto atual'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _cropCurrentImage();
                 },
               ),
               ListTile(
@@ -192,6 +270,34 @@ class _ProfilePageState extends State<ProfilePage> {
       _profileImage = null;
     });
     await UserService.updateProfileImage(null);
+  }
+  
+  Future<void> _cropCurrentImage() async {
+    if (_profileImage == null) return;
+    
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: _profileImage!.path,
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Editar Foto',
+          toolbarColor: tismAqua,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: true,
+        ),
+        IOSUiSettings(
+          title: 'Editar Foto',
+        ),
+      ],
+    );
+    
+    if (croppedFile != null) {
+      setState(() {
+        _profileImage = File(croppedFile.path);
+      });
+      await UserService.updateProfileImage(croppedFile.path);
+    }
   }
 
   void _showUserTypeDialog() {

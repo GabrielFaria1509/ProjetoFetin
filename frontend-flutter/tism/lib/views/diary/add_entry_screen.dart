@@ -4,7 +4,9 @@ import 'diary_models.dart';
 import 'diary_service.dart';
 
 class AddEntryScreen extends StatefulWidget {
-  const AddEntryScreen({super.key});
+  final DiaryEntry? entryToEdit;
+  
+  const AddEntryScreen({super.key, this.entryToEdit});
 
   @override
   State<AddEntryScreen> createState() => _AddEntryScreenState();
@@ -17,18 +19,47 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
   int _intensity = 3;
   String _observer = 'pai';
   final Set<String> _selectedTriggers = {};
+  
+  @override
+  void initState() {
+    super.initState();
+    if (widget.entryToEdit != null) {
+      _loadEntryData(widget.entryToEdit!);
+    }
+  }
+  
+  void _loadEntryData(DiaryEntry entry) {
+    _titleController.text = entry.title;
+    _descriptionController.text = entry.description;
+    _type = entry.type;
+    _intensity = entry.intensity;
+    _observer = entry.observer;
+    _selectedTriggers.addAll(entry.triggers);
+  }
 
   final List<String> _commonTriggers = [
     'Mudança de rotina', 'Barulho alto', 'Multidão', 'Cansaço',
-    'Fome', 'Frustração', 'Transição', 'Ambiente novo'
+    'Fome', 'Frustração', 'Transição', 'Ambiente novo',
+    'Luz muito forte', 'Textura desagradável', 'Cheiro forte', 'Temperatura',
+    'Roupa apertada', 'Sono insuficiente', 'Dor física', 'Medicação',
+    'Visita médica', 'Escola nova', 'Professor substituto', 'Prova/avaliação',
+    'Festa/evento', 'Viagem', 'Chuva/temporal', 'Separação dos pais',
+    'Brinquedo quebrado', 'Não conseguir algo', 'Interrupção atividade', 'Esperar muito tempo'
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nova Observação'),
+        title: Text(widget.entryToEdit != null ? 'Editar Observação' : 'Nova Observação'),
         backgroundColor: tismAqua,
+        foregroundColor: Colors.white,
+        actions: widget.entryToEdit != null ? [
+          IconButton(
+            icon: const Icon(Icons.delete, color: Colors.white),
+            onPressed: _deleteEntry,
+          ),
+        ] : null,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -128,7 +159,12 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
         const Text('Observador:', style: TextStyle(fontWeight: FontWeight.bold)),
         DropdownButton<String>(
           value: _observer,
-          items: ['pai', 'mãe', 'professor', 'terapeuta'].map((observer) =>
+          items: [
+            'pai', 'mãe', 'avô', 'avó', 'tio', 'tia', 'irmão', 'irmã', 
+            'filho', 'filha', 'neto', 'neta', 'sobrinho', 'sobrinha',
+            'primo', 'prima', 'amigo', 'amiga', 'parente', 'cuidador',
+            'professor', 'terapeuta', 'médico', 'psicólogo'
+          ].map((observer) =>
             DropdownMenuItem(value: observer, child: Text(observer.toUpperCase()))
           ).toList(),
           onChanged: (value) => setState(() => _observer = value!),
@@ -161,8 +197,8 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     if (_titleController.text.isEmpty) return;
 
     final entry = DiaryEntry(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      date: DateTime.now(),
+      id: widget.entryToEdit?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
+      date: widget.entryToEdit?.date ?? DateTime.now(),
       type: _type,
       title: _titleController.text,
       description: _descriptionController.text,
@@ -171,7 +207,36 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
       observer: _observer,
     );
 
-    DiaryService.addEntry(entry);
+    if (widget.entryToEdit != null) {
+      DiaryService.updateEntry(entry);
+    } else {
+      DiaryService.addEntry(entry);
+    }
+    
     Navigator.pop(context);
+  }
+  
+  void _deleteEntry() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Excluir Observação'),
+        content: const Text('Tem certeza que deseja excluir esta observação?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              DiaryService.deleteEntry(widget.entryToEdit!.id);
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context); // Close edit screen
+            },
+            child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
   }
 }

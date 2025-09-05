@@ -3,6 +3,8 @@ import 'package:tism/constants/colors.dart';
 import 'routine_models.dart';
 import 'routine_service.dart';
 import 'profile_setup.dart';
+import 'add_routine_screen.dart';
+import '../../services/child_profile_service.dart';
 
 class RoutineScreen extends StatefulWidget {
   const RoutineScreen({super.key});
@@ -24,15 +26,18 @@ class _RoutineScreenState extends State<RoutineScreen> {
     _loadDefaultProfile();
   }
 
-  void _loadDefaultProfile() {
-    profile = ChildProfile(
-      name: 'Criança',
-      age: 5,
-      supportLevel: 'leve',
-      sensoryPreferences: ['visual', 'auditivo'],
-      interests: ['música', 'desenho'],
-    );
-    _generateAndFilterActivities();
+  void _loadDefaultProfile() async {
+    final savedProfile = await ChildProfileService.getActiveProfile();
+    
+    if (savedProfile != null) {
+      profile = savedProfile;
+      _generateAndFilterActivities();
+    } else {
+      // Se não tem perfil, redireciona para criar
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showFirstTimeSetup();
+      });
+    }
   }
   
   void _generateAndFilterActivities() {
@@ -63,8 +68,56 @@ class _RoutineScreenState extends State<RoutineScreen> {
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_add, color: Colors.white),
-            onPressed: _showProfileSetup,
+            icon: const Icon(Icons.add, color: Colors.white),
+            onPressed: _addNewActivity,
+          ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.person, color: Colors.white),
+            onSelected: (value) {
+              switch (value) {
+                case 'edit':
+                  _showProfileSetup();
+                  break;
+                case 'switch':
+                  _showProfileSelector();
+                  break;
+                case 'new':
+                  _showNewProfileSetup();
+                  break;
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'edit',
+                child: Row(
+                  children: [
+                    Icon(Icons.edit),
+                    SizedBox(width: 8),
+                    Text('Editar Perfil'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'switch',
+                child: Row(
+                  children: [
+                    Icon(Icons.swap_horiz),
+                    SizedBox(width: 8),
+                    Text('Trocar Criança'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'new',
+                child: Row(
+                  children: [
+                    Icon(Icons.person_add),
+                    SizedBox(width: 8),
+                    Text('Nova Criança'),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -113,7 +166,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${profile?.age} anos • Suporte ${profile?.supportLevel}',
+                  '${profile?.ageDisplay ?? "5 anos"} • Suporte ${profile?.supportLevel}',
                   style: TextStyle(fontSize: 11, color: Colors.grey[600]),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -269,7 +322,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         leading: CircleAvatar(
           radius: 20,
-          backgroundColor: activity.isCompleted ? Colors.green : _getCategoryColor(activity.category),
+          backgroundColor: activity.isCompleted ? Colors.green : Color(activity.color),
           child: Text(
             activity.icon,
             style: const TextStyle(fontSize: 18),
@@ -301,7 +354,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                   decoration: BoxDecoration(
-                    color: _getCategoryColor(activity.category),
+                    color: Color(activity.color),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -339,19 +392,159 @@ class _RoutineScreenState extends State<RoutineScreen> {
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ),
+        onTap: () => _editActivity(activity),
       ),
     );
   }
 
+  void _showFirstTimeSetup() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Text('👶 Bem-vindo!'),
+        content: const Text(
+          'Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\n\n'
+          'Isso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.'
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _showNewProfileSetup();
+            },
+            child: const Text('Criar Perfil'),
+          ),
+        ],
+      ),
+    );
+  }
+  
   void _showProfileSetup() {
+    if (profile == null) {
+      _showNewProfileSetup();
+      return;
+    }
+    
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ProfileSetup(
-          onProfileCreated: (newProfile) {
+          existingProfile: profile,
+          onProfileCreated: (newProfile) async {
+            await ChildProfileService.saveProfile(newProfile);
+            await ChildProfileService.setActiveProfile(newProfile.name);
             setState(() {
               profile = newProfile;
               _generateAndFilterActivities();
+            });
+          },
+        ),
+      ),
+    );
+  }
+  
+  void _showNewProfileSetup() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfileSetup(
+          onProfileCreated: (newProfile) async {
+            await ChildProfileService.saveProfile(newProfile);
+            await ChildProfileService.setActiveProfile(newProfile.name);
+            setState(() {
+              profile = newProfile;
+              _generateAndFilterActivities();
+            });
+          },
+        ),
+      ),
+    );
+  }
+  
+  void _showProfileSelector() async {
+    final profiles = await ChildProfileService.getProfiles();
+    
+    if (profiles.isEmpty) {
+      _showNewProfileSetup();
+      return;
+    }
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Selecionar Criança'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: profiles.length,
+            itemBuilder: (context, index) {
+              final childProfile = profiles[index];
+              final isActive = profile?.name == childProfile.name;
+              
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: isActive ? tismAqua : Colors.grey,
+                  child: Text(
+                    childProfile.name[0].toUpperCase(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                title: Text(childProfile.name),
+                subtitle: Text('${childProfile.ageDisplay} • ${childProfile.supportLevel}'),
+                trailing: isActive ? const Icon(Icons.check, color: Colors.green) : null,
+                onTap: () async {
+                  await ChildProfileService.setActiveProfile(childProfile.name);
+                  setState(() {
+                    profile = childProfile;
+                    _generateAndFilterActivities();
+                  });
+                  if (context.mounted) Navigator.pop(context);
+                },
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  void _addNewActivity() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddRoutineScreen(
+          onActivitySaved: (activity) {
+            setState(() {
+              allActivities.add(activity);
+              _applyFilters();
+            });
+          },
+        ),
+      ),
+    );
+  }
+  
+  void _editActivity(RoutineActivity activity) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddRoutineScreen(
+          activityToEdit: activity,
+          onActivitySaved: (updatedActivity) {
+            setState(() {
+              final index = allActivities.indexWhere((a) => a.id == activity.id);
+              if (index != -1) {
+                allActivities[index] = updatedActivity;
+                _applyFilters();
+              }
             });
           },
         ),

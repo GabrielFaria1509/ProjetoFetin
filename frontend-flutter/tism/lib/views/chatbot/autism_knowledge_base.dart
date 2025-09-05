@@ -5,7 +5,7 @@ class AutismKnowledgeBase {
       'response': '**Compreendendo o Autismo (TEA)**\n\nO Transtorno do Espectro Autista é uma condição neurológica que afeta:\n• Comunicação\n• Interação social\n• Comportamentos repetitivos\n• Sensibilidades sensoriais',
       'follow_up': ['sintomas', 'diagnostico', 'tratamento']
     },
-<<<<<<< HEAD
+//<<<<<<< HEAD
     
     'sintomas_precoces': {
       'keywords': ['sintomas', 'sinais', 'identificar', 'como saber', 'primeiros sinais', 'bebê', 'criança pequena', 'sintoma', 'sinal', 'como identificar', 'quais sintomas', 'que sintomas', 'tem sintomas', 'apresenta sintomas'],
@@ -426,8 +426,7 @@ class AutismKnowledgeBase {
       'response': '**Coleções e Organização no TEA**\n\n**Valor das Coleções:**\n• Satisfação sensorial\n• Controle e previsibilidade\n• Desenvolvimento de expertise\n• Habilidades de classificação\n• Autoestima\n• Interesse especial positivo\n\n**Tipos de Coleções:**\n• Carros em miniatura\n• Pedras e minerais\n• Adesivos e figurinhas\n• Livros sobre tema específico\n• Objetos de personagens\n• Itens da natureza\n\n**Habilidades Desenvolvidas:**\n• Categorização\n• Sequenciação\n• Matemática (contagem)\n• Organização espacial\n• Memória\n• Atenção aos detalhes\n\n**Sistemas de Organização:**\n• Por cor\n• Por tamanho\n• Por categoria\n• Por data de aquisição\n• Por raridade\n• Por preferência pessoal\n\n**Benefícios Educativos:**\n• Pesquisa e aprendizado\n• Habilidades de apresentação\n• Compartilhamento de conhecimento\n• Conexões sociais\n• Responsabilidade\n\n**Apoio Familiar:**\n• Respeite o interesse\n• Ajude na organização\n• Celebre descobertas\n• Estabeleça limites saudáveis\n• Use como ferramenta educativa\n\nOrganizar é terapêutico!',
       'follow_up': ['espacos_colecoes', 'catalogacao_digital', 'grupos_colecionadores']
     }
-=======
->>>>>>> c54f39d98d3262fb7c18c17146c9aaab408644a0
+//c54f39d98d3262fb7c18c17146c9aaab408644a0
   };
 
   static String findResponse(String query) {
