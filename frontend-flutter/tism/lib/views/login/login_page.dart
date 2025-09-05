@@ -12,29 +12,88 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
-
-
+  bool _isLoading = false;
 
   Future<void> _tentarLogin() async {
-    final nome = nomeController.text.trim();
+    final email = emailController.text.trim();
     final senha = senhaController.text;
 
-    if (nome.isEmpty || senha.isEmpty) {
+    if (email.isEmpty || senha.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Preencha todos os campos')),
+        const SnackBar(
+          content: Text('Preencha todos os campos'),
+          backgroundColor: Colors.red,
+        ),
       );
       return;
     }
 
-    await UserService.saveUser(username: nome);
-    
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage(nomeUsuario: nome)),
+    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Digite um email válido'),
+          backgroundColor: Colors.red,
+        ),
       );
+      return;
+    }
+
+    if (senha.length < 8) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('A senha deve ter pelo menos 8 caracteres'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final result = await UserService.login(
+        email: email,
+        password: senha,
+      );
+
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (result['success']) {
+          final user = await UserService.getUser();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(nomeUsuario: user?['username'] ?? 'Usuário'),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(result['error'] ?? 'Erro no login'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro de conexão: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 
@@ -60,10 +119,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 32),
               TextField(
-                controller: nomeController,
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'Nome de usuário',
-                  prefixIcon: const Icon(Icons.person),
+                  labelText: 'Email',
+                  prefixIcon: const Icon(Icons.email),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: const BorderSide(color: Colors.black),
@@ -106,11 +166,20 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: _tentarLogin,
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
+                  onPressed: _isLoading ? null : _tentarLogin,
+                  child: _isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : const Text(
+                          'Entrar',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
                 ),
               ),
               const SizedBox(height: 16),

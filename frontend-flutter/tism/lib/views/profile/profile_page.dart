@@ -5,6 +5,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/views/login/login_page.dart';
 import 'package:tism/utils/name_formatter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
@@ -30,44 +31,99 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _loadUserData() async {
-    final user = await UserService.getUser();
-    if (user != null) {
-      setState(() {
-        _userName = user['username'] ?? widget.nomeUsuario;
-        _userType = user['userType'];
-        if (user['profileImagePath'] != null) {
-          _profileImage = File(user['profileImagePath']);
-        }
-      });
-      _nameController.text = _userName;
+    try {
+      final user = await UserService.getUser();
+      if (user != null && mounted) {
+        setState(() {
+          _userName = user['username'] ?? widget.nomeUsuario;
+          _userType = user['userType'] ?? 'Responsável';
+          if (user['profileImagePath'] != null) {
+            final imageFile = File(user['profileImagePath']);
+            if (imageFile.existsSync()) {
+              _profileImage = imageFile;
+            }
+          }
+        });
+        _nameController.text = _userName;
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _userName = widget.nomeUsuario;
+          _userType = 'Responsável';
+        });
+        _nameController.text = _userName;
+      }
     }
   }
 
+  Future<bool> _requestPermissions() async {
+    final status = await Permission.storage.request();
+    return status.isGranted;
+  }
+
   Future<void> _pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      final croppedFile = await ImageCropper().cropImage(
-        sourcePath: image.path,
-        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: 'Editar Foto',
-            toolbarColor: tismAqua,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.square,
-            lockAspectRatio: true,
-          ),
-          IOSUiSettings(
-            title: 'Editar Foto',
-          ),
-        ],
+    try {
+      // Solicitar permissões primeiro
+      if (!await _requestPermissions()) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Permissão de armazenamento necessária'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+      
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 85,
       );
       
-      if (croppedFile != null) {
-        setState(() {
-          _profileImage = File(croppedFile.path);
-        });
-        await UserService.updateProfileImage(croppedFile.path);
+      if (image != null && mounted) {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+          maxWidth: 512,
+          maxHeight: 512,
+          compressQuality: 85,
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Editar Foto',
+              toolbarColor: tismAqua,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true,
+              hideBottomControls: false,
+              showCropGrid: true,
+            ),
+            IOSUiSettings(
+              title: 'Editar Foto',
+              doneButtonTitle: 'Concluir',
+              cancelButtonTitle: 'Cancelar',
+            ),
+          ],
+        );
+        
+        if (croppedFile != null && mounted) {
+          setState(() {
+            _profileImage = File(croppedFile.path);
+          });
+          await UserService.updateProfileImage(croppedFile.path);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao selecionar imagem: ${e.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }
@@ -103,10 +159,10 @@ class _ProfilePageState extends State<ProfilePage> {
               child: CircleAvatar(
                 radius: 60,
                 backgroundColor: Colors.grey[300],
-                backgroundImage: _profileImage != null
+                backgroundImage: _profileImage != null && _profileImage!.existsSync()
                     ? FileImage(_profileImage!)
                     : null,
-                child: _profileImage == null
+                child: _profileImage == null || !_profileImage!.existsSync()
                     ? Icon(
                         Icons.camera_alt, 
                         size: 40, 
@@ -235,34 +291,111 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Wrap(
             children: [
               ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('Tirar foto'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _pickImageFromCamera();
+                },
+              ),
+              ListTile(
                 leading: const Icon(Icons.photo_library),
-                title: const Text('Alterar foto'),
+                title: const Text('Escolher da galeria'),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage();
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.crop),
-                title: const Text('Editar foto atual'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _cropCurrentImage();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.delete, color: Colors.red),
-                title: const Text('Remover foto', style: TextStyle(color: Colors.red)),
-                onTap: () {
-                  Navigator.pop(context);
-                  _removeImage();
-                },
-              ),
+              if (_profileImage != null && _profileImage!.existsSync())
+                ListTile(
+                  leading: const Icon(Icons.crop),
+                  title: const Text('Editar foto atual'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _cropCurrentImage();
+                  },
+                ),
+              if (_profileImage != null)
+                ListTile(
+                  leading: const Icon(Icons.delete, color: Colors.red),
+                  title: const Text('Remover foto', style: TextStyle(color: Colors.red)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _removeImage();
+                  },
+                ),
             ],
           ),
         );
       },
     );
+  }
+
+  Future<void> _pickImageFromCamera() async {
+    try {
+      // Solicitar permissões de câmera
+      final cameraStatus = await Permission.camera.request();
+      if (!cameraStatus.isGranted) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Permissão de câmera necessária'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+      
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 85,
+      );
+      
+      if (image != null && mounted) {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+          maxWidth: 512,
+          maxHeight: 512,
+          compressQuality: 85,
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Editar Foto',
+              toolbarColor: tismAqua,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true,
+              hideBottomControls: false,
+              showCropGrid: true,
+            ),
+            IOSUiSettings(
+              title: 'Editar Foto',
+              doneButtonTitle: 'Concluir',
+              cancelButtonTitle: 'Cancelar',
+            ),
+          ],
+        );
+        
+        if (croppedFile != null && mounted) {
+          setState(() {
+            _profileImage = File(croppedFile.path);
+          });
+          await UserService.updateProfileImage(croppedFile.path);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao tirar foto: ${e.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _removeImage() async {
@@ -273,30 +406,48 @@ class _ProfilePageState extends State<ProfilePage> {
   }
   
   Future<void> _cropCurrentImage() async {
-    if (_profileImage == null) return;
+    if (_profileImage == null || !_profileImage!.existsSync()) return;
     
-    final croppedFile = await ImageCropper().cropImage(
-      sourcePath: _profileImage!.path,
-      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: 'Editar Foto',
-          toolbarColor: tismAqua,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.square,
-          lockAspectRatio: true,
-        ),
-        IOSUiSettings(
-          title: 'Editar Foto',
-        ),
-      ],
-    );
-    
-    if (croppedFile != null) {
-      setState(() {
-        _profileImage = File(croppedFile.path);
-      });
-      await UserService.updateProfileImage(croppedFile.path);
+    try {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: _profileImage!.path,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        maxWidth: 512,
+        maxHeight: 512,
+        compressQuality: 85,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Editar Foto',
+            toolbarColor: tismAqua,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true,
+            hideBottomControls: false,
+            showCropGrid: true,
+          ),
+          IOSUiSettings(
+            title: 'Editar Foto',
+            doneButtonTitle: 'Concluir',
+            cancelButtonTitle: 'Cancelar',
+          ),
+        ],
+      );
+      
+      if (croppedFile != null && mounted) {
+        setState(() {
+          _profileImage = File(croppedFile.path);
+        });
+        await UserService.updateProfileImage(croppedFile.path);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao editar imagem: ${e.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 

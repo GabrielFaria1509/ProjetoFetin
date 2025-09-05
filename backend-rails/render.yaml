@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: tism-backend
+    env: ruby
+    buildCommand: bundle install && bundle exec rails db:migrate
+    startCommand: bundle exec rails server -p $PORT -e production
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_MASTER_KEY
+        sync: false
+
+databases:
+  - name: tism-postgres
+    databaseName: tism_production
+    user: tism

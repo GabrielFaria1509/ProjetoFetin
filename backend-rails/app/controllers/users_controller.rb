@@ -1,14 +1,29 @@
 class UsersController < ApplicationController
-  protect_from_forgery with: :exception, except: [:create, :login]
-  skip_before_action :verify_authenticity_token, only: [:create, :login]
+  protect_from_forgery with: :exception, except: [:create, :login, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create, :login, :update, :destroy]
 
   def create
+    # Validar parâmetros obrigatórios
+    return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
+    return render json: { error: "Username é obrigatório" }, status: :bad_request unless params[:username].present?
+    return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
+    return render json: { error: "Senha deve ter pelo menos 8 caracteres" }, status: :bad_request if params[:password].length < 8
+    
     user = User.new(user_params)
 
     if user.save
-      render json: { message: "Usuário criado com sucesso", user: user }, status: :created
+      render json: { 
+        message: "Usuário criado com sucesso", 
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          name: user.name,
+          user_type: user.user_type
+        }
+      }, status: :created
     else
-      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
   end
 
@@ -19,7 +34,20 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email].to_s.strip.downcase)
 
     if user && user.authenticate(params[:password])
-      render json: { message: "Login realizado com sucesso", user: user }, status: :ok
+      # Atualizar último login
+      user.update(last_login_at: Time.current)
+      
+      render json: { 
+        message: "Login realizado com sucesso", 
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          name: user.name,
+          user_type: user.user_type,
+          profile_picture: user.profile_picture
+        }
+      }, status: :ok
     else
       render json: { error: "Email ou senha inválidos" }, status: :unauthorized
     end
@@ -36,9 +64,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find_by(id: params[:id])
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
+    
+    if user.update(update_user_params)
+      render json: {
+        message: "Usuário atualizado com sucesso",
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          name: user.name,
+          user_type: user.user_type,
+          profile_picture: user.profile_picture
+        }
+      }, status: :ok
+    else
+      render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
-    params.permit(:email, :password, :password_confirmation, :name)
+    params.permit(:email, :password, :password_confirmation, :username, :name, :user_type)
+  end
+  
+  def update_user_params
+    params.permit(:username, :name, :user_type, :profile_picture)
   end
 end

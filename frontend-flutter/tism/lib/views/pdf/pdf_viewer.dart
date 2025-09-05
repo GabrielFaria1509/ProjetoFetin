@@ -31,21 +31,35 @@ class _PDFViewerState extends State<PDFViewer> {
 
   Future<void> _loadPDF() async {
     try {
+      // Verificar se o asset existe
       final bytes = await rootBundle.load(widget.assetPath);
       final dir = await getTemporaryDirectory();
-      final file = File('${dir.path}/${widget.title}.pdf');
+      
+      // Criar nome de arquivo seguro
+      final fileName = widget.title.replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(' ', '_');
+      final file = File('${dir.path}/${fileName}_${DateTime.now().millisecondsSinceEpoch}.pdf');
+      
+      // Escrever bytes no arquivo
       await file.writeAsBytes(bytes.buffer.asUint8List());
+      
+      // Verificar se o arquivo foi criado corretamente
+      if (await file.exists() && await file.length() > 0) {
+        if (mounted) {
+          setState(() {
+            localPath = file.path;
+            isLoading = false;
+          });
+        }
+      } else {
+        throw Exception('Arquivo PDF não foi criado corretamente');
+      }
+    } catch (e) {
+      print('Erro ao carregar PDF: $e');
+      print('Asset path: ${widget.assetPath}');
       
       if (mounted) {
         setState(() {
-          localPath = file.path;
-          isLoading = false;
-        });
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          errorMessage = 'Erro ao carregar PDF: ${e.toString()}';
+          errorMessage = 'Erro ao carregar PDF: ${widget.title}\n\nVerifique se o arquivo existe em: ${widget.assetPath}';
           isLoading = false;
         });
       }
@@ -181,6 +195,10 @@ class _PDFViewerState extends State<PDFViewer> {
   }
 
   Widget _buildPDFView() {
+    if (localPath == null || !File(localPath!).existsSync()) {
+      return _buildErrorView();
+    }
+    
     return PDFView(
       filePath: localPath!,
       enableSwipe: true,
@@ -192,27 +210,37 @@ class _PDFViewerState extends State<PDFViewer> {
       fitPolicy: FitPolicy.BOTH,
       preventLinkNavigation: false,
       onRender: (pages) {
-        setState(() {
-          totalPages = pages ?? 0;
-        });
+        if (mounted) {
+          setState(() {
+            totalPages = pages ?? 0;
+          });
+        }
       },
       onViewCreated: (PDFViewController controller) {
         pdfController = controller;
       },
       onPageChanged: (int? page, int? total) {
-        setState(() {
-          currentPage = page ?? 0;
-        });
+        if (mounted) {
+          setState(() {
+            currentPage = page ?? 0;
+          });
+        }
       },
       onError: (error) {
-        setState(() {
-          errorMessage = 'Erro na visualização: $error';
-        });
+        print('PDF Error: $error');
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Erro na visualização do PDF: $error';
+          });
+        }
       },
       onPageError: (page, error) {
-        setState(() {
-          errorMessage = 'Erro na página $page: $error';
-        });
+        print('PDF Page Error: $page - $error');
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Erro na página $page: $error';
+          });
+        }
       },
     );
   }

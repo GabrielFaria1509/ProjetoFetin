@@ -37,6 +37,13 @@ class _ResourcesTabState extends State<ResourcesTab> {
       'icon': Icons.checklist_rtl
     },
     {
+      'title': 'Autismo - Coisinhas',
+      'description': 'Material educativo sobre TEA',
+      'type': 'Guias',
+      'assetPath': 'assets/pdfs/autismo_coisinhas.pdf',
+      'icon': Icons.child_care
+    },
+    {
       'title': 'Intervenções Psicoeducacionais',
       'description': 'Estratégias terapêuticas',
       'type': 'Manuais',

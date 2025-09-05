@@ -1,11 +1,96 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 
 class UserService {
   static const String _keyUsername = 'username';
   static const String _keyUserType = 'user_type';
   static const String _keyProfileImage = 'profile_image';
   static const String _keyIsLoggedIn = 'is_logged_in';
+  static const String _keyUserId = 'user_id';
+  static const String _keyEmail = 'email';
+  
+  // URL do backend - altere para a URL do seu deploy no Render.com
+  static const String _baseUrl = 'http://localhost:3000'; // Desenvolvimento
+  // static const String _baseUrl = 'https://seu-app.onrender.com'; // Produção
 
+  // Registrar novo usuário
+  static Future<Map<String, dynamic>> register({
+    required String username,
+    required String email,
+    required String password,
+    String userType = 'Responsável',
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/signup'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'username': username,
+          'email': email,
+          'password': password,
+          'user_type': userType,
+        }),
+      );
+      
+      final data = json.decode(response.body);
+      
+      if (response.statusCode == 201) {
+        // Salvar dados do usuário localmente
+        await _saveUserLocally(data['user']);
+        return {'success': true, 'message': data['message']};
+      } else {
+        return {'success': false, 'error': data['error']};
+      }
+    } catch (e) {
+      return {'success': false, 'error': 'Erro de conexão: $e'};
+    }
+  }
+  
+  // Login do usuário
+  static Future<Map<String, dynamic>> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'password': password,
+        }),
+      );
+      
+      final data = json.decode(response.body);
+      
+      if (response.statusCode == 200) {
+        // Salvar dados do usuário localmente
+        await _saveUserLocally(data['user']);
+        return {'success': true, 'message': data['message']};
+      } else {
+        return {'success': false, 'error': data['error']};
+      }
+    } catch (e) {
+      return {'success': false, 'error': 'Erro de conexão: $e'};
+    }
+  }
+  
+  // Salvar usuário localmente
+  static Future<void> _saveUserLocally(Map<String, dynamic> user) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_keyUserId, user['id']);
+    await prefs.setString(_keyUsername, user['username'] ?? '');
+    await prefs.setString(_keyEmail, user['email'] ?? '');
+    await prefs.setString(_keyUserType, user['user_type'] ?? 'Responsável');
+    await prefs.setBool(_keyIsLoggedIn, true);
+    if (user['profile_picture'] != null) {
+      await prefs.setString(_keyProfileImage, user['profile_picture']);
+    }
+  }
+  
+  // Manter método antigo para compatibilidade
   static Future<void> saveUser({
     required String username,
     String userType = 'Responsável',
@@ -27,16 +112,36 @@ class UserService {
     if (!isLoggedIn) return null;
 
     return {
+      'id': prefs.getInt(_keyUserId),
       'username': prefs.getString(_keyUsername) ?? '',
+      'email': prefs.getString(_keyEmail) ?? '',
       'userType': prefs.getString(_keyUserType) ?? 'Responsável',
       'profileImagePath': prefs.getString(_keyProfileImage),
       'isLoggedIn': isLoggedIn,
     };
   }
 
-  static Future<void> updateUserType(String userType) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_keyUserType, userType);
+  static Future<bool> updateUserType(String userType) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt(_keyUserId);
+      
+      if (userId == null) return false;
+      
+      final response = await http.put(
+        Uri.parse('$_baseUrl/users/$userId'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'user_type': userType}),
+      );
+      
+      if (response.statusCode == 200) {
+        await prefs.setString(_keyUserType, userType);
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 
   static Future<void> updateProfileImage(String? imagePath) async {
@@ -48,9 +153,27 @@ class UserService {
     }
   }
 
-  static Future<void> updateUsername(String username) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_keyUsername, username);
+  static Future<bool> updateUsername(String username) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt(_keyUserId);
+      
+      if (userId == null) return false;
+      
+      final response = await http.put(
+        Uri.parse('$_baseUrl/users/$userId'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'username': username}),
+      );
+      
+      if (response.statusCode == 200) {
+        await prefs.setString(_keyUsername, username);
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 
   static Future<void> logout() async {

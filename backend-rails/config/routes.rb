@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   post "/signup", to: "users#create"
   post "/login", to: "users#login"
+  put "/users/:id", to: "users#update"
+  patch "/users/:id", to: "users#update"
   delete '/users/:id', to: 'users#destroy', as: 'delete_user'
 end
