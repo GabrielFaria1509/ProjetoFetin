@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  protect_from_forgery with: :exception, except: [:create, :login, :update, :destroy]
-  skip_before_action :verify_authenticity_token, only: [:create, :login, :update, :destroy]
+  # API-only Rails não usa CSRF protection
 
   def create
     # Validar parâmetros obrigatórios
