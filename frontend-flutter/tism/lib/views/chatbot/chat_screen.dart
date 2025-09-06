@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tism/constants/colors.dart';
 import 'chatbot_service.dart';
@@ -112,38 +111,25 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Row(
           children: [
             Expanded(
-              child: RawKeyboardListener(
-                focusNode: FocusNode(),
-                onKey: (RawKeyEvent event) {
-                  if (event is RawKeyDownEvent) {
-                    final isEnter = event.logicalKey == LogicalKeyboardKey.enter;
-                    final isCtrlPressed = event.isControlPressed;
-                    
-                    if (isEnter && !isCtrlPressed) {
-                      if (!_isLoading) _sendMessage(_controller.text);
-                    }
-                  }
-                },
-                child: TextField(
-                  controller: _controller,
-                  maxLines: null,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: InputDecoration(
-                    hintText: 'Digite sua mensagem... (Enter: enviar, Ctrl+Enter: nova linha)',
-                    hintStyle: TextStyle(color: Colors.grey[500], fontSize: 13),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.grey[300]!),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: tismAqua),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    filled: true,
-                    fillColor: isDark ? const Color(0xFF2A2A2A) : Colors.grey[50],
+              child: TextField(
+                controller: _controller,
+                maxLines: null,
+                textCapitalization: TextCapitalization.sentences,
+                onSubmitted: _isLoading ? null : _sendMessage,
+                decoration: InputDecoration(
+                  hintText: 'Digite sua mensagem...',
+                  hintStyle: TextStyle(color: Colors.grey[500], fontSize: 13),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: Colors.grey[300]!),
                   ),
-                  keyboardType: TextInputType.multiline,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: tismAqua),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  filled: true,
+                  fillColor: isDark ? const Color(0xFF2A2A2A) : Colors.grey[50],
                 ),
               ),
             ),

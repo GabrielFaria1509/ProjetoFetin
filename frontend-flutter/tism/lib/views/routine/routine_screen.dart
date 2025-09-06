@@ -472,6 +472,8 @@ class _RoutineScreenState extends State<RoutineScreen> {
       return;
     }
     
+    if (!mounted) return;
+    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -497,12 +499,15 @@ class _RoutineScreenState extends State<RoutineScreen> {
                 subtitle: Text('${childProfile.ageDisplay} • ${childProfile.supportLevel}'),
                 trailing: isActive ? const Icon(Icons.check, color: Colors.green) : null,
                 onTap: () async {
+                  final navigator = Navigator.of(context);
                   await ChildProfileService.setActiveProfile(childProfile.name);
-                  setState(() {
-                    profile = childProfile;
-                    _generateAndFilterActivities();
-                  });
-                  if (context.mounted) Navigator.pop(context);
+                  if (mounted) {
+                    setState(() {
+                      profile = childProfile;
+                      _generateAndFilterActivities();
+                    });
+                    navigator.pop();
+                  }
                 },
               );
             },
@@ -582,15 +587,5 @@ class _RoutineScreenState extends State<RoutineScreen> {
     }
   }
   
-  Color _getCategoryColor(String category) {
-    switch (category) {
-      case 'manhã': return Colors.orange;
-      case 'educação': return Colors.blue;
-      case 'alimentação': return Colors.green;
-      case 'lazer': return Colors.purple;
-      case 'bem-estar': return Colors.teal;
-      case 'noite': return Colors.indigo;
-      default: return Colors.grey;
-    }
-  }
+
 }

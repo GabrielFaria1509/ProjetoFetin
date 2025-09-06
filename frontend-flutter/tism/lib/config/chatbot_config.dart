@@ -1,9 +1,9 @@
 class ChatbotConfig {
   // Configuração de uso da IA
-  static const bool USE_AI = true; // true = só IA, false = só base local
+  static const bool useAi = true; // true = só IA, false = só base local
   
   // Prompt personalizado para a IA
-  static const String CUSTOM_PROMPT = '''
+  static const String customPrompt = '''
 
 Você é um assistente virtual especializado em autismo, com vasto conhecimento científico e prático na área. Sua missão é fornecer suporte empático e informativo para pais, professores, cuidadores e profissionais que trabalham com pessoas no espectro autista.
 

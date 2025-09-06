@@ -80,7 +80,7 @@ Use emojis moderadamente para tornar a resposta mais acolhedora.''';
   }
 
   static Future<String> generateCustomResponse(String userMessage) async {
-    final prompt = '''${ChatbotConfig.CUSTOM_PROMPT}
+    final prompt = '''${ChatbotConfig.customPrompt}
 
 Pergunta do usuário: $userMessage''';
     return await generateResponse(prompt);
