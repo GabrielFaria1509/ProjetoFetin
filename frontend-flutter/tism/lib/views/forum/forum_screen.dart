@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
 import 'package:tism/services/user_service.dart';
+import 'create_post_screen.dart';
 
 class ForumScreen extends StatefulWidget {
   const ForumScreen({super.key});
@@ -11,9 +12,9 @@ class ForumScreen extends StatefulWidget {
 }
 
 class _ForumScreenState extends State<ForumScreen> {
-  final TextEditingController _postController = TextEditingController();
   List<ForumPost> _posts = [];
   bool _isLoading = false;
+  bool _hasError = false;
   String _currentUsername = '';
 
   @override
@@ -33,22 +34,18 @@ class _ForumScreenState extends State<ForumScreen> {
   }
 
   Future<void> _loadPosts() async {
-    setState(() => _isLoading = true);
+    setState(() {
+      _isLoading = true;
+      _hasError = false;
+    });
+    
     final posts = await ForumService.getPosts();
+    
     setState(() {
       _posts = posts;
       _isLoading = false;
+      _hasError = posts.isEmpty;
     });
-  }
-
-  Future<void> _createPost() async {
-    if (_postController.text.trim().isEmpty) return;
-    
-    final success = await ForumService.createPost(_postController.text.trim());
-    if (success) {
-      _postController.clear();
-      _loadPosts();
-    }
   }
 
   @override
@@ -59,71 +56,64 @@ class _ForumScreenState extends State<ForumScreen> {
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.grey[50],
-              border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
-            ),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _postController,
-                  maxLines: 3,
-                  decoration: InputDecoration(
-                    hintText: 'Compartilhe sua experiência ou dúvida...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: tismAqua),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _createPost,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: tismAqua,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _hasError
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.error_outline, size: 64, color: Colors.grey[400]),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Ops! Não foi possível carregar o fórum',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                       ),
-                    ),
-                    child: const Text('Publicar'),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Verifique sua conexão e tente novamente',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        onPressed: _loadPosts,
+                        child: const Text('Tentar Novamente'),
+                      ),
+                    ],
+                  ),
+                )
+              : RefreshIndicator(
+                  onRefresh: _loadPosts,
+                  child: ListView.builder(
+                    itemCount: _posts.length,
+                    itemBuilder: (context, index) {
+                      final post = _posts[index];
+                      return PostCard(
+                        post: post,
+                        currentUsername: _currentUsername,
+                        onLike: () => _toggleLike(post.id),
+                        onComment: () => _showComments(post),
+                      );
+                    },
                   ),
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : RefreshIndicator(
-                    onRefresh: _loadPosts,
-                    child: ListView.builder(
-                      itemCount: _posts.length,
-                      itemBuilder: (context, index) {
-                        final post = _posts[index];
-                        return PostCard(
-                          post: post,
-                          currentUsername: _currentUsername,
-                          onLike: () => _toggleLike(post.id),
-                          onComment: () => _showComments(post),
-                        );
-                      },
-                    ),
-                  ),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _navigateToCreatePost(),
+        backgroundColor: tismAqua,
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
+  }
+
+  Future<void> _navigateToCreatePost() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CreatePostScreen()),
+    );
+    
+    if (result == true) {
+      _loadPosts();
+    }
   }
 
   Future<void> _toggleLike(int postId) async {

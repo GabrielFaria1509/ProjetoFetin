@@ -24,19 +24,36 @@ class ForumPostsController < ApplicationController
     user = User.find_by(id: params[:user_id])
     return render json: { error: 'Usuário não encontrado' }, status: :not_found unless user
     
-    forum = Forum.first || Forum.create!(name: 'Fórum Geral', user: user)
+    return render json: { error: 'Conteúdo é obrigatório' }, status: :bad_request if params[:content].blank?
+    
+    forum = Forum.first
+    unless forum
+      forum = Forum.create!(
+        name: 'Fórum Geral',
+        description: 'Fórum principal da comunidade TEA',
+        user: user
+      )
+    end
     
     post = UserPost.new(
-      title: 'Post',
+      title: params[:content].truncate(50),
       content: params[:content],
       user: user,
       forum: forum
     )
     
     if post.save
-      render json: { message: 'Post criado com sucesso' }, status: :created
+      render json: { 
+        message: 'Post criado com sucesso',
+        post: {
+          id: post.id,
+          content: post.content,
+          username: user.username,
+          created_at: post.created_at
+        }
+      }, status: :created
     else
-      render json: { error: post.errors.full_messages }, status: :unprocessable_entity
+      render json: { error: post.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 

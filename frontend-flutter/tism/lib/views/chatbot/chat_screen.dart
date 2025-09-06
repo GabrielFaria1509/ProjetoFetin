@@ -174,7 +174,6 @@ class _ChatScreenState extends State<ChatScreen> {
     try {
       final response = await ChatbotService.sendMessage(text).timeout(
         const Duration(seconds: 8),
-        onTimeout: () => '*ERRO*: Falha na conexão do servidor. Verifique sua conexão com a internet para conversar comigo.',
       );
 
       setState(() {
