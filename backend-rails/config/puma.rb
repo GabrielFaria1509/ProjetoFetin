@@ -3,11 +3,10 @@ min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 
 port ENV.fetch("PORT") { 3000 }
-
 environment ENV.fetch("RAILS_ENV") { "development" }
 
 if ENV["RAILS_ENV"] == "production"
-  workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+  workers ENV.fetch("WEB_CONCURRENCY") { 1 }
   preload_app!
 end
 

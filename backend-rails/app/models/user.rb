@@ -8,6 +8,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8, message: "deve ter pelo menos 8 caracteres" }, confirmation: true
   validates :user_type, inclusion: { in: %w[Responsável Professor] }, allow_nil: true
   
+  has_many :user_posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  
   before_save :downcase_email
   
   private
