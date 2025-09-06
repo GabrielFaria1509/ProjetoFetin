@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   put "/users/:id", to: "users#update"
   patch "/users/:id", to: "users#update"
   delete '/users/:id', to: 'users#destroy', as: 'delete_user'
+  post '/users/:id/upload_avatar', to: 'users#upload_avatar'
 end

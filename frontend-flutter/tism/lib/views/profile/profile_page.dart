@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:tism/services/user_service.dart';
+import 'package:tism/services/image_service.dart';
 import 'package:tism/views/login/login_page.dart';
 import 'package:tism/utils/name_formatter.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'dart:io';
+import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
   final String nomeUsuario;
@@ -18,11 +16,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  File? _profileImage;
+  String? _profileImageUrl;
   String _userType = 'Responsável';
   String _userName = '';
-  final ImagePicker _picker = ImagePicker();
   final TextEditingController _nameController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -37,12 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
         setState(() {
           _userName = user['username'] ?? widget.nomeUsuario;
           _userType = user['userType'] ?? 'Responsável';
-          if (user['profileImagePath'] != null) {
-            final imageFile = File(user['profileImagePath']);
-            if (imageFile.existsSync()) {
-              _profileImage = imageFile;
-            }
-          }
+          _profileImageUrl = user['profileImagePath'];
         });
         _nameController.text = _userName;
       }
@@ -57,74 +50,36 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  Future<bool> _requestPermissions() async {
-    final status = await Permission.storage.request();
-    return status.isGranted;
-  }
-
   Future<void> _pickImage() async {
+    setState(() => _isLoading = true);
+    
     try {
-      // Solicitar permissões primeiro
-      if (!await _requestPermissions()) {
+      final avatarUrl = await ImageService.pickAndCropImage(context);
+      
+      if (avatarUrl != null) {
+        setState(() => _profileImageUrl = avatarUrl);
+        await UserService.updateProfileImage(avatarUrl);
+        
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Permissão de armazenamento necessária'),
-              backgroundColor: Colors.orange,
+              content: Text('Foto atualizada com sucesso!'),
+              backgroundColor: Colors.green,
             ),
           );
-        }
-        return;
-      }
-      
-      final XFile? image = await _picker.pickImage(
-        source: ImageSource.gallery,
-        maxWidth: 1024,
-        maxHeight: 1024,
-        imageQuality: 85,
-      );
-      
-      if (image != null && mounted) {
-        final croppedFile = await ImageCropper().cropImage(
-          sourcePath: image.path,
-          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-          maxWidth: 512,
-          maxHeight: 512,
-          compressQuality: 85,
-          uiSettings: [
-            AndroidUiSettings(
-              toolbarTitle: 'Editar Foto',
-              toolbarColor: tismAqua,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.square,
-              lockAspectRatio: true,
-              hideBottomControls: false,
-              showCropGrid: true,
-            ),
-            IOSUiSettings(
-              title: 'Editar Foto',
-              doneButtonTitle: 'Concluir',
-              cancelButtonTitle: 'Cancelar',
-            ),
-          ],
-        );
-        
-        if (croppedFile != null && mounted) {
-          setState(() {
-            _profileImage = File(croppedFile.path);
-          });
-          await UserService.updateProfileImage(croppedFile.path);
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erro ao selecionar imagem: ${e.toString()}'),
+            content: Text('Erro ao atualizar foto: $e'),
             backgroundColor: Colors.red,
           ),
         );
       }
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -156,27 +111,41 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 20),
             // Foto de perfil
             GestureDetector(
-              onTap: _profileImage == null ? _pickImage : _showImageOptions,
-              child: CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.grey[300],
-                backgroundImage: _profileImage != null && _profileImage!.existsSync()
-                    ? FileImage(_profileImage!)
-                    : null,
-                child: _profileImage == null || !_profileImage!.existsSync()
-                    ? Icon(
-                        Icons.camera_alt, 
-                        size: 40, 
-                        color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.grey[300] 
-                          : Colors.grey[600]
-                      )
-                    : null,
+              onTap: _isLoading ? null : _pickImage,
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.grey[300],
+                    backgroundImage: _profileImageUrl != null 
+                        ? _getImageProvider(_profileImageUrl!)
+                        : null,
+                    child: _profileImageUrl == null
+                        ? Icon(
+                            Icons.camera_alt, 
+                            size: 40, 
+                            color: Colors.grey[600]
+                          )
+                        : null,
+                  ),
+                  if (_isLoading)
+                    Positioned.fill(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(60),
+                        ),
+                        child: const Center(
+                          child: CircularProgressIndicator(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
             const SizedBox(height: 10),
             Text(
-              _profileImage == null ? 'Toque para adicionar foto' : 'Toque para alterar/remover',
+              _profileImageUrl == null ? 'Toque para adicionar foto' : 'Toque para alterar foto',
               style: TextStyle(color: Colors.grey[600], fontSize: 12),
             ),
             const SizedBox(height: 30),
@@ -184,20 +153,10 @@ class _ProfilePageState extends State<ProfilePage> {
             // Nome do usuário
             Card(
               child: ListTile(
-                leading: Icon(
-                  Icons.person,
-                  color: Theme.of(context).brightness == Brightness.dark 
-                    ? Colors.white 
-                    : null,
-                ),
+                leading: const Icon(Icons.person),
                 title: const Text('Nome'),
                 subtitle: Text(_userName.isNotEmpty ? _userName : widget.nomeUsuario),
-                trailing: Icon(
-                  Icons.edit,
-                  color: Theme.of(context).brightness == Brightness.dark 
-                    ? Colors.white 
-                    : null,
-                ),
+                trailing: const Icon(Icons.edit),
                 onTap: _showEditNameDialog,
               ),
             ),
@@ -207,20 +166,10 @@ class _ProfilePageState extends State<ProfilePage> {
             // Tipo de usuário
             Card(
               child: ListTile(
-                leading: Icon(
-                  Icons.work,
-                  color: Theme.of(context).brightness == Brightness.dark 
-                    ? Colors.white 
-                    : null,
-                ),
+                leading: const Icon(Icons.work),
                 title: const Text('Tipo de usuário'),
                 subtitle: Text(_userType),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Theme.of(context).brightness == Brightness.dark 
-                    ? Colors.white 
-                    : null,
-                ),
+                trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: _showUserTypeDialog,
               ),
             ),
@@ -286,174 +235,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _showImageOptions() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return SafeArea(
-          child: Wrap(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.camera_alt),
-                title: const Text('Tirar foto'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickImageFromCamera();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Escolher da galeria'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickImage();
-                },
-              ),
-              if (_profileImage != null && _profileImage!.existsSync())
-                ListTile(
-                  leading: const Icon(Icons.crop),
-                  title: const Text('Editar foto atual'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _cropCurrentImage();
-                  },
-                ),
-              if (_profileImage != null)
-                ListTile(
-                  leading: const Icon(Icons.delete, color: Colors.red),
-                  title: const Text('Remover foto', style: TextStyle(color: Colors.red)),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _removeImage();
-                  },
-                ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _pickImageFromCamera() async {
-    try {
-      // Solicitar permissões de câmera
-      final cameraStatus = await Permission.camera.request();
-      if (!cameraStatus.isGranted) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Permissão de câmera necessária'),
-              backgroundColor: Colors.orange,
-            ),
-          );
-        }
-        return;
-      }
-      
-      final XFile? image = await _picker.pickImage(
-        source: ImageSource.camera,
-        maxWidth: 1024,
-        maxHeight: 1024,
-        imageQuality: 85,
-      );
-      
-      if (image != null && mounted) {
-        final croppedFile = await ImageCropper().cropImage(
-          sourcePath: image.path,
-          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-          maxWidth: 512,
-          maxHeight: 512,
-          compressQuality: 85,
-          uiSettings: [
-            AndroidUiSettings(
-              toolbarTitle: 'Editar Foto',
-              toolbarColor: tismAqua,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.square,
-              lockAspectRatio: true,
-              hideBottomControls: false,
-              showCropGrid: true,
-            ),
-            IOSUiSettings(
-              title: 'Editar Foto',
-              doneButtonTitle: 'Concluir',
-              cancelButtonTitle: 'Cancelar',
-            ),
-          ],
-        );
-        
-        if (croppedFile != null && mounted) {
-          setState(() {
-            _profileImage = File(croppedFile.path);
-          });
-          await UserService.updateProfileImage(croppedFile.path);
-        }
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro ao tirar foto: ${e.toString()}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-  }
-
-  Future<void> _removeImage() async {
-    setState(() {
-      _profileImage = null;
-    });
-    await UserService.updateProfileImage(null);
-  }
-  
-  Future<void> _cropCurrentImage() async {
-    if (_profileImage == null || !_profileImage!.existsSync()) return;
-    
-    try {
-      final croppedFile = await ImageCropper().cropImage(
-        sourcePath: _profileImage!.path,
-        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-        maxWidth: 512,
-        maxHeight: 512,
-        compressQuality: 85,
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: 'Editar Foto',
-            toolbarColor: tismAqua,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.square,
-            lockAspectRatio: true,
-            hideBottomControls: false,
-            showCropGrid: true,
-          ),
-          IOSUiSettings(
-            title: 'Editar Foto',
-            doneButtonTitle: 'Concluir',
-            cancelButtonTitle: 'Cancelar',
-          ),
-        ],
-      );
-      
-      if (croppedFile != null && mounted) {
-        setState(() {
-          _profileImage = File(croppedFile.path);
-        });
-        await UserService.updateProfileImage(croppedFile.path);
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro ao editar imagem: ${e.toString()}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-  }
-
   void _showUserTypeDialog() {
     showDialog(
       context: context,
@@ -498,5 +279,17 @@ class _ProfilePageState extends State<ProfilePage> {
         );
       },
     );
+  }
+  
+  ImageProvider? _getImageProvider(String imageUrl) {
+    if (imageUrl.startsWith('data:image')) {
+      // Base64 image
+      final base64String = imageUrl.split(',')[1];
+      final bytes = base64Decode(base64String);
+      return MemoryImage(bytes);
+    } else {
+      // Network image
+      return NetworkImage(imageUrl);
+    }
   }
 }

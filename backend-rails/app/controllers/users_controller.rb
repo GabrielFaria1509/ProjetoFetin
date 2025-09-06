@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   # API-only Rails não usa CSRF protection
+  require 'base64'
 
   def create
     # Validar parâmetros obrigatórios
@@ -81,6 +82,30 @@ class UsersController < ApplicationController
       }, status: :ok
     else
       render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    end
+  end
+
+  def upload_avatar
+    user = User.find_by(id: params[:id])
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
+    
+    if params[:avatar].present?
+      # Converter imagem para base64 e salvar no banco
+      image_data = params[:avatar].read
+      base64_image = "data:#{params[:avatar].content_type};base64,#{Base64.encode64(image_data)}"
+      
+      user.profile_picture = base64_image
+      
+      if user.save
+        render json: { 
+          message: "Avatar atualizado com sucesso",
+          avatar_url: base64_image
+        }, status: :ok
+      else
+        render json: { error: "Erro ao salvar avatar" }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: "Nenhuma imagem enviada" }, status: :bad_request
     end
   end
 

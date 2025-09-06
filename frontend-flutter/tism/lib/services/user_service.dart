@@ -144,12 +144,17 @@ class UserService {
     }
   }
 
-  static Future<void> updateProfileImage(String? imagePath) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (imagePath != null) {
-      await prefs.setString(_keyProfileImage, imagePath);
-    } else {
-      await prefs.remove(_keyProfileImage);
+  static Future<bool> updateProfileImage(String avatarUrl) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt(_keyUserId);
+      
+      if (userId == null) return false;
+      
+      await prefs.setString(_keyProfileImage, avatarUrl);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 

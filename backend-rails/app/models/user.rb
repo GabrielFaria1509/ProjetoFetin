@@ -3,9 +3,14 @@ class User < ApplicationRecord
   
   before_validation :set_name_from_username, if: -> { name.blank? && username.present? }
 
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :username, presence: true, length: { minimum: 2, maximum: 50 }
-  validates :password, presence: true, length: { minimum: 8, message: "deve ter pelo menos 8 caracteres" }, confirmation: true
+  validates :email, presence: { message: "é obrigatório" }, 
+                    uniqueness: { case_sensitive: false, message: "Este e-mail já foi cadastrado!" }, 
+                    format: { with: URI::MailTo::EMAIL_REGEXP, message: "formato inválido" }
+  validates :username, presence: { message: "é obrigatório" }, 
+                       length: { minimum: 2, maximum: 50, too_short: "deve ter pelo menos 2 caracteres", too_long: "deve ter no máximo 50 caracteres" }
+  validates :password, presence: { message: "é obrigatória" }, 
+                       length: { minimum: 8, message: "deve ter pelo menos 8 caracteres" }, 
+                       confirmation: { message: "não confere com a confirmação" }
   validates :user_type, inclusion: { in: %w[Responsável Professor] }, allow_nil: true
   
   has_many :user_posts, dependent: :destroy
