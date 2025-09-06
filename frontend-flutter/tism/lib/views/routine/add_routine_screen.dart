@@ -68,39 +68,48 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  _buildTitleField(),
-                  const SizedBox(height: 16),
-                  _buildTimeField(),
-                  const SizedBox(height: 16),
-                  _buildDescriptionField(),
-                  const SizedBox(height: 16),
-                  _buildCategorySelector(),
-                  const SizedBox(height: 16),
-                  _buildIconPicker(),
-                  const SizedBox(height: 16),
-                  _buildColorPicker(),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _saveActivity,
-                style: ElevatedButton.styleFrom(backgroundColor: tismAqua),
-                child: Text(
-                  widget.activityToEdit != null ? 'Salvar Alterações' : 'Criar Rotina',
-                  style: const TextStyle(color: Colors.white),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildTitleField(),
+                      const SizedBox(height: 16),
+                      _buildTimeField(),
+                      const SizedBox(height: 16),
+                      _buildDescriptionField(),
+                      const SizedBox(height: 16),
+                      _buildCategorySelector(),
+                      const SizedBox(height: 16),
+                      _buildIconPicker(),
+                      const SizedBox(height: 16),
+                      _buildColorPicker(),
+                      const SizedBox(height: 80), // Espaço para o botão
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 16),
+                child: ElevatedButton(
+                  onPressed: _saveActivity,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: tismAqua,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: Text(
+                    widget.activityToEdit != null ? 'Salvar Alterações' : 'Criar Rotina',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

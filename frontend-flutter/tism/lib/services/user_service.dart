@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
+
 
 class UserService {
   static const String _keyUsername = 'username';
@@ -12,7 +12,7 @@ class UserService {
   static const String _keyEmail = 'email';
   
   // URL do backend - altere para a URL do seu deploy no Render.com
-  static const String _baseUrl = 'http://localhost:3000'; // Desenvolvimento
+  static const String _baseUrl = 'https://tism-backend-api-rgxd.onrender.com'; // Produção
   // static const String _baseUrl = 'https://seu-app.onrender.com'; // Produção
 
   // Registrar novo usuário

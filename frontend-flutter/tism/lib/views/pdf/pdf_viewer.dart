@@ -33,14 +33,24 @@ class _PDFViewerState extends State<PDFViewer> {
     try {
       // Verificar se o asset existe
       final bytes = await rootBundle.load(widget.assetPath);
-      final dir = await getTemporaryDirectory();
+      final dir = await getApplicationDocumentsDirectory();
       
       // Criar nome de arquivo seguro
-      final fileName = widget.title.replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(' ', '_');
-      final file = File('${dir.path}/${fileName}_${DateTime.now().millisecondsSinceEpoch}.pdf');
+      final fileName = widget.title
+          .replaceAll(RegExp(r'[^\w\s-]'), '')
+          .replaceAll(' ', '_')
+          .replaceAll('__', '_');
+      
+      final file = File('${dir.path}/$fileName.pdf');
+      
+      // Criar diretório se não existir
+      await file.parent.create(recursive: true);
       
       // Escrever bytes no arquivo
-      await file.writeAsBytes(bytes.buffer.asUint8List());
+      await file.writeAsBytes(bytes.buffer.asUint8List(), flush: true);
+      
+      // Aguardar um pouco para garantir que o arquivo foi escrito
+      await Future.delayed(const Duration(milliseconds: 100));
       
       // Verificar se o arquivo foi criado corretamente
       if (await file.exists() && await file.length() > 0) {
@@ -54,12 +64,9 @@ class _PDFViewerState extends State<PDFViewer> {
         throw Exception('Arquivo PDF não foi criado corretamente');
       }
     } catch (e) {
-      print('Erro ao carregar PDF: $e');
-      print('Asset path: ${widget.assetPath}');
-      
       if (mounted) {
         setState(() {
-          errorMessage = 'Erro ao carregar PDF: ${widget.title}\n\nVerifique se o arquivo existe em: ${widget.assetPath}';
+          errorMessage = 'Erro ao carregar PDF: $e';
           isLoading = false;
         });
       }
@@ -195,52 +202,63 @@ class _PDFViewerState extends State<PDFViewer> {
   }
 
   Widget _buildPDFView() {
-    if (localPath == null || !File(localPath!).existsSync()) {
+    if (localPath == null) {
       return _buildErrorView();
     }
     
-    return PDFView(
-      filePath: localPath!,
-      enableSwipe: true,
-      swipeHorizontal: false,
-      autoSpacing: false,
-      pageFling: true,
-      pageSnap: true,
-      defaultPage: currentPage,
-      fitPolicy: FitPolicy.BOTH,
-      preventLinkNavigation: false,
-      onRender: (pages) {
-        if (mounted) {
-          setState(() {
-            totalPages = pages ?? 0;
-          });
+    return FutureBuilder<bool>(
+      future: File(localPath!).exists(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
         }
-      },
-      onViewCreated: (PDFViewController controller) {
-        pdfController = controller;
-      },
-      onPageChanged: (int? page, int? total) {
-        if (mounted) {
-          setState(() {
-            currentPage = page ?? 0;
-          });
+        
+        if (!snapshot.hasData || !snapshot.data!) {
+          return _buildErrorView();
         }
-      },
-      onError: (error) {
-        print('PDF Error: $error');
-        if (mounted) {
-          setState(() {
-            errorMessage = 'Erro na visualização do PDF: $error';
-          });
-        }
-      },
-      onPageError: (page, error) {
-        print('PDF Page Error: $page - $error');
-        if (mounted) {
-          setState(() {
-            errorMessage = 'Erro na página $page: $error';
-          });
-        }
+        
+        return PDFView(
+          filePath: localPath!,
+          enableSwipe: true,
+          swipeHorizontal: false,
+          autoSpacing: false,
+          pageFling: true,
+          pageSnap: true,
+          defaultPage: currentPage,
+          fitPolicy: FitPolicy.BOTH,
+          preventLinkNavigation: false,
+          onRender: (pages) {
+            if (mounted) {
+              setState(() {
+                totalPages = pages ?? 0;
+              });
+            }
+          },
+          onViewCreated: (PDFViewController controller) {
+            pdfController = controller;
+          },
+          onPageChanged: (int? page, int? total) {
+            if (mounted) {
+              setState(() {
+                currentPage = page ?? 0;
+              });
+            }
+          },
+          onError: (error) {
+            if (mounted) {
+              setState(() {
+                errorMessage = 'Erro: $error';
+              });
+            }
+          },
+          onPageError: (page, error) {
+            if (mounted) {
+              setState(() {
+                errorMessage = 'Erro na página $page';
+              });
+            }
+          },
+        );
       },
     );
   }

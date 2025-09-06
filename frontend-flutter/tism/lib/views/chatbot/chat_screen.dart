@@ -38,10 +38,16 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark 
+        ? const Color(0xFF121212) 
+        : null,
       appBar: AppBar(
         title: const Text('Assistente TEA'),
-        backgroundColor: tismAqua,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark 
+          ? const Color(0xFF1E1E1E) 
+          : tismAqua,
         foregroundColor: Colors.white,
+        elevation: Theme.of(context).brightness == Brightness.dark ? 0 : 4,
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline, color: Colors.white),
@@ -49,42 +55,44 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              reverse: true,
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final message = _messages[_messages.length - 1 - index];
-                return ChatBubble(message: message);
-              },
-            ),
-          ),
-          if (_isLoading)
-            Container(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text('Pensando...', style: TextStyle(fontSize: 12)),
-                ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                controller: _scrollController,
+                reverse: true,
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  final message = _messages[_messages.length - 1 - index];
+                  return ChatBubble(message: message);
+                },
               ),
             ),
-          if (_messages.length <= 1) // Mostra sugestões apenas no início
-            QuickSuggestions(onSuggestionTap: _sendMessage),
-          _buildInputArea(),
-        ],
+            if (_isLoading)
+              Container(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Text('Pensando...', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
+            if (_messages.length <= 1) // Mostra sugestões apenas no início
+              QuickSuggestions(onSuggestionTap: _sendMessage),
+            _buildInputArea(),
+          ],
+        ),
       ),
     );
   }
@@ -265,9 +273,19 @@ class ChatBubble extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                color: message.isUser ? tismAqua : Colors.grey[100],
+                color: message.isUser 
+                  ? tismAqua 
+                  : Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.grey[800] 
+                    : Colors.grey[100],
                 borderRadius: BorderRadius.circular(12),
-                border: message.isUser ? null : Border.all(color: Colors.grey[300]!),
+                border: message.isUser 
+                  ? null 
+                  : Border.all(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.grey[600]! 
+                        : Colors.grey[300]!
+                    ),
               ),
               child: message.isUser 
                 ? SelectableText(
@@ -282,18 +300,24 @@ class ChatBubble extends StatelessWidget {
                     data: message.text,
                     selectable: true,
                     styleSheet: MarkdownStyleSheet(
-                      p: const TextStyle(
-                        color: Colors.black87,
+                      p: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.white 
+                          : Colors.black87,
                         fontSize: 14,
                         height: 1.3,
                       ),
-                      strong: const TextStyle(
+                      strong: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.white 
+                          : Colors.black87,
                       ),
-                      em: const TextStyle(
+                      em: TextStyle(
                         fontStyle: FontStyle.italic,
-                        color: Colors.black87,
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.white70 
+                          : Colors.black87,
                       ),
                       listBullet: TextStyle(
                         color: tismAqua,
@@ -309,22 +333,33 @@ class ChatBubble extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: tismAqua,
                       ),
-                      h3: const TextStyle(
+                      h3: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.white 
+                          : Colors.black87,
                       ),
                       code: TextStyle(
-                        backgroundColor: Colors.grey[200],
+                        backgroundColor: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[800] 
+                          : Colors.grey[200],
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.white 
+                          : Colors.black87,
                         fontFamily: 'monospace',
                         fontSize: 13,
                       ),
                       codeblockDecoration: BoxDecoration(
-                        color: Colors.grey[100],
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[800] 
+                          : Colors.grey[100],
                         borderRadius: BorderRadius.circular(4),
                       ),
                       blockquote: TextStyle(
-                        color: Colors.grey[600],
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[400] 
+                          : Colors.grey[600],
                         fontStyle: FontStyle.italic,
                       ),
                     ),
@@ -337,7 +372,9 @@ class ChatBubble extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               child: CircleAvatar(
                 radius: 14,
-                backgroundColor: Colors.grey[400],
+                backgroundColor: Theme.of(context).brightness == Brightness.dark 
+                  ? Colors.grey[600] 
+                  : Colors.grey[400],
                 child: const Icon(Icons.person, size: 16, color: Colors.white),
               ),
             ),

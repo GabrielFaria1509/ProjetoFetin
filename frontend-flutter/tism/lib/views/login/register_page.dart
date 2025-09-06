@@ -93,10 +93,11 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFE6F2FF),
       appBar: AppBar(backgroundColor: tismAqua, title: const Text('Cadastro')),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: SingleChildScrollView(
-          child: Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: SingleChildScrollView(
+            child: Column(
             children: [
               TextField(
                 controller: nomeController,
@@ -195,7 +196,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.red),
                     ),
@@ -209,6 +210,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

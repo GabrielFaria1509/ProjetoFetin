@@ -16,17 +16,19 @@ class StatisticsScreen extends StatelessWidget {
         title: const Text('Estatísticas'),
         backgroundColor: tismAqua,
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          _buildSummaryCard(entries),
-          const SizedBox(height: 16),
-          _buildTypeDistribution(entries),
-          const SizedBox(height: 16),
-          _buildTriggerAnalysis(triggerFreq),
-          const SizedBox(height: 16),
-          _buildWeeklyTrend(entries),
-        ],
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            _buildSummaryCard(entries),
+            const SizedBox(height: 16),
+            _buildTypeDistribution(entries),
+            const SizedBox(height: 16),
+            _buildTriggerAnalysis(triggerFreq),
+            const SizedBox(height: 16),
+            _buildWeeklyTrend(entries),
+          ],
+        ),
       ),
     );
   }

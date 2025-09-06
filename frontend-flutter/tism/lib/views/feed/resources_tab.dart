@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/pdf/pdf_viewer.dart';
+import 'package:tism/views/pdf/native_pdf_viewer.dart';
 import 'package:tism/widgets/pdf_cover_generator.dart';
 
 class ResourcesTab extends StatefulWidget {
@@ -268,11 +269,68 @@ class _ResourcesTabState extends State<ResourcesTab> {
   }
 
   void _openPDF(String title, String assetPath) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.picture_as_pdf),
+                title: const Text('Visualizador Interno'),
+                subtitle: const Text('Abrir no app'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _openInternalViewer(title, assetPath);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.open_in_new),
+                title: const Text('Aplicativo Externo'),
+                subtitle: const Text('Abrir com outro app'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _openNativeViewer(title, assetPath);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  
+  void _openInternalViewer(String title, String assetPath) {
     try {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => PDFViewer(
+            title: title,
+            assetPath: assetPath,
+          ),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro no visualizador interno. Tente o externo.'),
+          backgroundColor: Colors.orange,
+          action: SnackBarAction(
+            label: 'Externo',
+            onPressed: () => _openNativeViewer(title, assetPath),
+          ),
+        ),
+      );
+    }
+  }
+  
+  void _openNativeViewer(String title, String assetPath) {
+    try {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NativePDFViewer(
             title: title,
             assetPath: assetPath,
           ),

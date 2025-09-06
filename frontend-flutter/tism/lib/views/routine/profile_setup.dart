@@ -46,34 +46,43 @@ class _ProfileSetupState extends State<ProfileSetup> {
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  _buildNameField(),
-                  const SizedBox(height: 16),
-                  _buildAgeSelector(),
-                  const SizedBox(height: 16),
-                  _buildSupportLevelSelector(),
-                  const SizedBox(height: 16),
-                  _buildSensoryPreferences(),
-                  const SizedBox(height: 16),
-                  _buildInterests(),
-                ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildNameField(),
+                      const SizedBox(height: 16),
+                      _buildAgeSelector(),
+                      const SizedBox(height: 16),
+                      _buildSupportLevelSelector(),
+                      const SizedBox(height: 16),
+                      _buildSensoryPreferences(),
+                      const SizedBox(height: 16),
+                      _buildInterests(),
+                      const SizedBox(height: 80), // Espaço para o botão
+                    ],
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _createProfile,
-                style: ElevatedButton.styleFrom(backgroundColor: tismAqua),
-                child: const Text('Criar Rotina', style: TextStyle(color: Colors.white)),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 16),
+                child: ElevatedButton(
+                  onPressed: _createProfile,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: tismAqua,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Criar Rotina', style: TextStyle(color: Colors.white)),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -146,12 +155,19 @@ class _ProfileSetupState extends State<ProfileSetup> {
   }
 
   Widget _buildSensoryPreferences() {
-    final options = ['visual', 'auditivo', 'tátil', 'movimento'];
+    final options = [
+      'Visual', 'Auditivo', 'Tátil', 'Movimento', 'Olfativo', 'Gustativo',
+      'Proprioceptivo', 'Vestibular', 'Pressão Profunda', 'Texturas Suaves',
+      'Texturas Ásperas', 'Sons Baixos', 'Sons Altos', 'Luzes Suaves',
+      'Luzes Brilhantes', 'Temperaturas Quentes', 'Temperaturas Frias'
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Preferências sensoriais:', style: TextStyle(fontWeight: FontWeight.bold)),
         Wrap(
+          spacing: 8,
+          runSpacing: 4,
           children: options.map((option) => FilterChip(
             label: Text(option),
             selected: _sensoryPreferences.contains(option),
@@ -167,12 +183,19 @@ class _ProfileSetupState extends State<ProfileSetup> {
   }
 
   Widget _buildInterests() {
-    final options = ['música', 'desenho', 'números', 'animais', 'carros'];
+    final options = [
+      'Música', 'Desenho', 'Números', 'Animais', 'Carros', 'Livros', 'Jogos',
+      'Computador', 'Tablet', 'Brinquedos', 'Esportes', 'Dança', 'Culinária',
+      'Jardinagem', 'Ciência', 'Matemática', 'Arte', 'Fotografia', 'Vídeos',
+      'Filmes', 'Séries', 'Quebra-cabeças', 'Lego', 'Bonecas', 'Super-heróis'
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Interesses:', style: TextStyle(fontWeight: FontWeight.bold)),
         Wrap(
+          spacing: 8,
+          runSpacing: 4,
           children: options.map((option) => FilterChip(
             label: Text(option),
             selected: _interests.contains(option),
@@ -187,9 +210,17 @@ class _ProfileSetupState extends State<ProfileSetup> {
     );
   }
 
+  String _capitalizeName(String name) {
+    return name.split(' ').map((word) {
+      if (word.isEmpty) return word;
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }).join(' ');
+  }
+
   void _createProfile() {
+    final name = _nameController.text.trim();
     final profile = ChildProfile(
-      name: _nameController.text.isEmpty ? 'Criança' : _nameController.text,
+      name: name.isEmpty ? 'Criança' : _capitalizeName(name),
       ageDisplay: _ageDisplay,
       ageInMonths: _ageInMonths,
       supportLevel: _supportLevel,

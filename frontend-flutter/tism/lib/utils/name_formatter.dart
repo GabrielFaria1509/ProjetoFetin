@@ -1,18 +1,17 @@
 class NameFormatter {
   static const List<String> _prepositions = [
-    'de', 'da', 'do', 'das', 'dos', 'e', 'del', 'della', 'di', 'du', 'van', 'von', 'la', 'le'
+    'de', 'da', 'do', 'das', 'dos', 'e', 'del', 'della', 'di', 'du', 'van', 'von', 'la', 'le', 'em', 'na', 'no'
   ];
 
   static String formatName(String name) {
     if (name.trim().isEmpty) return name;
     
-    final words = name.trim().toLowerCase().split(' ');
+    // Remove espaços múltiplos e divide em palavras
+    final words = name.trim().split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
     final formattedWords = <String>[];
     
     for (int i = 0; i < words.length; i++) {
-      final word = words[i];
-      
-      if (word.isEmpty) continue;
+      final word = words[i].toLowerCase();
       
       // Primeira palavra sempre capitalizada
       if (i == 0) {

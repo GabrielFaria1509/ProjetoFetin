@@ -148,9 +148,10 @@ class _ProfilePageState extends State<ProfilePage> {
         foregroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
           children: [
             const SizedBox(height: 20),
             // Foto de perfil
@@ -242,6 +243,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+      ),
     );
   }
   
@@ -267,8 +269,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           TextButton(
             onPressed: () async {
-              final newName = NameFormatter.formatName(_nameController.text.trim());
-              if (newName.isNotEmpty) {
+              final inputName = _nameController.text.trim();
+              if (inputName.isNotEmpty) {
+                final newName = NameFormatter.formatName(inputName);
                 setState(() {
                   _userName = newName;
                 });

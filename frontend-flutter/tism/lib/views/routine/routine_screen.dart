@@ -121,24 +121,26 @@ class _RoutineScreenState extends State<RoutineScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          _buildHeader(),
-          _buildFilterChips(),
-          _buildProgressIndicator(),
-          Expanded(
-            child: filteredActivities.isEmpty
-                ? _buildEmptyState()
-                : ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: filteredActivities.length,
-                    itemBuilder: (context, index) {
-                      final activity = filteredActivities[index];
-                      return _buildActivityCard(activity, index);
-                    },
-                  ),
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildHeader(),
+            _buildFilterChips(),
+            _buildProgressIndicator(),
+            Expanded(
+              child: filteredActivities.isEmpty
+                  ? _buildEmptyState()
+                  : ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: filteredActivities.length,
+                      itemBuilder: (context, index) {
+                        final activity = filteredActivities[index];
+                        return _buildActivityCard(activity, index);
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

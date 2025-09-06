@@ -18,6 +18,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TISM - Guia TEA'),
+        backgroundColor: Theme.of(context).brightness == Brightness.dark 
+          ? const Color(0xFF1E1E1E) 
+          : tismAqua,
+        foregroundColor: Colors.white,
+        elevation: Theme.of(context).brightness == Brightness.dark ? 0 : 4,
         actions: [
           Consumer<ThemeService>(
             builder: (context, themeService, child) {
@@ -33,9 +38,10 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -43,9 +49,14 @@ class HomePage extends StatelessWidget {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Explore conteúdos educativos sobre o TEA',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              style: TextStyle(
+                fontSize: 16, 
+                color: Theme.of(context).brightness == Brightness.dark 
+                  ? Colors.grey[300] 
+                  : Colors.grey[600]
+              ),
             ),
             const SizedBox(height: 32),
             Expanded(
@@ -103,6 +114,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      ),
     );
   }
 
@@ -124,9 +136,24 @@ class HomePage extends StatelessWidget {
                   color: tismAqua,
                 ),
                 const SizedBox(width: 16),
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18, 
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.white 
+                        : Colors.black87
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.grey[400] 
+                    : Colors.grey[600],
+                  size: 16,
                 ),
               ],
             ),

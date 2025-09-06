@@ -61,36 +61,45 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
           ),
         ] : null,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  _buildTypeSelector(),
-                  const SizedBox(height: 16),
-                  _buildTitleField(),
-                  const SizedBox(height: 16),
-                  _buildDescriptionField(),
-                  const SizedBox(height: 16),
-                  _buildIntensitySlider(),
-                  const SizedBox(height: 16),
-                  _buildObserverSelector(),
-                  const SizedBox(height: 16),
-                  _buildTriggersSelector(),
-                ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildTypeSelector(),
+                      const SizedBox(height: 16),
+                      _buildTitleField(),
+                      const SizedBox(height: 16),
+                      _buildDescriptionField(),
+                      const SizedBox(height: 16),
+                      _buildIntensitySlider(),
+                      const SizedBox(height: 16),
+                      _buildObserverSelector(),
+                      const SizedBox(height: 16),
+                      _buildTriggersSelector(),
+                      const SizedBox(height: 80),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _saveEntry,
-                style: ElevatedButton.styleFrom(backgroundColor: tismAqua),
-                child: const Text('Salvar', style: TextStyle(color: Colors.white)),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 16),
+                child: ElevatedButton(
+                  onPressed: _saveEntry,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: tismAqua,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Salvar', style: TextStyle(color: Colors.white)),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

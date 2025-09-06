@@ -49,29 +49,31 @@ class _DiaryScreenState extends State<DiaryScreen> {
           ),
         ],
       ),
-      body: entries.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.book, 
-                    size: 64, 
-                    color: Theme.of(context).brightness == Brightness.dark 
-                      ? Colors.grey[400] 
-                      : Colors.grey
-                  ),
-                  SizedBox(height: 16),
-                  Text('Nenhuma observação ainda'),
-                  Text('Toque no + para começar'),
-                ],
+      body: SafeArea(
+        child: entries.isEmpty
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.book, 
+                      size: 64, 
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.grey[400] 
+                        : Colors.grey
+                    ),
+                    const SizedBox(height: 16),
+                    const Text('Nenhuma observação ainda'),
+                    const Text('Toque no + para começar'),
+                  ],
+                ),
+              )
+            : ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: entries.length,
+                itemBuilder: (context, index) => _buildEntryCard(entries[index]),
               ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: entries.length,
-              itemBuilder: (context, index) => _buildEntryCard(entries[index]),
-            ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
