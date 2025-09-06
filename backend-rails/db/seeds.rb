@@ -67,7 +67,11 @@ resources = [
 
 resources.each do |resource_attrs|
   Resource.find_or_create_by(title: resource_attrs[:title]) do |resource|
-    resource.assign_attributes(resource_attrs)
+    resource.title = resource_attrs[:title]
+    resource.description = resource_attrs[:description]
+    resource.resource_type = resource_attrs[:resource_type]
+    resource.category = resource_attrs[:category]
+    resource.file_url = resource_attrs[:file_url]
   end
 end
 
