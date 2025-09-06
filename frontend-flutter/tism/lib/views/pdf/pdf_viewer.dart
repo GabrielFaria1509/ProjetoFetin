@@ -32,25 +32,15 @@ class _PDFViewerState extends State<PDFViewer> {
   Future<void> _loadPDF() async {
     try {
       final bytes = await rootBundle.load(widget.assetPath);
-<<<<<<< HEAD
-      final dir = await getApplicationDocumentsDirectory();
+      final dir = await getTemporaryDirectory();
       
       final fileName = widget.title
           .replaceAll(RegExp(r'[^\w\s-]'), '')
           .replaceAll(' ', '_');
       
-=======
-      final dir = await getTemporaryDirectory();
-      final fileName = widget.title.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
->>>>>>> a9e4406608c2423bae344a6c69d69b80fe31f3de
       final file = File('${dir.path}/$fileName.pdf');
       await file.writeAsBytes(bytes.buffer.asUint8List());
       
-<<<<<<< HEAD
-=======
-      await file.writeAsBytes(bytes.buffer.asUint8List());
-      
->>>>>>> a9e4406608c2423bae344a6c69d69b80fe31f3de
       if (mounted) {
         setState(() {
           localPath = file.path;
@@ -74,53 +64,47 @@ class _PDFViewerState extends State<PDFViewer> {
         title: Text(widget.title),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
+        actions: [
+          if (totalPages > 0)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Text(
+                  '${currentPage + 1}/$totalPages',
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
+                ),
+              ),
+            ),
+        ],
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text('Carregando PDF...'),
+                ],
+              ),
+            )
           : errorMessage != null
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.error, size: 64, color: Colors.red),
-                      const SizedBox(height: 16),
-                      Text(errorMessage!),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isLoading = true;
-                            errorMessage = null;
-                          });
-                          _loadPDF();
-                        },
-                        child: const Text('Tentar Novamente'),
-                      ),
-                    ],
+              ? _buildErrorView()
+              : _buildPDFView(),
+      bottomNavigationBar: localPath != null && totalPages > 1
+          ? Container(
+              height: 60,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark 
+                  ? const Color(0xFF1E1E1E) 
+                  : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, -2),
                   ),
-<<<<<<< HEAD
-                )
-              : PDFView(
-                  filePath: localPath!,
-                  enableSwipe: true,
-                  swipeHorizontal: false,
-                  autoSpacing: false,
-                  pageFling: true,
-                  onRender: (pages) {
-                    setState(() {
-                      totalPages = pages ?? 0;
-                    });
-                  },
-                  onViewCreated: (PDFViewController controller) {
-                    pdfController = controller;
-                  },
-                  onPageChanged: (int? page, int? total) {
-                    setState(() {
-                      currentPage = page ?? 0;
-                    });
-                  },
-                ),
-=======
                 ],
               ),
               child: Row(
@@ -201,6 +185,10 @@ class _PDFViewerState extends State<PDFViewer> {
   }
 
   Widget _buildPDFView() {
+    if (localPath == null) {
+      return _buildErrorView();
+    }
+    
     return PDFView(
       filePath: localPath!,
       enableSwipe: true,
@@ -212,29 +200,36 @@ class _PDFViewerState extends State<PDFViewer> {
       fitPolicy: FitPolicy.BOTH,
       preventLinkNavigation: false,
       onRender: (pages) {
-        setState(() {
-          totalPages = pages ?? 0;
-        });
+        if (mounted) {
+          setState(() {
+            totalPages = pages ?? 0;
+          });
+        }
       },
       onViewCreated: (PDFViewController controller) {
         pdfController = controller;
       },
       onPageChanged: (int? page, int? total) {
-        setState(() {
-          currentPage = page ?? 0;
-        });
+        if (mounted) {
+          setState(() {
+            currentPage = page ?? 0;
+          });
+        }
       },
       onError: (error) {
-        setState(() {
-          errorMessage = 'Erro na visualização: $error';
-        });
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Erro na visualização: $error';
+          });
+        }
       },
       onPageError: (page, error) {
-        setState(() {
-          errorMessage = 'Erro na página $page: $error';
-        });
+        if (mounted) {
+          setState(() {
+            errorMessage = 'Erro na página $page: $error';
+          });
+        }
       },
->>>>>>> a9e4406608c2423bae344a6c69d69b80fe31f3de
     );
   }
 }
