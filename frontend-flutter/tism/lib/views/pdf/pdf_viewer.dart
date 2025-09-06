@@ -50,7 +50,7 @@ class _PDFViewerState extends State<PDFViewer> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          errorMessage = 'Erro ao carregar PDF: ${e.toString()}';
+          errorMessage = 'Erro ao carregar PDF: $e';
           isLoading = false;
         });
       }
@@ -64,172 +64,51 @@ class _PDFViewerState extends State<PDFViewer> {
         title: Text(widget.title),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
-        actions: [
-          if (totalPages > 0)
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Text(
-                  '${currentPage + 1}/$totalPages',
-                  style: const TextStyle(fontSize: 14, color: Colors.white),
-                ),
-              ),
-            ),
-        ],
       ),
       body: isLoading
-          ? const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 16),
-                  Text('Carregando PDF...'),
-                ],
-              ),
-            )
+          ? const Center(child: CircularProgressIndicator())
           : errorMessage != null
-              ? _buildErrorView()
-              : _buildPDFView(),
-      bottomNavigationBar: localPath != null && totalPages > 1
-          ? Container(
-              height: 60,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Theme.of(context).brightness == Brightness.dark 
-                  ? const Color(0xFF1E1E1E) 
-                  : Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, -2),
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.error, size: 64, color: Colors.red),
+                      const SizedBox(height: 16),
+                      Text(errorMessage!),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isLoading = true;
+                            errorMessage = null;
+                          });
+                          _loadPDF();
+                        },
+                        child: const Text('Tentar Novamente'),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    onPressed: currentPage > 0
-                        ? () => pdfController?.setPage(currentPage - 1)
-                        : null,
-                    icon: Icon(
-                      Icons.chevron_left,
-                      color: Theme.of(context).brightness == Brightness.dark 
-                        ? Colors.white 
-                        : null,
-                    ),
-                  ),
-                  Text(
-                    'Página ${currentPage + 1} de $totalPages',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).brightness == Brightness.dark 
-                        ? Colors.white 
-                        : null,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: currentPage < totalPages - 1
-                        ? () => pdfController?.setPage(currentPage + 1)
-                        : null,
-                    icon: Icon(
-                      Icons.chevron_right,
-                      color: Theme.of(context).brightness == Brightness.dark 
-                        ? Colors.white 
-                        : null,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : null,
-    );
-  }
-
-  Widget _buildErrorView() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
-            const Text(
-              'Erro ao carregar PDF',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              errorMessage!,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  isLoading = true;
-                  errorMessage = null;
-                });
-                _loadPDF();
-              },
-              child: const Text('Tentar Novamente'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPDFView() {
-    if (localPath == null) {
-      return _buildErrorView();
-    }
-    
-    return PDFView(
-      filePath: localPath!,
-      enableSwipe: true,
-      swipeHorizontal: false,
-      autoSpacing: false,
-      pageFling: true,
-      pageSnap: true,
-      defaultPage: currentPage,
-      fitPolicy: FitPolicy.BOTH,
-      preventLinkNavigation: false,
-      onRender: (pages) {
-        if (mounted) {
-          setState(() {
-            totalPages = pages ?? 0;
-          });
-        }
-      },
-      onViewCreated: (PDFViewController controller) {
-        pdfController = controller;
-      },
-      onPageChanged: (int? page, int? total) {
-        if (mounted) {
-          setState(() {
-            currentPage = page ?? 0;
-          });
-        }
-      },
-      onError: (error) {
-        if (mounted) {
-          setState(() {
-            errorMessage = 'Erro na visualização: $error';
-          });
-        }
-      },
-      onPageError: (page, error) {
-        if (mounted) {
-          setState(() {
-            errorMessage = 'Erro na página $page: $error';
-          });
-        }
-      },
+                )
+              : PDFView(
+                  filePath: localPath!,
+                  enableSwipe: true,
+                  swipeHorizontal: false,
+                  autoSpacing: false,
+                  pageFling: true,
+                  onRender: (pages) {
+                    setState(() {
+                      totalPages = pages ?? 0;
+                    });
+                  },
+                  onViewCreated: (PDFViewController controller) {
+                    pdfController = controller;
+                  },
+                  onPageChanged: (int? page, int? total) {
+                    setState(() {
+                      currentPage = page ?? 0;
+                    });
+                  },
+                ),
     );
   }
 }
