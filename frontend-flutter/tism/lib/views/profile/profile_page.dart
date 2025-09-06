@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/user_service.dart';
-import 'package:tism/services/image_service.dart';
 import 'package:tism/views/login/login_page.dart';
 import 'package:tism/utils/name_formatter.dart';
-import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
   final String nomeUsuario;
@@ -16,11 +14,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String? _profileImageUrl;
   String _userType = 'Responsável';
   String _userName = '';
   final TextEditingController _nameController = TextEditingController();
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -34,23 +30,9 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         _userName = user['username'] ?? widget.nomeUsuario;
         _userType = user['userType'] ?? 'Responsável';
-        _profileImageUrl = user['profileImagePath'];
       });
       _nameController.text = _userName;
     }
-  }
-
-  Future<void> _pickImage() async {
-    setState(() => _isLoading = true);
-    
-    final avatarUrl = await ImageService.pickAndCropImage(context);
-    
-    if (avatarUrl != null) {
-      setState(() => _profileImageUrl = avatarUrl);
-      await UserService.updateProfileImage(avatarUrl);
-    }
-    
-    setState(() => _isLoading = false);
   }
 
   Future<void> _logout() async {
@@ -77,40 +59,13 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
         children: [
           const SizedBox(height: 20),
-          GestureDetector(
-            onTap: _isLoading ? null : _pickImage,
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.grey[300],
-                  backgroundImage: _profileImageUrl != null 
-                      ? _getImageProvider(_profileImageUrl!)
-                      : null,
-                  child: _profileImageUrl == null
-                      ? const Icon(Icons.camera_alt, size: 40)
-                      : null,
-                ),
-                if (_isLoading)
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black54,
-                        borderRadius: BorderRadius.circular(60),
-                      ),
-                      child: const Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+          
+          CircleAvatar(
+            radius: 60,
+            backgroundColor: Colors.grey[300],
+            child: const Icon(Icons.person, size: 60, color: Colors.white),
           ),
-          const SizedBox(height: 10),
-          Text(
-            'Toque para ${_profileImageUrl == null ? 'adicionar' : 'alterar'} foto',
-            style: TextStyle(color: Colors.grey[600], fontSize: 12),
-          ),
+          
           const SizedBox(height: 30),
 
           Card(
@@ -230,15 +185,5 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-  }
-  
-  ImageProvider? _getImageProvider(String imageUrl) {
-    if (imageUrl.startsWith('data:image')) {
-      final base64String = imageUrl.split(',')[1];
-      final bytes = base64Decode(base64String);
-      return MemoryImage(bytes);
-    } else {
-      return NetworkImage(imageUrl);
-    }
   }
 }

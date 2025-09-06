@@ -6,6 +6,7 @@ import 'package:tism/views/profile/profile_page.dart';
 import 'package:tism/views/chatbot/chat_screen.dart';
 import 'package:tism/views/routine/routine_screen.dart';
 import 'package:tism/views/diary/diary_screen.dart';
+import 'package:tism/views/forum/forum_screen.dart';
 import 'package:tism/services/theme_service.dart';
 
 class HomePage extends StatelessWidget {
@@ -94,6 +95,15 @@ class HomePage extends StatelessWidget {
                     () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const ChatScreen()),
+                    ),
+                  ),
+                  _buildMenuCard(
+                    context,
+                    'Fórum TEA',
+                    Icons.forum,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ForumScreen()),
                     ),
                   ),
 

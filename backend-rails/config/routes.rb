@@ -16,4 +16,11 @@ Rails.application.routes.draw do
   patch "/users/:id", to: "users#update"
   delete '/users/:id', to: 'users#destroy', as: 'delete_user'
   post '/users/:id/upload_avatar', to: 'users#upload_avatar'
+  
+  # Forum routes
+  get '/forum_posts', to: 'forum_posts#index'
+  post '/forum_posts', to: 'forum_posts#create'
+  post '/forum_posts/:id/toggle_like', to: 'forum_posts#toggle_like'
+  get '/forum_posts/:id/comments', to: 'forum_posts#comments'
+  post '/forum_posts/:id/comments', to: 'forum_posts#create_comment'
 end
