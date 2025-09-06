@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '3.2.0'
+ruby '3.4.3'
 
 gem 'carrierwave'
 gem 'devise'
@@ -16,7 +16,7 @@ gem 'os'
 gem 'pg'
 gem 'puma'
 gem 'pundit'
-gem 'rails'
+gem 'rails', '~> 7.2.0'
 gem 'ransack'
 gem 'redis'
 gem 'ruby-lsp'

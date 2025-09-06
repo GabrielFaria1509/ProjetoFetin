@@ -2,21 +2,23 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # Configurações básicas para conexão
-  host: localhost
-  username: postgres           # Seu usuário PostgreSQL (troque se necessário)
-  password: postgres
-  port: 5432
 
 development:
   <<: *default
   database: tism_development
+  host: localhost
+  username: postgres
+  password: postgres
+  port: 5432
 
 test:
   <<: *default
   database: tism_test
+  host: localhost
+  username: postgres
+  password: postgres
+  port: 5432
 
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  # Render.com fornece DATABASE_URL automaticamente
