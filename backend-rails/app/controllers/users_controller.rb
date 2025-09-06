@@ -89,11 +89,8 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
-    if params[:avatar].present?
-      # Converter imagem para base64 e salvar no banco
-      image_data = params[:avatar].read
-      base64_image = "data:#{params[:avatar].content_type};base64,#{Base64.encode64(image_data)}"
-      
+    if params[:avatar_base64].present?
+      base64_image = "data:image/jpeg;base64,#{params[:avatar_base64]}"
       user.profile_picture = base64_image
       
       if user.save

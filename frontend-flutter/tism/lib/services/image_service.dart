@@ -1,9 +1,9 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ImageService {
@@ -11,18 +11,11 @@ class ImageService {
   
   static Future<String?> pickAndCropImage(BuildContext context) async {
     try {
-      // Escolher imagem
       final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(
-        source: ImageSource.gallery,
-        maxWidth: 1024,
-        maxHeight: 1024,
-        imageQuality: 85,
-      );
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       
       if (image == null) return null;
       
-      // Fazer crop quadrado
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: image.path,
         aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
@@ -31,24 +24,20 @@ class ImageService {
             toolbarTitle: 'Ajustar Foto',
             toolbarColor: const Color(0xFF4FC3F7),
             toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: true,
           ),
           IOSUiSettings(
             title: 'Ajustar Foto',
             aspectRatioLockEnabled: true,
-            resetAspectRatioEnabled: false,
           ),
         ],
       );
       
       if (croppedFile == null) return null;
       
-      // Upload para servidor
       return await _uploadImage(croppedFile.path);
       
     } catch (e) {
-      debugPrint('Erro ao processar imagem: $e');
       return null;
     }
   }
@@ -60,26 +49,22 @@ class ImageService {
       
       if (userId == null) return null;
       
-      final request = http.MultipartRequest(
-        'POST',
+      final bytes = await File(imagePath).readAsBytes();
+      final base64Image = base64Encode(bytes);
+      
+      final response = await http.post(
         Uri.parse('$_baseUrl/users/$userId/upload_avatar'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'avatar_base64': base64Image}),
       );
-      
-      request.files.add(
-        await http.MultipartFile.fromPath('avatar', imagePath),
-      );
-      
-      final response = await request.send();
       
       if (response.statusCode == 200) {
-        final responseData = await response.stream.bytesToString();
-        final data = json.decode(responseData);
+        final data = json.decode(response.body);
         return data['avatar_url'];
       }
       
       return null;
     } catch (e) {
-      debugPrint('Erro no upload: $e');
       return null;
     }
   }

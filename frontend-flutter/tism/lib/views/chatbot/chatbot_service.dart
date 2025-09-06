@@ -15,7 +15,7 @@ class ChatbotService {
     
     String response;
     
-    if (ChatbotConfig.USE_AI) {
+    if (ChatbotConfig.useAi) {
       // Modo IA: usa apenas Gemini AI
       try {
         response = await GeminiService.generateCustomResponse(message);
@@ -32,8 +32,7 @@ class ChatbotService {
   }
   
   static String _getLocalResponse(String message) {
-    final response = AutismKnowledgeBase.findResponse(message);
-    return response ?? AutismKnowledgeBase.getDefaultResponse();
+    return AutismKnowledgeBase.findResponse(message);
   }
   
   static List<String> getSuggestions(String message) {
