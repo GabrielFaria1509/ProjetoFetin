@@ -2,6 +2,7 @@
 # exit on error
 set -o errexit
 
+bundle config set frozen false
 bundle install
 bundle exec rails db:create RAILS_ENV=production
 bundle exec rails db:migrate RAILS_ENV=production
