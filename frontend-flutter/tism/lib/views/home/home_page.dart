@@ -101,10 +101,7 @@ class HomePage extends StatelessWidget {
                     context,
                     'Fórum TEA',
                     Icons.forum,
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ForumScreen()),
-                    ),
+                    () => _showDevelopmentDialog(context),
                   ),
 
                   _buildMenuCard(
@@ -169,6 +166,30 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+  
+  void _showDevelopmentDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('🚧 Em Desenvolvimento'),
+        content: const Text(
+          'O Fórum TEA está sendo desenvolvido com muito carinho para você!\n\n'
+          '🚀 Em breve você poderá:\n'
+          '• Compartilhar experiências\n'
+          '• Fazer perguntas à comunidade\n'
+          '• Trocar dicas e apoio\n'
+          '• Conectar-se com outras famílias\n\n'
+          '💙 Obrigado pela paciência!'
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Entendi'),
+          ),
+        ],
       ),
     );
   }

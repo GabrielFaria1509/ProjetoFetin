@@ -199,19 +199,23 @@ class _ChatScreenState extends State<ChatScreen> {
       builder: (context) => AlertDialog(
         title: const Text('💙 Sobre o Assistente TEA'),
         content: const Text(
-          'Sou especializado em Transtorno do Espectro Autista (TEA).\n\n'
-          '🎯 Posso ajudar pais e professores com:\n'
-          '• Identificação de sintomas\n'
-          '• Orientações sobre diagnóstico\n'
-          '• Informações sobre terapias\n'
-          '• Dicas para inclusão escolar\n'
-          '• Direitos e benefícios\n\n'
-          '⚠️ Importante: Não substituo consulta médica!'
+          '🤗 **Olá! Eu sou seu assistente especializado em TEA!**\n\n'
+          'Fui criado com muito carinho para apoiar famílias, educadores e cuidadores na jornada do Transtorno do Espectro Autista.\n\n'
+          '✨ **O que posso fazer por você:**\n'
+          '• 🔍 Ajudar a identificar sinais e características\n'
+          '• 🩺 Orientar sobre o processo de diagnóstico\n'
+          '• 🌱 Compartilhar informações sobre terapias\n'
+          '• 🏫 Dar dicas de inclusão escolar\n'
+          '• 📋 Explicar direitos e benefícios\n'
+          '• 💪 Oferecer apoio emocional e motivação\n\n'
+          '🎯 **Minha missão:** Ser seu companheiro de confiança, oferecendo informações baseadas em evidências científicas, sempre com empatia e compreensão.\n\n'
+          '⚠️ **Lembrete importante:** Sou um assistente informativo e não substituo a consulta com profissionais de saúde. Sempre busque orientação médica especializada!\n\n'
+          '💙 **Juntos, podemos fazer a diferença na vida de pessoas com TEA!**'
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Entendi'),
+            child: const Text('Entendi! Vamos conversar! 😊'),
           ),
         ],
       ),
