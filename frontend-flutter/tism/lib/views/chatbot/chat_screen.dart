@@ -171,24 +171,12 @@ class _ChatScreenState extends State<ChatScreen> {
     _controller.clear();
     _scrollToBottom();
 
-    try {
-      final response = await ChatbotService.sendMessage(text).timeout(
-        const Duration(seconds: 8),
-      );
+    final response = await ChatbotService.sendMessage(text);
 
-      setState(() {
-        _messages.add(ChatMessage(text: response, isUser: false));
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _messages.add(ChatMessage(
-          text: '*ERRO*: Falha na conexão do servidor. Verifique sua conexão com a internet para conversar comigo.',
-          isUser: false,
-        ));
-        _isLoading = false;
-      });
-    }
+    setState(() {
+      _messages.add(ChatMessage(text: response, isUser: false));
+      _isLoading = false;
+    });
     
     _scrollToBottom();
   }

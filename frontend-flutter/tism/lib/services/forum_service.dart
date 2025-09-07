@@ -7,15 +7,18 @@ class ForumService {
 
   static Future<List<ForumPost>> getPosts() async {
     try {
-      final response = await http.get(Uri.parse('$_baseUrl/forum_posts'));
+      final response = await http.get(
+        Uri.parse('$_baseUrl/forum_posts'),
+        headers: {'Content-Type': 'application/json'},
+      ).timeout(const Duration(seconds: 10));
       
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         return data.map((json) => ForumPost.fromJson(json)).toList();
       }
-      return [];
+      throw Exception('Erro ao carregar posts');
     } catch (e) {
-      return [];
+      throw Exception('Erro de conexão');
     }
   }
 

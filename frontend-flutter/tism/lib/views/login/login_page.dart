@@ -104,7 +104,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE6F2FF),
+      backgroundColor: Theme.of(context).brightness == Brightness.dark 
+        ? const Color(0xFF121212) 
+        : const Color(0xFFE6F2FF),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -114,12 +116,14 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Image.asset('assets/images/TISM-logo.png', height: 80),
               const SizedBox(height: 24),
-              const Text(
+              Text(
                 'Olá, seja bem vindo(a)!',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: tismAqua,
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.white 
+                    : tismAqua,
                 ),
               ),
               const SizedBox(height: 32),
@@ -131,14 +135,20 @@ class _LoginPageState extends State<LoginPage> {
                   prefixIcon: const Icon(Icons.email),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(color: Colors.black),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.grey[600]! 
+                        : Colors.black
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: const BorderSide(color: tismAqua, width: 2),
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
               ),
               const SizedBox(height: 16),
@@ -150,14 +160,20 @@ class _LoginPageState extends State<LoginPage> {
                   prefixIcon: const Icon(Icons.lock),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
-                    borderSide: const BorderSide(color: Colors.black),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).brightness == Brightness.dark 
+                        ? Colors.grey[600]! 
+                        : Colors.black
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: const BorderSide(color: tismAqua, width: 2),
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
               ),
               const SizedBox(height: 24),
@@ -198,9 +214,14 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('Ainda não tem conta ? Cadastre-se'),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Tudo o que você precisa saber sobre o TEA em um clique 💙',
-                style: TextStyle(fontSize: 12, color: Colors.black54),
+                style: TextStyle(
+                  fontSize: 12, 
+                  color: Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.grey[400] 
+                    : Colors.black54
+                ),
               ),
             ],
           ),

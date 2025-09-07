@@ -39,13 +39,21 @@ class _ForumScreenState extends State<ForumScreen> {
       _hasError = false;
     });
     
-    final posts = await ForumService.getPosts();
-    
-    setState(() {
-      _posts = posts;
-      _isLoading = false;
-      _hasError = posts.isEmpty;
-    });
+    try {
+      final posts = await ForumService.getPosts();
+      
+      setState(() {
+        _posts = posts;
+        _isLoading = false;
+        _hasError = false;
+      });
+    } catch (e) {
+      setState(() {
+        _posts = [];
+        _isLoading = false;
+        _hasError = true;
+      });
+    }
   }
 
   @override
