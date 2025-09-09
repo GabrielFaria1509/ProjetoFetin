@@ -92,23 +92,25 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     
     final success = await ForumService.createPost(_controller.text.trim());
     
-    setState(() => _isLoading = false);
-    
-    if (success) {
-      Navigator.pop(context, true);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Post publicado com sucesso!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Erro ao publicar post'),
-          backgroundColor: Colors.red,
-        ),
-      );
+    if (mounted) {
+      setState(() => _isLoading = false);
+      
+      if (success) {
+        Navigator.pop(context, true);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Post publicado com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Erro ao publicar post'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 }
