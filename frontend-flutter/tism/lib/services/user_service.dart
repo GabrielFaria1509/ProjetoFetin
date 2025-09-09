@@ -172,7 +172,9 @@ class UserService {
       );
       
       if (response.statusCode == 200) {
-        await prefs.setString(_keyUsername, username);
+        final data = json.decode(response.body);
+        // Atualiza com os dados retornados pelo servidor
+        await _saveUserLocally(data['user']);
         return true;
       }
       return false;
