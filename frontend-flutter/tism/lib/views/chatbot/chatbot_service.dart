@@ -1,38 +1,32 @@
-import 'memory_optimized_cache.dart';
-import '../../services/gemini_service.dart';
-import '../../config/chatbot_config.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ChatbotService {
-  static final MemoryOptimizedCache _cache = MemoryOptimizedCache();
-  
   static Future<String> sendMessage(String message) async {
-    // Cache primeiro - prioridade máxima
-    final cachedResponse = _cache.getCachedResponse(message);
-    if (cachedResponse != null) {
-      return cachedResponse;
+    try {
+      await dotenv.load();
+      final apiKey = dotenv.env['GEMINI_API_KEY'];
+      
+      if (apiKey == null || apiKey.isEmpty) {
+        return 'Erro: API key não configurada no arquivo .env';
+      }
+      
+      final model = GenerativeModel(
+        model: 'gemini-1.5-flash',
+        apiKey: apiKey,
+      );
+
+      final prompt = '''Você é um assistente especializado em TEA (Transtorno do Espectro Autista).
+Responda de forma empática e útil em português.
+
+Pergunta: $message''';
+      
+      final content = [Content.text(prompt)];
+      final response = await model.generateContent(content);
+      
+      return response.text ?? 'Desculpe, não consegui gerar uma resposta.';
+    } catch (e) {
+      return 'Erro ao conectar com a API: $e';
     }
-    
-    // Sempre usa IA agora
-    final response = await GeminiService.generateCustomResponse(message);
-    
-    _cache.cacheResponse(message, response);
-    return response;
-  }
-  
-  static List<String> getSuggestions(String message) {
-    return [
-      'Como identificar sinais de autismo?',
-      'Que terapias são recomendadas?',
-      'Como lidar com crises?',
-      'Dicas para inclusão escolar',
-    ];
-  }
-  
-  static void clearCache() {
-    _cache.clearCache();
-  }
-  
-  static int getCacheSize() {
-    return _cache.cacheSize;
   }
 }

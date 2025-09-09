@@ -6,8 +6,8 @@ import 'package:tism/views/profile/profile_page.dart';
 import 'package:tism/views/chatbot/chat_screen.dart';
 import 'package:tism/views/routine/routine_screen.dart';
 import 'package:tism/views/diary/diary_screen.dart';
-import 'package:tism/views/forum/forum_screen.dart';
 import 'package:tism/services/theme_service.dart';
+import 'package:tism/test_api.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;
@@ -95,6 +95,15 @@ class HomePage extends StatelessWidget {
                     () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const ChatScreen()),
+                    ),
+                  ),
+                  _buildMenuCard(
+                    context,
+                    'Teste API',
+                    Icons.bug_report,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const TestApiScreen()),
                     ),
                   ),
                   _buildMenuCard(
