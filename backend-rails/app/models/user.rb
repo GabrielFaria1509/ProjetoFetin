@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :user_posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   before_save :downcase_email
   
