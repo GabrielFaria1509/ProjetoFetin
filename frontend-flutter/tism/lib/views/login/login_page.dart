@@ -114,7 +114,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/TISM-logo.png', height: 80),
+              Image.asset(
+                Theme.of(context).brightness == Brightness.dark 
+                  ? 'assets/images/TISM-logo-dark.png'
+                  : 'assets/images/TISM-logo.png',
+                height: 80,
+              ),
               const SizedBox(height: 24),
               Text(
                 'Olá, seja bem vindo(a)!',

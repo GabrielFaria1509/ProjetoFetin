@@ -11,8 +11,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+    with TickerProviderStateMixin {
+  late AnimationController _fadeInController;
+  late AnimationController _animationController;
+  late Animation<double> _fadeInAnimation;
   late Animation<double> _scaleAnimation;
   late Animation<double> _opacityAnimation;
 
@@ -20,25 +22,38 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     
-    _controller = AnimationController(
+    _fadeInController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    
+    _animationController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
+
+    _fadeInAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _fadeInController,
+      curve: Curves.easeIn,
+    ));
 
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.0,
     ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.5, 1.0, curve: Curves.easeInExpo),
+      parent: _animationController,
+      curve: const Interval(0.25, 1.0, curve: Curves.easeInExpo),
     ));
 
     _opacityAnimation = Tween<double>(
       begin: 1.0,
       end: 0.0,
     ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.7, 1.0, curve: Curves.easeOut),
+      parent: _animationController,
+      curve: const Interval(0.67, 1.0, curve: Curves.easeOut),
     ));
 
     _startAnimation();
@@ -51,11 +66,14 @@ class _SplashScreenState extends State<SplashScreen>
       await UserService.getUser();
     }
     
-    // Aguarda 1.5s mostrando o logo estático
-    await Future.delayed(const Duration(milliseconds: 1500));
+    // Fade in do logo (0.3s)
+    await _fadeInController.forward();
+    
+    // Aguarda mais um tempo mostrando o logo
+    await Future.delayed(const Duration(milliseconds: 1000));
     
     // Inicia a animação de saída
-    await _controller.forward();
+    await _animationController.forward();
     
     _navigateToNextScreen();
   }
@@ -98,26 +116,27 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _fadeInController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF121212),
       body: Center(
         child: AnimatedBuilder(
-          animation: _controller,
+          animation: Listenable.merge([_fadeInController, _animationController]),
           builder: (context, child) {
             return Transform.scale(
               scale: _scaleAnimation.value,
               child: Opacity(
-                opacity: _opacityAnimation.value,
+                opacity: _fadeInAnimation.value * _opacityAnimation.value,
                 child: Image.asset(
                   'assets/images/TISM-heart.png',
-                  width: 120,
-                  height: 120,
+                  width: 200,
+                  height: 200,
                 ),
               ),
             );

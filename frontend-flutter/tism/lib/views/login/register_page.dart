@@ -91,8 +91,16 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE6F2FF),
-      appBar: AppBar(backgroundColor: tismAqua, title: const Text('Cadastro')),
+      backgroundColor: Theme.of(context).brightness == Brightness.dark 
+        ? const Color(0xFF121212) 
+        : const Color(0xFFE6F2FF),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).brightness == Brightness.dark 
+          ? const Color(0xFF1E1E1E) 
+          : tismAqua,
+        foregroundColor: Colors.white,
+        title: const Text('Cadastro'),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -107,6 +115,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
               ),
               const SizedBox(height: 16),
@@ -119,6 +131,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
               ),
               const SizedBox(height: 16),
@@ -131,6 +147,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
               ),
               const SizedBox(height: 16),
@@ -143,6 +163,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
               ),
               const SizedBox(height: 16),
@@ -154,10 +178,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
                 ),
+                dropdownColor: Theme.of(context).brightness == Brightness.dark 
+                  ? const Color(0xFF2A2A2A) 
+                  : Colors.white,
                 items: const [
                   DropdownMenuItem(value: 'Responsável', child: Text('Responsável')),
-                  DropdownMenuItem(value: 'Professor', child: Text('Professor')),
+                  DropdownMenuItem(value: 'Profissional', child: Text('Profissional')),
                 ],
                 onChanged: (value) {
                   setState(() => _userType = value!);

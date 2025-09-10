@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/user_service.dart';
+import 'package:tism/services/theme_service.dart';
 import 'package:tism/views/login/login_page.dart';
 import 'package:tism/utils/name_formatter.dart';
 
@@ -90,6 +92,20 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
 
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.palette),
+              title: const Text('Tema'),
+              subtitle: Consumer<ThemeService>(
+                builder: (context, themeService, child) {
+                  return Text(themeService.themeName);
+                },
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: _showThemeDialog,
+            ),
+          ),
+
           const SizedBox(height: 30),
 
           SizedBox(
@@ -169,9 +185,9 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             RadioListTile<String>(
-              title: const Text('Professor'),
+              title: const Text('Profissional'),
               subtitle: const Text('Educador ou profissional'),
-              value: 'Professor',
+              value: 'Profissional',
               groupValue: _userType,
               onChanged: (value) async {
                 if (value != null) {
@@ -182,6 +198,58 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showThemeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Selecione o tema'),
+        content: Consumer<ThemeService>(
+          builder: (context, themeService, child) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RadioListTile<ThemeMode>(
+                  title: const Text('Claro'),
+                  value: ThemeMode.light,
+                  groupValue: themeService.themeMode,
+                  onChanged: (value) async {
+                    if (value != null) {
+                      await themeService.setThemeMode(value);
+                      if (context.mounted) Navigator.pop(context);
+                    }
+                  },
+                ),
+                RadioListTile<ThemeMode>(
+                  title: const Text('Escuro'),
+                  value: ThemeMode.dark,
+                  groupValue: themeService.themeMode,
+                  onChanged: (value) async {
+                    if (value != null) {
+                      await themeService.setThemeMode(value);
+                      if (context.mounted) Navigator.pop(context);
+                    }
+                  },
+                ),
+                RadioListTile<ThemeMode>(
+                  title: const Text('Sistema'),
+                  subtitle: const Text('Segue o tema do dispositivo'),
+                  value: ThemeMode.system,
+                  groupValue: themeService.themeMode,
+                  onChanged: (value) async {
+                    if (value != null) {
+                      await themeService.setThemeMode(value);
+                      if (context.mounted) Navigator.pop(context);
+                    }
+                  },
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

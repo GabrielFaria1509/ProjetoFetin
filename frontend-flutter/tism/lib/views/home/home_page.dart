@@ -23,20 +23,7 @@ class HomePage extends StatelessWidget {
           : tismAqua,
         foregroundColor: Colors.white,
         elevation: Theme.of(context).brightness == Brightness.dark ? 0 : 4,
-        actions: [
-          Consumer<ThemeService>(
-            builder: (context, themeService, child) {
-              return IconButton(
-                icon: Icon(
-                  themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                  color: Colors.white,
-                ),
-                onPressed: () => themeService.toggleTheme(),
-                tooltip: themeService.isDarkMode ? 'Modo Claro' : 'Modo Escuro',
-              );
-            },
-          ),
-        ],
+        actions: [],
       ),
       body: SafeArea(
         child: Padding(
