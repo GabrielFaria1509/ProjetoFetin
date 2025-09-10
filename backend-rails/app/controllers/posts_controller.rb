@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
-    posts = Post.includes(:user).order(created_at: :desc)
+    posts = Post.includes(:user, :likes).order(created_at: :desc)
+    current_user_id = params[:user_id] # Passar user_id na query
     
     render json: {
       posts: posts.map do |post|
@@ -10,10 +11,10 @@ class PostsController < ApplicationController
           author: post.user.name || post.user.username,
           username: post.user.username,
           timestamp: post.created_at,
-          likes: post.likes_count || 0,
+          likes: post.likes.count,
           comments: post.comments_count || 0,
-          isLiked: false, # TODO: verificar se usuário curtiu
-          isSaved: false, # TODO: verificar se usuário salvou
+          isLiked: current_user_id ? post.likes.exists?(user_id: current_user_id) : false,
+          isSaved: false, # TODO: implementar saves
           tags: post.tags || []
         }
       end
@@ -57,10 +58,22 @@ class PostsController < ApplicationController
     post = Post.find_by(id: params[:id])
     return render json: { error: "Post não encontrado" }, status: :not_found unless post
     
-    # Simular toggle de like
-    post.increment!(:likes_count)
+    user = User.find_by(id: params[:user_id])
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
-    render json: { message: "Post curtido com sucesso" }, status: :ok
+    like = post.likes.find_by(user: user)
+    
+    if like
+      # Descurtir
+      like.destroy
+      post.decrement!(:likes_count) if post.likes_count > 0
+      render json: { message: "Post descurtido", liked: false, likes_count: post.likes.count }, status: :ok
+    else
+      # Curtir
+      post.likes.create!(user: user)
+      post.increment!(:likes_count)
+      render json: { message: "Post curtido", liked: true, likes_count: post.likes.count }, status: :ok
+    end
   end
 
   def save_post

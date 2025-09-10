@@ -126,7 +126,13 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :password_confirmation, :username, :name, :user_type)
+    permitted = params.permit(:email, :password, :password_confirmation, :username, :name, :user_type)
+    
+    # Formatar nome (capitalizado) e username (minúsculo)
+    permitted[:name] = permitted[:name].titleize if permitted[:name].present?
+    permitted[:username] = permitted[:username].downcase if permitted[:username].present?
+    
+    permitted
   end
   
   def update_user_params

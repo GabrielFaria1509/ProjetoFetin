@@ -472,14 +472,14 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           TextButton(
             onPressed: () async {
-              final inputUsername = _usernameController.text.trim().toLowerCase();
+              final inputUsername = _usernameController.text.trim();
               if (inputUsername.isNotEmpty) {
                 // Popup de confirmação
                 final confirm = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
                     title: const Text('Confirmar alteração'),
-                    content: Text('Alterar username de @$_userUsername para @$inputUsername?'),
+                    content: Text('Alterar username de @$_userUsername para @${inputUsername.toLowerCase()}?'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context, false),

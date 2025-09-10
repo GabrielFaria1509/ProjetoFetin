@@ -29,8 +29,15 @@ class ForumService {
 
   static Future<List<Map<String, dynamic>>> getPosts() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt('user_id');
+      
+      final uri = userId != null 
+        ? Uri.parse('$_baseUrl/posts?user_id=$userId')
+        : Uri.parse('$_baseUrl/posts');
+      
       final response = await http.get(
-        Uri.parse('$_baseUrl/posts'),
+        uri,
         headers: {'Content-Type': 'application/json'},
       );
       
