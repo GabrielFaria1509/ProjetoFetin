@@ -29,7 +29,7 @@ class UserService {
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'name': name,
-          'username': username,
+          'username': username.toLowerCase(),
           'email': email,
           'password': password,
           'user_type': userType,

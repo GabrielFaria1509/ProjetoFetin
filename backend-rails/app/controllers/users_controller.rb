@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def create
     # Validar parâmetros obrigatórios
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
+    return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Nome é obrigatório" }, status: :bad_request unless params[:name].present?
     return render json: { error: "Username é obrigatório" }, status: :bad_request unless params[:username].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
@@ -129,6 +130,12 @@ class UsersController < ApplicationController
   end
   
   def update_user_params
-    params.permit(:username, :name, :user_type, :profile_picture)
+    permitted = params.permit(:username, :name, :user_type, :profile_picture)
+    
+    # Formatar nome (capitalizado) e username (minúsculo)
+    permitted[:name] = permitted[:name].titleize if permitted[:name].present?
+    permitted[:username] = permitted[:username].downcase if permitted[:username].present?
+    
+    permitted
   end
 end

@@ -201,26 +201,47 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () async {
               final inputName = _nameController.text.trim();
               if (inputName.isNotEmpty) {
-                final result = await UserService.updateName(inputName);
-                if (result['success']) {
-                  setState(() => _userName = inputName);
-                  if (context.mounted) {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Nome atualizado com sucesso!'),
-                        backgroundColor: Colors.green,
+                // Popup de confirmação
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Confirmar alteração'),
+                    content: Text('Alterar nome para "$inputName"?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: const Text('Cancelar'),
                       ),
-                    );
-                  }
-                } else {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(result['error'] ?? 'Erro ao atualizar nome'),
-                        backgroundColor: Colors.red,
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: const Text('Confirmar'),
                       ),
-                    );
+                    ],
+                  ),
+                );
+                
+                if (confirm == true) {
+                  final result = await UserService.updateName(inputName);
+                  if (result['success']) {
+                    setState(() => _userName = inputName);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Nome atualizado com sucesso!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(result['error'] ?? 'Erro ao atualizar nome'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   }
                 }
               }
@@ -451,28 +472,49 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           TextButton(
             onPressed: () async {
-              final inputUsername = _usernameController.text.trim();
+              final inputUsername = _usernameController.text.trim().toLowerCase();
               if (inputUsername.isNotEmpty) {
-                final result = await UserService.updateUsername(inputUsername);
-                if (result['success']) {
-                  setState(() => _userUsername = inputUsername);
-                  if (context.mounted) {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Username atualizado com sucesso!'),
-                        backgroundColor: Colors.green,
+                // Popup de confirmação
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Confirmar alteração'),
+                    content: Text('Alterar username de @$_userUsername para @$inputUsername?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: const Text('Cancelar'),
                       ),
-                    );
-                  }
-                } else {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(result['error'] ?? 'Erro ao atualizar username'),
-                        backgroundColor: Colors.red,
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: const Text('Confirmar'),
                       ),
-                    );
+                    ],
+                  ),
+                );
+                
+                if (confirm == true) {
+                  final result = await UserService.updateUsername(inputUsername);
+                  if (result['success']) {
+                    setState(() => _userUsername = inputUsername);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Username atualizado com sucesso!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(result['error'] ?? 'Erro ao atualizar username'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   }
                 }
               }
