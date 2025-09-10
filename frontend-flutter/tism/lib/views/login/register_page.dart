@@ -12,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController nomeController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   final TextEditingController confirmarSenhaController = TextEditingController();
@@ -21,14 +22,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> _registrar() async {
     final nome = nomeController.text.trim();
+    final username = usernameController.text.trim();
     final email = emailController.text.trim();
     final senha = senhaController.text;
     final confirmar = confirmarSenhaController.text;
 
     setState(() => erro = null);
 
-    if (nome.isEmpty || email.isEmpty || senha.isEmpty || confirmar.isEmpty) {
+    if (nome.isEmpty || username.isEmpty || email.isEmpty || senha.isEmpty || confirmar.isEmpty) {
       setState(() => erro = 'Preencha todos os campos.');
+      return;
+    }
+
+    if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(username)) {
+      setState(() => erro = 'Username pode conter apenas letras, números e underscore.');
       return;
     }
 
@@ -51,7 +58,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     try {
       final result = await UserService.register(
-        username: nome,
+        name: nome,
+        username: username,
         email: email,
         password: senha,
         userType: _userType,
@@ -110,8 +118,25 @@ class _RegisterPageState extends State<RegisterPage> {
               TextField(
                 controller: nomeController,
                 decoration: InputDecoration(
-                  labelText: 'Nome de usuário',
+                  labelText: 'Nome completo',
                   prefixIcon: const Icon(Icons.person),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  filled: true,
+                  fillColor: Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF2A2A2A) 
+                    : Colors.white,
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username (único)',
+                  prefixText: '@',
+                  prefixIcon: const Icon(Icons.alternate_email),
+                  hintText: 'exemplo123',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

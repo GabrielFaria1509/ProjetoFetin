@@ -138,7 +138,7 @@ class _ForumSearchState extends State<ForumSearch> {
                             _selectedFilter = filter;
                           });
                         },
-                        selectedColor: tismAqua.withOpacity(0.2),
+                        selectedColor: tismAqua.withValues(alpha: 0.2),
                         checkmarkColor: tismAqua,
                       ),
                     );
@@ -317,7 +317,7 @@ class _ForumSearchState extends State<ForumSearch> {
                   _searchController.text = category;
                   _performSearch(category);
                 },
-                backgroundColor: tismAqua.withOpacity(0.1),
+                backgroundColor: tismAqua.withValues(alpha: 0.1),
                 labelStyle: const TextStyle(color: tismAqua),
               );
             }).toList(),

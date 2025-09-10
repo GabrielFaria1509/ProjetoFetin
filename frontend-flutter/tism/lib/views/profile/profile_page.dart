@@ -18,7 +18,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String _userType = 'Responsável';
   String _userName = '';
+  String _userUsername = '';
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   void initState() {
@@ -30,10 +32,12 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = await UserService.getUser();
     if (user != null && mounted) {
       setState(() {
-        _userName = user['username'] ?? widget.nomeUsuario;
+        _userName = user['name'] ?? user['username'] ?? widget.nomeUsuario;
+        _userUsername = user['username'] ?? '';
         _userType = user['userType'] ?? 'Responsável';
       });
       _nameController.text = _userName;
+      _usernameController.text = _userUsername;
     }
   }
 
@@ -97,6 +101,18 @@ class _ProfilePageState extends State<ProfilePage> {
               subtitle: Text(_userName.isNotEmpty ? _userName : widget.nomeUsuario),
               trailing: const Icon(Icons.edit),
               onTap: _showEditNameDialog,
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.alternate_email),
+              title: const Text('Username'),
+              subtitle: Text(_userUsername.isNotEmpty ? '@$_userUsername' : 'Não definido'),
+              trailing: const Icon(Icons.edit),
+              onTap: _showEditUsernameDialog,
             ),
           ),
 
@@ -185,10 +201,28 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () async {
               final inputName = _nameController.text.trim();
               if (inputName.isNotEmpty) {
-                final newName = NameFormatter.formatName(inputName);
-                setState(() => _userName = newName);
-                await UserService.updateUsername(newName);
-                if (context.mounted) Navigator.pop(context);
+                final result = await UserService.updateName(inputName);
+                if (result['success']) {
+                  setState(() => _userName = inputName);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Nome atualizado com sucesso!'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
+                } else {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(result['error'] ?? 'Erro ao atualizar nome'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                }
               }
             },
             child: const Text('Salvar'),
@@ -382,5 +416,71 @@ class _ProfilePageState extends State<ProfilePage> {
         }
       }
     }
+  }
+
+  void _showEditUsernameDialog() {
+    _usernameController.text = _userUsername;
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Editar Username'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+                prefixText: '@',
+                border: OutlineInputBorder(),
+                hintText: 'exemplo123',
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Username pode ser alterado apenas 1 vez a cada 3 dias',
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final inputUsername = _usernameController.text.trim();
+              if (inputUsername.isNotEmpty) {
+                final result = await UserService.updateUsername(inputUsername);
+                if (result['success']) {
+                  setState(() => _userUsername = inputUsername);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Username atualizado com sucesso!'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
+                } else {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(result['error'] ?? 'Erro ao atualizar username'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                }
+              }
+            },
+            child: const Text('Salvar'),
+          ),
+        ],
+      ),
+    );
   }
 }

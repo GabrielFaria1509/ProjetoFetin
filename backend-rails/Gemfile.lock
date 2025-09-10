@@ -485,7 +485,6 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
-  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
@@ -533,6 +532,9 @@ DEPENDENCIES
   turbolinks
   tzinfo-data
   web-console
+
+RUBY VERSION
+   ruby 3.4.3p32
 
 BUNDLED WITH
    2.6.9

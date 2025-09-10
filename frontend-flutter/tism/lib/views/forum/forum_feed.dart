@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/forum_service.dart';
 import 'post_widget.dart';
 
 class ForumFeed extends StatefulWidget {
@@ -10,79 +11,37 @@ class ForumFeed extends StatefulWidget {
 }
 
 class _ForumFeedState extends State<ForumFeed> {
-  final ScrollController _scrollController = ScrollController();
-  List<Map<String, dynamic>> _posts = [];
-  bool _isLoading = false;
+  List<Map<String, dynamic>> posts = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _loadPosts();
-    _scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-      _loadMorePosts();
-    }
   }
 
   Future<void> _loadPosts() async {
     setState(() => _isLoading = true);
     
-    // Simular carregamento de posts
-    await Future.delayed(const Duration(milliseconds: 500));
+    final loadedPosts = await ForumService.getPosts();
     
-    setState(() {
-      _posts = [
-        {
-          'id': '1',
-          'author': 'Maria Silva',
-          'avatar': null,
-          'content': 'Compartilhando uma experiência incrível com meu filho autista hoje! 💙',
-          'timestamp': DateTime.now().subtract(const Duration(hours: 2)),
-          'likes': 15,
-          'comments': 3,
-          'isLiked': false,
-          'isSaved': false,
-          'tags': ['experiência', 'progresso'],
-        },
-        {
-          'id': '2',
-          'author': 'João Santos',
-          'avatar': null,
-          'content': 'Alguém tem dicas de atividades sensoriais para crianças de 5 anos?',
-          'timestamp': DateTime.now().subtract(const Duration(hours: 4)),
-          'likes': 8,
-          'comments': 12,
-          'isLiked': true,
-          'isSaved': false,
-          'tags': ['dicas', 'atividades', 'sensorial'],
-        },
-      ];
-      _isLoading = false;
-    });
-  }
-
-  Future<void> _loadMorePosts() async {
-    // Implementar lazy loading
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+    if (mounted) {
+      setState(() {
+        posts = loadedPosts;
+        _isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading && _posts.isEmpty) {
+    if (_isLoading) {
       return const Center(
         child: CircularProgressIndicator(color: tismAqua),
       );
     }
 
-    if (_posts.isEmpty) {
+    if (posts.isEmpty) {
       return _buildEmptyState();
     }
 
@@ -90,21 +49,11 @@ class _ForumFeedState extends State<ForumFeed> {
       onRefresh: _loadPosts,
       color: tismAqua,
       child: ListView.builder(
-        controller: _scrollController,
         padding: const EdgeInsets.all(8),
-        itemCount: _posts.length + (_isLoading ? 1 : 0),
+        itemCount: posts.length,
         itemBuilder: (context, index) {
-          if (index == _posts.length) {
-            return const Center(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: CircularProgressIndicator(color: tismAqua),
-              ),
-            );
-          }
-          
           return PostWidget(
-            post: _posts[index],
+            post: posts[index],
             onLike: (postId) => _toggleLike(postId),
             onSave: (postId) => _toggleSave(postId),
             onComment: (postId) => _openComments(postId),
@@ -142,40 +91,36 @@ class _ForumFeedState extends State<ForumFeed> {
               color: Colors.grey[500],
             ),
           ),
-          const SizedBox(height: 24),
-          ElevatedButton.icon(
-            onPressed: () {
-              // Navegar para criar post
-            },
-            icon: const Icon(Icons.add),
-            label: const Text('Criar Primeiro Post'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: tismAqua,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            ),
-          ),
         ],
       ),
     );
   }
 
-  void _toggleLike(String postId) {
-    setState(() {
-      final post = _posts.firstWhere((p) => p['id'] == postId);
-      post['isLiked'] = !post['isLiked'];
-      post['likes'] += post['isLiked'] ? 1 : -1;
-    });
+  Future<void> _toggleLike(String postId) async {
+    final success = await ForumService.likePost(int.parse(postId));
+    if (success) {
+      setState(() {
+        final post = posts.firstWhere((p) => p['id'].toString() == postId);
+        post['isLiked'] = !post['isLiked'];
+        post['likes'] += post['isLiked'] ? 1 : -1;
+      });
+    }
   }
 
-  void _toggleSave(String postId) {
-    setState(() {
-      final post = _posts.firstWhere((p) => p['id'] == postId);
-      post['isSaved'] = !post['isSaved'];
-    });
+  Future<void> _toggleSave(String postId) async {
+    final success = await ForumService.savePost(int.parse(postId));
+    if (success) {
+      setState(() {
+        final post = posts.firstWhere((p) => p['id'].toString() == postId);
+        post['isSaved'] = !post['isSaved'];
+      });
+    }
   }
 
   void _openComments(String postId) {
     // Implementar tela de comentários
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Comentários em desenvolvimento')),
+    );
   }
 }

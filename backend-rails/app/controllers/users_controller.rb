@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def create
     # Validar parâmetros obrigatórios
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
+    return render json: { error: "Nome é obrigatório" }, status: :bad_request unless params[:name].present?
     return render json: { error: "Username é obrigatório" }, status: :bad_request unless params[:username].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     return render json: { error: "Senha deve ter pelo menos 8 caracteres" }, status: :bad_request if params[:password].length < 8
@@ -67,6 +68,21 @@ class UsersController < ApplicationController
   def update
     user = User.find_by(id: params[:id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
+    
+    # Verificar cooldowns
+    if params[:name].present?
+      if user.name_updated_at && user.name_updated_at > 1.day.ago
+        return render json: { error: "Nome pode ser alterado apenas 1 vez por dia" }, status: :unprocessable_entity
+      end
+      user.name_updated_at = Time.current
+    end
+    
+    if params[:username].present?
+      if user.username_updated_at && user.username_updated_at > 3.days.ago
+        return render json: { error: "Username pode ser alterado apenas 1 vez a cada 3 dias" }, status: :unprocessable_entity
+      end
+      user.username_updated_at = Time.current
+    end
     
     if user.update(update_user_params)
       render json: {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
@@ -7,7 +6,6 @@ import 'package:tism/views/chatbot/chat_screen.dart';
 import 'package:tism/views/routine/routine_screen.dart';
 import 'package:tism/views/diary/diary_screen.dart';
 import 'package:tism/views/forum/forum_main.dart';
-import 'package:tism/services/theme_service.dart';
 
 class HomePage extends StatelessWidget {
   final String nomeUsuario;

@@ -17,7 +17,6 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
@@ -34,7 +33,7 @@ class PostWidget extends StatelessWidget {
                   radius: 20,
                   backgroundColor: tismAqua,
                   child: Text(
-                    post['author'][0].toUpperCase(),
+                    (post['author'] ?? 'U')[0].toUpperCase(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -46,12 +45,26 @@ class PostWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        post['author'],
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            post['author'] ?? 'Usuário',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          if (post['username'] != null) ...[
+                            const SizedBox(width: 4),
+                            Text(
+                              '@${post['username']}',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                       Text(
                         _formatTimestamp(post['timestamp']),
@@ -108,9 +121,9 @@ class PostWidget extends StatelessWidget {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: tismAqua.withOpacity(0.1),
+                      color: tismAqua.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: tismAqua.withOpacity(0.3)),
+                      border: Border.all(color: tismAqua.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       '#$tag',

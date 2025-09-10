@@ -18,15 +18,26 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Novo Post'),
-        backgroundColor: tismAqua,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark 
+          ? const Color(0xFF1E1E1E) 
+          : tismAqua,
         foregroundColor: Colors.white,
         actions: [
           TextButton(
-            onPressed: _isLoading ? null : _showConfirmDialog,
-            child: const Text(
-              'Publicar',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+            onPressed: _isLoading ? null : _createPost,
+            child: _isLoading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  )
+                : const Text(
+                    'Publicar',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
           ),
         ],
       ),
@@ -47,16 +58,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            if (_isLoading)
-              const Center(child: CircularProgressIndicator()),
           ],
         ),
       ),
     );
   }
 
-  void _showConfirmDialog() {
+  Future<void> _createPost() async {
     if (_controller.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Escreva algo antes de publicar')),
@@ -64,30 +72,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       return;
     }
 
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Confirmar Publicação'),
-        content: const Text('Deseja publicar este post no fórum?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _createPost();
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: tismAqua),
-            child: const Text('Publicar', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _createPost() async {
     setState(() => _isLoading = true);
     
     final success = await ForumService.createPost(_controller.text.trim());

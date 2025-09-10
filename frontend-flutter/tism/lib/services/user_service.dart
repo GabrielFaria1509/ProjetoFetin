@@ -17,6 +17,7 @@ class UserService {
 
   // Registrar novo usuário
   static Future<Map<String, dynamic>> register({
+    required String name,
     required String username,
     required String email,
     required String password,
@@ -27,6 +28,7 @@ class UserService {
         Uri.parse('$_baseUrl/signup'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
+          'name': name,
           'username': username,
           'email': email,
           'password': password,
@@ -81,6 +83,7 @@ class UserService {
   static Future<void> _saveUserLocally(Map<String, dynamic> user) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_keyUserId, user['id']);
+    await prefs.setString('name', user['name'] ?? '');
     await prefs.setString(_keyUsername, user['username'] ?? '');
     await prefs.setString(_keyEmail, user['email'] ?? '');
     await prefs.setString(_keyUserType, user['user_type'] ?? 'Responsável');
@@ -113,6 +116,7 @@ class UserService {
 
     return {
       'id': prefs.getInt(_keyUserId),
+      'name': prefs.getString('name') ?? '',
       'username': prefs.getString(_keyUsername) ?? '',
       'email': prefs.getString(_keyEmail) ?? '',
       'userType': prefs.getString(_keyUserType) ?? 'Responsável',
@@ -158,12 +162,38 @@ class UserService {
     }
   }
 
-  static Future<bool> updateUsername(String username) async {
+  static Future<Map<String, dynamic>> updateName(String name) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getInt(_keyUserId);
       
-      if (userId == null) return false;
+      if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
+      
+      final response = await http.put(
+        Uri.parse('$_baseUrl/users/$userId'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'name': name}),
+      );
+      
+      final data = json.decode(response.body);
+      
+      if (response.statusCode == 200) {
+        await _saveUserLocally(data['user']);
+        return {'success': true};
+      } else {
+        return {'success': false, 'error': data['error'] ?? 'Erro ao atualizar nome'};
+      }
+    } catch (e) {
+      return {'success': false, 'error': 'Erro de conexão'};
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateUsername(String username) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt(_keyUserId);
+      
+      if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
       
       final response = await http.put(
         Uri.parse('$_baseUrl/users/$userId'),
@@ -171,15 +201,16 @@ class UserService {
         body: json.encode({'username': username}),
       );
       
+      final data = json.decode(response.body);
+      
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        // Atualiza com os dados retornados pelo servidor
         await _saveUserLocally(data['user']);
-        return true;
+        return {'success': true};
+      } else {
+        return {'success': false, 'error': data['error'] ?? 'Erro ao atualizar username'};
       }
-      return false;
     } catch (e) {
-      return false;
+      return {'success': false, 'error': 'Erro de conexão'};
     }
   }
 

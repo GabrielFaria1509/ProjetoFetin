@@ -47,19 +47,7 @@ class _ForumMainState extends State<ForumMain> with TickerProviderStateMixin {
         backgroundColor: isDark ? const Color(0xFF1E1E1E) : tismAqua,
         foregroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          Consumer<ThemeService>(
-            builder: (context, themeService, child) {
-              return IconButton(
-                icon: Icon(
-                  themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                  color: Colors.white,
-                ),
-                onPressed: () => themeService.toggleTheme(),
-              );
-            },
-          ),
-        ],
+        actions: [],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,

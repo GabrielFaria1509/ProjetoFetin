@@ -15,7 +15,7 @@ class _CreatePostEnhancedState extends State<CreatePostEnhanced> with TickerProv
   
   bool _isPosting = false;
   bool _showPreview = false;
-  List<String> _tags = [];
+  final List<String> _tags = [];
   String _selectedCategory = 'Geral';
   
   final List<String> _categories = ['Geral', 'Dicas', 'Experiências', 'Dúvidas', 'Recursos'];
@@ -250,7 +250,7 @@ class _CreatePostEnhancedState extends State<CreatePostEnhanced> with TickerProv
                   label: Text('#$tag'),
                   deleteIcon: const Icon(Icons.close, size: 18),
                   onDeleted: () => _removeTag(tag),
-                  backgroundColor: tismAqua.withOpacity(0.1),
+                  backgroundColor: tismAqua.withValues(alpha: 0.1),
                   labelStyle: const TextStyle(color: tismAqua),
                 );
               }).toList(),
@@ -344,9 +344,9 @@ class _CreatePostEnhancedState extends State<CreatePostEnhanced> with TickerProv
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: tismAqua.withOpacity(0.1),
+                            color: tismAqua.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: tismAqua.withOpacity(0.3)),
+                            border: Border.all(color: tismAqua.withValues(alpha: 0.3)),
                           ),
                           child: Text(
                             '#$tag',
