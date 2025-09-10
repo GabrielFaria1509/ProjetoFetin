@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
 import 'post_widget.dart';
+import 'comments_screen.dart';
 
 class ForumFeed extends StatefulWidget {
   const ForumFeed({super.key});
@@ -118,9 +119,15 @@ class _ForumFeedState extends State<ForumFeed> {
   }
 
   void _openComments(String postId) {
-    // Implementar tela de comentários
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Comentários em desenvolvimento')),
-    );
+    final post = posts.firstWhere((p) => p['id'].toString() == postId);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CommentsScreen(
+          postId: postId,
+          post: post,
+        ),
+      ),
+    ).then((_) => _loadPosts()); // Recarregar posts ao voltar
   }
 }

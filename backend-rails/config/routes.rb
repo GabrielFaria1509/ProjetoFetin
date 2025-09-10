@@ -23,5 +23,6 @@ Rails.application.routes.draw do
       post :like
       post :save_post
     end
+    resources :comments, only: [:index, :create]
   end
 end

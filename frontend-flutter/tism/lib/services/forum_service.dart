@@ -81,4 +81,41 @@ class ForumService {
       return false;
     }
   }
+
+  static Future<List<Map<String, dynamic>>> getComments(String postId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$_baseUrl/posts/$postId/comments'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return List<Map<String, dynamic>>.from(data['comments']);
+      } else {
+        throw Exception('Erro ao carregar comentários');
+      }
+    } catch (e) {
+      throw Exception('Erro ao carregar comentários: $e');
+    }
+  }
+
+  static Future<void> createComment(String postId, String userId, String content) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/posts/$postId/comments'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'user_id': userId,
+          'content': content,
+        }),
+      );
+      
+      if (response.statusCode != 201) {
+        throw Exception('Erro ao criar comentário');
+      }
+    } catch (e) {
+      throw Exception('Erro ao criar comentário: $e');
+    }
+  }
 }
