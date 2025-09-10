@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
-    # Verificar cooldowns
+    # Verificar cooldowns apenas para nome e username
     if params[:name].present?
       if user.name_updated_at && user.name_updated_at > 1.day.ago
         return render json: { error: "Nome pode ser alterado apenas 1 vez por dia" }, status: :unprocessable_entity
@@ -85,6 +85,7 @@ class UsersController < ApplicationController
       user.username_updated_at = Time.current
     end
     
+    # Atualizar normalmente - password não é mais obrigatório no update
     if user.update(update_user_params)
       render json: {
         message: "Usuário atualizado com sucesso",
@@ -98,7 +99,7 @@ class UsersController < ApplicationController
         }
       }, status: :ok
     else
-      render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
+      render json: { error: "Erro ao atualizar usuário" }, status: :unprocessable_entity
     end
   end
 

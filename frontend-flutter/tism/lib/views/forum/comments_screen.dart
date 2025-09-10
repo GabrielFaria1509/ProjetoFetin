@@ -77,11 +77,15 @@ class _CommentsScreenState extends State<CommentsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
+      backgroundColor: isDark ? Colors.black : Colors.white,
       appBar: AppBar(
         title: const Text('Comentários'),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -89,8 +93,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
-              border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
+              color: isDark ? Colors.grey[900] : Colors.grey[50],
+              border: Border(bottom: BorderSide(color: isDark ? Colors.grey[700]! : Colors.grey[300]!)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,19 +112,30 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     const SizedBox(width: 8),
                     Text(
                       widget.post['author'] ?? 'Usuário',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                     ),
                     if (widget.post['username'] != null) ...[
                       const SizedBox(width: 4),
                       Text(
                         '@${widget.post['username']}',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                        style: TextStyle(
+                          color: isDark ? Colors.grey[400] : Colors.grey[600], 
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ],
                 ),
                 const SizedBox(height: 8),
-                Text(widget.post['content'] ?? ''),
+                Text(
+                  widget.post['content'] ?? '',
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
               ],
             ),
           ),
@@ -130,11 +145,13 @@ class _CommentsScreenState extends State<CommentsScreen> {
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : _comments.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
                           'Nenhum comentário ainda.\nSeja o primeiro a comentar!',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(
+                            color: isDark ? Colors.grey[400] : Colors.grey[600],
+                          ),
                         ),
                       )
                     : ListView.builder(
@@ -145,7 +162,9 @@ class _CommentsScreenState extends State<CommentsScreen> {
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               border: Border(
-                                bottom: BorderSide(color: Colors.grey[200]!),
+                                bottom: BorderSide(
+                                  color: isDark ? Colors.grey[800]! : Colors.grey[200]!,
+                                ),
                               ),
                             ),
                             child: Row(
@@ -171,9 +190,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                         children: [
                                           Text(
                                             comment['author'] ?? 'Usuário',
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14,
+                                              color: isDark ? Colors.white : Colors.black,
                                             ),
                                           ),
                                           if (comment['username'] != null) ...[
@@ -181,7 +201,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                             Text(
                                               '@${comment['username']}',
                                               style: TextStyle(
-                                                color: Colors.grey[600],
+                                                color: isDark ? Colors.grey[400] : Colors.grey[600],
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -189,7 +209,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                         ],
                                       ),
                                       const SizedBox(height: 4),
-                                      Text(comment['content'] ?? ''),
+                                      Text(
+                                        comment['content'] ?? '',
+                                        style: TextStyle(
+                                          color: isDark ? Colors.white : Colors.black,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -204,21 +229,43 @@ class _CommentsScreenState extends State<CommentsScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(top: BorderSide(color: Colors.grey[300]!)),
+              color: isDark ? Colors.grey[900] : Colors.white,
+              border: Border(top: BorderSide(
+                color: isDark ? Colors.grey[700]! : Colors.grey[300]!,
+              )),
             ),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _commentController,
-                    decoration: const InputDecoration(
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                    decoration: InputDecoration(
                       hintText: 'Escreva um comentário...',
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
+                      hintStyle: TextStyle(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: isDark ? Colors.grey[600]! : Colors.grey[400]!,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: isDark ? Colors.grey[600]! : Colors.grey[400]!,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: tismAqua),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: 12,
                         vertical: 8,
                       ),
+                      filled: true,
+                      fillColor: isDark ? Colors.grey[800] : Colors.white,
                     ),
                     maxLines: null,
                     textCapitalization: TextCapitalization.sentences,

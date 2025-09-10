@@ -268,9 +268,19 @@ class _ProfilePageState extends State<ProfilePage> {
               groupValue: _userType,
               onChanged: (value) async {
                 if (value != null) {
-                  setState(() => _userType = value);
-                  await UserService.updateUserType(value);
-                  if (context.mounted) Navigator.pop(context);
+                  final success = await UserService.updateUserType(value);
+                  if (success) {
+                    setState(() => _userType = value);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Tipo atualizado!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  }
                 }
               },
             ),
@@ -281,9 +291,19 @@ class _ProfilePageState extends State<ProfilePage> {
               groupValue: _userType,
               onChanged: (value) async {
                 if (value != null) {
-                  setState(() => _userType = value);
-                  await UserService.updateUserType(value);
-                  if (context.mounted) Navigator.pop(context);
+                  final success = await UserService.updateUserType(value);
+                  if (success) {
+                    setState(() => _userType = value);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Tipo atualizado!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  }
                 }
               },
             ),
@@ -496,7 +516,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 if (confirm == true) {
                   final result = await UserService.updateUsername(inputUsername);
                   if (result['success']) {
-                    setState(() => _userUsername = inputUsername);
+                    setState(() => _userUsername = inputUsername.toLowerCase());
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
