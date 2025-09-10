@@ -25,4 +25,9 @@ Rails.application.routes.draw do
     end
     resources :comments, only: [:index, :create]
   end
+  
+  # Profile routes
+  put '/profile/:id/name', to: 'profile#update_name'
+  put '/profile/:id/username', to: 'profile#update_username'
+  put '/profile/:id/user_type', to: 'profile#update_user_type'
 end

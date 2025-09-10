@@ -133,7 +133,7 @@ class UserService {
       if (userId == null) return false;
       
       final response = await http.put(
-        Uri.parse('$_baseUrl/users/$userId'),
+        Uri.parse('$_baseUrl/profile/$userId/user_type'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'user_type': userType}),
       );
@@ -171,7 +171,7 @@ class UserService {
       if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
       
       final response = await http.put(
-        Uri.parse('$_baseUrl/users/$userId'),
+        Uri.parse('$_baseUrl/profile/$userId/name'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'name': name}),
       );
@@ -197,7 +197,7 @@ class UserService {
       if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
       
       final response = await http.put(
-        Uri.parse('$_baseUrl/users/$userId'),
+        Uri.parse('$_baseUrl/profile/$userId/username'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'username': username}),
       );
