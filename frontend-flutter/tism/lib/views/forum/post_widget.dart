@@ -107,8 +107,9 @@ class PostWidget extends StatelessWidget {
             
             // Conteúdo do post
             Text(
-              post['content'],
+              post['content'] ?? 'Sem conteúdo',
               style: const TextStyle(fontSize: 16, height: 1.4),
+              maxLines: null,
             ),
             
             // Tags
@@ -121,9 +122,9 @@ class PostWidget extends StatelessWidget {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: tismAqua.withValues(alpha: 0.1),
+                      color: tismAqua.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: tismAqua.withValues(alpha: 0.3)),
+                      border: Border.all(color: tismAqua.withOpacity(0.3)),
                     ),
                     child: Text(
                       '#$tag',
@@ -145,7 +146,7 @@ class PostWidget extends StatelessWidget {
               children: [
                 // Like
                 InkWell(
-                  onTap: () => onLike(post['id']),
+                  onTap: () => onLike(post['id'].toString()),
                   borderRadius: BorderRadius.circular(20),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -159,7 +160,7 @@ class PostWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${post['likes']}',
+                          '${post['likes'] ?? 0}',
                           style: TextStyle(
                             color: post['isLiked'] ? Colors.red : Colors.grey[600],
                             fontWeight: FontWeight.w500,
@@ -174,7 +175,7 @@ class PostWidget extends StatelessWidget {
                 
                 // Comentários
                 InkWell(
-                  onTap: () => onComment(post['id']),
+                  onTap: () => onComment(post['id'].toString()),
                   borderRadius: BorderRadius.circular(20),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -188,7 +189,7 @@ class PostWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${post['comments']}',
+                          '${post['comments'] ?? 0}',
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontWeight: FontWeight.w500,
@@ -203,7 +204,7 @@ class PostWidget extends StatelessWidget {
                 
                 // Salvar
                 InkWell(
-                  onTap: () => onSave(post['id']),
+                  onTap: () => onSave(post['id'].toString()),
                   borderRadius: BorderRadius.circular(20),
                   child: Padding(
                     padding: const EdgeInsets.all(8),
@@ -222,9 +223,20 @@ class PostWidget extends StatelessWidget {
     );
   }
 
-  String _formatTimestamp(DateTime timestamp) {
+  String _formatTimestamp(dynamic timestamp) {
+    if (timestamp == null) return 'Agora';
+    
+    DateTime dateTime;
+    if (timestamp is String) {
+      dateTime = DateTime.tryParse(timestamp) ?? DateTime.now();
+    } else if (timestamp is DateTime) {
+      dateTime = timestamp;
+    } else {
+      return 'Agora';
+    }
+    
     final now = DateTime.now();
-    final difference = now.difference(timestamp);
+    final difference = now.difference(dateTime);
     
     if (difference.inMinutes < 1) {
       return 'Agora';
@@ -235,7 +247,7 @@ class PostWidget extends StatelessWidget {
     } else if (difference.inDays < 7) {
       return '${difference.inDays}d';
     } else {
-      return '${timestamp.day}/${timestamp.month}/${timestamp.year}';
+      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
     }
   }
 
