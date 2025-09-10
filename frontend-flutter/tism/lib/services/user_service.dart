@@ -183,6 +183,30 @@ class UserService {
     }
   }
 
+  static Future<bool> deleteAccount({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$_baseUrl/users'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'password': password,
+        }),
+      );
+      
+      if (response.statusCode == 200) {
+        await logout();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
   static Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
