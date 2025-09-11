@@ -18,13 +18,15 @@ Rails.application.routes.draw do
   post '/users/:id/upload_avatar', to: 'users#upload_avatar'
   
   # Posts routes
-  resources :posts, only: [:index, :create] do
+  resources :posts, only: [:index, :create, :destroy] do
+    collection do
+      get :search
+    end
     member do
       post :like
       post :save_post
     end
     resources :comments, only: [:index, :create]
-    resources :reactions, only: [:create]
   end
   
   # Profile routes

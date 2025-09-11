@@ -476,7 +476,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 prefixText: '@',
                 border: OutlineInputBorder(),
                 hintText: 'exemplo123',
+                helperText: 'Apenas letras minúsculas, números e _',
               ),
+              onChanged: (value) {
+                // Normalizar em tempo real
+                final normalized = value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9_]'), '');
+                if (normalized != value) {
+                  _usernameController.value = _usernameController.value.copyWith(
+                    text: normalized,
+                    selection: TextSelection.collapsed(offset: normalized.length),
+                  );
+                }
+              },
             ),
             const SizedBox(height: 8),
             const Text(

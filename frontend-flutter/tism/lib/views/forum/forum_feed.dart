@@ -15,11 +15,18 @@ class ForumFeed extends StatefulWidget {
 class _ForumFeedState extends State<ForumFeed> {
   List<Map<String, dynamic>> posts = [];
   bool _isLoading = true;
+  int? _currentUserId;
 
   @override
   void initState() {
     super.initState();
+    _loadCurrentUser();
     _loadPosts();
+  }
+
+  Future<void> _loadCurrentUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    _currentUserId = prefs.getInt('user_id');
   }
 
   Future<void> _loadPosts() async {
@@ -57,9 +64,8 @@ class _ForumFeedState extends State<ForumFeed> {
           return PostWidget(
             post: posts[index],
             onLike: (postId) => _toggleLike(postId),
-            onSave: (postId) => _toggleSave(postId),
             onComment: (postId) => _openComments(postId),
-            onReaction: (postId, reactionType) => _handleReaction(postId, reactionType),
+            onDelete: _canDeletePost(posts[index]) ? (postId) => _deletePost(postId) : null,
           );
         },
       ),
@@ -130,50 +136,54 @@ class _ForumFeedState extends State<ForumFeed> {
     ).then((_) => _loadPosts()); // Recarregar posts ao voltar
   }
 
-  Future<void> _handleReaction(String postId, String reactionType) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt('user_id');
-      
-      if (userId != null) {
-        final result = await ForumService.addReaction(postId, userId.toString(), reactionType);
-        if (result['success']) {
-          // Atualizar post local com novas reações
-          setState(() {
-            final postIndex = posts.indexWhere((p) => p['id'].toString() == postId);
-            if (postIndex != -1) {
-              posts[postIndex]['reaction_counts'] = result['reaction_counts'] ?? {};
-              posts[postIndex]['user_reaction'] = result['user_reaction'];
-            }
-          });
-        } else {
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(result['error'] ?? 'Erro ao reagir ao post'),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        }
-      } else {
+  bool _canDeletePost(Map<String, dynamic> post) {
+    // Verificar se o usuário atual é o autor do post
+    return post['user_id']?.toString() == _currentUserId?.toString();
+  }
+
+  Future<void> _deletePost(String postId) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Deletar Post'),
+        content: const Text('Tem certeza que deseja deletar este post? Esta ação não pode ser desfeita.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Deletar'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      try {
+        await ForumService.deletePost(postId, _currentUserId.toString());
+        setState(() {
+          posts.removeWhere((post) => post['id'].toString() == postId);
+        });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Faça login para reagir aos posts'),
-              backgroundColor: Colors.orange,
+              content: Text('Post deletado com sucesso'),
+              backgroundColor: Colors.green,
             ),
           );
         }
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro de conexão: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Erro ao deletar post: $e'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       }
     }
   }

@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/theme_service.dart';
 import 'forum_feed.dart';
-import 'forum_following.dart';
-import 'forum_liked.dart';
-import 'forum_saved.dart';
+
 import 'forum_search.dart';
 import 'create_post_screen.dart';
 
@@ -23,7 +21,7 @@ class _ForumMainState extends State<ForumMain> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {
       setState(() {
         _currentIndex = _tabController.index;
@@ -55,9 +53,6 @@ class _ForumMainState extends State<ForumMain> with TickerProviderStateMixin {
           unselectedLabelColor: Colors.white70,
           tabs: const [
             Tab(icon: Icon(Icons.home), text: 'Feed'),
-            Tab(icon: Icon(Icons.people), text: 'Seguindo'),
-            Tab(icon: Icon(Icons.favorite), text: 'Curtidas'),
-            Tab(icon: Icon(Icons.bookmark), text: 'Salvos'),
             Tab(icon: Icon(Icons.search), text: 'Buscar'),
           ],
         ),
@@ -66,9 +61,6 @@ class _ForumMainState extends State<ForumMain> with TickerProviderStateMixin {
         controller: _tabController,
         children: const [
           ForumFeed(),
-          ForumFollowing(),
-          ForumLiked(),
-          ForumSaved(),
           ForumSearch(),
         ],
       ),

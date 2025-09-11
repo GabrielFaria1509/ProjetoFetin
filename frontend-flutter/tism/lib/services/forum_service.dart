@@ -126,33 +126,36 @@ class ForumService {
     }
   }
 
-  static Future<Map<String, dynamic>> addReaction(String postId, String userId, String reactionType) async {
+  static Future<List<Map<String, dynamic>>> searchPosts(String query) async {
     try {
-      final response = await http.post(
-        Uri.parse('$_baseUrl/posts/$postId/reactions'),
+      final response = await http.get(
+        Uri.parse('$_baseUrl/posts/search?q=${Uri.encodeComponent(query)}'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'user_id': int.parse(userId),
-          'reaction_type': reactionType,
-        }),
       );
       
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        return {
-          'success': true,
-          'reaction_counts': Map<String, int>.from(data['reaction_counts'] ?? {}),
-          'user_reaction': data['user_reaction'],
-        };
+        return List<Map<String, dynamic>>.from(data['posts'] ?? []);
       } else {
-        final errorData = json.decode(response.body);
-        return {
-          'success': false, 
-          'error': errorData['error'] ?? 'Erro ao adicionar reação'
-        };
+        throw Exception('Erro na busca');
       }
     } catch (e) {
-      return {'success': false, 'error': 'Erro de conexão: $e'};
+      throw Exception('Erro de conexão: $e');
+    }
+  }
+
+  static Future<void> deletePost(String postId, String userId) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$_baseUrl/posts/$postId?user_id=$userId'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      
+      if (response.statusCode != 200) {
+        throw Exception('Erro ao deletar post');
+      }
+    } catch (e) {
+      throw Exception('Erro ao deletar post: $e');
     }
   }
 }

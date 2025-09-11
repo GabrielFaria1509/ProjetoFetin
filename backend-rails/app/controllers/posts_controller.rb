@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    posts = Post.includes(:user, :likes, :reactions).order(created_at: :desc)
+    posts = Post.includes(:user, :likes).order(created_at: :desc)
     current_user_id = params[:user_id]&.to_i # Passar user_id na query
     
     render json: {
@@ -16,8 +16,7 @@ class PostsController < ApplicationController
           isLiked: current_user_id ? post.likes.exists?(user_id: current_user_id) : false,
           isSaved: false, # TODO: implementar saves
           tags: post.tags || [],
-          reaction_counts: post.reaction_counts,
-          user_reaction: current_user_id ? post.reactions.find_by(user_id: current_user_id)&.reaction_type : nil
+          user_id: post.user.id
         }
       end
     }, status: :ok
@@ -85,5 +84,57 @@ class PostsController < ApplicationController
     return render json: { error: "Post não encontrado" }, status: :not_found unless post
     
     render json: { message: "Post salvo com sucesso" }, status: :ok
+  end
+
+  def search
+    query = params[:q]&.strip
+    return render json: { posts: [] } if query.blank?
+    
+    # Busca em conteúdo, hashtags e nomes de usuário
+    posts = Post.joins(:user)
+                .where(
+                  "posts.content ILIKE ? OR users.name ILIKE ? OR users.username ILIKE ?",
+                  "%#{query}%", "%#{query}%", "%#{query}%"
+                )
+                .includes(:user, :likes)
+                .order(created_at: :desc)
+                .limit(50)
+    
+    current_user_id = params[:user_id]&.to_i
+    
+    posts_data = posts.map do |post|
+      {
+        id: post.id,
+        content: post.content,
+        author: post.user.name || post.user.username,
+        username: post.user.username,
+        user_id: post.user.id,
+        timestamp: post.created_at,
+        likes: post.likes.count,
+        comments: post.comments_count || 0,
+        isLiked: current_user_id ? post.likes.exists?(user_id: current_user_id) : false,
+        isSaved: false,
+        tags: post.tags || []
+      }
+    end
+    
+    render json: { posts: posts_data }, status: :ok
+  end
+
+  def destroy
+    post = Post.find_by(id: params[:id])
+    return render json: { error: "Post não encontrado" }, status: :not_found unless post
+    
+    # Verificar se o usuário é o autor do post
+    current_user_id = params[:user_id]&.to_i
+    unless post.user_id == current_user_id
+      return render json: { error: "Você não tem permissão para deletar este post" }, status: :forbidden
+    end
+    
+    if post.destroy
+      render json: { message: "Post deletado com sucesso" }, status: :ok
+    else
+      render json: { error: "Erro ao deletar post" }, status: :unprocessable_entity
+    end
   end
 end

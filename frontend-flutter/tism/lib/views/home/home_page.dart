@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
@@ -7,10 +8,44 @@ import 'package:tism/views/routine/routine_screen.dart';
 import 'package:tism/views/diary/diary_screen.dart';
 import 'package:tism/views/forum/forum_main.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final String nomeUsuario;
 
   const HomePage({super.key, required this.nomeUsuario});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _displayName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final fullName = prefs.getString('name') ?? widget.nomeUsuario;
+      
+      // Pegar apenas o primeiro nome e capitalizar
+      final firstName = fullName.split(' ').first;
+      final capitalizedName = firstName.isNotEmpty 
+          ? firstName[0].toUpperCase() + firstName.substring(1).toLowerCase()
+          : widget.nomeUsuario;
+      
+      setState(() {
+        _displayName = capitalizedName;
+      });
+    } catch (e) {
+      setState(() {
+        _displayName = widget.nomeUsuario;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +66,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Olá, $nomeUsuario! 👋',
+              'Olá, ${_displayName.isNotEmpty ? _displayName : widget.nomeUsuario}! 👋',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -99,7 +134,7 @@ class HomePage extends StatelessWidget {
                     () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfilePage(nomeUsuario: nomeUsuario),
+                        builder: (context) => ProfilePage(nomeUsuario: widget.nomeUsuario),
                       ),
                     ),
                   ),

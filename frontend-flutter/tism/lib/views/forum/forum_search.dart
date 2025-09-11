@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/forum_service.dart';
+import 'post_widget.dart';
 
 class ForumSearch extends StatefulWidget {
   const ForumSearch({super.key});
@@ -52,28 +54,18 @@ class _ForumSearchState extends State<ForumSearch> {
       _suggestions = [];
     });
 
-    // Simular busca
-    await Future.delayed(const Duration(milliseconds: 800));
-
-    setState(() {
-      _searchResults = [
-        {
-          'type': 'post',
-          'title': 'Dicas de atividades sensoriais para crianças autistas',
-          'author': 'Ana Costa',
-          'content': 'Compartilho algumas atividades que funcionaram muito bem...',
-          'likes': 25,
-          'comments': 8,
-        },
-        {
-          'type': 'user',
-          'name': 'Dr. Carlos Silva',
-          'bio': 'Terapeuta especializado em TEA',
-          'followers': 150,
-        },
-      ];
-      _isSearching = false;
-    });
+    try {
+      final results = await ForumService.searchPosts(query);
+      setState(() {
+        _searchResults = results;
+        _isSearching = false;
+      });
+    } catch (e) {
+      setState(() {
+        _searchResults = [];
+        _isSearching = false;
+      });
+    }
   }
 
   @override
@@ -164,6 +156,10 @@ class _ForumSearchState extends State<ForumSearch> {
       );
     }
 
+    if (_searchController.text.isEmpty) {
+      return _buildInitialState();
+    }
+
     if (_suggestions.isNotEmpty) {
       return _buildSuggestions();
     }
@@ -172,11 +168,7 @@ class _ForumSearchState extends State<ForumSearch> {
       return _buildSearchResults();
     }
 
-    if (_searchController.text.isNotEmpty) {
-      return _buildNoResults();
-    }
-
-    return _buildInitialState();
+    return _buildNoResults();
   }
 
   Widget _buildSuggestions() {
@@ -198,66 +190,30 @@ class _ForumSearchState extends State<ForumSearch> {
 
   Widget _buildSearchResults() {
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       itemCount: _searchResults.length,
       itemBuilder: (context, index) {
-        final result = _searchResults[index];
-        
-        if (result['type'] == 'post') {
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              title: Text(result['title']),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Por ${result['author']}'),
-                  const SizedBox(height: 4),
-                  Text(result['content'], maxLines: 2, overflow: TextOverflow.ellipsis),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Icon(Icons.favorite, size: 16, color: Colors.grey[600]),
-                      Text(' ${result['likes']}'),
-                      const SizedBox(width: 16),
-                      Icon(Icons.comment, size: 16, color: Colors.grey[600]),
-                      Text(' ${result['comments']}'),
-                    ],
-                  ),
-                ],
-              ),
-              isThreeLine: true,
-            ),
-          );
-        } else {
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: tismAqua,
-                child: Text(result['name'][0]),
-              ),
-              title: Text(result['name']),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(result['bio']),
-                  Text('${result['followers']} seguidores'),
-                ],
-              ),
-              trailing: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: tismAqua,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text('Seguir'),
-              ),
-            ),
-          );
-        }
+        return PostWidget(
+          post: _searchResults[index],
+          onLike: (postId) => _toggleLike(postId),
+          onComment: (postId) => {},
+        );
       },
     );
+  }
+
+  Future<void> _toggleLike(String postId) async {
+    final success = await ForumService.likePost(int.parse(postId));
+    if (success) {
+      setState(() {
+        final postIndex = _searchResults.indexWhere((p) => p['id'].toString() == postId);
+        if (postIndex != -1) {
+          _searchResults[postIndex]['isLiked'] = !_searchResults[postIndex]['isLiked'];
+          _searchResults[postIndex]['likes'] = (_searchResults[postIndex]['likes'] ?? 0) + 
+              (_searchResults[postIndex]['isLiked'] ? 1 : -1);
+        }
+      });
+    }
   }
 
   Widget _buildNoResults() {

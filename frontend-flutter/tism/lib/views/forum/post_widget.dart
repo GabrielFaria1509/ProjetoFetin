@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/widgets/reaction_bar.dart';
 
 class PostWidget extends StatelessWidget {
   final Map<String, dynamic> post;
   final Function(String) onLike;
-  final Function(String) onSave;
   final Function(String) onComment;
-  final Function(String, String)? onReaction;
+  final Function(String)? onDelete;
 
   const PostWidget({
     super.key,
     required this.post,
     required this.onLike,
-    required this.onSave,
     required this.onComment,
-    this.onReaction,
+    this.onDelete,
   });
 
   @override
@@ -79,31 +76,38 @@ class PostWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                PopupMenuButton<String>(
-                  onSelected: (value) => _handleMenuAction(context, value),
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'report',
-                      child: Row(
-                        children: [
-                          Icon(Icons.flag_outlined),
-                          SizedBox(width: 8),
-                          Text('Denunciar'),
-                        ],
+                if (onDelete != null)
+                  PopupMenuButton<String>(
+                    onSelected: (value) {
+                      if (value == 'delete') {
+                        onDelete!(post['id'].toString());
+                      } else {
+                        _handleMenuAction(context, value);
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      const PopupMenuItem(
+                        value: 'delete',
+                        child: Row(
+                          children: [
+                            Icon(Icons.delete, color: Colors.red),
+                            SizedBox(width: 8),
+                            Text('Deletar', style: TextStyle(color: Colors.red)),
+                          ],
+                        ),
                       ),
-                    ),
-                    const PopupMenuItem(
-                      value: 'share',
-                      child: Row(
-                        children: [
-                          Icon(Icons.share_outlined),
-                          SizedBox(width: 8),
-                          Text('Compartilhar'),
-                        ],
+                      const PopupMenuItem(
+                        value: 'report',
+                        child: Row(
+                          children: [
+                            Icon(Icons.flag_outlined),
+                            SizedBox(width: 8),
+                            Text('Denunciar'),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
               ],
             ),
             const SizedBox(height: 12),
@@ -144,18 +148,7 @@ class PostWidget extends StatelessWidget {
             
             const SizedBox(height: 12),
             
-            // Sistema de reações
-            if (onReaction != null && post['reaction_counts'] != null) ...[
-              ReactionBar(
-                reactionCounts: Map<String, int>.from(
-                  (post['reaction_counts'] as Map<dynamic, dynamic>? ?? {})
-                    .map((k, v) => MapEntry(k.toString(), (v as num?)?.toInt() ?? 0))
-                ),
-                userReaction: post['user_reaction']?.toString(),
-                onReaction: (reactionType) => onReaction!(post['id'].toString(), reactionType),
-              ),
-              const SizedBox(height: 12),
-            ],
+
             
             // Ações do post
             Row(
@@ -216,21 +209,7 @@ class PostWidget extends StatelessWidget {
                   ),
                 ),
                 
-                const Spacer(),
-                
-                // Salvar
-                InkWell(
-                  onTap: () => onSave(post['id'].toString()),
-                  borderRadius: BorderRadius.circular(20),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Icon(
-                      post['isSaved'] ? Icons.bookmark : Icons.bookmark_border,
-                      color: post['isSaved'] ? tismAqua : Colors.grey[600],
-                      size: 20,
-                    ),
-                  ),
-                ),
+
               ],
             ),
           ],

@@ -67,80 +67,69 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final hasReactions = widget.reactionCounts.values.any((count) => count > 0);
-    
-    if (!hasReactions && widget.userReaction == null) {
-      // Mostrar apenas botão de adicionar reação se não houver nenhuma
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: PopupMenuButton<String>(
-          icon: Icon(
-            Icons.add_reaction_outlined,
-            size: 20,
-            color: isDark ? Colors.grey[400] : Colors.grey[600],
-          ),
-          tooltip: 'Adicionar reação',
-          onSelected: _handleReaction,
-          itemBuilder: (context) => reactions.entries
-              .map((entry) => PopupMenuItem<String>(
-                    value: entry.key,
-                    child: Row(
-                      children: [
-                        Text(entry.value, style: const TextStyle(fontSize: 20)),
-                        const SizedBox(width: 8),
-                        Text(_getReactionLabel(entry.key)),
-                      ],
-                    ),
-                  ))
-              .toList(),
-        ),
-      );
-    }
+    final hasReactions = widget.reactionCounts.values.any((count) => count > 0) || widget.userReaction != null;
     
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: isDark ? Colors.grey[800]?.withOpacity(0.5) : Colors.grey[100],
-        borderRadius: BorderRadius.circular(20),
+        color: isDark ? Colors.grey[850] : Colors.grey[50],
+        borderRadius: BorderRadius.circular(25),
+        border: Border.all(
+          color: isDark ? Colors.grey[700]! : Colors.grey[200]!,
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Reações principais (mais usadas)
-          ...['like', 'love', 'clap', 'star']
-              .where((type) => widget.reactionCounts[type] != null && widget.reactionCounts[type]! > 0 || widget.userReaction == type)
-              .map((type) => _buildReactionButton(type)),
+          // Sempre mostrar as 4 reações principais
+          ...['like', 'love', 'clap', 'star'].map((type) => _buildReactionButton(type)),
           
-          // Outras reações com contagem
+          // Outras reações ativas
           ...reactions.keys
               .where((type) => !['like', 'love', 'clap', 'star'].contains(type))
-              .where((type) => widget.reactionCounts[type] != null && widget.reactionCounts[type]! > 0 || widget.userReaction == type)
+              .where((type) => (widget.reactionCounts[type] ?? 0) > 0 || widget.userReaction == type)
               .map((type) => _buildReactionButton(type)),
+          
+          // Separador
+          if (hasReactions) Container(
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            height: 20,
+            width: 1,
+            color: isDark ? Colors.grey[600] : Colors.grey[300],
+          ),
           
           // Botão "mais reações"
           PopupMenuButton<String>(
             icon: Icon(
               Icons.add_reaction_outlined,
-              size: 18,
-              color: isDark ? Colors.grey[400] : Colors.grey[600],
+              size: 20,
+              color: tismAqua,
             ),
-            tooltip: 'Mais reações',
+            tooltip: 'Adicionar reação',
             onSelected: _handleReaction,
             itemBuilder: (context) => reactions.entries
                 .map((entry) => PopupMenuItem<String>(
                       value: entry.key,
                       child: Row(
                         children: [
-                          Text(entry.value, style: const TextStyle(fontSize: 20)),
-                          const SizedBox(width: 8),
-                          Text(_getReactionLabel(entry.key)),
-                          if (widget.reactionCounts[entry.key] != null && widget.reactionCounts[entry.key]! > 0) ...[
-                            const Spacer(),
-                            Text(
-                              '${widget.reactionCounts[entry.key]}',
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 12,
+                          Text(entry.value, style: const TextStyle(fontSize: 22)),
+                          const SizedBox(width: 12),
+                          Expanded(child: Text(_getReactionLabel(entry.key))),
+                          if ((widget.reactionCounts[entry.key] ?? 0) > 0) ...[
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: tismAqua.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                '${widget.reactionCounts[entry.key]}',
+                                style: TextStyle(
+                                  color: tismAqua,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],
@@ -158,6 +147,7 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
     final count = widget.reactionCounts[type] ?? 0;
     final isSelected = widget.userReaction == type;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final showCount = count > 0;
 
     return AnimatedBuilder(
       animation: _scaleAnimation,
@@ -166,17 +156,18 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
           scale: isSelected ? _scaleAnimation.value : 1.0,
           child: GestureDetector(
             onTap: () => _handleReaction(type),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 2),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              margin: const EdgeInsets.symmetric(horizontal: 3),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: isSelected 
-                    ? tismAqua.withOpacity(0.2)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(12),
+                    ? tismAqua.withOpacity(0.15)
+                    : (showCount ? (isDark ? Colors.grey[800] : Colors.grey[100]) : Colors.transparent),
+                borderRadius: BorderRadius.circular(18),
                 border: isSelected 
-                    ? Border.all(color: tismAqua, width: 1)
-                    : null,
+                    ? Border.all(color: tismAqua, width: 1.5)
+                    : (showCount ? Border.all(color: isDark ? Colors.grey[700]! : Colors.grey[300]!, width: 1) : null),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -184,19 +175,28 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
                   Text(
                     reactions[type]!,
                     style: TextStyle(
-                      fontSize: isSelected ? 18 : 16,
+                      fontSize: isSelected ? 20 : 18,
                     ),
                   ),
-                  if (count > 0) ...[
+                  if (showCount) ...[
                     const SizedBox(width: 4),
-                    Text(
-                      count.toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                      decoration: BoxDecoration(
                         color: isSelected 
                             ? tismAqua
-                            : (isDark ? Colors.grey[400] : Colors.grey[600]),
+                            : (isDark ? Colors.grey[600] : Colors.grey[400]),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        count.toString(),
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected 
+                              ? Colors.white
+                              : (isDark ? Colors.white : Colors.white),
+                        ),
                       ),
                     ),
                   ],
