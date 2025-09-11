@@ -7,11 +7,7 @@ class CommentsScreen extends StatefulWidget {
   final String postId;
   final Map<String, dynamic> post;
 
-  const CommentsScreen({
-    super.key,
-    required this.postId,
-    required this.post,
-  });
+  const CommentsScreen({super.key, required this.postId, required this.post});
 
   @override
   State<CommentsScreen> createState() => _CommentsScreenState();
@@ -54,14 +50,14 @@ class _CommentsScreenState extends State<CommentsScreen> {
           user['id'].toString(),
           _commentController.text.trim(),
         );
-        
+
         _commentController.clear();
         await _loadComments();
-        
+
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Comentário enviado!')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Comentário enviado!')));
         }
       }
     } catch (e) {
@@ -85,7 +81,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
           final currentUsername = currentUser['username'];
           final commentUserId = comment['user_id'];
           final commentUsername = comment['username'];
-          
+
           // Verificar por ID ou username
           bool isOwner = false;
           if (currentUserId != null && commentUserId != null) {
@@ -93,7 +89,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
           } else if (currentUsername != null && commentUsername != null) {
             isOwner = currentUsername == commentUsername;
           }
-          
+
           if (isOwner) {
             return IconButton(
               icon: Icon(
@@ -138,9 +134,9 @@ class _CommentsScreenState extends State<CommentsScreen> {
             commentId.toString(),
             user['id'].toString(),
           );
-          
+
           await _loadComments();
-          
+
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Comentário deletado!')),
@@ -160,7 +156,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Scaffold(
       backgroundColor: isDark ? Colors.black : Colors.white,
       appBar: AppBar(
@@ -176,7 +172,11 @@ class _CommentsScreenState extends State<CommentsScreen> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isDark ? Colors.grey[900] : Colors.grey[50],
-              border: Border(bottom: BorderSide(color: isDark ? Colors.grey[700]! : Colors.grey[300]!)),
+              border: Border(
+                bottom: BorderSide(
+                  color: isDark ? Colors.grey[700]! : Colors.grey[300]!,
+                ),
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +188,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       backgroundColor: tismAqua,
                       child: Text(
                         (widget.post['author'] ?? 'U')[0].toUpperCase(),
-                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -204,7 +207,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       Text(
                         '@${widget.post['username']}',
                         style: TextStyle(
-                          color: isDark ? Colors.grey[400] : Colors.grey[600], 
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
                           fontSize: 12,
                         ),
                       ),
@@ -214,108 +217,116 @@ class _CommentsScreenState extends State<CommentsScreen> {
                 const SizedBox(height: 8),
                 Text(
                   widget.post['content'] ?? '',
-                  style: TextStyle(
-                    color: isDark ? Colors.white : Colors.black,
-                  ),
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
                 ),
               ],
             ),
           ),
-          
+
           // Lista de comentários
           Expanded(
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : _comments.isEmpty
-                    ? Center(
-                        child: Text(
-                          'Nenhum comentário ainda.\nSeja o primeiro a comentar!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: isDark ? Colors.grey[400] : Colors.grey[600],
+                ? Center(
+                    child: Text(
+                      'Nenhum comentário ainda.\nSeja o primeiro a comentar!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: _comments.length,
+                    itemBuilder: (context, index) {
+                      final comment = _comments[index];
+                      return Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: isDark
+                                  ? Colors.grey[800]!
+                                  : Colors.grey[200]!,
+                            ),
                           ),
                         ),
-                      )
-                    : ListView.builder(
-                        itemCount: _comments.length,
-                        itemBuilder: (context, index) {
-                          final comment = _comments[index];
-                          return Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: isDark ? Colors.grey[800]! : Colors.grey[200]!,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              radius: 16,
+                              backgroundColor: tismAqua,
+                              child: Text(
+                                (comment['author'] ?? 'U')[0].toUpperCase(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
                                 ),
                               ),
                             ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CircleAvatar(
-                                  radius: 16,
-                                  backgroundColor: tismAqua,
-                                  child: Text(
-                                    (comment['author'] ?? 'U')[0].toUpperCase(),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            comment['author'] ?? 'Usuário',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: isDark ? Colors.white : Colors.black,
-                                            ),
-                                          ),
-                                          if (comment['username'] != null) ...[
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              '@${comment['username']}',
-                                              style: TextStyle(
-                                                color: isDark ? Colors.grey[400] : Colors.grey[600],
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ],
-                                        ],
-                                      ),
-                                      const SizedBox(height: 4),
                                       Text(
-                                        comment['content'] ?? '',
+                                        comment['author'] ?? 'Usuário',
                                         style: TextStyle(
-                                          color: isDark ? Colors.white : Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: isDark
+                                              ? Colors.white
+                                              : Colors.black,
                                         ),
                                       ),
+                                      if (comment['username'] != null) ...[
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          '@${comment['username']}',
+                                          style: TextStyle(
+                                            color: isDark
+                                                ? Colors.grey[400]
+                                                : Colors.grey[600],
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
                                     ],
                                   ),
-                                ),
-                                _buildDeleteButton(comment, isDark),
-                              ],
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    comment['content'] ?? '',
+                                    style: TextStyle(
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          );
-                        },
-                      ),
+                            _buildDeleteButton(comment, isDark),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
           ),
-          
+
           // Campo de comentário
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isDark ? Colors.grey[900] : Colors.white,
-              border: Border(top: BorderSide(
-                color: isDark ? Colors.grey[700]! : Colors.grey[300]!,
-              )),
+              border: Border(
+                top: BorderSide(
+                  color: isDark ? Colors.grey[700]! : Colors.grey[300]!,
+                ),
+              ),
             ),
             child: Row(
               children: [
