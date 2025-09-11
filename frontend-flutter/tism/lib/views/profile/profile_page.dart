@@ -4,7 +4,7 @@ import 'package:tism/constants/colors.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/services/theme_service.dart';
 import 'package:tism/views/login/login_page.dart';
-import 'package:tism/utils/name_formatter.dart';
+
 
 class ProfilePage extends StatefulWidget {
   final String nomeUsuario;

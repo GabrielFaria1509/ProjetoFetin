@@ -120,7 +120,7 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
-                                color: tismAqua.withOpacity(0.1),
+                                color: tismAqua.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
@@ -162,7 +162,7 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: isSelected 
-                    ? tismAqua.withOpacity(0.15)
+                    ? tismAqua.withValues(alpha: 0.15)
                     : (showCount ? (isDark ? Colors.grey[800] : Colors.grey[100]) : Colors.transparent),
                 borderRadius: BorderRadius.circular(18),
                 border: isSelected 

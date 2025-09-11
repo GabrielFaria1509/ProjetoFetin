@@ -87,16 +87,16 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                       Row(
                         children: [
                           Text(
-                            post['author'] ?? 'Usuário',
+                            widget.post['author'] ?? 'Usuário',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
-                          if (post['username'] != null) ...[
+                          if (widget.post['username'] != null) ...[
                             const SizedBox(width: 4),
                             Text(
-                              '@${post['username']}',
+                              '@${widget.post['username']}',
                               style: TextStyle(
                                 color: Colors.grey[600],
                                 fontSize: 14,
@@ -106,7 +106,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                         ],
                       ),
                       Text(
-                        _formatTimestamp(post['timestamp']),
+                        _formatTimestamp(widget.post['timestamp']),
                         style: TextStyle(
                           color: Colors.grey[600],
                           fontSize: 12,
@@ -153,24 +153,24 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
             
             // Conteúdo do post
             Text(
-              post['content'] ?? 'Sem conteúdo',
+              widget.post['content'] ?? 'Sem conteúdo',
               style: const TextStyle(fontSize: 16, height: 1.4),
               maxLines: null,
             ),
             
             // Tags
-            if (post['tags'] != null && post['tags'].isNotEmpty) ...[
+            if (widget.post['tags'] != null && widget.post['tags'].isNotEmpty) ...[
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
                 runSpacing: 4,
-                children: (post['tags'] as List<String>).map((tag) {
+                children: (widget.post['tags'] as List<String>).map((tag) {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: tismAqua.withOpacity(0.1),
+                      color: tismAqua.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: tismAqua.withOpacity(0.3)),
+                      border: Border.all(color: tismAqua.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       '#$tag',

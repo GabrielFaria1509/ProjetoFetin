@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/services/theme_service.dart';
 import 'forum_feed.dart';
 
 import 'forum_search.dart';

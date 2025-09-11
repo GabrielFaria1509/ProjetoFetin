@@ -113,15 +113,7 @@ class _ForumFeedState extends State<ForumFeed> {
     }
   }
 
-  Future<void> _toggleSave(String postId) async {
-    final success = await ForumService.savePost(int.parse(postId));
-    if (success) {
-      setState(() {
-        final post = posts.firstWhere((p) => p['id'].toString() == postId);
-        post['isSaved'] = !post['isSaved'];
-      });
-    }
-  }
+
 
   void _openComments(String postId) {
     final post = posts.firstWhere((p) => p['id'].toString() == postId);
