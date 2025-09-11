@@ -3,19 +3,23 @@ class CommentsController < ApplicationController
     post = Post.find_by(id: params[:post_id])
     return render json: { error: "Post não encontrado" }, status: :not_found unless post
     
-    comments = post.comments.includes(:user).order(created_at: :asc)
-    
-    render json: {
-      comments: comments.map do |comment|
-        {
-          id: comment.id,
-          content: comment.content,
-          author: comment.user.name || comment.user.username,
-          username: comment.user.username,
-          timestamp: comment.created_at
-        }
-      end
-    }, status: :ok
+    begin
+      comments = Comment.where(post_id: params[:post_id]).includes(:user).order(created_at: :asc)
+      
+      render json: {
+        comments: comments.map do |comment|
+          {
+            id: comment.id,
+            content: comment.content,
+            author: comment.user.name || comment.user.username,
+            username: comment.user.username,
+            timestamp: comment.created_at
+          }
+        end
+      }, status: :ok
+    rescue => e
+      render json: { comments: [] }, status: :ok
+    end
   end
 
   def create
@@ -34,8 +38,8 @@ class CommentsController < ApplicationController
     end
     
     comment = Comment.new(
-      post: post,
-      user: user,
+      post_id: post.id,
+      user_id: user.id,
       content: params[:content].strip
     )
 

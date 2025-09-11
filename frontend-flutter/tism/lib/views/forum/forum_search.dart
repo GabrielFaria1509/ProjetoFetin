@@ -15,9 +15,8 @@ class _ForumSearchState extends State<ForumSearch> {
   List<String> _suggestions = [];
   List<Map<String, dynamic>> _searchResults = [];
   bool _isSearching = false;
-  String _selectedFilter = 'Todos';
+  bool _hasSubmitted = false;
 
-  final List<String> _filters = ['Todos', 'Posts', 'Usuários', 'Tags'];
   final List<String> _categories = ['Geral', 'Dicas', 'Experiências', 'Dúvidas', 'Recursos'];
 
   @override
@@ -32,12 +31,13 @@ class _ForumSearchState extends State<ForumSearch> {
       setState(() {
         _suggestions = [];
         _searchResults = [];
+        _hasSubmitted = false;
       });
       return;
     }
 
-    // Simular sugestões em tempo real
     setState(() {
+      _hasSubmitted = false; // Reset quando digita
       _suggestions = [
         'atividades sensoriais',
         'terapia ABA',
@@ -52,6 +52,7 @@ class _ForumSearchState extends State<ForumSearch> {
     setState(() {
       _isSearching = true;
       _suggestions = [];
+      _hasSubmitted = true;
     });
 
     try {
@@ -112,31 +113,7 @@ class _ForumSearchState extends State<ForumSearch> {
                 onSubmitted: _performSearch,
               ),
               
-              const SizedBox(height: 12),
-              
-              // Filtros
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _filters.map((filter) {
-                    final isSelected = _selectedFilter == filter;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: FilterChip(
-                        label: Text(filter),
-                        selected: isSelected,
-                        onSelected: (selected) {
-                          setState(() {
-                            _selectedFilter = filter;
-                          });
-                        },
-                        selectedColor: tismAqua.withValues(alpha: 0.2),
-                        checkmarkColor: tismAqua,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
+
             ],
           ),
         ),
@@ -168,7 +145,11 @@ class _ForumSearchState extends State<ForumSearch> {
       return _buildSearchResults();
     }
 
-    return _buildNoResults();
+    if (_hasSubmitted) {
+      return _buildNoResults();
+    }
+
+    return _buildTypingState();
   }
 
   Widget _buildSuggestions() {
@@ -238,6 +219,39 @@ class _ForumSearchState extends State<ForumSearch> {
           const SizedBox(height: 8),
           Text(
             'Tente usar palavras-chave diferentes\nou explore as categorias abaixo',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[500],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTypingState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search,
+            size: 80,
+            color: Colors.grey[400],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Digite para buscar...',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[600],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Encontre posts, perfis e hashtags\nna comunidade TEA',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,

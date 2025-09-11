@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 
-class PostWidget extends StatelessWidget {
+class PostWidget extends StatefulWidget {
   final Map<String, dynamic> post;
   final Function(String) onLike;
   final Function(String) onComment;
@@ -14,6 +14,45 @@ class PostWidget extends StatelessWidget {
     required this.onComment,
     this.onDelete,
   });
+
+  @override
+  State<PostWidget> createState() => _PostWidgetState();
+}
+
+class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
+  late AnimationController _likeAnimationController;
+  late Animation<double> _likeScaleAnimation;
+  late Animation<double> _likeOpacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _likeAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    _likeScaleAnimation = Tween<double>(begin: 1.0, end: 1.4).animate(
+      CurvedAnimation(parent: _likeAnimationController, curve: Curves.elasticOut),
+    );
+    _likeOpacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _likeAnimationController, curve: Curves.easeOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _likeAnimationController.dispose();
+    super.dispose();
+  }
+
+  void _handleLike() {
+    widget.onLike(widget.post['id'].toString());
+    if (!widget.post['isLiked']) {
+      _likeAnimationController.forward().then((_) {
+        _likeAnimationController.reverse();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +72,7 @@ class PostWidget extends StatelessWidget {
                   radius: 20,
                   backgroundColor: tismAqua,
                   child: Text(
-                    (post['author'] ?? 'U')[0].toUpperCase(),
+                    (widget.post['author'] ?? 'U')[0].toUpperCase(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -76,11 +115,11 @@ class PostWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (onDelete != null)
+                if (widget.onDelete != null)
                   PopupMenuButton<String>(
                     onSelected: (value) {
                       if (value == 'delete') {
-                        onDelete!(post['id'].toString());
+                        widget.onDelete!(widget.post['id'].toString());
                       } else {
                         _handleMenuAction(context, value);
                       }
@@ -153,25 +192,56 @@ class PostWidget extends StatelessWidget {
             // Ações do post
             Row(
               children: [
-                // Like
+                // Like com animação
                 InkWell(
-                  onTap: () => onLike(post['id'].toString()),
+                  onTap: _handleLike,
                   borderRadius: BorderRadius.circular(20),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          post['isLiked'] ? Icons.favorite : Icons.favorite_border,
-                          color: post['isLiked'] ? Colors.red : Colors.grey[600],
-                          size: 20,
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            AnimatedBuilder(
+                              animation: _likeScaleAnimation,
+                              builder: (context, child) {
+                                return Transform.scale(
+                                  scale: widget.post['isLiked'] ? _likeScaleAnimation.value : 1.0,
+                                  child: Icon(
+                                    widget.post['isLiked'] ? Icons.favorite : Icons.favorite_border,
+                                    color: widget.post['isLiked'] ? Colors.red : Colors.grey[600],
+                                    size: 20,
+                                  ),
+                                );
+                              },
+                            ),
+                            // Partículas de coração
+                            if (widget.post['isLiked'])
+                              AnimatedBuilder(
+                                animation: _likeOpacityAnimation,
+                                builder: (context, child) {
+                                  return Opacity(
+                                    opacity: _likeOpacityAnimation.value * 0.7,
+                                    child: Transform.scale(
+                                      scale: _likeScaleAnimation.value * 1.5,
+                                      child: const Icon(
+                                        Icons.favorite,
+                                        color: Colors.pink,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                          ],
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${post['likes'] ?? 0}',
+                          '${widget.post['likes'] ?? 0}',
                           style: TextStyle(
-                            color: post['isLiked'] ? Colors.red : Colors.grey[600],
+                            color: widget.post['isLiked'] ? Colors.red : Colors.grey[600],
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -184,7 +254,7 @@ class PostWidget extends StatelessWidget {
                 
                 // Comentários
                 InkWell(
-                  onTap: () => onComment(post['id'].toString()),
+                  onTap: () => widget.onComment(widget.post['id'].toString()),
                   borderRadius: BorderRadius.circular(20),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -198,7 +268,7 @@ class PostWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${post['comments'] ?? 0}',
+                          '${widget.post['comments'] ?? 0}',
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontWeight: FontWeight.w500,
