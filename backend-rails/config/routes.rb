@@ -26,8 +26,11 @@ Rails.application.routes.draw do
       post :like
       post :save_post
     end
-    resources :comments, only: [:index, :create, :destroy]
+    resources :comments, only: [:index, :create]
   end
+  
+  # Rota específica para deletar comentários
+  delete '/comments/:id', to: 'comments#destroy'
   
   # Profile routes
   put '/profile/:id/name', to: 'profile#update_name'

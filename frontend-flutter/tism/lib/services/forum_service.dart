@@ -161,13 +161,17 @@ class ForumService {
 
   static Future<void> deleteComment(String postId, String commentId, String userId) async {
     try {
+      final url = '$_baseUrl/comments/$commentId';
       final response = await http.delete(
-        Uri.parse('$_baseUrl/posts/$postId/comments/$commentId?user_id=$userId'),
+        Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
+        body: json.encode({'user_id': userId}),
       );
       
       if (response.statusCode != 200) {
-        throw Exception('Erro ao deletar comentário');
+        final errorBody = response.body.isNotEmpty ? json.decode(response.body) : {};
+        final errorMessage = errorBody['error'] ?? 'Erro desconhecido';
+        throw Exception('Status ${response.statusCode}: $errorMessage');
       }
     } catch (e) {
       throw Exception('Erro ao deletar comentário: $e');

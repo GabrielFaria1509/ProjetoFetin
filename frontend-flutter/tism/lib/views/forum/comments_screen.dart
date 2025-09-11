@@ -75,7 +75,42 @@ class _CommentsScreenState extends State<CommentsScreen> {
     }
   }
 
-  Future<void> _deleteComment(int commentId) async {
+  Widget _buildDeleteButton(Map<String, dynamic> comment, bool isDark) {
+    return FutureBuilder<Map<String, dynamic>?>(
+      future: UserService.getUser(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
+          final currentUser = snapshot.data!;
+          final currentUserId = currentUser['id'];
+          final currentUsername = currentUser['username'];
+          final commentUserId = comment['user_id'];
+          final commentUsername = comment['username'];
+          
+          // Verificar por ID ou username
+          bool isOwner = false;
+          if (currentUserId != null && commentUserId != null) {
+            isOwner = currentUserId == commentUserId;
+          } else if (currentUsername != null && commentUsername != null) {
+            isOwner = currentUsername == commentUsername;
+          }
+          
+          if (isOwner) {
+            return IconButton(
+              icon: Icon(
+                Icons.delete_outline,
+                size: 18,
+                color: Colors.red[400],
+              ),
+              onPressed: () => _deleteComment(comment['id']),
+            );
+          }
+        }
+        return const SizedBox.shrink();
+      },
+    );
+  }
+
+  Future<void> _deleteComment(dynamic commentId) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -115,7 +150,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Erro ao deletar comentário')),
+            SnackBar(content: Text('Erro ao deletar: ${e.toString()}')),
           );
         }
       }
@@ -265,27 +300,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                     ],
                                   ),
                                 ),
-                                FutureBuilder<Map<String, dynamic>?>(
-                                  future: UserService.getUser(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData && snapshot.data != null) {
-                                      final currentUser = snapshot.data!;
-                                      final isOwner = currentUser['id'] == comment['user_id'];
-                                      
-                                      if (isOwner) {
-                                        return IconButton(
-                                          icon: Icon(
-                                            Icons.delete_outline,
-                                            size: 18,
-                                            color: isDark ? Colors.grey[400] : Colors.grey[600],
-                                          ),
-                                          onPressed: () => _deleteComment(comment['id']),
-                                        );
-                                      }
-                                    }
-                                    return const SizedBox.shrink();
-                                  },
-                                ),
+                                _buildDeleteButton(comment, isDark),
                               ],
                             ),
                           );

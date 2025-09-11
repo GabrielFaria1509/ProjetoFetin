@@ -55,6 +55,7 @@ class CommentsController < ApplicationController
           content: comment.content,
           author: comment.user.name || comment.user.username,
           username: comment.user.username,
+          user_id: comment.user.id,
           timestamp: comment.created_at
         }
       }, status: :created
