@@ -125,4 +125,34 @@ class ForumService {
       throw Exception('Erro ao criar comentário: $e');
     }
   }
+
+  static Future<Map<String, dynamic>> addReaction(String postId, String userId, String reactionType) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/posts/$postId/reactions'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'user_id': int.parse(userId),
+          'reaction_type': reactionType,
+        }),
+      );
+      
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = json.decode(response.body);
+        return {
+          'success': true,
+          'reaction_counts': Map<String, int>.from(data['reaction_counts'] ?? {}),
+          'user_reaction': data['user_reaction'],
+        };
+      } else {
+        final errorData = json.decode(response.body);
+        return {
+          'success': false, 
+          'error': errorData['error'] ?? 'Erro ao adicionar reação'
+        };
+      }
+    } catch (e) {
+      return {'success': false, 'error': 'Erro de conexão: $e'};
+    }
+  }
 }

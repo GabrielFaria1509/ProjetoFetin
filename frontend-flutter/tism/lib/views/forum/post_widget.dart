@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/widgets/reaction_bar.dart';
 
 class PostWidget extends StatelessWidget {
   final Map<String, dynamic> post;
   final Function(String) onLike;
   final Function(String) onSave;
   final Function(String) onComment;
+  final Function(String, String)? onReaction;
 
   const PostWidget({
     super.key,
@@ -13,6 +15,7 @@ class PostWidget extends StatelessWidget {
     required this.onLike,
     required this.onSave,
     required this.onComment,
+    this.onReaction,
   });
 
   @override
@@ -139,7 +142,20 @@ class PostWidget extends StatelessWidget {
               ),
             ],
             
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            
+            // Sistema de reações
+            if (onReaction != null && post['reaction_counts'] != null) ...[
+              ReactionBar(
+                reactionCounts: Map<String, int>.from(
+                  (post['reaction_counts'] as Map<dynamic, dynamic>? ?? {})
+                    .map((k, v) => MapEntry(k.toString(), (v as num?)?.toInt() ?? 0))
+                ),
+                userReaction: post['user_reaction']?.toString(),
+                onReaction: (reactionType) => onReaction!(post['id'].toString(), reactionType),
+              ),
+              const SizedBox(height: 12),
+            ],
             
             // Ações do post
             Row(

@@ -28,14 +28,20 @@ class CommentsController < ApplicationController
     user = User.find_by(id: params[:user_id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
+    # Verificar se tabela comments existe
+    unless ActiveRecord::Base.connection.table_exists?('comments')
+      return render json: { error: "Sistema de comentários em manutenção" }, status: :service_unavailable
+    end
+    
     comment = Comment.new(
       post: post,
       user: user,
-      content: params[:content]
+      content: params[:content].strip
     )
 
     if comment.save
-      post.increment!(:comments_count)
+      # Atualizar contador de comentários
+      Post.where(id: post.id).update_all(comments_count: post.comments.count)
       
       render json: {
         message: "Comentário criado com sucesso",

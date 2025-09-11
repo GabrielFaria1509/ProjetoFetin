@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
-    posts = Post.includes(:user, :likes).order(created_at: :desc)
-    current_user_id = params[:user_id] # Passar user_id na query
+    posts = Post.includes(:user, :likes, :reactions).order(created_at: :desc)
+    current_user_id = params[:user_id]&.to_i # Passar user_id na query
     
     render json: {
       posts: posts.map do |post|
@@ -15,7 +15,9 @@ class PostsController < ApplicationController
           comments: post.comments_count || 0,
           isLiked: current_user_id ? post.likes.exists?(user_id: current_user_id) : false,
           isSaved: false, # TODO: implementar saves
-          tags: post.tags || []
+          tags: post.tags || [],
+          reaction_counts: post.reaction_counts,
+          user_reaction: current_user_id ? post.reactions.find_by(user_id: current_user_id)&.reaction_type : nil
         }
       end
     }, status: :ok

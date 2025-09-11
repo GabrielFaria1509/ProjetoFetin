@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
 import 'post_widget.dart';
@@ -58,6 +59,7 @@ class _ForumFeedState extends State<ForumFeed> {
             onLike: (postId) => _toggleLike(postId),
             onSave: (postId) => _toggleSave(postId),
             onComment: (postId) => _openComments(postId),
+            onReaction: (postId, reactionType) => _handleReaction(postId, reactionType),
           );
         },
       ),
@@ -126,5 +128,53 @@ class _ForumFeedState extends State<ForumFeed> {
         ),
       ),
     ).then((_) => _loadPosts()); // Recarregar posts ao voltar
+  }
+
+  Future<void> _handleReaction(String postId, String reactionType) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getInt('user_id');
+      
+      if (userId != null) {
+        final result = await ForumService.addReaction(postId, userId.toString(), reactionType);
+        if (result['success']) {
+          // Atualizar post local com novas reações
+          setState(() {
+            final postIndex = posts.indexWhere((p) => p['id'].toString() == postId);
+            if (postIndex != -1) {
+              posts[postIndex]['reaction_counts'] = result['reaction_counts'] ?? {};
+              posts[postIndex]['user_reaction'] = result['user_reaction'];
+            }
+          });
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(result['error'] ?? 'Erro ao reagir ao post'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Faça login para reagir aos posts'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro de conexão: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }
