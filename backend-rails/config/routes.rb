@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "rails/health#show"
   post "/signup", to: "users#create"
   post "/login", to: "users#login"
   put "/users/:id", to: "users#update"
