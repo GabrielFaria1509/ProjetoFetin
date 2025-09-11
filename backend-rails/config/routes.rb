@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       post :like
       post :save_post
     end
-    resources :comments, only: [:index, :create]
+    resources :comments, only: [:index, :create, :destroy]
   end
   
   # Profile routes

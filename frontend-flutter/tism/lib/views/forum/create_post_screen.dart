@@ -24,20 +24,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         foregroundColor: Colors.white,
         actions: [
           TextButton(
-            onPressed: _isLoading ? null : _createPost,
-            child: _isLoading
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    ),
-                  )
-                : const Text(
-                    'Publicar',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+            onPressed: _isLoading ? null : _showConfirmDialog,
+            child: const Text(
+              'Publicar',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -52,19 +46,22 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 expands: true,
                 textAlignVertical: TextAlignVertical.top,
                 decoration: const InputDecoration(
-                  hintText: 'Compartilhe sua experiência, dúvida ou dica sobre TEA...',
+                  hintText:
+                      'Compartilhe sua experiência, dúvida ou dica sobre TEA...',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(16),
                 ),
               ),
             ),
+            const SizedBox(height: 16),
+            if (_isLoading) const Center(child: CircularProgressIndicator()),
           ],
         ),
       ),
     );
   }
 
-  Future<void> _createPost() async {
+  void _showConfirmDialog() {
     if (_controller.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Escreva algo antes de publicar')),
@@ -72,13 +69,40 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       return;
     }
 
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmar Publicação'),
+        content: const Text('Deseja publicar este post no fórum?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _createPost();
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: tismAqua),
+            child: const Text(
+              'Publicar',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _createPost() async {
     setState(() => _isLoading = true);
-    
+
     final success = await ForumService.createPost(_controller.text.trim());
-    
+
     if (mounted) {
       setState(() => _isLoading = false);
-      
+
       if (success) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(

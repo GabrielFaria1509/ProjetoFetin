@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
             content: comment.content,
             author: comment.user.name || comment.user.username,
             username: comment.user.username,
+            user_id: comment.user.id,
             timestamp: comment.created_at
           }
         end
@@ -59,6 +60,30 @@ class CommentsController < ApplicationController
       }, status: :created
     else
       render json: { error: comment.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    comment = Comment.find_by(id: params[:id])
+    return render json: { error: "Comentário não encontrado" }, status: :not_found unless comment
+    
+    user = User.find_by(id: params[:user_id])
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
+    
+    # Verificar se o usuário é o autor do comentário
+    unless comment.user_id == user.id
+      return render json: { error: "Você só pode deletar seus próprios comentários" }, status: :forbidden
+    end
+    
+    post = comment.post
+    
+    if comment.destroy
+      # Atualizar contador de comentários
+      Post.where(id: post.id).update_all(comments_count: post.comments.count)
+      
+      render json: { message: "Comentário deletado com sucesso" }, status: :ok
+    else
+      render json: { error: "Erro ao deletar comentário" }, status: :unprocessable_entity
     end
   end
 end

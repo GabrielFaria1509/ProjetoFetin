@@ -158,4 +158,19 @@ class ForumService {
       throw Exception('Erro ao deletar post: $e');
     }
   }
+
+  static Future<void> deleteComment(String postId, String commentId, String userId) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$_baseUrl/posts/$postId/comments/$commentId?user_id=$userId'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      
+      if (response.statusCode != 200) {
+        throw Exception('Erro ao deletar comentário');
+      }
+    } catch (e) {
+      throw Exception('Erro ao deletar comentário: $e');
+    }
+  }
 }
