@@ -2,6 +2,22 @@ class UsersController < ApplicationController
   # API-only Rails não usa CSRF protection
   require 'base64'
 
+  def index
+    users = User.all.order(created_at: :desc)
+    render json: {
+      users: users.map do |user|
+        {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          user_type: user.user_type,
+          created_at: user.created_at
+        }
+      end
+    }, status: :ok
+  end
+
   def create
     # Validar parâmetros obrigatórios
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
@@ -56,13 +72,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find_by(email: params[:email])
-    return render json: { error: "Email não informado" }, status: :bad_request unless params[:email].present?
-    return render json: { error: "Senha não informada" }, status: :bad_request unless params[:password].present?
-    if user && user.destroy
+    user = User.find_by(id: params[:id])
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
+    
+    if user.destroy
       render json: { message: "Usuário deletado com sucesso" }, status: :ok
     else
-      render json: { error: "Usuário não encontrado ou não pôde ser deletado" }, status: :not_found
+      render json: { error: "Erro ao deletar usuário" }, status: :unprocessable_entity
     end
   end
 
