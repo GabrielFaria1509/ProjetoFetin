@@ -87,6 +87,7 @@ class UserService {
     await prefs.setString(_keyUsername, user['username'] ?? '');
     await prefs.setString(_keyEmail, user['email'] ?? '');
     await prefs.setString(_keyUserType, user['user_type'] ?? 'Responsável');
+    await prefs.setString('account_type', user['account_type'] ?? 'normal');
     await prefs.setBool(_keyIsLoggedIn, true);
     if (user['profile_picture'] != null) {
       await prefs.setString(_keyProfileImage, user['profile_picture']);
@@ -120,6 +121,7 @@ class UserService {
       'username': prefs.getString(_keyUsername) ?? '',
       'email': prefs.getString(_keyEmail) ?? '',
       'userType': prefs.getString(_keyUserType) ?? 'Responsável',
+      'accountType': prefs.getString('account_type') ?? 'normal',
       'profileImagePath': prefs.getString(_keyProfileImage),
       'isLoggedIn': isLoggedIn,
     };

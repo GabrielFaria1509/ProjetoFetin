@@ -1,17 +1,19 @@
 class ForumPostsController < ApplicationController
   def index
     posts = UserPost.joins(:user, :forum)
-                   .select('user_posts.*, users.username, 
+                   .select('user_posts.*, users.username, users.name, users.account_type,
                            COUNT(DISTINCT comments.id) as comments_count')
                    .left_joins(:comments)
-                   .group('user_posts.id, users.username')
+                   .group('user_posts.id, users.username, users.name, users.account_type')
                    .order(created_at: :desc)
     
     render json: posts.map { |post|
       {
         id: post.id,
         content: post.content,
+        author: post.name || post.username,
         username: post.username,
+        account_type: post.account_type || 'normal',
         created_at: post.created_at,
         likes_count: 0,
         comments_count: post.comments_count || 0,
@@ -66,14 +68,16 @@ class ForumPostsController < ApplicationController
     return render json: { error: 'Post não encontrado' }, status: :not_found unless post
     
     comments = post.comments.joins(:user)
-                          .select('comments.*, users.username')
+                          .select('comments.*, users.username, users.name, users.account_type')
                           .order(created_at: :desc)
     
     render json: comments.map { |comment|
       {
         id: comment.id,
         content: comment.content,
+        author: comment.name || comment.username,
         username: comment.username,
+        account_type: comment.account_type || 'normal',
         created_at: comment.created_at
       }
     }

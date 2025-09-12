@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
 import 'package:tism/services/user_service.dart';
+import 'package:tism/widgets/account_badge.dart';
 
 class CommentsScreen extends StatefulWidget {
   final String postId;
@@ -202,6 +203,11 @@ class _CommentsScreenState extends State<CommentsScreen> {
                         color: isDark ? Colors.white : Colors.black,
                       ),
                     ),
+                    const SizedBox(width: 4),
+                    AccountBadge(
+                      accountType: widget.post['account_type'] ?? 'normal',
+                      size: 16,
+                    ),
                     if (widget.post['username'] != null) ...[
                       const SizedBox(width: 4),
                       Text(
@@ -282,6 +288,11 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                               ? Colors.white
                                               : Colors.black,
                                         ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      AccountBadge(
+                                        accountType: comment['account_type'] ?? 'normal',
+                                        size: 14,
                                       ),
                                       if (comment['username'] != null) ...[
                                         const SizedBox(width: 4),

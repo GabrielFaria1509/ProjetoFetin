@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/widgets/account_badge.dart';
 
 class PostWidget extends StatefulWidget {
   final Map<String, dynamic> post;
@@ -92,6 +93,11 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
+                          ),
+                          const SizedBox(width: 4),
+                          AccountBadge(
+                            accountType: widget.post['account_type'] ?? 'normal',
+                            size: 16,
                           ),
                           if (widget.post['username'] != null) ...[
                             const SizedBox(width: 4),

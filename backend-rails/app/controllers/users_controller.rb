@@ -12,6 +12,7 @@ class UsersController < ApplicationController
           username: user.username,
           email: user.email,
           user_type: user.user_type,
+          account_type: user.account_type || 'normal',
           created_at: user.created_at
         }
       end
@@ -37,7 +38,8 @@ class UsersController < ApplicationController
           username: user.username,
           email: user.email,
           name: user.name,
-          user_type: user.user_type
+          user_type: user.user_type,
+          account_type: user.account_type || 'normal'
         }
       }, status: :created
     else
@@ -63,6 +65,7 @@ class UsersController < ApplicationController
           email: user.email,
           name: user.name,
           user_type: user.user_type,
+          account_type: user.account_type || 'normal',
           profile_picture: user.profile_picture
         }
       }, status: :ok
@@ -111,6 +114,7 @@ class UsersController < ApplicationController
           email: user.email,
           name: user.name,
           user_type: user.user_type,
+          account_type: user.account_type || 'normal',
           profile_picture: user.profile_picture
         }
       }, status: :ok

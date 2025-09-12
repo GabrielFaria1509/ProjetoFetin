@@ -123,6 +123,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_11_011844) do
     t.string "profile_image_url"
     t.datetime "name_updated_at"
     t.datetime "username_updated_at"
+    t.string "account_type", default: "normal"
+    t.index ["account_type"], name: "index_users_on_account_type"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
