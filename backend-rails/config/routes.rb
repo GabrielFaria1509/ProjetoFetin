@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   put '/profile/:id/user_type', to: 'profile#update_user_type'
   
   # Admin routes
+  get '/admin/test', to: 'admin#test_env'
   post '/admin/login', to: 'admin#login'
   get '/admin/users', to: 'admin#users_index'
   put '/admin/users/:id', to: 'admin#users_update'

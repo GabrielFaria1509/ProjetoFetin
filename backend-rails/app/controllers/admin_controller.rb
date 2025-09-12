@@ -1,9 +1,25 @@
 class AdminController < ApplicationController
-  before_action :authenticate_admin, except: [:login]
+  before_action :authenticate_admin, except: [:login, :test_env]
+
+  # Test ENV variables
+  def test_env
+    render json: {
+      admin_key_set: ENV['ADMIN_KEY'].present?,
+      rails_env: Rails.env,
+      all_env_keys: ENV.keys.select { |k| k.include?('ADMIN') }
+    }
+  end
 
   # Admin Login
   def login
     admin_key = ENV['ADMIN_KEY']
+    
+    Rails.logger.info "Admin login attempt - ENV key: #{admin_key.present? ? '[SET]' : '[NOT SET]'}"
+    Rails.logger.info "Admin login attempt - Received key: #{params[:admin_key]}"
+    
+    if admin_key.blank?
+      return render json: { error: 'Variável ADMIN_KEY não configurada no servidor' }, status: :internal_server_error
+    end
     
     return render json: { error: 'Chave de administrador inválida' }, status: :unauthorized unless params[:admin_key] == admin_key
     
