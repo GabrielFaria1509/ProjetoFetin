@@ -38,16 +38,14 @@ Rails.application.routes.draw do
   put '/profile/:id/user_type', to: 'profile#update_user_type'
   
   # Admin routes
-  namespace :admin do
-    post :login, to: 'admin#login'
-    get :users, to: 'admin#users_index'
-    put 'users/:id', to: 'admin#users_update'
-    delete 'users/:id', to: 'admin#users_destroy'
-    get :posts, to: 'admin#posts_index'
-    delete 'posts/:id', to: 'admin#posts_destroy'
-    get :articles, to: 'admin#articles_index'
-    post :articles, to: 'admin#articles_create'
-    put 'articles/:id', to: 'admin#articles_update'
-    delete 'articles/:id', to: 'admin#articles_destroy'
-  end
+  post '/admin/login', to: 'admin#login'
+  get '/admin/users', to: 'admin#users_index'
+  put '/admin/users/:id', to: 'admin#users_update'
+  delete '/admin/users/:id', to: 'admin#users_destroy'
+  get '/admin/posts', to: 'admin#posts_index'
+  delete '/admin/posts/:id', to: 'admin#posts_destroy'
+  get '/admin/articles', to: 'admin#articles_index'
+  post '/admin/articles', to: 'admin#articles_create'
+  put '/admin/articles/:id', to: 'admin#articles_update'
+  delete '/admin/articles/:id', to: 'admin#articles_destroy'
 end

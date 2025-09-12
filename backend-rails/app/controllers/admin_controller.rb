@@ -1,9 +1,11 @@
 class AdminController < ApplicationController
-  before_action :authenticate_admin
+  before_action :authenticate_admin, except: [:login]
 
   # Admin Login
   def login
-    return render json: { error: 'Chave de administrador inválida' }, status: :unauthorized unless params[:admin_key] == ENV['ADMIN_KEY']
+    admin_key = ENV['ADMIN_KEY']
+    
+    return render json: { error: 'Chave de administrador inválida' }, status: :unauthorized unless params[:admin_key] == admin_key
     
     user = User.find_by(email: params[:email])
     
