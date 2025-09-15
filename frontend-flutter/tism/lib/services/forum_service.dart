@@ -161,11 +161,9 @@ class ForumService {
 
   static Future<void> deleteComment(String postId, String commentId, String userId) async {
     try {
-      final url = '$_baseUrl/comments/$commentId';
       final response = await http.delete(
-        Uri.parse(url),
+        Uri.parse('$_baseUrl/comments/$commentId?user_id=$userId'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'user_id': userId}),
       );
       
       if (response.statusCode != 200) {
