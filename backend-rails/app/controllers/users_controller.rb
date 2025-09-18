@@ -77,9 +77,15 @@ class UsersController < ApplicationController
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
-    user = User.where("email = ?", params[:email].to_s.strip.downcase).first
+    # Buscar APENAS usuário existente - NÃO criar novo
+    user = User.find_by(email: params[:email].to_s.strip.downcase)
+    
+    # Se não encontrar, retornar erro
+    unless user
+      return render json: { error: "Conta não encontrada. Faça seu cadastro primeiro." }, status: :unauthorized
+    end
 
-    if user && user.authenticate(params[:password])
+    if user.authenticate(params[:password])
       # Atualizar último login
       user.update(last_login_at: Time.current)
       
@@ -96,7 +102,7 @@ class UsersController < ApplicationController
         }
       }, status: :ok
     else
-      render json: { error: "Email ou senha inválidos" }, status: :unauthorized
+      render json: { error: "Senha incorreta" }, status: :unauthorized
     end
   end
 
