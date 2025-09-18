@@ -94,7 +94,6 @@ class _SplashScreenState extends State<SplashScreen>
       if (isLoggedIn) {
         final userName = await SecureStorageService.getSecureString('user_name') ?? 'Usuário';
         final username = await SecureStorageService.getSecureString('username') ?? 'usuario';
-        print('Splash - Nome: $userName, Username: $username'); // Debug
         
         if (mounted) {
           Navigator.pushReplacement(
