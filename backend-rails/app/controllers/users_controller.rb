@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       return render json: { error: firebase_result[:error] }, status: :unprocessable_entity
     end
     
-    # Criar usuário no banco local
+    # Criar usuário no banco local com senha real
     user = User.new(
       email: firebase_result[:email].downcase,
       firebase_uid: firebase_result[:firebase_uid],
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       username: SecurityService.sanitize_input(params[:username]).downcase,
       user_type: params[:user_type] || 'Responsável',
       account_type: 'normal',
-      password: SecureRandom.hex(16), # Senha aleatória pois usa Firebase
+      password: params[:password], # Senha real para login posterior
       email_verified: false
     )
     
@@ -82,41 +82,28 @@ class UsersController < ApplicationController
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
-    # Autenticar com Firebase
-    firebase_result = FirebaseAuthService.authenticate_user(params[:email], params[:password])
-    
-    unless firebase_result[:success]
-      return render json: { error: firebase_result[:error] }, status: :unauthorized
+    # Buscar usuário no banco PostgreSQL
+    user = User.where("email = ?", params[:email].to_s.strip.downcase).first
+
+    if user && user.authenticate(params[:password])
+      # Atualizar último login
+      user.update(last_login_at: Time.current)
+      
+      render json: { 
+        message: "Login realizado com sucesso", 
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          name: user.name,
+          user_type: user.user_type,
+          account_type: user.account_type || 'normal',
+          profile_picture: user.profile_picture
+        }
+      }, status: :ok
+    else
+      render json: { error: "Email ou senha inválidos" }, status: :unauthorized
     end
-    
-    # Buscar ou criar usuário no banco local
-    user = User.find_or_create_by(email: firebase_result[:email].downcase) do |u|
-      u.firebase_uid = firebase_result[:firebase_uid]
-      u.name = firebase_result[:email].split('@')[0].titleize
-      u.username = firebase_result[:email].split('@')[0].downcase
-      u.user_type = 'Responsável'
-      u.account_type = 'normal'
-      u.password = SecureRandom.hex(16) # Senha aleatória pois usa Firebase
-    end
-    
-    # Atualizar último login e firebase_uid
-    user.update(
-      last_login_at: Time.current,
-      firebase_uid: firebase_result[:firebase_uid]
-    )
-    
-    render json: { 
-      message: "Login realizado com sucesso", 
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        name: user.name,
-        user_type: user.user_type,
-        account_type: user.account_type || 'normal',
-        profile_picture: user.profile_picture
-      }
-    }, status: :ok
   end
 
   def destroy
