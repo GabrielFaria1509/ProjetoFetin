@@ -1,31 +1,49 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'secure_storage_service.dart';
 
 class AuthIntegrationService {
-  static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
+  static const String _baseUrl = 'https://tism-backend-api-rgxd.onrender.com';
 
   // Login apenas com Backend Rails
   static Future<Map<String, dynamic>> loginWithEmail(String email, String password) async {
     try {
+      print('Fazendo login para: $email');
+      print('URL: $_baseUrl/login');
+      
       final response = await http.post(
         Uri.parse('$_baseUrl/login'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: json.encode({
           'email': email,
           'password': password,
         }),
-      );
+      ).timeout(const Duration(seconds: 30));
+
+      print('Status: ${response.statusCode}');
+      print('Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         await _saveUserData(data['user']);
         return {'success': true, 'user': data['user']};
       } else {
-        return {'success': false, 'error': 'Email ou senha inválidos'};
+        try {
+          final errorData = json.decode(response.body);
+          return {'success': false, 'error': errorData['error'] ?? 'Email ou senha inválidos'};
+        } catch (e) {
+          return {'success': false, 'error': 'Erro no servidor: ${response.statusCode}'};
+        }
       }
+    } on TimeoutException {
+      return {'success': false, 'error': 'Timeout: Servidor demorou para responder'};
     } catch (e) {
+      print('Erro completo: $e');
       return {'success': false, 'error': 'Erro de conexão: $e'};
     }
   }
@@ -39,9 +57,15 @@ class AuthIntegrationService {
     required String userType,
   }) async {
     try {
+      print('Fazendo cadastro para: $email');
+      print('URL: $_baseUrl/signup');
+      
       final response = await http.post(
         Uri.parse('$_baseUrl/signup'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: json.encode({
           'name': name,
           'username': username,
@@ -49,17 +73,26 @@ class AuthIntegrationService {
           'password': password,
           'user_type': userType,
         }),
-      );
+      ).timeout(const Duration(seconds: 30));
+
+      print('Status: ${response.statusCode}');
+      print('Body: ${response.body}');
 
       if (response.statusCode == 201) {
         final data = json.decode(response.body);
-        await _saveUserData(data['user']);
-        return {'success': true, 'user': data['user']};
+        return {'success': true, 'user': data['user'], 'message': data['message']};
       } else {
-        final errorData = json.decode(response.body);
-        return {'success': false, 'error': errorData['error'] ?? 'Erro no cadastro'};
+        try {
+          final errorData = json.decode(response.body);
+          return {'success': false, 'error': errorData['error'] ?? 'Erro no cadastro'};
+        } catch (e) {
+          return {'success': false, 'error': 'Erro no servidor: ${response.statusCode}'};
+        }
       }
+    } on TimeoutException {
+      return {'success': false, 'error': 'Timeout: Servidor demorou para responder'};
     } catch (e) {
+      print('Erro completo: $e');
       return {'success': false, 'error': 'Erro de conexão: $e'};
     }
   }

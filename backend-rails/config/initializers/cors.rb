@@ -1,10 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins Rails.env.production? ? [
-      'https://tism-app.com',
-      'https://www.tism-app.com',
-      /\Ahttps:\/\/.*\.tism-app\.com\z/
-    ] : '*'
+    origins '*' # Permitir todas as origens temporariamente
     
     resource '*',
       headers: :any,
