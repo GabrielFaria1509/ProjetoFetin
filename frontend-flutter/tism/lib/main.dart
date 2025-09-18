@@ -8,7 +8,11 @@ import 'package:tism/views/splash/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  await dotenv.load(fileName: ".env");
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    debugPrint('Erro ao carregar .env: $e');
+  }
   
   runApp(
     ChangeNotifierProvider(

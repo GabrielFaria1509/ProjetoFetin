@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'secure_storage_service.dart';
 
 class AuthIntegrationService {
@@ -10,9 +9,6 @@ class AuthIntegrationService {
   // Login apenas com Backend Rails
   static Future<Map<String, dynamic>> loginWithEmail(String email, String password) async {
     try {
-      print('Fazendo login para: $email');
-      print('URL: $_baseUrl/login');
-      
       final response = await http.post(
         Uri.parse('$_baseUrl/login'),
         headers: {
@@ -24,9 +20,6 @@ class AuthIntegrationService {
           'password': password,
         }),
       ).timeout(const Duration(seconds: 30));
-
-      print('Status: ${response.statusCode}');
-      print('Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -43,8 +36,7 @@ class AuthIntegrationService {
     } on TimeoutException {
       return {'success': false, 'error': 'Timeout: Servidor demorou para responder'};
     } catch (e) {
-      print('Erro completo: $e');
-      return {'success': false, 'error': 'Erro de conexão: $e'};
+      return {'success': false, 'error': 'Erro de conexão'};
     }
   }
 
@@ -57,9 +49,6 @@ class AuthIntegrationService {
     required String userType,
   }) async {
     try {
-      print('Fazendo cadastro para: $email');
-      print('URL: $_baseUrl/signup');
-      
       final response = await http.post(
         Uri.parse('$_baseUrl/signup'),
         headers: {
@@ -75,9 +64,6 @@ class AuthIntegrationService {
         }),
       ).timeout(const Duration(seconds: 30));
 
-      print('Status: ${response.statusCode}');
-      print('Body: ${response.body}');
-
       if (response.statusCode == 201) {
         final data = json.decode(response.body);
         return {'success': true, 'user': data['user'], 'message': data['message']};
@@ -92,25 +78,18 @@ class AuthIntegrationService {
     } on TimeoutException {
       return {'success': false, 'error': 'Timeout: Servidor demorou para responder'};
     } catch (e) {
-      print('Erro completo: $e');
-      return {'success': false, 'error': 'Erro de conexão: $e'};
+      return {'success': false, 'error': 'Erro de conexão'};
     }
   }
 
   // Salvar dados do usuário localmente
   static Future<void> _saveUserData(Map<String, dynamic> user) async {
-    print('Salvando dados do usuário: $user'); // Debug
     await SecureStorageService.setSecureInt('user_id', user['id']);
     await SecureStorageService.setSecureString('user_name', user['name'] ?? 'Usuário');
     await SecureStorageService.setSecureString('username', user['username'] ?? 'usuario');
     await SecureStorageService.setSecureString('user_email', user['email'] ?? '');
     await SecureStorageService.setSecureString('user_type', user['user_type'] ?? 'Responsável');
     await SecureStorageService.setSecureString('account_type', user['account_type'] ?? 'normal');
-    
-    // Verificar se salvou corretamente
-    final savedName = await SecureStorageService.getSecureString('user_name');
-    final savedUsername = await SecureStorageService.getSecureString('username');
-    print('Dados salvos - Nome: $savedName, Username: $savedUsername'); // Debug
   }
 
   // Logout
