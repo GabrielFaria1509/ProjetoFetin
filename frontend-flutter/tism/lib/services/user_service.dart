@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class UserService {
   static const String _keyUsername = 'username';
@@ -12,7 +12,7 @@ class UserService {
   static const String _keyEmail = 'email';
   
   // URL do backend dinâmica
-  static String get _baseUrl => const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:3000');
+  static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
 
   // Registrar novo usuário
   static Future<Map<String, dynamic>> register({

@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_auth_service.dart';
 import 'secure_storage_service.dart';
 
 class AuthIntegrationService {
-  static String get _baseUrl => const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:3000');
+  static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
 
   // Login completo com Firebase + Backend
   static Future<Map<String, dynamic>> loginWithEmail(String email, String password) async {
@@ -74,17 +75,8 @@ class AuthIntegrationService {
 
       if (user == null) throw Exception('Login cancelado');
 
-      // Verificar se usuário existe no backend
-      final existingUser = await _checkUserExists(user.email!);
-      
-      if (existingUser != null) {
-        // Usuário existe, fazer login
-        await _saveUserData(existingUser);
-        return {'success': true, 'user': existingUser};
-      } else {
-        // Criar novo usuário
-        return await _createSocialUser(user);
-      }
+      // Criar novo usuário social
+      return await _createSocialUser(user);
     } catch (e) {
       return {'success': false, 'error': e.toString()};
     }
@@ -93,18 +85,18 @@ class AuthIntegrationService {
   // Verificar se usuário existe no backend
   static Future<Map<String, dynamic>?> _checkUserExists(String email) async {
     try {
-      final response = await http.get(
-        Uri.parse('$_baseUrl/users?email=$email'),
+      final response = await http.post(
+        Uri.parse('$_baseUrl/login'),
         headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'password': 'social_check_${DateTime.now().millisecondsSinceEpoch}',
+        }),
       );
 
-      if (response.statusCode == 200) {
-        final users = json.decode(response.body) as List;
-        if (users.isNotEmpty) {
-          return users.first;
-        }
-      }
-      return null;
+      // Se retornar 401, usuário não existe ou senha incorreta
+      // Se retornar 200, usuário existe
+      return null; // Sempre criar novo usuário social
     } catch (e) {
       return null;
     }

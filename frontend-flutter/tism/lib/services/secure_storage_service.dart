@@ -1,12 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SecureStorageService {
   static const String _keyPrefix = 'tism_secure_';
   
   // Chave dinâmica para criptografia
-  static String get _encryptionKey => const String.fromEnvironment('ENCRYPTION_KEY', defaultValue: 'dev_key_not_secure');
+  static String get _encryptionKey => dotenv.env['ENCRYPTION_KEY'] ?? 'dev_key_not_secure';
   
   static String _encrypt(String data) {
     final bytes = utf8.encode(data + _encryptionKey);

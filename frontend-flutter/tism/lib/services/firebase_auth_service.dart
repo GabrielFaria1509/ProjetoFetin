@@ -38,10 +38,15 @@ class FirebaseAuthService {
   // Login com Google
   static Future<User?> signInWithGoogle() async {
     try {
+      await _googleSignIn.signOut(); // Limpar cache
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
 
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      
+      if (googleAuth.accessToken == null || googleAuth.idToken == null) {
+        throw Exception('Tokens de autenticação não recebidos');
+      }
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,

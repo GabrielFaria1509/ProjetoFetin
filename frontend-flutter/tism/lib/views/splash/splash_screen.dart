@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/views/login/login_startup.dart';
 import 'package:tism/views/home/home_page.dart';
-import 'package:tism/services/user_service.dart';
+import 'package:tism/services/auth_integration_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -60,57 +60,56 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _startAnimation() async {
-    // Aguarda o app carregar completamente
-    final isLoggedIn = await UserService.isLoggedIn();
-    if (isLoggedIn) {
-      await UserService.getUser();
+    try {
+      // Fade in do logo (0.3s)
+      await _fadeInController.forward();
+      
+      // Aguarda mais um tempo mostrando o logo
+      await Future.delayed(const Duration(milliseconds: 1000));
+      
+      // Inicia a animação de saída
+      await _animationController.forward();
+      
+      _navigateToNextScreen();
+    } catch (e) {
+      // Em caso de erro, navega para login
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginStartup()),
+        );
+      }
     }
-    
-    // Fade in do logo (0.3s)
-    await _fadeInController.forward();
-    
-    // Aguarda mais um tempo mostrando o logo
-    await Future.delayed(const Duration(milliseconds: 1000));
-    
-    // Inicia a animação de saída
-    await _animationController.forward();
-    
-    _navigateToNextScreen();
   }
 
   void _navigateToNextScreen() async {
     if (!mounted) return;
     
-    final isLoggedIn = await UserService.isLoggedIn();
-    if (!mounted) return;
-    
-    if (isLoggedIn) {
-      final user = await UserService.getUser();
+    try {
+      final isLoggedIn = await AuthIntegrationService.isLoggedIn();
       if (!mounted) return;
       
-      Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              HomePage(nomeUsuario: user?['username'] ?? 'Usuário'),
-          transitionDuration: const Duration(milliseconds: 500),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-        ),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const LoginStartup(),
-          transitionDuration: const Duration(milliseconds: 500),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-        ),
-      );
+      if (isLoggedIn) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const HomePage(nomeUsuario: 'Usuário'),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginStartup()),
+        );
+      }
+    } catch (e) {
+      // Em caso de erro, vai para login
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginStartup()),
+        );
+      }
     }
   }
 
@@ -130,13 +129,15 @@ class _SplashScreenState extends State<SplashScreen>
           animation: Listenable.merge([_fadeInController, _animationController]),
           builder: (context, child) {
             return Transform.scale(
-              scale: _scaleAnimation.value,
+              scale: 1.0 - _scaleAnimation.value,
               child: Opacity(
-                opacity: _fadeInAnimation.value * _opacityAnimation.value,
+                opacity: _fadeInAnimation.value * (1.0 - _opacityAnimation.value),
                 child: Image.asset(
                   'assets/images/TISM-heart.png',
                   width: 200,
                   height: 200,
+                  errorBuilder: (context, error, stackTrace) => 
+                    const Icon(Icons.favorite, size: 200, color: Colors.blue),
                 ),
               ),
             );

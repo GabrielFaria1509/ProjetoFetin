@@ -3,8 +3,8 @@ import 'package:tism/constants/colors.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
 import 'package:tism/services/user_service.dart';
-import 'package:tism/widgets/social_login_buttons.dart';
 import 'package:tism/services/auth_integration_service.dart';
+import 'package:tism/widgets/social_login_buttons.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(result['error'] ?? 'Erro no login social'),
-              backgroundColor: tismRed,
+              backgroundColor: Colors.red,
             ),
           );
         }
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erro no login social: $e'),
-            backgroundColor: tismRed,
+            backgroundColor: Colors.red,
           ),
         );
       }
@@ -264,11 +264,12 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               const SizedBox(height: 24),
-              SocialLoginButtons(
-                onGoogleLogin: () => _handleSocialLogin('google'),
-                onAppleLogin: () => _handleSocialLogin('apple'),
-                onLoading: () => setState(() => _isLoading = true),
-              ),
+              if (!_isLoading)
+                SocialLoginButtons(
+                  onGoogleLogin: () => _handleSocialLogin('google'),
+                  onAppleLogin: () => _handleSocialLogin('apple'),
+                  onLoading: () => setState(() => _isLoading = true),
+                ),
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () {

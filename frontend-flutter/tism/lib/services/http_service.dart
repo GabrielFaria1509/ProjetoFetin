@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HttpService {
-  static String get _baseUrl => const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:3000');
+  static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
   static const Duration _timeout = Duration(seconds: 30);
   
   // Headers seguros padrão

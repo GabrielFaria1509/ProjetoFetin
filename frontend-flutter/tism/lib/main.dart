@@ -10,16 +10,25 @@ import 'package:tism/views/splash/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Inicializar Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
   try {
+    // Carregar .env primeiro
     await dotenv.load(fileName: ".env");
+    debugPrint('Arquivo .env carregado com sucesso');
   } catch (e) {
     debugPrint('Erro ao carregar .env: $e');
   }
+  
+  try {
+    // Inicializar Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    debugPrint('Firebase inicializado com sucesso');
+  } catch (e) {
+    debugPrint('Erro ao inicializar Firebase: $e');
+  }
+  
+
   
   runApp(
     ChangeNotifierProvider(

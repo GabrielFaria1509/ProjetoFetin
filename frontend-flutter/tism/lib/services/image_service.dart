@@ -5,9 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ImageService {
-  static const String _baseUrl = 'https://tism-backend-api-rgxd.onrender.com';
+  static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
   
   static Future<String?> pickAndCropImage(BuildContext context) async {
     try {
