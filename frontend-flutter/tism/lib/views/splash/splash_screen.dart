@@ -86,7 +86,8 @@ class _SplashScreenState extends State<SplashScreen>
     if (!mounted) return;
     
     try {
-      final isLoggedIn = await AuthIntegrationService.isLoggedIn();
+      final isLoggedIn = await AuthIntegrationService.isLoggedIn()
+          .timeout(const Duration(seconds: 3));
       if (!mounted) return;
       
       if (isLoggedIn) {

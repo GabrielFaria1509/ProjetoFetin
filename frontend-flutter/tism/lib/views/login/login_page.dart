@@ -246,31 +246,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 24),
-              Row(
-                children: [
-                  Expanded(child: Divider(color: Colors.grey[400])),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'ou continue com',
-                      style: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.grey[400] 
-                          : Colors.grey[600],
-                      ),
-                    ),
-                  ),
-                  Expanded(child: Divider(color: Colors.grey[400])),
-                ],
-              ),
-              const SizedBox(height: 24),
-              if (!_isLoading)
-                SocialLoginButtons(
-                  onGoogleLogin: () => _handleSocialLogin('google'),
-                  onAppleLogin: () => _handleSocialLogin('apple'),
-                  onLoading: () => setState(() => _isLoading = true),
-                ),
-              const SizedBox(height: 16),
               TextButton(
                 onPressed: () {
                   Navigator.push(

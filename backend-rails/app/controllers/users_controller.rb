@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # API-only Rails não usa CSRF protection
   require 'base64'
+  require 'securerandom'
 
   def index
     users = User.all.order(created_at: :desc)
@@ -20,27 +21,53 @@ class UsersController < ApplicationController
   end
 
   def create
+    # Rate limiting
+    if SecurityService.rate_limit_exceeded?(request.remote_ip, :signup)
+      return render json: { error: "Muitas tentativas. Tente novamente mais tarde" }, status: :too_many_requests
+    end
+    
     # Validar parâmetros obrigatórios
-    return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Nome é obrigatório" }, status: :bad_request unless params[:name].present?
     return render json: { error: "Username é obrigatório" }, status: :bad_request unless params[:username].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
-    return render json: { error: "Senha deve ter pelo menos 8 caracteres" }, status: :bad_request if params[:password].length < 8
     
-    user = User.new(user_params)
-
+    # Validar dados com segurança
+    security_errors = SecurityService.validate_user_data(params)
+    return render json: { error: security_errors.first }, status: :bad_request if security_errors.any?
+    
+    # Criar conta no Firebase
+    firebase_result = FirebaseSignupService.create_user(params[:email], params[:password])
+    
+    unless firebase_result[:success]
+      return render json: { error: firebase_result[:error] }, status: :unprocessable_entity
+    end
+    
+    # Criar usuário no banco local (não verificado ainda)
+    user = User.new(
+      email: firebase_result[:email].downcase,
+      firebase_uid: firebase_result[:firebase_uid],
+      name: SecurityService.sanitize_input(params[:name]).titleize,
+      username: SecurityService.sanitize_input(params[:username]).downcase,
+      user_type: params[:user_type] || 'responsavel',
+      account_type: 'normal',
+      password: SecureRandom.hex(16), # Senha aleatória pois usa Firebase
+      email_verified: false
+    )
+    
     if user.save
       render json: { 
-        message: "Usuário criado com sucesso", 
+        message: "Conta criada! Verifique seu email para ativar", 
         user: {
           id: user.id,
           username: user.username,
           email: user.email,
           name: user.name,
           user_type: user.user_type,
-          account_type: user.account_type || 'normal'
-        }
+          account_type: user.account_type,
+          email_verified: user.email_verified
+        },
+        email_sent: firebase_result[:email_sent]
       }, status: :created
     else
       render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
@@ -48,30 +75,49 @@ class UsersController < ApplicationController
   end
 
   def login
+    # Rate limiting
+    if SecurityService.rate_limit_exceeded?(request.remote_ip, :login)
+      return render json: { error: "Muitas tentativas de login. Tente novamente em 15 minutos" }, status: :too_many_requests
+    end
+    
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
-    user = User.where("email = ?", params[:email].to_s.strip.downcase).first
-
-    if user && user.authenticate(params[:password])
-      # Atualizar último login
-      user.update(last_login_at: Time.current)
-      
-      render json: { 
-        message: "Login realizado com sucesso", 
-        user: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          name: user.name,
-          user_type: user.user_type,
-          account_type: user.account_type || 'normal',
-          profile_picture: user.profile_picture
-        }
-      }, status: :ok
-    else
-      render json: { error: "Email ou senha inválidos" }, status: :unauthorized
+    # Autenticar com Firebase
+    firebase_result = FirebaseAuthService.authenticate_user(params[:email], params[:password])
+    
+    unless firebase_result[:success]
+      return render json: { error: firebase_result[:error] }, status: :unauthorized
     end
+    
+    # Buscar ou criar usuário no banco local
+    user = User.find_or_create_by(email: firebase_result[:email].downcase) do |u|
+      u.firebase_uid = firebase_result[:firebase_uid]
+      u.name = firebase_result[:email].split('@')[0].titleize
+      u.username = firebase_result[:email].split('@')[0].downcase
+      u.user_type = 'responsavel'
+      u.account_type = 'normal'
+      u.password = SecureRandom.hex(16) # Senha aleatória pois usa Firebase
+    end
+    
+    # Atualizar último login e firebase_uid se necessário
+    user.update(
+      last_login_at: Time.current,
+      firebase_uid: firebase_result[:firebase_uid]
+    )
+    
+    render json: { 
+      message: "Login realizado com sucesso", 
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+        user_type: user.user_type,
+        account_type: user.account_type || 'normal',
+        profile_picture: user.profile_picture
+      }
+    }, status: :ok
   end
 
   def destroy
