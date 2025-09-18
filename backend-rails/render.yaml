@@ -18,3 +18,5 @@ services:
         sync: false
       - key: WEB_CONCURRENCY
         value: 4
+      - key: FIREBASE_API_KEY
+        value: AIzaSyBiJ0mUJJg4VnpXBEQP1lRdvH33vPTj0MM
