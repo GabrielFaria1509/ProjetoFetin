@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/auth_integration_service.dart';
-import 'package:tism/views/home/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -71,17 +70,14 @@ class _RegisterPageState extends State<RegisterPage> {
         if (result['success']) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(result['message'] ?? 'Cadastro realizado com sucesso!'),
+              content: Text(result['message'] ?? 'Cadastro realizado! Verifique seu email.'),
               backgroundColor: Colors.green,
+              duration: const Duration(seconds: 5),
             ),
           );
           
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(nomeUsuario: nome),
-            ),
-          );
+          // Voltar para login após cadastro
+          Navigator.pop(context);
         } else {
           setState(() => erro = result['error']);
         }
@@ -252,7 +248,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.red),
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/views/login/login_startup.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/services/auth_integration_service.dart';
+import 'package:tism/services/secure_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -91,17 +92,22 @@ class _SplashScreenState extends State<SplashScreen>
       if (!mounted) return;
       
       if (isLoggedIn) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const HomePage(nomeUsuario: 'Usuário'),
-          ),
-        );
+        final userName = await SecureStorageService.getSecureString('user_name') ?? 'Usuário';
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => HomePage(nomeUsuario: userName),
+            ),
+          );
+        }
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const LoginStartup()),
-        );
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const LoginStartup()),
+          );
+        }
       }
     } catch (e) {
       // Em caso de erro, vai para login

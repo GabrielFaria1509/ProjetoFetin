@@ -4,7 +4,6 @@ import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/services/auth_integration_service.dart';
-import 'package:tism/widgets/social_login_buttons.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,43 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController senhaController = TextEditingController();
   bool _isLoading = false;
 
-  Future<void> _handleSocialLogin(String provider) async {
-    setState(() => _isLoading = true);
-    
-    try {
-      final result = await AuthIntegrationService.loginSocial(provider);
-      
-      if (result['success'] && mounted) {
-        final user = result['user'];
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => HomePage(nomeUsuario: user['username'] ?? user['name']),
-          ),
-        );
-      } else {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(result['error'] ?? 'Erro no login social'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro no login social: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
-  }
+
 
   Future<void> _tentarLogin() async {
     final email = emailController.text.trim();

@@ -1,8 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter/foundation.dart';
-import 'secure_storage_service.dart;
+import 'secure_storage_service.dart';
 
 class AuthIntegrationService {
   static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';

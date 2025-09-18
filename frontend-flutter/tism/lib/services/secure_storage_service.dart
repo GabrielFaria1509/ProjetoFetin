@@ -12,7 +12,7 @@ class SecureStorageService {
   static String _encrypt(String data) {
     final bytes = utf8.encode(data + _encryptionKey);
     final digest = sha256.convert(bytes);
-    return base64.encode(utf8.encode(data)) + '.' + digest.toString().substring(0, 16);
+    return '${base64.encode(utf8.encode(data))}.${digest.toString().substring(0, 16)}';
   }
   
   static String? _decrypt(String encryptedData) {

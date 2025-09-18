@@ -43,13 +43,13 @@ class UsersController < ApplicationController
       return render json: { error: firebase_result[:error] }, status: :unprocessable_entity
     end
     
-    # Criar usuário no banco local (não verificado ainda)
+    # Criar usuário no banco local
     user = User.new(
       email: firebase_result[:email].downcase,
       firebase_uid: firebase_result[:firebase_uid],
       name: SecurityService.sanitize_input(params[:name]).titleize,
       username: SecurityService.sanitize_input(params[:username]).downcase,
-      user_type: params[:user_type] || 'responsavel',
+      user_type: params[:user_type] || 'Responsável',
       account_type: 'normal',
       password: SecureRandom.hex(16), # Senha aleatória pois usa Firebase
       email_verified: false
@@ -64,8 +64,7 @@ class UsersController < ApplicationController
           email: user.email,
           name: user.name,
           user_type: user.user_type,
-          account_type: user.account_type,
-          email_verified: user.email_verified
+          account_type: user.account_type
         },
         email_sent: firebase_result[:email_sent]
       }, status: :created
@@ -95,12 +94,12 @@ class UsersController < ApplicationController
       u.firebase_uid = firebase_result[:firebase_uid]
       u.name = firebase_result[:email].split('@')[0].titleize
       u.username = firebase_result[:email].split('@')[0].downcase
-      u.user_type = 'responsavel'
+      u.user_type = 'Responsável'
       u.account_type = 'normal'
       u.password = SecureRandom.hex(16) # Senha aleatória pois usa Firebase
     end
     
-    # Atualizar último login e firebase_uid se necessário
+    # Atualizar último login e firebase_uid
     user.update(
       last_login_at: Time.current,
       firebase_uid: firebase_result[:firebase_uid]
