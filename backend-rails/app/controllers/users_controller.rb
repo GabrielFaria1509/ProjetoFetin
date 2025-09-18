@@ -74,15 +74,9 @@ class UsersController < ApplicationController
   end
 
   def login
-    # Rate limiting
-    if SecurityService.rate_limit_exceeded?(request.remote_ip, :login)
-      return render json: { error: "Muitas tentativas de login. Tente novamente em 15 minutos" }, status: :too_many_requests
-    end
-    
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
-    # Buscar usuário no banco PostgreSQL
     user = User.where("email = ?", params[:email].to_s.strip.downcase).first
 
     if user && user.authenticate(params[:password])

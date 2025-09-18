@@ -99,12 +99,18 @@ class AuthIntegrationService {
 
   // Salvar dados do usuário localmente
   static Future<void> _saveUserData(Map<String, dynamic> user) async {
+    print('Salvando dados do usuário: $user'); // Debug
     await SecureStorageService.setSecureInt('user_id', user['id']);
-    await SecureStorageService.setSecureString('user_name', user['name'] ?? '');
-    await SecureStorageService.setSecureString('username', user['username'] ?? '');
+    await SecureStorageService.setSecureString('user_name', user['name'] ?? 'Usuário');
+    await SecureStorageService.setSecureString('username', user['username'] ?? 'usuario');
     await SecureStorageService.setSecureString('user_email', user['email'] ?? '');
-    await SecureStorageService.setSecureString('user_type', user['user_type'] ?? '');
+    await SecureStorageService.setSecureString('user_type', user['user_type'] ?? 'Responsável');
     await SecureStorageService.setSecureString('account_type', user['account_type'] ?? 'normal');
+    
+    // Verificar se salvou corretamente
+    final savedName = await SecureStorageService.getSecureString('user_name');
+    final savedUsername = await SecureStorageService.getSecureString('username');
+    print('Dados salvos - Nome: $savedName, Username: $savedUsername'); // Debug
   }
 
   // Logout
