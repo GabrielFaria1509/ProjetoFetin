@@ -12,9 +12,21 @@ class AdminController < ApplicationController
 
   # Admin Login
   def login
-    user = User.find_by(email: params[:email])
+    return render json: { error: 'Email é obrigatório' }, status: :bad_request unless params[:email].present?
+    return render json: { error: 'Senha é obrigatória' }, status: :bad_request unless params[:password].present?
+    
+    # Rate limiting manual adicional para admin
+    cache_key = "admin_login_#{request.remote_ip}"
+    attempts = Rails.cache.read(cache_key) || 0
+    
+    if attempts >= 3
+      return render json: { error: 'Muitas tentativas de login admin. Tente em 1 hora.' }, status: :too_many_requests
+    end
+    
+    user = User.where("email = ?", params[:email].to_s.strip.downcase).first
     
     if user && user.authenticate(params[:password])
+      Rails.cache.delete(cache_key) # Limpar tentativas em caso de sucesso
       token = generate_admin_token(user)
       render json: { 
         message: 'Login administrativo realizado com sucesso',
@@ -22,6 +34,7 @@ class AdminController < ApplicationController
         token: token
       }, status: :ok
     else
+      Rails.cache.write(cache_key, attempts + 1, expires_in: 1.hour)
       render json: { error: 'Credenciais inválidas' }, status: :unauthorized
     end
   end
@@ -35,7 +48,15 @@ class AdminController < ApplicationController
   end
 
   def users_update
-    user = User.find(params[:id])
+    user = User.where("id = ?", params[:id]).first
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
+    
+    # Validar account_type se fornecido
+    if params[:account_type].present?
+      unless ['normal', 'verified', 'bot'].include?(params[:account_type])
+        return render json: { error: "Tipo de conta inválido" }, status: :bad_request
+      end
+    end
     
     if user.update(admin_user_params)
       render json: { 
@@ -45,16 +66,21 @@ class AdminController < ApplicationController
     else
       render json: { error: user.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Usuário não encontrado" }, status: :not_found
   end
 
   def users_destroy
-    user = User.find(params[:id])
+    user = User.where("id = ?", params[:id]).first
+    return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
     if user.destroy
       render json: { message: 'Usuário deletado com sucesso' }, status: :ok
     else
       render json: { error: 'Erro ao deletar usuário' }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Usuário não encontrado" }, status: :not_found
   end
 
   # Posts Management
@@ -80,13 +106,16 @@ class AdminController < ApplicationController
   end
 
   def posts_destroy
-    post = Post.find(params[:id])
+    post = Post.where("id = ?", params[:id]).first
+    return render json: { error: "Post não encontrado" }, status: :not_found unless post
     
     if post.destroy
       render json: { message: 'Post deletado com sucesso' }, status: :ok
     else
       render json: { error: 'Erro ao deletar post' }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Post não encontrado" }, status: :not_found
   end
 
   # Articles Management

@@ -11,9 +11,8 @@ class UserService {
   static const String _keyUserId = 'user_id';
   static const String _keyEmail = 'email';
   
-  // URL do backend - altere para a URL do seu deploy no Render.com
-  static const String _baseUrl = 'https://tism-backend-api-rgxd.onrender.com'; // Produção
-  // static const String _baseUrl = 'https://seu-app.onrender.com'; // Produção
+  // URL do backend dinâmica
+  static String get _baseUrl => const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:3000');
 
   // Registrar novo usuário
   static Future<Map<String, dynamic>> register({

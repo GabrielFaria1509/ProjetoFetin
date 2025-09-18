@@ -29,12 +29,7 @@ class PostsController < ApplicationController
     user = User.find_by(id: params[:user_id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
-    post = Post.new(
-      user: user,
-      content: params[:content],
-      likes_count: 0,
-      comments_count: 0
-    )
+    post = Post.new(post_params.merge(user: user, likes_count: 0, comments_count: 0))
 
     if post.save
       render json: {
@@ -136,5 +131,11 @@ class PostsController < ApplicationController
     else
       render json: { error: "Erro ao deletar post" }, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def post_params
+    params.permit(:content, :user_id)
   end
 end

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "244753639768",
+    "project_id": "tism-2025",
+    "storage_bucket": "tism-2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244753639768:android:4d8bea3de869c7b37c1d2d",
+        "android_client_info": {
+          "package_name": "com.example.tism_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244753639768-b1odoi6h1j0bail6n8saqapp51s9dsi9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tism_app",
+            "certificate_hash": "79e6009b69eeb20feb82deb382da47b6706c011d"
+          }
+        },
+        {
+          "client_id": "244753639768-ook8baurnnsso49gpjkka88c1hpeovm1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiJ0mUJJg4VnpXBEQP1lRdvH33vPTj0MM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244753639768-ook8baurnnsso49gpjkka88c1hpeovm1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

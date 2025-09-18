@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ForumService {
-  static const String _baseUrl = 'https://tism-backend-api-rgxd.onrender.com';
+  static String get _baseUrl => const String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:3000');
 
   static Future<bool> createPost(String content) async {
     try {

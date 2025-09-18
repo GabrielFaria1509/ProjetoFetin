@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
-    user = User.find_by(email: params[:email].to_s.strip.downcase)
+    user = User.where("email = ?", params[:email].to_s.strip.downcase).first
 
     if user && user.authenticate(params[:password])
       # Atualizar último login
@@ -147,21 +147,28 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    permitted = params.permit(:email, :password, :password_confirmation, :username, :name, :user_type)
+    permitted = params.permit(:email, :password, :password_confirmation, :username, :name, :user_type, :firebase_uid, :account_type)
     
     # Formatar nome (capitalizado) e username (minúsculo)
     permitted[:name] = permitted[:name].titleize if permitted[:name].present?
     permitted[:username] = permitted[:username].downcase if permitted[:username].present?
+    permitted[:email] = permitted[:email].downcase.strip if permitted[:email].present?
+    
+    # Validar account_type
+    permitted[:account_type] = 'normal' unless ['normal', 'verified', 'bot'].include?(permitted[:account_type])
     
     permitted
   end
   
   def update_user_params
-    permitted = params.permit(:username, :name, :user_type, :profile_picture)
+    permitted = params.permit(:username, :name, :user_type, :profile_picture, :account_type)
     
     # Formatar nome (capitalizado) e username (minúsculo)
     permitted[:name] = permitted[:name].titleize if permitted[:name].present?
     permitted[:username] = permitted[:username].downcase if permitted[:username].present?
+    
+    # Validar account_type
+    permitted[:account_type] = 'normal' unless ['normal', 'verified', 'bot'].include?(permitted[:account_type])
     
     permitted
   end

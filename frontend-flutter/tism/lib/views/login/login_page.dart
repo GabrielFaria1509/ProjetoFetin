@@ -3,6 +3,8 @@ import 'package:tism/constants/colors.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
 import 'package:tism/services/user_service.dart';
+import 'package:tism/widgets/social_login_buttons.dart';
+import 'package:tism/services/auth_integration_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,6 +17,44 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   bool _isLoading = false;
+
+  Future<void> _handleSocialLogin(String provider) async {
+    setState(() => _isLoading = true);
+    
+    try {
+      final result = await AuthIntegrationService.loginSocial(provider);
+      
+      if (result['success'] && mounted) {
+        final user = result['user'];
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => HomePage(nomeUsuario: user['username'] ?? user['name']),
+          ),
+        );
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(result['error'] ?? 'Erro no login social'),
+              backgroundColor: tismRed,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro no login social: $e'),
+            backgroundColor: tismRed,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
 
   Future<void> _tentarLogin() async {
     final email = emailController.text.trim();
@@ -55,10 +95,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      final result = await UserService.login(
-        email: email,
-        password: senha,
-      );
+      final result = await AuthIntegrationService.loginWithEmail(email, senha);
 
       if (mounted) {
         setState(() {
@@ -207,6 +244,30 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                 ),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                children: [
+                  Expanded(child: Divider(color: Colors.grey[400])),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'ou continue com',
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.grey[400] 
+                          : Colors.grey[600],
+                      ),
+                    ),
+                  ),
+                  Expanded(child: Divider(color: Colors.grey[400])),
+                ],
+              ),
+              const SizedBox(height: 24),
+              SocialLoginButtons(
+                onGoogleLogin: () => _handleSocialLogin('google'),
+                onAppleLogin: () => _handleSocialLogin('apple'),
+                onLoading: () => setState(() => _isLoading = true),
               ),
               const SizedBox(height: 16),
               TextButton(

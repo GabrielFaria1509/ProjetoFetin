@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/services/user_service.dart';
+import 'package:tism/services/auth_integration_service.dart';
 import 'package:tism/views/home/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -57,12 +57,12 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => _isLoading = true);
 
     try {
-      final result = await UserService.register(
+      final result = await AuthIntegrationService.registerWithEmail(
         name: nome,
         username: username,
         email: email,
         password: senha,
-        userType: _userType,
+        userType: _userType.toLowerCase(),
       );
 
       if (mounted) {
