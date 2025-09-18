@@ -7,8 +7,8 @@ services:
   - type: web
     name: tism-backend
     runtime: ruby
-    buildCommand: "bundle config set frozen false && bundle install"
-    startCommand: "bundle exec rails db:migrate RAILS_ENV=production && bundle exec puma -C config/puma.rb"
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
