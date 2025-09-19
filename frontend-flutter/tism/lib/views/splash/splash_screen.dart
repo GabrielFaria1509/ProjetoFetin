@@ -92,16 +92,22 @@ class _SplashScreenState extends State<SplashScreen>
       if (!mounted) return;
       
       if (isLoggedIn) {
-        final userName = await SecureStorageService.getSecureString('user_name') ?? 'Usuário';
-        final username = await SecureStorageService.getSecureString('username') ?? 'usuario';
+        final userName = await SecureStorageService.getSecureString('user_name');
         
-        if (mounted) {
+        if (mounted && userName != null && userName.isNotEmpty) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (_) => HomePage(nomeUsuario: userName),
             ),
           );
+        } else {
+          if (mounted) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const LoginStartup()),
+            );
+          }
         }
       } else {
         if (mounted) {

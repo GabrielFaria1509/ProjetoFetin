@@ -1,7 +1,7 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'secure_storage_service.dart';
 
 class UserService {
   static const String _keyUsername = 'username';
@@ -80,16 +80,14 @@ class UserService {
   
   // Salvar usuário localmente
   static Future<void> _saveUserLocally(Map<String, dynamic> user) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_keyUserId, user['id']);
-    await prefs.setString('name', user['name'] ?? '');
-    await prefs.setString(_keyUsername, user['username'] ?? '');
-    await prefs.setString(_keyEmail, user['email'] ?? '');
-    await prefs.setString(_keyUserType, user['user_type'] ?? 'Responsável');
-    await prefs.setString('account_type', user['account_type'] ?? 'normal');
-    await prefs.setBool(_keyIsLoggedIn, true);
+    await SecureStorageService.setSecureInt('user_id', user['id']);
+    await SecureStorageService.setSecureString('user_name', user['name'] ?? '');
+    await SecureStorageService.setSecureString('username', user['username'] ?? '');
+    await SecureStorageService.setSecureString('user_email', user['email'] ?? '');
+    await SecureStorageService.setSecureString('user_type', user['user_type'] ?? 'Responsável');
+    await SecureStorageService.setSecureString('account_type', user['account_type'] ?? 'normal');
     if (user['profile_picture'] != null) {
-      await prefs.setString(_keyProfileImage, user['profile_picture']);
+      await SecureStorageService.setSecureString('profile_image', user['profile_picture']);
     }
   }
   
@@ -99,37 +97,31 @@ class UserService {
     String userType = 'Responsável',
     String? profileImagePath,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_keyUsername, username);
-    await prefs.setString(_keyUserType, userType);
-    await prefs.setBool(_keyIsLoggedIn, true);
+    await SecureStorageService.setSecureString('username', username);
+    await SecureStorageService.setSecureString('user_type', userType);
     if (profileImagePath != null) {
-      await prefs.setString(_keyProfileImage, profileImagePath);
+      await SecureStorageService.setSecureString('profile_image', profileImagePath);
     }
   }
 
   static Future<Map<String, dynamic>?> getUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isLoggedIn = prefs.getBool(_keyIsLoggedIn) ?? false;
-
-    if (!isLoggedIn) return null;
+    final userId = await SecureStorageService.getSecureInt('user_id');
+    if (userId == null) return null;
 
     return {
-      'id': prefs.getInt(_keyUserId),
-      'name': prefs.getString('name') ?? '',
-      'username': prefs.getString(_keyUsername) ?? '',
-      'email': prefs.getString(_keyEmail) ?? '',
-      'userType': prefs.getString(_keyUserType) ?? 'Responsável',
-      'accountType': prefs.getString('account_type') ?? 'normal',
-      'profileImagePath': prefs.getString(_keyProfileImage),
-      'isLoggedIn': isLoggedIn,
+      'id': userId,
+      'name': await SecureStorageService.getSecureString('user_name'),
+      'username': await SecureStorageService.getSecureString('username'),
+      'email': await SecureStorageService.getSecureString('user_email'),
+      'userType': await SecureStorageService.getSecureString('user_type'),
+      'accountType': await SecureStorageService.getSecureString('account_type'),
+      'isLoggedIn': true,
     };
   }
 
   static Future<bool> updateUserType(String userType) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt(_keyUserId);
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return false;
       
@@ -152,12 +144,11 @@ class UserService {
 
   static Future<bool> updateProfileImage(String avatarUrl) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt(_keyUserId);
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return false;
       
-      await prefs.setString(_keyProfileImage, avatarUrl);
+      await SecureStorageService.setSecureString('profile_image', avatarUrl);
       return true;
     } catch (e) {
       return false;
@@ -166,8 +157,7 @@ class UserService {
 
   static Future<Map<String, dynamic>> updateName(String name) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt(_keyUserId);
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
       
@@ -192,8 +182,7 @@ class UserService {
 
   static Future<Map<String, dynamic>> updateUsername(String username) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt(_keyUserId);
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
       
@@ -241,12 +230,11 @@ class UserService {
   }
 
   static Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    await SecureStorageService.clearAll();
   }
 
   static Future<bool> isLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_keyIsLoggedIn) ?? false;
+    final userId = await SecureStorageService.getSecureInt('user_id');
+    return userId != null;
   }
 }

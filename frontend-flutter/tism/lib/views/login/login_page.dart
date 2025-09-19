@@ -66,12 +66,12 @@ class _LoginPageState extends State<LoginPage> {
         });
 
         if (result['success']) {
-          final user = await UserService.getUser();
+          final user = result['user'];
           if (mounted) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (_) => HomePage(nomeUsuario: user?['username'] ?? 'Usuário'),
+                builder: (_) => HomePage(nomeUsuario: user['name']),
               ),
             );
           }

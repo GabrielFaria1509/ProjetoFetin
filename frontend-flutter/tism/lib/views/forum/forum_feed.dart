@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
+import 'package:tism/services/secure_storage_service.dart';
 import 'post_widget.dart';
 import 'comments_screen.dart';
 
@@ -25,8 +25,7 @@ class _ForumFeedState extends State<ForumFeed> {
   }
 
   Future<void> _loadCurrentUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    _currentUserId = prefs.getInt('user_id');
+    _currentUserId = await SecureStorageService.getSecureInt('user_id');
   }
 
   Future<void> _loadPosts() async {

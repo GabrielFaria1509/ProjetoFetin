@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/secure_storage_service.dart';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
 import 'package:tism/views/chatbot/chat_screen.dart';
@@ -28,8 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadUserName() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final fullName = prefs.getString('name') ?? widget.nomeUsuario;
+      final fullName = await SecureStorageService.getSecureString('user_name') ?? widget.nomeUsuario;
       
       // Pegar apenas o primeiro nome e capitalizar
       final firstName = fullName.split(' ').first;

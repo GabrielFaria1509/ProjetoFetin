@@ -1,15 +1,14 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'secure_storage_service.dart';
 
 class ForumService {
   static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
 
   static Future<bool> createPost(String content) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt('user_id');
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return false;
       
@@ -30,8 +29,7 @@ class ForumService {
 
   static Future<List<Map<String, dynamic>>> getPosts() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt('user_id');
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       final uri = userId != null 
         ? Uri.parse('$_baseUrl/posts?user_id=$userId')
@@ -54,8 +52,7 @@ class ForumService {
 
   static Future<bool> likePost(int postId) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt('user_id');
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return false;
       
@@ -73,8 +70,7 @@ class ForumService {
 
   static Future<bool> savePost(int postId) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getInt('user_id');
+      final userId = await SecureStorageService.getSecureInt('user_id');
       
       if (userId == null) return false;
       

@@ -84,12 +84,13 @@ class AuthIntegrationService {
 
   // Salvar dados do usuário localmente
   static Future<void> _saveUserData(Map<String, dynamic> user) async {
+    await SecureStorageService.clearAll(); // Limpar dados antigos
     await SecureStorageService.setSecureInt('user_id', user['id']);
-    await SecureStorageService.setSecureString('user_name', user['name'] ?? 'Usuário');
-    await SecureStorageService.setSecureString('username', user['username'] ?? 'usuario');
-    await SecureStorageService.setSecureString('user_email', user['email'] ?? '');
-    await SecureStorageService.setSecureString('user_type', user['user_type'] ?? 'Responsável');
-    await SecureStorageService.setSecureString('account_type', user['account_type'] ?? 'normal');
+    await SecureStorageService.setSecureString('user_name', user['name']);
+    await SecureStorageService.setSecureString('username', user['username']);
+    await SecureStorageService.setSecureString('user_email', user['email']);
+    await SecureStorageService.setSecureString('user_type', user['user_type']);
+    await SecureStorageService.setSecureString('account_type', user['account_type']);
   }
 
   // Logout
