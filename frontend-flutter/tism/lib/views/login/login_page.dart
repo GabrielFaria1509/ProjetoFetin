@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
-import 'package:tism/services/user_service.dart';
 import 'package:tism/services/auth_integration_service.dart';
 
 class LoginPage extends StatefulWidget {
