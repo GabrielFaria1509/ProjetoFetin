@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCard(
                     context,
-                    'Chatbot',
+                    'Tina - Chatbot',
                     Icons.chat,
                     () => Navigator.push(
                       context,

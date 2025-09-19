@@ -11,7 +11,7 @@ void main() async {
   try {
     await dotenv.load(fileName: ".env");
   } catch (e) {
-    debugPrint('Erro ao carregar .env: $e');
+    // Erro ao carregar .env silencioso
   }
   
   runApp(

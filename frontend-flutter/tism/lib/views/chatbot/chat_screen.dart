@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tism/constants/colors.dart';
+import 'dart:convert';
 import 'chatbot_service.dart';
 import 'quick_suggestions.dart';
 
@@ -22,8 +23,9 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     _messages.add(ChatMessage(
-      text: '💙 **Olá! Estou aqui para apoiar você.**\n\n🎯 **Posso ajudar com:**\n• Identificar sinais do TEA\n• Orientar sobre diagnóstico\n• Sugerir terapias\n• Apoiar inclusão escolar\n• Oferecer suporte emocional\n\n💬 **Seja específico:** "Meu filho tem 3 anos e não fala" ou "Como lidar com crises?"\n\n🤗 **Você não está sozinho(a) nessa jornada.**',
+      text: 'Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?',
       isUser: false,
+      avatarMood: 'smile',
     ));
   }
 
@@ -41,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ? const Color(0xFF121212) 
         : null,
       appBar: AppBar(
-        title: const Text('Assistente TEA'),
+        title: const Text('Tina - Assistente TEA'),
         backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
@@ -172,9 +174,41 @@ class _ChatScreenState extends State<ChatScreen> {
     _scrollToBottom();
 
     final response = await ChatbotService.sendMessage(text);
+    
+    // Parse JSON response
+    String messageText = response;
+    String mood = 'smile';
+    
+    try {
+      String jsonStr = response.trim();
+      
+      // Extrair JSON se houver texto extra
+      int jsonStart = jsonStr.indexOf('{');
+      int jsonEnd = jsonStr.lastIndexOf('}');
+      
+      if (jsonStart >= 0 && jsonEnd > jsonStart) {
+        jsonStr = jsonStr.substring(jsonStart, jsonEnd + 1);
+      }
+      
+      final jsonResponse = json.decode(jsonStr);
+      messageText = jsonResponse['message']?.toString() ?? response;
+      mood = jsonResponse['mood']?.toString() ?? 'smile';
+      
+      const validMoods = ['grimacing', 'smile', 'happy', 'eyebrow', 'sweat', 'wink'];
+      if (!validMoods.contains(mood)) mood = 'smile';
+      
+      
+    } catch (e) {
+      messageText = response;
+      mood = 'smile';
+    }
 
     setState(() {
-      _messages.add(ChatMessage(text: response, isUser: false));
+      _messages.add(ChatMessage(
+        text: messageText,
+        isUser: false,
+        avatarMood: mood,
+      ));
       _isLoading = false;
     });
     
@@ -197,25 +231,24 @@ class _ChatScreenState extends State<ChatScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('💙 Sobre o Assistente TEA'),
+        title: const Text('💙 Sobre a Tina'),
         content: const Text(
-          '🤗 **Olá! Eu sou seu assistente especializado em TEA!**\n\n'
-          'Fui criado com muito carinho para apoiar famílias, educadores e cuidadores na jornada do Transtorno do Espectro Autista.\n\n'
-          '✨ **O que posso fazer por você:**\n'
-          '• 🔍 Ajudar a identificar sinais e características\n'
-          '• 🩺 Orientar sobre o processo de diagnóstico\n'
-          '• 🌱 Compartilhar informações sobre terapias\n'
-          '• 🏫 Dar dicas de inclusão escolar\n'
-          '• 📋 Explicar direitos e benefícios\n'
-          '• 💪 Oferecer apoio emocional e motivação\n\n'
-          '🎯 **Minha missão:** Ser seu companheiro de confiança, oferecendo informações baseadas em evidências científicas, sempre com empatia e compreensão.\n\n'
-          '⚠️ **Lembrete importante:** Sou um assistente informativo e não substituo a consulta com profissionais de saúde. Sempre busque orientação médica especializada!\n\n'
-          '💙 **Juntos, podemos fazer a diferença na vida de pessoas com TEA!**'
+          '🤖 **Olá! Eu sou a Tina!**\n\n'
+          'Sou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.\n\n'
+          '🎯 **Minha especialização:**\n'
+          '• 🧠 Desenvolvimento e comportamento\n'
+          '• 🏫 Estratégias educacionais inclusivas\n'
+          '• 💬 Técnicas de comunicação e interação social\n'
+          '• 🌍 Adaptações ambientais e sensoriais\n'
+          '• 🛠️ Recursos práticos para o dia a dia\n\n'
+          '🔬 **Base científica:** Fui treinada com conhecimento validado por neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\n'
+          '⚠️ **Importante:** Não realizo diagnósticos nem substituo profissionais de saúde. Meu papel é complementar, oferecendo suporte informativo e prático.\n\n'
+          '💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**'
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Entendi! Vamos conversar! 😊'),
+            child: const Text('Entendi, Tina! Vamos conversar! 😊'),
           ),
         ],
       ),
@@ -227,11 +260,13 @@ class _ChatScreenState extends State<ChatScreen> {
 class ChatMessage {
   final String text;
   final bool isUser;
-  final DateTime? timestamp; // Opcional para economizar memória
+  final String? avatarMood;
+  final DateTime? timestamp;
 
   ChatMessage({
     required this.text, 
     required this.isUser,
+    this.avatarMood,
     this.timestamp,
   });
 }
@@ -253,9 +288,20 @@ class ChatBubble extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 4),
               child: CircleAvatar(
-                radius: 14,
-                backgroundColor: tismAqua,
-                child: const Icon(Icons.psychology, size: 16, color: Colors.white),
+                radius: 16,
+                backgroundColor: Colors.grey[200],
+                child: ClipOval(
+                  child: Image.asset(
+                    message.avatarMood != null 
+                      ? 'assets/images/chatbot/chatbot-${message.avatarMood}.png'
+                      : 'assets/images/chatbot/chatbot-smile.png',
+                    width: 32,
+                    height: 32,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => 
+                      const Icon(Icons.psychology, size: 18, color: Colors.white),
+                  ),
+                ),
               ),
             ),
           const SizedBox(width: 6),
@@ -282,7 +328,7 @@ class ChatBubble extends StatelessWidget {
                     message.text,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 15,
                       height: 1.3,
                     ),
                   )
@@ -294,7 +340,7 @@ class ChatBubble extends StatelessWidget {
                         color: Theme.of(context).brightness == Brightness.dark 
                           ? Colors.white 
                           : Colors.black87,
-                        fontSize: 14,
+                        fontSize: 15,
                         height: 1.3,
                       ),
                       strong: TextStyle(
@@ -361,11 +407,11 @@ class ChatBubble extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 4),
               child: CircleAvatar(
-                radius: 14,
+                radius: 16,
                 backgroundColor: Theme.of(context).brightness == Brightness.dark 
                   ? Colors.grey[600] 
                   : Colors.grey[400],
-                child: const Icon(Icons.person, size: 16, color: Colors.white),
+                child: const Icon(Icons.person, size: 18, color: Colors.white),
               ),
             ),
         ],

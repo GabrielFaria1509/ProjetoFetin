@@ -32,20 +32,28 @@ Enquanto isso, você pode usar o fórum para tirar dúvidas com a comunidade!'''
         ),
       );
 
-      final prompt = '''Você é TISM, um assistente especializado em TEA (Transtorno do Espectro Autista).
-Você deve responder de forma empática, útil e acessível em português brasileiro.
-Suas respostas devem ser informativas mas não substituem consulta médica profissional.
+      final prompt = '''Responda SOMENTE em formato JSON. NÃO adicione texto antes ou depois.
 
-Pergunta do usuário: $message
+Você é Tina, assistente TEA do TISM.
 
-Responda de forma clara e objetiva:''';
+Moods:
+- grimacing: situações polêmicas, "eita!", temas delicados
+- smile: cordial, neutro, informações gerais
+- happy: celebrações, conquistas, boas notícias
+- eyebrow: dúvidas, questionamentos
+- sweat: tristeza ("meu filho morreu"), luto, dor, sofrimento
+- wink: dicas, cumplicidade
+
+Exemplo: {"message": "Sinto muito pela sua perda. Estou aqui para apoiar.", "mood": "sweat"}
+
+Pergunta: $message''';
       
       final content = [Content.text(prompt)];
       final response = await model.generateContent(content);
       
       final responseText = response.text;
       if (responseText == null || responseText.isEmpty) {
-        return 'Desculpe, não consegui gerar uma resposta adequada. Tente reformular sua pergunta.';
+        return '{"message": "Desculpe, não consegui gerar uma resposta adequada. Tente reformular sua pergunta.", "mood": "smile"}';
       }
       
       return responseText;
@@ -61,4 +69,6 @@ Responda de forma clara e objetiva:''';
       return 'Erro de conexão. Verifique sua internet e tente novamente.';
     }
   }
+
+
 }
