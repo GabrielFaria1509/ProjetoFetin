@@ -59,6 +59,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(const SnackBar(content: Text('Comentário enviado!')));
+          // Retornar true para atualizar contador
+          Navigator.pop(context, true);
         }
       }
     } catch (e) {

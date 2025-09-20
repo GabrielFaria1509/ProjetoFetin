@@ -17,6 +17,7 @@ class _ForumFeedState extends State<ForumFeed> {
   List<Map<String, dynamic>> posts = [];
   bool _isLoading = true;
   int? _currentUserId;
+  final Map<String, bool> _pendingLikes = {}; // Estado final pendente
 
   @override
   void initState() {
@@ -57,6 +58,9 @@ class _ForumFeedState extends State<ForumFeed> {
     return RefreshIndicator(
       onRefresh: _loadPosts,
       color: tismAqua,
+      backgroundColor: Colors.white,
+      strokeWidth: 3,
+      displacement: 60,
       child: ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: posts.length,
@@ -121,10 +125,28 @@ class _ForumFeedState extends State<ForumFeed> {
   }
 
   Future<void> _toggleLike(String postId) async {
-    final success = await ForumService.likePost(int.parse(postId));
-    if (success) {
-      // Recarregar posts para ter estado atualizado
-      await _loadPosts();
+    // Atualizar UI imediatamente
+    setState(() {
+      final postIndex = posts.indexWhere((p) => p['id'].toString() == postId);
+      if (postIndex != -1) {
+        final post = posts[postIndex];
+        final wasLiked = post['isLiked'] == true;
+        post['isLiked'] = !wasLiked;
+        post['likes'] = (post['likes'] ?? 0) + (wasLiked ? -1 : 1);
+        
+        // Guardar estado final para enviar
+        _pendingLikes[postId] = post['isLiked'];
+      }
+    });
+    
+    // Debounce: aguarda 500ms sem novos cliques
+    await Future.delayed(const Duration(milliseconds: 500));
+    
+    // Se ainda é o estado final, envia para servidor
+    final finalState = _pendingLikes[postId];
+    if (finalState != null) {
+      _pendingLikes.remove(postId);
+      await ForumService.likePost(int.parse(postId));
     }
   }
 
@@ -140,7 +162,17 @@ class _ForumFeedState extends State<ForumFeed> {
           post: post,
         ),
       ),
-    ).then((_) => _loadPosts()); // Recarregar posts ao voltar
+    ).then((result) {
+      // Atualizar contador se novo comentário foi adicionado
+      if (result == true) {
+        setState(() {
+          final postIndex = posts.indexWhere((p) => p['id'].toString() == postId);
+          if (postIndex != -1) {
+            posts[postIndex]['comments'] = (posts[postIndex]['comments'] ?? 0) + 1;
+          }
+        });
+      }
+    });
   }
 
   bool _canDeletePost(Map<String, dynamic> post) {

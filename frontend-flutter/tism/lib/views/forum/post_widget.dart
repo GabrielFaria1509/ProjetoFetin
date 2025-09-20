@@ -215,19 +215,11 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                               builder: (context, child) {
                                 return Transform.scale(
                                   scale: widget.post['isLiked'] == true ? _likeScaleAnimation.value : 1.0,
-                                  child: widget.post['isLiked'] == true
-                                    ? Image.asset(
-                                        'assets/images/TISM-heart-red.png',
-                                        width: 20,
-                                        height: 20,
-                                        errorBuilder: (context, error, stackTrace) => 
-                                          const Icon(Icons.favorite, color: Colors.red, size: 20),
-                                      )
-                                    : Icon(
-                                        Icons.favorite_border,
-                                        color: Colors.grey[600],
-                                        size: 20,
-                                      ),
+                                  child: Icon(
+                                    widget.post['isLiked'] == true ? Icons.favorite : Icons.favorite_border,
+                                    color: widget.post['isLiked'] == true ? Colors.red : Colors.grey[600],
+                                    size: 20,
+                                  ),
                                 );
                               },
                             ),
@@ -240,12 +232,10 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                                     opacity: _likeOpacityAnimation.value * 0.7,
                                     child: Transform.scale(
                                       scale: _likeScaleAnimation.value * 1.5,
-                                      child: Image.asset(
-                                        'assets/images/TISM-heart-red.png',
-                                        width: 25,
-                                        height: 25,
-                                        errorBuilder: (context, error, stackTrace) => 
-                                          const Icon(Icons.favorite, color: Colors.pink, size: 25),
+                                      child: const Icon(
+                                        Icons.favorite,
+                                        color: Colors.pink,
+                                        size: 25,
                                       ),
                                     ),
                                   );
