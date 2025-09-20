@@ -4,12 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'secure_storage_service.dart';
 
 class UserService {
-  static const String _keyUsername = 'username';
-  static const String _keyUserType = 'user_type';
-  static const String _keyProfileImage = 'profile_image';
-  static const String _keyIsLoggedIn = 'is_logged_in';
-  static const String _keyUserId = 'user_id';
-  static const String _keyEmail = 'email';
   
   // URL do backend dinâmica
   static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
