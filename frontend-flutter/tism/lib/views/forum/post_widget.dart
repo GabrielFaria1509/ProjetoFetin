@@ -48,7 +48,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
 
   void _handleLike() {
     widget.onLike(widget.post['id'].toString());
-    if (!widget.post['isLiked']) {
+    if (widget.post['isLiked'] != true) {
       _likeAnimationController.forward().then((_) {
         _likeAnimationController.reverse();
       });
@@ -159,7 +159,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
             
             // Conteúdo do post
             Text(
-              widget.post['content'] ?? 'Sem conteúdo',
+              widget.post['content']?.toString() ?? 'Sem conteúdo',
               style: const TextStyle(fontSize: 16, height: 1.4),
               maxLines: null,
             ),
@@ -214,17 +214,25 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                               animation: _likeScaleAnimation,
                               builder: (context, child) {
                                 return Transform.scale(
-                                  scale: widget.post['isLiked'] ? _likeScaleAnimation.value : 1.0,
-                                  child: Icon(
-                                    widget.post['isLiked'] ? Icons.favorite : Icons.favorite_border,
-                                    color: widget.post['isLiked'] ? Colors.red : Colors.grey[600],
-                                    size: 20,
-                                  ),
+                                  scale: widget.post['isLiked'] == true ? _likeScaleAnimation.value : 1.0,
+                                  child: widget.post['isLiked'] == true
+                                    ? Image.asset(
+                                        'assets/images/TISM-heart-red.png',
+                                        width: 20,
+                                        height: 20,
+                                        errorBuilder: (context, error, stackTrace) => 
+                                          const Icon(Icons.favorite, color: Colors.red, size: 20),
+                                      )
+                                    : Icon(
+                                        Icons.favorite_border,
+                                        color: Colors.grey[600],
+                                        size: 20,
+                                      ),
                                 );
                               },
                             ),
                             // Partículas de coração
-                            if (widget.post['isLiked'])
+                            if (widget.post['isLiked'] == true)
                               AnimatedBuilder(
                                 animation: _likeOpacityAnimation,
                                 builder: (context, child) {
@@ -232,10 +240,12 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                                     opacity: _likeOpacityAnimation.value * 0.7,
                                     child: Transform.scale(
                                       scale: _likeScaleAnimation.value * 1.5,
-                                      child: const Icon(
-                                        Icons.favorite,
-                                        color: Colors.pink,
-                                        size: 25,
+                                      child: Image.asset(
+                                        'assets/images/TISM-heart-red.png',
+                                        width: 25,
+                                        height: 25,
+                                        errorBuilder: (context, error, stackTrace) => 
+                                          const Icon(Icons.favorite, color: Colors.pink, size: 25),
                                       ),
                                     ),
                                   );
@@ -247,7 +257,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                         Text(
                           '${widget.post['likes'] ?? 0}',
                           style: TextStyle(
-                            color: widget.post['isLiked'] ? Colors.red : Colors.grey[600],
+                            color: Colors.grey[600],
                             fontWeight: FontWeight.w500,
                           ),
                         ),

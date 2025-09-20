@@ -4,7 +4,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'secure_storage_service.dart';
 
 class ForumService {
-  static String get _baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000';
+  static String get _baseUrl {
+    final url = dotenv.env['API_BASE_URL'] ?? 'https://tism-backend-api-rgxd.onrender.com';
+    return url;
+  }
 
   static Future<bool> createPost(String content) async {
     try {
@@ -19,7 +22,7 @@ class ForumService {
           'user_id': userId,
           'content': content,
         }),
-      );
+      ).timeout(const Duration(seconds: 10));
       
       return response.statusCode == 201;
     } catch (e) {
@@ -30,21 +33,21 @@ class ForumService {
   static Future<List<Map<String, dynamic>>> getPosts() async {
     try {
       final userId = await SecureStorageService.getSecureInt('user_id');
-      
-      final uri = userId != null 
-        ? Uri.parse('$_baseUrl/posts?user_id=$userId')
-        : Uri.parse('$_baseUrl/posts');
-      
+      final url = userId != null ? '$_baseUrl/posts?user_id=$userId' : '$_baseUrl/posts';
       final response = await http.get(
-        uri,
+        Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
-      );
+      ).timeout(const Duration(seconds: 10));
       
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+        if (data is List) {
+          return List<Map<String, dynamic>>.from(data);
+        }
         return List<Map<String, dynamic>>.from(data['posts'] ?? []);
+      } else {
+        return [];
       }
-      return [];
     } catch (e) {
       return [];
     }
@@ -60,7 +63,7 @@ class ForumService {
         Uri.parse('$_baseUrl/posts/$postId/like'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'user_id': userId}),
-      );
+      ).timeout(const Duration(seconds: 10));
       
       return response.statusCode == 200;
     } catch (e) {
@@ -95,7 +98,10 @@ class ForumService {
       
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        return List<Map<String, dynamic>>.from(data['comments']);
+        if (data is List) {
+          return List<Map<String, dynamic>>.from(data);
+        }
+        return List<Map<String, dynamic>>.from(data['comments'] ?? []);
       } else {
         throw Exception('Erro ao carregar comentários');
       }

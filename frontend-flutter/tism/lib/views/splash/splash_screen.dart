@@ -65,8 +65,8 @@ class _SplashScreenState extends State<SplashScreen>
       // Fade in do logo (0.3s)
       await _fadeInController.forward();
       
-      // Aguarda mais um tempo mostrando o logo
-      await Future.delayed(const Duration(milliseconds: 1000));
+      // Aguarda menos tempo mostrando o logo
+      await Future.delayed(const Duration(milliseconds: 500));
       
       // Inicia a animação de saída
       await _animationController.forward();
@@ -87,28 +87,16 @@ class _SplashScreenState extends State<SplashScreen>
     if (!mounted) return;
     
     try {
-      final isLoggedIn = await AuthIntegrationService.isLoggedIn()
-          .timeout(const Duration(seconds: 3));
-      if (!mounted) return;
+      final userId = await SecureStorageService.getSecureInt('user_id');
+      final userName = await SecureStorageService.getSecureString('user_name');
       
-      if (isLoggedIn) {
-        final userName = await SecureStorageService.getSecureString('user_name');
-        
-        if (mounted && userName != null && userName.isNotEmpty) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => HomePage(nomeUsuario: userName),
-            ),
-          );
-        } else {
-          if (mounted) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => const LoginStartup()),
-            );
-          }
-        }
+      if (mounted && userId != null && userName != null && userName.isNotEmpty) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => HomePage(nomeUsuario: userName),
+          ),
+        );
       } else {
         if (mounted) {
           Navigator.pushReplacement(

@@ -13,7 +13,7 @@ class ForumPostsController < ApplicationController
         content: post.content,
         author: post.name || post.username,
         username: post.username,
-        account_type: post.account_type || 'normal',
+        account_type: post.account_type.presence || 'normal',
         created_at: post.created_at,
         likes_count: 0,
         comments_count: post.comments_count || 0,
@@ -77,7 +77,7 @@ class ForumPostsController < ApplicationController
         content: comment.content,
         author: comment.name || comment.username,
         username: comment.username,
-        account_type: comment.account_type || 'normal',
+        account_type: comment.account_type.presence || 'normal',
         created_at: comment.created_at
       }
     }

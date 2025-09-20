@@ -12,7 +12,8 @@ class AccountBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (accountType == 'normal') {
+    // Só mostra badge para verified e bot
+    if (accountType != 'verified' && accountType != 'bot') {
       return const SizedBox.shrink();
     }
 
@@ -26,11 +27,11 @@ class AccountBadge extends StatelessWidget {
   String _getBadgeImage() {
     switch (accountType) {
       case 'verified':
-        return 'assets/images/TISM-heart-blue.png';
+        return 'assets/images/TISM-heart-blue.png';  // Coração azul
       case 'bot':
-        return 'assets/images/TISM-heart-gray.png';
+        return 'assets/images/TISM-heart-gray.png';  // Coração cinza
       default:
-        return 'assets/images/TISM-heart.png';
+        return 'assets/images/TISM-heart.png';       // Fallback
     }
   }
 }

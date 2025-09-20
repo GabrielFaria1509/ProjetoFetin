@@ -4,6 +4,7 @@ import 'package:tism/services/forum_service.dart';
 import 'package:tism/services/secure_storage_service.dart';
 import 'post_widget.dart';
 import 'comments_screen.dart';
+import 'create_post_screen.dart';
 
 class ForumFeed extends StatefulWidget {
   const ForumFeed({super.key});
@@ -97,6 +98,21 @@ class _ForumFeedState extends State<ForumFeed> {
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey[500],
+            ),
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CreatePostScreen()),
+              ).then((_) => _loadPosts());
+            },
+            icon: const Icon(Icons.add),
+            label: const Text('Criar primeiro post'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: tismAqua,
+              foregroundColor: Colors.white,
             ),
           ),
         ],
