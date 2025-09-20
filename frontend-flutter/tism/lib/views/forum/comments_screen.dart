@@ -208,7 +208,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     const SizedBox(width: 4),
                     AccountBadge(
                       accountType: widget.post['account_type'] ?? 'normal',
-                      size: 16,
+                      size: 20,
                     ),
                     if (widget.post['username'] != null) ...[
                       const SizedBox(width: 4),
@@ -294,7 +294,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                       const SizedBox(width: 4),
                                       AccountBadge(
                                         accountType: comment['account_type'] ?? 'normal',
-                                        size: 14,
+                                        size: 18,
                                       ),
                                       if (comment['username'] != null) ...[
                                         const SizedBox(width: 4),

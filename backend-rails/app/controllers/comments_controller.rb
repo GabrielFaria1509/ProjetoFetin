@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
             content: comment.content,
             author: comment.user.name || comment.user.username,
             username: comment.user.username,
+            account_type: comment.user.account_type || 'normal',
             user_id: comment.user.id,
             timestamp: comment.created_at
           }
@@ -55,6 +56,7 @@ class CommentsController < ApplicationController
           content: comment.content,
           author: comment.user.name || comment.user.username,
           username: comment.user.username,
+          account_type: comment.user.account_type || 'normal',
           user_id: comment.user.id,
           timestamp: comment.created_at
         }

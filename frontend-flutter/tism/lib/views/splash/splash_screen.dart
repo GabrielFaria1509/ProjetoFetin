@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/views/login/login_startup.dart';
 import 'package:tism/views/home/home_page.dart';
-import 'package:tism/services/auth_integration_service.dart';
 import 'package:tism/services/secure_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {

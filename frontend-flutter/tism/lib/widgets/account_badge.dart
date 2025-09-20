@@ -21,6 +21,7 @@ class AccountBadge extends StatelessWidget {
       _getBadgeImage(),
       width: size,
       height: size,
+      fit: BoxFit.contain,
     );
   }
 

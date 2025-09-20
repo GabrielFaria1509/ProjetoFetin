@@ -17,7 +17,7 @@ class _ForumFeedState extends State<ForumFeed> {
   List<Map<String, dynamic>> posts = [];
   bool _isLoading = true;
   int? _currentUserId;
-  final Map<String, bool> _pendingLikes = {}; // Estado final pendente
+  final Set<String> _likingPosts = {}; // Posts sendo processados
 
   @override
   void initState() {
@@ -125,6 +125,10 @@ class _ForumFeedState extends State<ForumFeed> {
   }
 
   Future<void> _toggleLike(String postId) async {
+    // Evitar spam
+    if (_likingPosts.contains(postId)) return;
+    _likingPosts.add(postId);
+    
     // Atualizar UI imediatamente
     setState(() {
       final postIndex = posts.indexWhere((p) => p['id'].toString() == postId);
@@ -133,20 +137,25 @@ class _ForumFeedState extends State<ForumFeed> {
         final wasLiked = post['isLiked'] == true;
         post['isLiked'] = !wasLiked;
         post['likes'] = (post['likes'] ?? 0) + (wasLiked ? -1 : 1);
-        
-        // Guardar estado final para enviar
-        _pendingLikes[postId] = post['isLiked'];
       }
     });
     
-    // Debounce: aguarda 500ms sem novos cliques
-    await Future.delayed(const Duration(milliseconds: 500));
-    
-    // Se ainda é o estado final, envia para servidor
-    final finalState = _pendingLikes[postId];
-    if (finalState != null) {
-      _pendingLikes.remove(postId);
+    try {
+      // Enviar IMEDIATAMENTE para servidor
       await ForumService.likePost(int.parse(postId));
+    } catch (e) {
+      // Se falhar, reverter UI
+      setState(() {
+        final postIndex = posts.indexWhere((p) => p['id'].toString() == postId);
+        if (postIndex != -1) {
+          final post = posts[postIndex];
+          final wasLiked = post['isLiked'] == true;
+          post['isLiked'] = !wasLiked;
+          post['likes'] = (post['likes'] ?? 0) + (wasLiked ? -1 : 1);
+        }
+      });
+    } finally {
+      _likingPosts.remove(postId);
     }
   }
 

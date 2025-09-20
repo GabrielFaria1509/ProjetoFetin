@@ -23,20 +23,16 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
   late AnimationController _likeAnimationController;
   late Animation<double> _likeScaleAnimation;
-  late Animation<double> _likeOpacityAnimation;
 
   @override
   void initState() {
     super.initState();
     _likeAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _likeScaleAnimation = Tween<double>(begin: 1.0, end: 1.4).animate(
+    _likeScaleAnimation = Tween<double>(begin: 1.0, end: 1.3).animate(
       CurvedAnimation(parent: _likeAnimationController, curve: Curves.elasticOut),
-    );
-    _likeOpacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _likeAnimationController, curve: Curves.easeOut),
     );
   }
 
@@ -97,7 +93,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                           const SizedBox(width: 4),
                           AccountBadge(
                             accountType: widget.post['account_type'] ?? 'normal',
-                            size: 16,
+                            size: 20,
                           ),
                           if (widget.post['username'] != null) ...[
                             const SizedBox(width: 4),
@@ -207,41 +203,18 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            AnimatedBuilder(
-                              animation: _likeScaleAnimation,
-                              builder: (context, child) {
-                                return Transform.scale(
-                                  scale: widget.post['isLiked'] == true ? _likeScaleAnimation.value : 1.0,
-                                  child: Icon(
-                                    widget.post['isLiked'] == true ? Icons.favorite : Icons.favorite_border,
-                                    color: widget.post['isLiked'] == true ? Colors.red : Colors.grey[600],
-                                    size: 20,
-                                  ),
-                                );
-                              },
-                            ),
-                            // Partículas de coração
-                            if (widget.post['isLiked'] == true)
-                              AnimatedBuilder(
-                                animation: _likeOpacityAnimation,
-                                builder: (context, child) {
-                                  return Opacity(
-                                    opacity: _likeOpacityAnimation.value * 0.7,
-                                    child: Transform.scale(
-                                      scale: _likeScaleAnimation.value * 1.5,
-                                      child: const Icon(
-                                        Icons.favorite,
-                                        color: Colors.pink,
-                                        size: 25,
-                                      ),
-                                    ),
-                                  );
-                                },
+                        AnimatedBuilder(
+                          animation: _likeAnimationController,
+                          builder: (context, child) {
+                            return Transform.scale(
+                              scale: widget.post['isLiked'] == true ? 1.0 : _likeScaleAnimation.value,
+                              child: Icon(
+                                widget.post['isLiked'] == true ? Icons.favorite : Icons.favorite_border,
+                                color: widget.post['isLiked'] == true ? Colors.red : Colors.grey[600],
+                                size: 20,
                               ),
-                          ],
+                            );
+                          },
                         ),
                         const SizedBox(width: 4),
                         Text(
