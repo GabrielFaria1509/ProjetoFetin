@@ -4,17 +4,31 @@ class FirebaseAuthService
   
   def self.verify_user(email, password)
     begin
-      # Simular verificação do Firebase
-      # Em produção, faria chamada real para Firebase Auth API
+      api_key = ENV['FIREBASE_API_KEY']
+      return nil unless api_key
       
-      # Por enquanto, simular que usuário está verificado após 10 segundos
-      user = User.find_by(email: email.downcase)
-      if user && user.created_at < 10.seconds.ago
+      # Fazer login no Firebase para verificar se email foi verificado
+      uri = URI("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=#{api_key}")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      
+      request = Net::HTTP::Post.new(uri)
+      request['Content-Type'] = 'application/json'
+      request.body = {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }.to_json
+      
+      response = http.request(request)
+      data = JSON.parse(response.body)
+      
+      if response.code == '200' && data['emailVerified']
         return {
-          uid: user.firebase_uid || SecureRandom.uuid,
-          email: email,
-          email_verified: true,
-          display_name: user.name
+          uid: data['localId'],
+          email: data['email'],
+          email_verified: data['emailVerified'],
+          display_name: data['displayName']
         }
       end
       

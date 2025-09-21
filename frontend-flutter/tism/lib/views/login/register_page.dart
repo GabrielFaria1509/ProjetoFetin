@@ -221,38 +221,22 @@ class _RegisterPageState extends State<RegisterPage> {
                   : Colors.white,
                 items: const [
                   DropdownMenuItem(
-                    value: 'Participante', 
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Participante'),
-                        Text('(Usuário comum do TISM)', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      ],
-                    ),
+                    value: 'Participante',
+                    child: Text('Participante'),
                   ),
                   DropdownMenuItem(
-                    value: 'Responsável', 
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Responsável'),
-                        Text('(Familiar ou cuidador)', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      ],
-                    ),
+                    value: 'Responsável',
+                    child: Text('Responsável'),
                   ),
                   DropdownMenuItem(
-                    value: 'Profissional', 
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Profissional'),
-                        Text('(Terapeuta, médico, educador)', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                      ],
-                    ),
+                    value: 'Profissional',
+                    child: Text('Profissional'),
                   ),
+                ],
+                selectedItemBuilder: (context) => [
+                  const Text('Participante'),
+                  const Text('Responsável'),
+                  const Text('Profissional'),
                 ],
                 onChanged: (value) {
                   setState(() => _userType = value!);

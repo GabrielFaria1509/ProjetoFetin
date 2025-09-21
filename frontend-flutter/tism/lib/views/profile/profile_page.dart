@@ -16,7 +16,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String _userType = 'Responsável';
+  String _userType = 'Participante';
   String _userName = '';
   String _userUsername = '';
   final TextEditingController _nameController = TextEditingController();
@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         _userName = user['name'] ?? user['username'] ?? widget.nomeUsuario;
         _userUsername = user['username'] ?? '';
-        _userType = user['userType'] ?? 'Responsável';
+        _userType = user['userType'] ?? 'Participante';
       });
       _nameController.text = _userName;
       _usernameController.text = _userUsername;
@@ -262,8 +262,31 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<String>(
+              title: const Text('Participante'),
+              subtitle: const Text('(Usuário comum do TISM)'),
+              value: 'Participante',
+              groupValue: _userType,
+              onChanged: (value) async {
+                if (value != null) {
+                  final success = await UserService.updateUserType(value);
+                  if (success) {
+                    setState(() => _userType = value);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Tipo atualizado!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  }
+                }
+              },
+            ),
+            RadioListTile<String>(
               title: const Text('Responsável'),
-              subtitle: const Text('Pai, mãe ou cuidador'),
+              subtitle: const Text('(Familiar ou cuidador)'),
               value: 'Responsável',
               groupValue: _userType,
               onChanged: (value) async {
@@ -286,7 +309,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             RadioListTile<String>(
               title: const Text('Profissional'),
-              subtitle: const Text('Educador ou profissional'),
+              subtitle: const Text('(Terapeuta, médico, educador)'),
               value: 'Profissional',
               groupValue: _userType,
               onChanged: (value) async {

@@ -185,6 +185,7 @@ class UsersController < ApplicationController
 
   def check_verification
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
+    return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
     user = User.find_by(email: params[:email].to_s.strip.downcase)
     
@@ -192,9 +193,11 @@ class UsersController < ApplicationController
       return render json: { verified: false, error: "Usuário não encontrado" }, status: :not_found
     end
     
-    # Simular verificação - em produção, verificaria com Firebase
-    # Por enquanto, marcar como verificado após 10 segundos da criação
-    if user.created_at < 10.seconds.ago
+    # Verificar com Firebase se email foi verificado
+    firebase_user = FirebaseAuthService.verify_user(params[:email], params[:password])
+    
+    if firebase_user && firebase_user[:email_verified]
+      # Marcar como verificado no DB
       user.update(email_verified: true)
       render json: { verified: true, user: {
         id: user.id,

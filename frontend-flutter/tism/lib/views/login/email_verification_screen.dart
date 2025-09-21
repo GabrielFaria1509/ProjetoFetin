@@ -55,7 +55,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       final response = await http.post(
         Uri.parse('https://tism-backend-api-rgxd.onrender.com/check_verification'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'email': widget.email}),
+        body: json.encode({
+          'email': widget.email,
+          'password': widget.userData['password']
+        }),
       );
 
       if (response.statusCode == 200) {
@@ -98,10 +101,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         ? const Color(0xFF121212) 
         : const Color(0xFFE6F2FF),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Ícone de email
               Container(
@@ -221,7 +225,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   ),
                 ),
               ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
