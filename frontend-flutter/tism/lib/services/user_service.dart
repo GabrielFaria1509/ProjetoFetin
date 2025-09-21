@@ -113,26 +113,28 @@ class UserService {
     };
   }
 
-  static Future<bool> updateUserType(String userType) async {
+  static Future<Map<String, dynamic>> updateUserType(String userType) async {
     try {
       final userId = await SecureStorageService.getSecureInt('user_id');
       
-      if (userId == null) return false;
+      if (userId == null) return {'success': false, 'error': 'Usuário não encontrado'};
       
       final response = await http.put(
-        Uri.parse('$_baseUrl/profile/$userId/user_type'),
+        Uri.parse('$_baseUrl/users/$userId'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'user_type': userType}),
+        body: json.encode({'user_type': userType.toLowerCase()}),
       );
       
+      final data = json.decode(response.body);
+      
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
         await _saveUserLocally(data['user']);
-        return true;
+        return {'success': true};
+      } else {
+        return {'success': false, 'error': data['error'] ?? 'Erro ao atualizar tipo'};
       }
-      return false;
     } catch (e) {
-      return false;
+      return {'success': false, 'error': 'Erro de conexão'};
     }
   }
 

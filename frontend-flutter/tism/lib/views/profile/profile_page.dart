@@ -267,8 +267,8 @@ class _ProfilePageState extends State<ProfilePage> {
               groupValue: _userType,
               onChanged: (value) async {
                 if (value != null) {
-                  final success = await UserService.updateUserType(value);
-                  if (success) {
+                  final result = await UserService.updateUserType(value);
+                  if (result['success']) {
                     setState(() => _userType = value);
                     if (context.mounted) {
                       Navigator.pop(context);
@@ -276,6 +276,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SnackBar(
                           content: Text('Tipo atualizado!'),
                           backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(result['error'] ?? 'Erro ao atualizar tipo'),
+                          backgroundColor: Colors.red,
                         ),
                       );
                     }
@@ -289,8 +298,8 @@ class _ProfilePageState extends State<ProfilePage> {
               groupValue: _userType,
               onChanged: (value) async {
                 if (value != null) {
-                  final success = await UserService.updateUserType(value);
-                  if (success) {
+                  final result = await UserService.updateUserType(value);
+                  if (result['success']) {
                     setState(() => _userType = value);
                     if (context.mounted) {
                       Navigator.pop(context);
@@ -298,6 +307,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SnackBar(
                           content: Text('Tipo atualizado!'),
                           backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(result['error'] ?? 'Erro ao atualizar tipo'),
+                          backgroundColor: Colors.red,
                         ),
                       );
                     }
@@ -311,8 +329,8 @@ class _ProfilePageState extends State<ProfilePage> {
               groupValue: _userType,
               onChanged: (value) async {
                 if (value != null) {
-                  final success = await UserService.updateUserType(value);
-                  if (success) {
+                  final result = await UserService.updateUserType(value);
+                  if (result['success']) {
                     setState(() => _userType = value);
                     if (context.mounted) {
                       Navigator.pop(context);
@@ -320,6 +338,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SnackBar(
                           content: Text('Tipo atualizado!'),
                           backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(result['error'] ?? 'Erro ao atualizar tipo'),
+                          backgroundColor: Colors.red,
                         ),
                       );
                     }

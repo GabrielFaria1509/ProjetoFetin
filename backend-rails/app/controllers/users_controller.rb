@@ -160,7 +160,7 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
-    # Verificar cooldowns apenas para nome e username
+    # Verificar cooldowns
     if params[:name].present?
       if user.name_updated_at && user.name_updated_at > 1.day.ago
         return render json: { error: "Nome pode ser alterado apenas 1 vez por dia" }, status: :unprocessable_entity
@@ -173,6 +173,13 @@ class UsersController < ApplicationController
         return render json: { error: "Username pode ser alterado apenas 1 vez a cada 3 dias" }, status: :unprocessable_entity
       end
       user.username_updated_at = Time.current
+    end
+    
+    if params[:user_type].present?
+      if user.user_type_updated_at && user.user_type_updated_at > 1.day.ago
+        return render json: { error: "Tipo de usuário pode ser alterado apenas 1 vez por dia" }, status: :unprocessable_entity
+      end
+      user.user_type_updated_at = Time.current
     end
     
     # Atualizar normalmente - password não é mais obrigatório no update
@@ -266,6 +273,7 @@ class UsersController < ApplicationController
     # Formatar nome (capitalizado) e username (minúsculo)
     permitted[:name] = permitted[:name].titleize if permitted[:name].present?
     permitted[:username] = permitted[:username].downcase if permitted[:username].present?
+    permitted[:user_type] = permitted[:user_type].downcase if permitted[:user_type].present?
     
     # Validar account_type
     permitted[:account_type] = 'normal' unless ['normal', 'verified', 'bot'].include?(permitted[:account_type])
