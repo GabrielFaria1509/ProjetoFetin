@@ -67,6 +67,21 @@ class AuthIntegrationService {
       if (response.statusCode == 201) {
         final data = json.decode(response.body);
         return {'success': true, 'user': data['user'], 'message': data['message']};
+      } else if (response.statusCode == 202) {
+        // Conta criada mas precisa verificar email
+        final data = json.decode(response.body);
+        return {
+          'success': true, 
+          'needsVerification': true,
+          'message': data['message'] ?? 'Verifique seu email para ativar a conta',
+          'userData': {
+            'name': name,
+            'username': username,
+            'email': email,
+            'password': password,
+            'user_type': userType,
+          }
+        };
       } else {
         try {
           final errorData = json.decode(response.body);

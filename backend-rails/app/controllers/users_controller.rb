@@ -56,6 +56,7 @@ class UsersController < ApplicationController
     )
     
     if user.save
+      # Retornar 202 para indicar que precisa verificar email
       render json: { 
         message: "Conta criada! Verifique seu email para ativar", 
         user: {
@@ -67,7 +68,7 @@ class UsersController < ApplicationController
           account_type: user.account_type
         },
         email_sent: firebase_result[:email_sent]
-      }, status: :created
+      }, status: 202 # Accepted - precisa verificar email
     else
       render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
@@ -83,6 +84,11 @@ class UsersController < ApplicationController
     # Se não encontrar, retornar erro
     unless user
       return render json: { error: "Conta não encontrada. Faça seu cadastro primeiro." }, status: :unauthorized
+    end
+    
+    # Verificar se email foi verificado (se usar Firebase)
+    if user.firebase_uid.present? && !user.email_verified
+      return render json: { error: "Verifique seu email antes de fazer login" }, status: :unauthorized
     end
 
     if user.authenticate(params[:password])
@@ -152,6 +158,32 @@ class UsersController < ApplicationController
       }, status: :ok
     else
       render json: { error: "Erro ao atualizar usuário" }, status: :unprocessable_entity
+    end
+  end
+
+  def check_verification
+    return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
+    
+    user = User.find_by(email: params[:email].to_s.strip.downcase)
+    
+    unless user
+      return render json: { verified: false, error: "Usuário não encontrado" }, status: :not_found
+    end
+    
+    # Simular verificação - em produção, verificaria com Firebase
+    # Por enquanto, marcar como verificado após 10 segundos da criação
+    if user.created_at < 10.seconds.ago
+      user.update(email_verified: true)
+      render json: { verified: true, user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+        user_type: user.user_type,
+        account_type: user.account_type
+      }}, status: :ok
+    else
+      render json: { verified: false, message: "Email ainda não verificado" }, status: :ok
     end
   end
 

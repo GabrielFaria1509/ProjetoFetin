@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/auth_integration_service.dart';
+import 'package:tism/views/login/email_verification_screen.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -68,16 +69,27 @@ class _RegisterPageState extends State<RegisterPage> {
         setState(() => _isLoading = false);
 
         if (result['success']) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(result['message'] ?? 'Cadastro realizado! Verifique seu email.'),
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 5),
-            ),
-          );
-          
-          // Voltar para login após cadastro
-          Navigator.pop(context);
+          if (result['needsVerification'] == true) {
+            // Navegar para tela de verificação
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => EmailVerificationScreen(
+                  email: email,
+                  userData: result['userData'],
+                ),
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(result['message'] ?? 'Cadastro realizado com sucesso!'),
+                backgroundColor: Colors.green,
+                duration: const Duration(seconds: 5),
+              ),
+            );
+            Navigator.pop(context);
+          }
         } else {
           setState(() => erro = result['error']);
         }
