@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         _userName = user['name'] ?? user['username'] ?? widget.nomeUsuario;
         _userUsername = user['username'] ?? '';
-        _userType = user['userType'] ?? 'Participante';
+        _userType = (user['userType'] ?? 'participante').toLowerCase() == 'participante' ? 'Participante' : user['userType'] ?? 'Participante';
       });
       _nameController.text = _userName;
       _usernameController.text = _userUsername;
@@ -263,7 +263,6 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             RadioListTile<String>(
               title: const Text('Participante'),
-              subtitle: const Text('(Usuário comum do TISM)'),
               value: 'Participante',
               groupValue: _userType,
               onChanged: (value) async {
@@ -286,7 +285,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             RadioListTile<String>(
               title: const Text('Responsável'),
-              subtitle: const Text('(Familiar ou cuidador)'),
               value: 'Responsável',
               groupValue: _userType,
               onChanged: (value) async {
@@ -309,7 +307,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             RadioListTile<String>(
               title: const Text('Profissional'),
-              subtitle: const Text('(Terapeuta, médico, educador)'),
               value: 'Profissional',
               groupValue: _userType,
               onChanged: (value) async {

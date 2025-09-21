@@ -222,15 +222,36 @@ class _RegisterPageState extends State<RegisterPage> {
                 items: const [
                   DropdownMenuItem(
                     value: 'Participante',
-                    child: Text('Participante'),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Participante'),
+                        Text('(Usuário comum do TISM)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: 'Responsável',
-                    child: Text('Responsável'),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Responsável'),
+                        Text('(Familiar ou cuidador)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: 'Profissional',
-                    child: Text('Profissional'),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Profissional'),
+                        Text('(Terapeuta, médico, educador)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
                   ),
                 ],
                 selectedItemBuilder: (context) => [
