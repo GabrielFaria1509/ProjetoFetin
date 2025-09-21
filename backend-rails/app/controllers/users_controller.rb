@@ -138,10 +138,21 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
-    if user.destroy
-      render json: { message: "Usuário deletado com sucesso" }, status: :ok
-    else
-      render json: { error: "Erro ao deletar usuário" }, status: :unprocessable_entity
+    begin
+      # Deletar do Firebase se tiver firebase_uid
+      if user.firebase_uid.present?
+        FirebaseDeletionService.delete_user(user.firebase_uid)
+      end
+      
+      # Deletar do banco de dados
+      if user.destroy
+        render json: { message: "Conta deletada com sucesso" }, status: :ok
+      else
+        render json: { error: "Erro ao deletar conta" }, status: :unprocessable_entity
+      end
+    rescue => e
+      Rails.logger.error "Error deleting user: #{e.message}"
+      render json: { error: "Erro interno do servidor" }, status: :internal_server_error
     end
   end
 

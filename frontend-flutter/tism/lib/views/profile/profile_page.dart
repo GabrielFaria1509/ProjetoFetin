@@ -453,12 +453,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
     
     if (confirm == true) {
-      // Implementar delete no UserService
+      // Deletar conta
       final user = await UserService.getUser();
       if (user != null) {
         final success = await UserService.deleteAccount(
-          email: user['email'],
-          password: 'temp', // Backend vai validar por ID
+          email: user['email'] ?? '',
+          password: 'validated_by_confirmation', // Confirmação já foi feita
         );
         
         if (success && mounted) {

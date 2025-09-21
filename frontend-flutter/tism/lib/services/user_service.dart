@@ -204,8 +204,12 @@ class UserService {
     required String password,
   }) async {
     try {
+      final userId = await SecureStorageService.getSecureInt('user_id');
+      
+      if (userId == null) return false;
+      
       final response = await http.delete(
-        Uri.parse('$_baseUrl/users'),
+        Uri.parse('$_baseUrl/users/$userId'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': email,
