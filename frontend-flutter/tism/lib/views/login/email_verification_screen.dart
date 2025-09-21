@@ -84,6 +84,18 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     });
   }
 
+  Future<void> _checkVerificationManually() async {
+    setState(() {
+      _isChecking = true;
+    });
+    
+    await _checkVerificationStatus();
+    
+    setState(() {
+      _isChecking = false;
+    });
+  }
+
   Future<void> _resendVerification() async {
     // Reenviar email de verificação
     ScaffoldMessenger.of(context).showSnackBar(
@@ -199,6 +211,20 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
               
               const SizedBox(height: 32),
+              
+              ElevatedButton(
+                onPressed: _checkVerificationManually,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: tismAqua,
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                ),
+                child: const Text(
+                  'Já verifiquei - Entrar',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+              
+              const SizedBox(height: 16),
               
               TextButton(
                 onPressed: _resendVerification,
