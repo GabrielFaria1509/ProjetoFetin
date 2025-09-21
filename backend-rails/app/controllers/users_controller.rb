@@ -85,17 +85,26 @@ class UsersController < ApplicationController
       firebase_user = FirebaseAuthService.verify_user(params[:email], params[:password])
       
       if firebase_user && firebase_user[:email_verified]
-        # Criar usuário no DB se verificado no Firebase
-        user = User.create!(
-          email: params[:email].to_s.strip.downcase,
-          firebase_uid: firebase_user[:uid],
-          name: firebase_user[:display_name] || params[:email].split('@').first.titleize,
-          username: params[:email].split('@').first.downcase,
-          user_type: 'participante',
-          account_type: 'normal',
-          password: params[:password],
-          email_verified: true
-        )
+        # Buscar dados originais do cadastro se existir
+        existing_user = User.find_by(email: params[:email].to_s.strip.downcase)
+        
+        if existing_user
+          # Atualizar usuário existente como verificado
+          existing_user.update(email_verified: true)
+          user = existing_user
+        else
+          # Criar usuário novo (fallback)
+          user = User.create!(
+            email: params[:email].to_s.strip.downcase,
+            firebase_uid: firebase_user[:uid],
+            name: firebase_user[:display_name] || params[:email].split('@').first.titleize,
+            username: params[:email].split('@').first.downcase,
+            user_type: 'participante',
+            account_type: 'normal',
+            password: params[:password],
+            email_verified: true
+          )
+        end
       else
         return render json: { error: "Conta não encontrada ou não verificada. Faça seu cadastro primeiro." }, status: :unauthorized
       end
@@ -138,21 +147,29 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     return render json: { error: "Usuário não encontrado" }, status: :not_found unless user
     
+    # Validar senha se fornecida (opcional para segurança extra)
+    if params[:password].present?
+      unless user.authenticate(params[:password])
+        return render json: { error: "Senha incorreta" }, status: :unauthorized
+      end
+    end
+    
     begin
       # Deletar do Firebase se tiver firebase_uid
       if user.firebase_uid.present?
-        FirebaseDeletionService.delete_user(user.firebase_uid)
+        firebase_deleted = FirebaseDeletionService.delete_user(user.firebase_uid)
+        Rails.logger.info "Firebase deletion result: #{firebase_deleted}"
       end
       
       # Deletar do banco de dados
       if user.destroy
         render json: { message: "Conta deletada com sucesso" }, status: :ok
       else
-        render json: { error: "Erro ao deletar conta" }, status: :unprocessable_entity
+        render json: { error: "Erro ao deletar conta: #{user.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
       end
     rescue => e
       Rails.logger.error "Error deleting user: #{e.message}"
-      render json: { error: "Erro interno do servidor" }, status: :internal_server_error
+      render json: { error: "Erro interno: #{e.message}" }, status: :internal_server_error
     end
   end
 

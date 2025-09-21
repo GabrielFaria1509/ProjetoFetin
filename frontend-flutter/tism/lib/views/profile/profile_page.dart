@@ -480,12 +480,41 @@ class _ProfilePageState extends State<ProfilePage> {
     );
     
     if (confirm == true) {
-      // Deletar conta
+      // Deletar conta - pedir senha real
       final user = await UserService.getUser();
       if (user != null) {
+        // Pedir senha do usuário
+        final passwordController = TextEditingController();
+        final password = await showDialog<String>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Confirmar senha'),
+            content: TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Digite sua senha',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, passwordController.text),
+                child: const Text('Confirmar'),
+              ),
+            ],
+          ),
+        );
+        
+        if (password == null || password.isEmpty) return;
+        
         final success = await UserService.deleteAccount(
           email: user['email'] ?? '',
-          password: 'validated_by_confirmation', // Confirmação já foi feita
+          password: password,
         );
         
         if (success && mounted) {
