@@ -16,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   final TextEditingController confirmarSenhaController = TextEditingController();
-  String _userType = 'Responsável';
+  String _userType = 'Participante';
   bool _isLoading = false;
   String? erro;
 
@@ -220,8 +220,39 @@ class _RegisterPageState extends State<RegisterPage> {
                   ? const Color(0xFF2A2A2A) 
                   : Colors.white,
                 items: const [
-                  DropdownMenuItem(value: 'Responsável', child: Text('Responsável')),
-                  DropdownMenuItem(value: 'Profissional', child: Text('Profissional')),
+                  DropdownMenuItem(
+                    value: 'Participante', 
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Participante'),
+                        Text('(Usuário comum do TISM)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Responsável', 
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Responsável'),
+                        Text('(Familiar ou cuidador)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Profissional', 
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Profissional'),
+                        Text('(Terapeuta, médico, educador)', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
+                  ),
                 ],
                 onChanged: (value) {
                   setState(() => _userType = value!);

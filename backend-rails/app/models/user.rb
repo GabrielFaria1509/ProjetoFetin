@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :password, presence: { message: "é obrigatória" }, on: :create
   validates :password, length: { minimum: 8, message: "deve ter pelo menos 8 caracteres" }, allow_blank: true
   validates :password, confirmation: { message: "não confere com a confirmação" }, allow_blank: true
-  validates :user_type, inclusion: { in: %w[Responsável Profissional] }, allow_nil: true
+  validates :user_type, inclusion: { in: %w[participante responsável profissional Participante Responsável Profissional] }, allow_nil: true
   validates :account_type, inclusion: { in: %w[normal verified bot] }
   
   has_many :posts, dependent: :destroy

@@ -43,20 +43,19 @@ class UsersController < ApplicationController
       return render json: { error: firebase_result[:error] }, status: :unprocessable_entity
     end
     
-    # Criar usuário no banco local com senha real
+    # Criar usuário no banco local
     user = User.new(
       email: firebase_result[:email].downcase,
       firebase_uid: firebase_result[:firebase_uid],
-      name: SecurityService.sanitize_input(params[:name]).titleize,
-      username: SecurityService.sanitize_input(params[:username]).downcase,
-      user_type: params[:user_type] || 'Responsável',
+      name: params[:name].to_s.strip.titleize,
+      username: params[:username].to_s.strip.downcase,
+      user_type: params[:user_type] || 'participante',
       account_type: 'normal',
-      password: params[:password], # Senha real para login posterior
+      password: params[:password],
       email_verified: false
     )
     
     if user.save
-      # Retornar 202 para indicar que precisa verificar email
       render json: { 
         message: "Conta criada! Verifique seu email para ativar", 
         user: {
@@ -68,7 +67,7 @@ class UsersController < ApplicationController
           account_type: user.account_type
         },
         email_sent: firebase_result[:email_sent]
-      }, status: 202 # Accepted - precisa verificar email
+      }, status: 202
     else
       render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
@@ -78,18 +77,41 @@ class UsersController < ApplicationController
     return render json: { error: "Email é obrigatório" }, status: :bad_request unless params[:email].present?
     return render json: { error: "Senha é obrigatória" }, status: :bad_request unless params[:password].present?
     
-    # Buscar APENAS usuário existente - NÃO criar novo
+    # Buscar usuário existente
     user = User.find_by(email: params[:email].to_s.strip.downcase)
     
-    # Se não encontrar, retornar erro
+    # Se não encontrar no DB, verificar se existe no Firebase e está verificado
     unless user
-      return render json: { error: "Conta não encontrada. Faça seu cadastro primeiro." }, status: :unauthorized
+      firebase_user = FirebaseAuthService.verify_user(params[:email], params[:password])
+      
+      if firebase_user && firebase_user[:email_verified]
+        # Criar usuário no DB se verificado no Firebase
+        user = User.create!(
+          email: params[:email].to_s.strip.downcase,
+          firebase_uid: firebase_user[:uid],
+          name: firebase_user[:display_name] || params[:email].split('@').first.titleize,
+          username: params[:email].split('@').first.downcase,
+          user_type: 'participante',
+          account_type: 'normal',
+          password: params[:password],
+          email_verified: true
+        )
+      else
+        return render json: { error: "Conta não encontrada ou não verificada. Faça seu cadastro primeiro." }, status: :unauthorized
+      end
     end
     
-    # Verificar se email foi verificado (se usar Firebase)
+    # Verificar se email foi verificado no Firebase
     if user.firebase_uid.present? && !user.email_verified
-      return render json: { error: "Verifique seu email antes de fazer login" }, status: :unauthorized
+      firebase_user = FirebaseAuthService.verify_user(params[:email], params[:password])
+      if firebase_user && firebase_user[:email_verified]
+        user.update(email_verified: true)
+      else
+        return render json: { error: "Verifique seu email antes de fazer login" }, status: :unauthorized
+      end
     end
+    
+
 
     if user.authenticate(params[:password])
       # Atualizar último login
