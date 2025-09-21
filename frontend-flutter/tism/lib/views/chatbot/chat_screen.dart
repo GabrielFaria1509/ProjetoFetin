@@ -232,8 +232,8 @@ class _ChatScreenState extends State<ChatScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('💙 Sobre a Tina'),
-        content: const Text(
-          '🤖 **Olá! Eu sou a Tina!**\n\n'
+        content: MarkdownBody(
+          data: '🤖 **Olá! Eu sou a Tina!**\n\n'
           'Sou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.\n\n'
           '🎯 **Minha especialização:**\n'
           '• 🧠 Desenvolvimento e comportamento\n'
@@ -243,7 +243,11 @@ class _ChatScreenState extends State<ChatScreen> {
           '• 🛠️ Recursos práticos para o dia a dia\n\n'
           '🔬 **Base científica:** Fui treinada com conhecimento validado por neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\n'
           '⚠️ **Importante:** Não realizo diagnósticos nem substituo profissionais de saúde. Meu papel é complementar, oferecendo suporte informativo e prático.\n\n'
-          '💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**'
+          '💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**',
+          styleSheet: MarkdownStyleSheet(
+            p: const TextStyle(fontSize: 14, height: 1.4),
+            strong: TextStyle(fontWeight: FontWeight.bold, color: tismAqua),
+          ),
         ),
         actions: [
           TextButton(
@@ -286,22 +290,16 @@ class ChatBubble extends StatelessWidget {
         children: [
           if (!message.isUser) 
             Container(
-              margin: const EdgeInsets.only(top: 4),
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: Colors.grey[200],
-                child: ClipOval(
-                  child: Image.asset(
-                    message.avatarMood != null 
-                      ? 'assets/images/chatbot/chatbot-${message.avatarMood}.png'
-                      : 'assets/images/chatbot/chatbot-smile.png',
-                    width: 32,
-                    height: 32,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => 
-                      const Icon(Icons.psychology, size: 18, color: Colors.white),
-                  ),
-                ),
+              margin: const EdgeInsets.only(top: 0),
+              child: Image.asset(
+                message.avatarMood != null 
+                  ? 'assets/images/chatbot/chatbot-${message.avatarMood}.png'
+                  : 'assets/images/chatbot/chatbot-smile.png',
+                width: 60,
+                height: 60,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) => 
+                  const Icon(Icons.psychology, size: 60, color: Colors.grey),
               ),
             ),
           const SizedBox(width: 6),
@@ -403,17 +401,7 @@ class ChatBubble extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 6),
-          if (message.isUser) 
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).brightness == Brightness.dark 
-                  ? Colors.grey[600] 
-                  : Colors.grey[400],
-                child: const Icon(Icons.person, size: 18, color: Colors.white),
-              ),
-            ),
+
         ],
       ),
     );

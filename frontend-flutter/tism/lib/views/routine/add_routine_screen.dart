@@ -264,11 +264,21 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
   }
 
   void _saveActivity() {
-    if (_titleController.text.isEmpty) return;
+    // Validar se título não é apenas whitespace ou caracteres invisíveis
+    final title = _titleController.text.trim();
+    if (title.isEmpty || title.replaceAll(RegExp(r'\s+'), '').isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('O título da rotina não pode estar vazio'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
 
     final activity = RoutineActivity(
       id: widget.activityToEdit?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
-      title: _titleController.text,
+      title: title,
       icon: _selectedIcon,
       time: _timeController.text,
       description: _descriptionController.text,

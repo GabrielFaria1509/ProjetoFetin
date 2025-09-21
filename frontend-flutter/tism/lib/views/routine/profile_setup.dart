@@ -219,8 +219,20 @@ class _ProfileSetupState extends State<ProfileSetup> {
 
   void _createProfile() {
     final name = _nameController.text.trim();
+    
+    // Validar se nome não é apenas whitespace ou caracteres invisíveis
+    if (name.isEmpty || name.replaceAll(RegExp(r'\s+'), '').isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('O nome da criança não pode estar vazio'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    
     final profile = ChildProfile(
-      name: name.isEmpty ? 'Criança' : _capitalizeName(name),
+      name: _capitalizeName(name),
       ageDisplay: _ageDisplay,
       ageInMonths: _ageInMonths,
       supportLevel: _supportLevel,

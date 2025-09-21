@@ -203,13 +203,23 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
   }
 
   void _saveEntry() {
-    if (_titleController.text.isEmpty) return;
+    // Validar se título não é apenas whitespace ou caracteres invisíveis
+    final title = _titleController.text.trim();
+    if (title.isEmpty || title.replaceAll(RegExp(r'\s+'), '').isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('O título da observação não pode estar vazio'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
 
     final entry = DiaryEntry(
       id: widget.entryToEdit?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
       date: widget.entryToEdit?.date ?? DateTime.now(),
       type: _type,
-      title: _titleController.text,
+      title: title,
       description: _descriptionController.text,
       intensity: _intensity,
       triggers: _selectedTriggers.toList(),
