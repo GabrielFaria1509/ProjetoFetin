@@ -155,20 +155,29 @@ class UsersController < ApplicationController
     end
     
     begin
-      # Deletar do Firebase se tiver firebase_uid
-      if user.firebase_uid.present?
-        firebase_deleted = FirebaseDeletionService.delete_user(user.firebase_uid)
-        Rails.logger.info "Firebase deletion result: #{firebase_deleted}"
-      end
+      Rails.logger.info "Attempting to delete user ID: #{user.id}, Email: #{user.email}"
       
-      # Deletar do banco de dados
+      # Deletar do banco de dados primeiro
       if user.destroy
+        Rails.logger.info "User deleted successfully from DB: #{user.id}"
+        
+        # Tentar deletar do Firebase (não bloquear se falhar)
+        if user.firebase_uid.present?
+          begin
+            FirebaseDeletionService.delete_user(user.firebase_uid)
+          rescue => firebase_error
+            Rails.logger.warn "Firebase deletion failed but continuing: #{firebase_error.message}"
+          end
+        end
+        
         render json: { message: "Conta deletada com sucesso" }, status: :ok
       else
+        Rails.logger.error "Failed to delete user from DB: #{user.errors.full_messages}"
         render json: { error: "Erro ao deletar conta: #{user.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
       end
     rescue => e
       Rails.logger.error "Error deleting user: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
       render json: { error: "Erro interno: #{e.message}" }, status: :internal_server_error
     end
   end

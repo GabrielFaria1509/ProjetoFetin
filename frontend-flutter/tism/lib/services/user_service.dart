@@ -201,14 +201,16 @@ class UserService {
     }
   }
 
-  static Future<bool> deleteAccount({
+  static Future<Map<String, dynamic>> deleteAccount({
     required String email,
     required String password,
   }) async {
     try {
       final userId = await SecureStorageService.getSecureInt('user_id');
       
-      if (userId == null) return false;
+      if (userId == null) {
+        return {'success': false, 'error': 'Usuário não encontrado localmente'};
+      }
       
       final response = await http.delete(
         Uri.parse('$_baseUrl/users/$userId'),
@@ -219,13 +221,16 @@ class UserService {
         }),
       );
       
+      final data = json.decode(response.body);
+      
       if (response.statusCode == 200) {
         await logout();
-        return true;
+        return {'success': true, 'message': data['message']};
+      } else {
+        return {'success': false, 'error': data['error'] ?? 'Erro desconhecido'};
       }
-      return false;
     } catch (e) {
-      return false;
+      return {'success': false, 'error': 'Erro de conexão: $e'};
     }
   }
 

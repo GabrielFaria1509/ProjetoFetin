@@ -512,24 +512,33 @@ class _ProfilePageState extends State<ProfilePage> {
         
         if (password == null || password.isEmpty) return;
         
-        final success = await UserService.deleteAccount(
+        final result = await UserService.deleteAccount(
           email: user['email'] ?? '',
           password: password,
         );
         
-        if (success && mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Conta deletada com sucesso'),
-              backgroundColor: Colors.green,
-            ),
-          );
-          
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-            (route) => false,
-          );
+        if (mounted) {
+          if (result['success']) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(result['message'] ?? 'Conta deletada com sucesso'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+              (route) => false,
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(result['error'] ?? 'Erro ao deletar conta'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
         }
       }
     }
