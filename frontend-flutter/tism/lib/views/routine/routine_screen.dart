@@ -5,6 +5,8 @@ import 'routine_service.dart';
 import 'profile_setup.dart';
 import 'add_routine_screen.dart';
 import '../../services/child_profile_service.dart';
+import '../../services/secure_storage_service.dart';
+import 'dart:convert';
 
 class RoutineScreen extends StatefulWidget {
   const RoutineScreen({super.key});
@@ -40,8 +42,17 @@ class _RoutineScreenState extends State<RoutineScreen> {
     }
   }
   
-  void _generateAndFilterActivities() {
-    allActivities = RoutineService.generateRoutine(profile!);
+  void _generateAndFilterActivities() async {
+    // Tentar carregar atividades salvas primeiro
+    final savedActivities = await _loadSavedActivities();
+    
+    if (savedActivities.isNotEmpty) {
+      allActivities = savedActivities;
+    } else {
+      // Gerar rotina padrão se não houver salva
+      allActivities = RoutineService.generateRoutine(profile!);
+    }
+    
     _applyFilters();
   }
   
@@ -388,6 +399,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                 if (activityIndex != -1) {
                   allActivities[activityIndex] = activity.copyWith(isCompleted: value);
                   _applyFilters();
+                  _saveActivities(); // Salvar quando marcar/desmarcar
                 }
               });
             },
@@ -532,6 +544,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
             setState(() {
               allActivities.add(activity);
               _applyFilters();
+              _saveActivities(); // Salvar nova atividade
             });
           },
         ),
@@ -551,6 +564,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
               if (index != -1) {
                 allActivities[index] = updatedActivity;
                 _applyFilters();
+                _saveActivities(); // Salvar atividade editada
               }
             });
           },
@@ -587,5 +601,37 @@ class _RoutineScreenState extends State<RoutineScreen> {
     }
   }
   
+  // Métodos de persistência
+  Future<void> _saveActivities() async {
+    if (profile == null) return;
+    
+    final activitiesJson = allActivities.map((a) => a.toJson()).toList();
+    final key = 'routine_activities_${profile!.name}';
+    await SecureStorageService.setSecureString(key, json.encode(activitiesJson));
+  }
+  
+  Future<List<RoutineActivity>> _loadSavedActivities() async {
+    if (profile == null) return [];
+    
+    try {
+      final key = 'routine_activities_${profile!.name}';
+      final savedData = await SecureStorageService.getSecureString(key);
+      
+      if (savedData != null) {
+        final List<dynamic> activitiesJson = json.decode(savedData);
+        return activitiesJson.map((json) => RoutineActivity.fromJson(json)).toList();
+      }
+    } catch (e) {
+      // Se houver erro, retorna lista vazia para gerar rotina padrão
+    }
+    
+    return [];
+  }
+  
+  @override
+  void dispose() {
+    _saveActivities(); // Salvar ao sair da tela
+    super.dispose();
+  }
 
 }

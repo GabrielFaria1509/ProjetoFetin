@@ -39,6 +39,32 @@ class RoutineActivity {
       color: color ?? this.color,
     );
   }
+  
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'icon': icon,
+      'time': time,
+      'description': description,
+      'isCompleted': isCompleted,
+      'category': category,
+      'color': color,
+    };
+  }
+  
+  factory RoutineActivity.fromJson(Map<String, dynamic> json) {
+    return RoutineActivity(
+      id: json['id'],
+      title: json['title'],
+      icon: json['icon'],
+      time: json['time'],
+      description: json['description'],
+      isCompleted: json['isCompleted'] ?? false,
+      category: json['category'],
+      color: json['color'] ?? 0xFF2196F3,
+    );
+  }
 }
 
 class ChildProfile {
