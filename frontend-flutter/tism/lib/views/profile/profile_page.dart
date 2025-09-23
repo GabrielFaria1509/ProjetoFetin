@@ -426,7 +426,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Text(
               'delete_warning'.tr,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             Text('delete_confirmation'.tr),
@@ -439,7 +439,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: Text(
                 'delete_phrase'.tr,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'monospace',
                   fontWeight: FontWeight.bold,
                 ),

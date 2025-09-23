@@ -32,12 +32,12 @@ class SocialLoginButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.g_mobiledata, size: 24, color: Colors.red),
-                const SizedBox(width: 8),
-                const Text('Continuar com Google'),
+                SizedBox(width: 8),
+                Text('Continuar com Google'),
               ],
             ),
           ),
@@ -59,12 +59,12 @@ class SocialLoginButtons extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.apple, size: 24, color: Colors.white),
-                  const SizedBox(width: 8),
-                  const Text('Continuar com Apple'),
+                  Icon(Icons.apple, size: 24, color: Colors.white),
+                  SizedBox(width: 8),
+                  Text('Continuar com Apple'),
                 ],
               ),
             ),

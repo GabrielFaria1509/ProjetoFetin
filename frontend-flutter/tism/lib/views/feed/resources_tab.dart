@@ -231,7 +231,7 @@ class _ResourcesTabState extends State<ResourcesTab> {
                         color: tismAqua.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
@@ -239,7 +239,7 @@ class _ResourcesTabState extends State<ResourcesTab> {
                             size: 16,
                             color: tismAqua,
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Text(
                             'Abrir PDF',
                             style: TextStyle(

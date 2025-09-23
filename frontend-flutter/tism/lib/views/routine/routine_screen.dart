@@ -297,7 +297,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
           LinearProgressIndicator(
             value: progress,
             backgroundColor: Colors.grey[300],
-            valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
+            valueColor: const AlwaysStoppedAnimation<Color>(tismAqua),
             minHeight: 6,
           ),
         ],

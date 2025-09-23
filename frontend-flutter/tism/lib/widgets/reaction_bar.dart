@@ -101,7 +101,7 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
           
           // Botão "mais reações"
           PopupMenuButton<String>(
-            icon: Icon(
+            icon: const Icon(
               Icons.add_reaction_outlined,
               size: 20,
               color: tismAqua,
@@ -125,7 +125,7 @@ class _ReactionBarState extends State<ReactionBar> with TickerProviderStateMixin
                               ),
                               child: Text(
                                 '${widget.reactionCounts[entry.key]}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: tismAqua,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,

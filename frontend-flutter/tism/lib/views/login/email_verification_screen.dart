@@ -126,7 +126,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   color: tismAqua.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.email_outlined,
                   size: 80,
                   color: tismAqua,
@@ -164,7 +164,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               
               Text(
                 widget.email,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: tismAqua,
@@ -191,7 +191,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                       height: 16,
                       child: CircularProgressIndicator(
@@ -202,7 +202,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     const SizedBox(width: 12),
                     Text(
                       'verifying'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: tismAqua,
                         fontSize: 14,
                       ),
@@ -220,7 +220,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
                 child: Text(
                   'already_verified'.tr,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
               
@@ -230,7 +230,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 onPressed: _resendVerification,
                 child: Text(
                   'resend_verification'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: tismAqua,
                     fontSize: 16,
                   ),
@@ -245,7 +245,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 },
                 child: Text(
                   'login'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 14,
                   ),

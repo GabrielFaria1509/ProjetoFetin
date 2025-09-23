@@ -176,7 +176,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                     ),
                     child: Text(
                       '#$tag',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: tismAqua,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

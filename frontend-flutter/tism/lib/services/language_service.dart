@@ -6,7 +6,7 @@ import 'package:tism/l10n/app_localizations.dart';
 import 'secure_storage_service.dart';
 
 class LanguageService extends ChangeNotifier {
-  Map<String, String> _strings = {};
+  final Map<String, String> _strings = {};
   String _currentLanguage = 'pt';
   Locale _currentLocale = const Locale('pt');
   

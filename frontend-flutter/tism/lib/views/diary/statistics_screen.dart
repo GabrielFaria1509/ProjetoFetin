@@ -148,7 +148,7 @@ class StatisticsScreen extends StatelessWidget {
             LinearProgressIndicator(
               value: recentEntries / (entries.isNotEmpty ? entries.length : 1),
               backgroundColor: Colors.grey[300],
-              valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
+              valueColor: const AlwaysStoppedAnimation<Color>(tismAqua),
             ),
           ],
         ),

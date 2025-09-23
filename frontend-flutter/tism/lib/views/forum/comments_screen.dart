@@ -364,7 +364,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                           color: isDark ? Colors.grey[600]! : Colors.grey[400]!,
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: tismAqua),
                       ),
                       contentPadding: const EdgeInsets.symmetric(

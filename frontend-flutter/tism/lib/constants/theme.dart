@@ -9,12 +9,12 @@ class AppTheme {
     primaryColor: tismAqua,
     scaffoldBackgroundColor: Colors.grey[50],
     
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: tismAqua,
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: Colors.white,
@@ -43,7 +43,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: tismAqua, width: 2),
+        borderSide: const BorderSide(color: tismAqua, width: 2),
       ),
       filled: true,
       fillColor: Colors.grey[50],
@@ -70,14 +70,14 @@ class AppTheme {
     primaryColor: tismAqua,
     scaffoldBackgroundColor: const Color(0xFF121212),
     
-    appBarTheme: AppBarTheme(
-      backgroundColor: const Color(0xFF1E1E1E),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFF1E1E1E),
       foregroundColor: Colors.white,
-      iconTheme: const IconThemeData(color: Colors.white),
-      actionsIconTheme: const IconThemeData(color: Colors.white),
+      iconTheme: IconThemeData(color: Colors.white),
+      actionsIconTheme: IconThemeData(color: Colors.white),
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: Colors.white,
@@ -106,7 +106,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: tismAqua, width: 2),
+        borderSide: const BorderSide(color: tismAqua, width: 2),
       ),
       filled: true,
       fillColor: const Color(0xFF2A2A2A),

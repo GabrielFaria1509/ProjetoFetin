@@ -207,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       : Text(
                           'login'.tr,
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: const TextStyle(fontSize: 16, color: Colors.white),
                           textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
                         ),
                 ),

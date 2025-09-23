@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
           : tismAqua,
         foregroundColor: Colors.white,
         elevation: Theme.of(context).brightness == Brightness.dark ? 0 : 4,
-        actions: [],
+        actions: const [],
       ),
       body: SafeArea(
         child: Padding(
@@ -231,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                   height: 42,
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) => 
-                    Icon(Icons.chat, size: 42, color: tismAqua),
+                    const Icon(Icons.chat, size: 42, color: tismAqua),
                 ),
                 const SizedBox(width: 16),
                 Expanded(

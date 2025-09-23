@@ -228,7 +228,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('participant'.tr),
-                        Text('participant_desc'.tr, style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text('participant_desc'.tr, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -239,7 +239,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('responsible'.tr),
-                        Text('responsible_desc'.tr, style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text('responsible_desc'.tr, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -250,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('professional'.tr),
-                        Text('professional_desc'.tr, style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text('professional_desc'.tr, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -287,7 +287,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         )
                       : Text(
                           'register'.tr,
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: const TextStyle(fontSize: 16, color: Colors.white),
                         ),
                 ),
               ),

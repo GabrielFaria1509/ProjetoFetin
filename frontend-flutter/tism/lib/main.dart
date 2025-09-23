@@ -23,8 +23,11 @@ void main() async {
   await languageService.initialize();
   
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeService(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeService()),
+        ChangeNotifierProvider.value(value: languageService),
+      ],
       child: const MyApp(),
     ),
   );
@@ -35,14 +38,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeService>(
-      builder: (context, themeService, child) {
+    return Consumer2<ThemeService, LanguageService>(
+      builder: (context, themeService, languageService, child) {
         return MaterialApp(
           title: 'TISM App',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeService.themeMode,
-          locale: const Locale('pt'),
+          locale: languageService.currentLocale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

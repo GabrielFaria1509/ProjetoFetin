@@ -73,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
             if (_isLoading)
               Container(
                 padding: const EdgeInsets.all(12),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
@@ -84,8 +84,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    const Text('Pensando...', style: TextStyle(fontSize: 12)),
+                    SizedBox(width: 8),
+                    Text('Pensando...', style: TextStyle(fontSize: 12)),
                   ],
                 ),
               ),
@@ -127,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: tismAqua),
+                    borderSide: const BorderSide(color: tismAqua),
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   filled: true,
@@ -246,7 +246,7 @@ class _ChatScreenState extends State<ChatScreen> {
           '💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**',
           styleSheet: MarkdownStyleSheet(
             p: const TextStyle(fontSize: 14, height: 1.4),
-            strong: TextStyle(fontWeight: FontWeight.bold, color: tismAqua),
+            strong: const TextStyle(fontWeight: FontWeight.bold, color: tismAqua),
           ),
         ),
         actions: [
@@ -353,16 +353,16 @@ class ChatBubble extends StatelessWidget {
                           ? Colors.white70 
                           : Colors.black87,
                       ),
-                      listBullet: TextStyle(
+                      listBullet: const TextStyle(
                         color: tismAqua,
                         fontSize: 14,
                       ),
-                      h1: TextStyle(
+                      h1: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: tismAqua,
                       ),
-                      h2: TextStyle(
+                      h2: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: tismAqua,

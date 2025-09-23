@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 
 // Conditional imports
-import 'pdf_viewer_mobile.dart' if (dart.library.html) 'pdf_viewer_web.dart';
+import 'pdf_viewer_mobile_native.dart' if (dart.library.html) 'pdf_viewer_web.dart';
 
 class PDFViewer extends StatefulWidget {
   final String title;
