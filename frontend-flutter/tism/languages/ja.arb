@@ -93,7 +93,7 @@
   "wellness": "ウェルネス",
   "night": "夜",
   "all": "すべて",
-  "welcome": "ようこそ！",
+  "welcome": "こんにちは、ようこそ！",
   "profile_setup_desc": "個別ルーティンを作成するため、まず子どものプロフィールを設定しましょう。\\n\\nこれにより年齢に適したアクティビティとサポートレベルを提案できます。",
   "create_profile": "プロフィール作成",
   "edit_profile_menu": "プロフィール編集",
@@ -239,5 +239,5 @@
   "create_account": "アカウント作成",
   "account_created": "アカウント作成！有効化のためメールを確認",
   "example123": "例123",
-  "@@locale": "ja_JP"
+  "@@locale": "ja"
 }

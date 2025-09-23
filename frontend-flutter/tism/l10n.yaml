@@ -3,3 +3,5 @@ template-arb-file: pt.arb
 output-localization-file: app_localizations.dart
 output-class: AppLocalizations
 output-dir: lib/l10n
+require-resource-attributes: false
+synthetic-package: false

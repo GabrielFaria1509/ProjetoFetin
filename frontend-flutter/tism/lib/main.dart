@@ -20,7 +20,7 @@ void main() async {
   }
   
   // Inicializar serviço de idiomas
-  await LanguageService.initialize();
+  await languageService.initialize();
   
   runApp(
     ChangeNotifierProvider(
@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeService.themeMode,
+          locale: const Locale('pt'),
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

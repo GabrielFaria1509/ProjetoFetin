@@ -54,6 +54,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
       allActivities = RoutineService.generateRoutine(profile!);
     }
     
+    _sortActivitiesByTime();
     _applyFilters();
   }
   
@@ -543,8 +544,9 @@ class _RoutineScreenState extends State<RoutineScreen> {
           onActivitySaved: (activity) {
             setState(() {
               allActivities.add(activity);
+              _sortActivitiesByTime();
               _applyFilters();
-              _saveActivities(); // Salvar nova atividade
+              _saveActivities();
             });
           },
         ),
@@ -563,9 +565,17 @@ class _RoutineScreenState extends State<RoutineScreen> {
               final index = allActivities.indexWhere((a) => a.id == activity.id);
               if (index != -1) {
                 allActivities[index] = updatedActivity;
+                _sortActivitiesByTime();
                 _applyFilters();
-                _saveActivities(); // Salvar atividade editada
+                _saveActivities();
               }
+            });
+          },
+          onActivityDeleted: () {
+            setState(() {
+              allActivities.removeWhere((a) => a.id == activity.id);
+              _applyFilters();
+              _saveActivities();
             });
           },
         ),
@@ -629,9 +639,31 @@ class _RoutineScreenState extends State<RoutineScreen> {
     return [];
   }
   
+  void _sortActivitiesByTime() {
+    allActivities.sort((a, b) {
+      final timeA = _parseTime(a.time);
+      final timeB = _parseTime(b.time);
+      return timeA.compareTo(timeB);
+    });
+  }
+  
+  int _parseTime(String time) {
+    try {
+      final parts = time.split(':');
+      if (parts.length == 2) {
+        final hours = int.parse(parts[0]);
+        final minutes = int.parse(parts[1]);
+        return hours * 60 + minutes;
+      }
+    } catch (e) {
+      // Se não conseguir parsear, retorna um valor alto para ficar no final
+    }
+    return 9999;
+  }
+
   @override
   void dispose() {
-    _saveActivities(); // Salvar ao sair da tela
+    _saveActivities();
     super.dispose();
   }
 

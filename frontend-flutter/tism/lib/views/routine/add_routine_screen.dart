@@ -5,11 +5,13 @@ import 'routine_models.dart';
 class AddRoutineScreen extends StatefulWidget {
   final RoutineActivity? activityToEdit;
   final Function(RoutineActivity) onActivitySaved;
+  final VoidCallback? onActivityDeleted;
   
   const AddRoutineScreen({
     super.key, 
     required this.onActivitySaved,
     this.activityToEdit,
+    this.onActivityDeleted,
   });
 
   @override
@@ -67,6 +69,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
         title: Text(widget.activityToEdit != null ? 'Editar Rotina' : 'Nova Rotina'),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
+        actions: widget.activityToEdit != null ? [
+          IconButton(
+            icon: const Icon(Icons.delete, color: Colors.white),
+            onPressed: _deleteActivity,
+          ),
+        ] : null,
       ),
       body: SafeArea(
         child: Padding(
@@ -128,10 +136,21 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
   Widget _buildTimeField() {
     return TextField(
       controller: _timeController,
+      keyboardType: TextInputType.number,
       decoration: const InputDecoration(
-        labelText: 'Horário (ex: 08:00)',
+        labelText: 'Horário (00:00 - 23:59)',
         border: OutlineInputBorder(),
+        hintText: '08:00',
       ),
+      onChanged: (value) {
+        // Auto-format time input
+        if (value.length == 2 && !value.contains(':')) {
+          _timeController.text = '$value:';
+          _timeController.selection = TextSelection.fromPosition(
+            TextPosition(offset: _timeController.text.length),
+          );
+        }
+      },
     );
   }
 
@@ -276,11 +295,23 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
       return;
     }
 
+    // Validar horário
+    final time = _timeController.text.trim();
+    if (!_isValidTime(time)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Horário inválido. Use formato 24h (00:00 - 23:59)'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
     final activity = RoutineActivity(
       id: widget.activityToEdit?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
       title: title,
       icon: _selectedIcon,
-      time: _timeController.text,
+      time: time,
       description: _descriptionController.text,
       category: _selectedCategory,
       color: _selectedColor,
@@ -289,5 +320,36 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
 
     widget.onActivitySaved(activity);
     Navigator.pop(context);
+  }
+
+  bool _isValidTime(String time) {
+    if (time.isEmpty) return false;
+    
+    final regex = RegExp(r'^([01]?[0-9]|2[0-3]):([0-5][0-9])$');
+    return regex.hasMatch(time);
+  }
+  
+  void _deleteActivity() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Deletar Rotina'),
+        content: const Text('Tem certeza que deseja deletar esta rotina?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context); // Close edit screen
+              widget.onActivityDeleted?.call();
+            },
+            child: const Text('Deletar', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,7 +1,13 @@
 {
-  "@@locale": "pt_BR",
+  "@@locale": "pt",
   "app_name": "TISM",
+  "@app_name": {
+    "description": "Application name"
+  },
   "app_subtitle": "Tudo o que você precisa saber sobre o TEA em um clique",
+  "@app_subtitle": {
+    "description": "Application subtitle"
+  },
   "app_title": "TISM - Guia TEA",
   "login": "Entrar",
   "register": "Cadastrar",
@@ -41,7 +47,15 @@
   "dashboard": "Dashboard",
   "feed": "Feed",
   "search": "Buscar",
-  "hello_user": "Olá, %s! 👋",
+  "hello_user": "Olá, {name}! 👋",
+  "@hello_user": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "explore_content": "Explore conteúdos educativos sobre o TEA",
   "educational_feed": "Feed Educativo",
   "custom_routine": "Rotina Personalizada",
@@ -78,11 +92,38 @@
   "crisis": "Crise",
   "difficulty": "Dificuldade",
   "triggers": "Gatilhos",
-  "routine_of": "Rotina de %s",
-  "support_level": "Suporte %s",
+  "routine_of": "Rotina de {name}",
+  "@routine_of": {
+    "description": "Routine title with child name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "support_level": "Suporte {level}",
+  "@support_level": {
+    "description": "Support level text",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "filter_category": "Filtrar por categoria:",
   "completed": "Concluídas",
-  "progress_count": "Progresso: %d/%d",
+  "progress_count": "Progresso: {completed}/{total}",
+  "@progress_count": {
+    "description": "Progress counter",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "no_activities": "Nenhuma atividade encontrada",
   "clear_filters": "Limpar filtros",
   "add_activity": "Adicionar Atividade",
@@ -94,7 +135,7 @@
   "wellness": "Bem-estar",
   "night": "Noite",
   "all": "Todas",
-  "welcome": "Bem-vindo!",
+  "welcome": "Olá, seja bem vindo(a)!",
   "profile_setup_desc": "Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\\n\\nIsso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.",
   "create_profile": "Criar Perfil",
   "edit_profile_menu": "Editar Perfil",
@@ -141,7 +182,15 @@
   "no_account": "Ainda não tem conta? Cadastre-se",
   "fill_all_fields": "Preencha todos os campos",
   "login_error": "Erro no login",
-  "connection_error_detail": "Erro de conexão: %s",
+  "connection_error_detail": "Erro de conexão: {error}",
+  "@connection_error_detail": {
+    "description": "Connection error with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "field_required": "Este campo é obrigatório",
   "invalid_email": "Email inválido",
   "password_too_short": "Senha deve ter pelo menos 8 caracteres",
@@ -180,7 +229,15 @@
   "delete_post": "Deletar Post",
   "delete_post_confirm": "Tem certeza que deseja deletar este post? Esta ação não pode ser desfeita.",
   "post_deleted_success": "Post deletado com sucesso",
-  "error_deleting_post": "Erro ao deletar post: %s",
+  "error_deleting_post": "Erro ao deletar post: {error}",
+  "@error_deleting_post": {
+    "description": "Error deleting post",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "report_post": "Denunciar",
   "report_post_title": "Denunciar Post",
   "report_post_confirm": "Tem certeza que deseja denunciar este post?",
@@ -210,7 +267,15 @@
   "observation_type": "Tipo:",
   "title": "Título",
   "detailed_description": "Descrição detalhada",
-  "intensity": "Intensidade: %d",
+  "intensity": "Intensidade: {level}",
+  "@intensity": {
+    "description": "Intensity level",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "observer": "Observador:",
   "possible_triggers": "Possíveis gatilhos:",
   "delete_observation": "Excluir Observação",
@@ -218,8 +283,27 @@
   "observation_title_empty": "O título da observação não pode estar vazio",
   "not_defined": "Não definido",
   "confirm_change": "Confirmar alteração",
-  "change_name_to": "Alterar nome para \"%s\"?",
-  "change_username_to": "Alterar username de @%s para @%s?",
+  "change_name_to": "Alterar nome para \"{name}\"?",
+  "@change_name_to": {
+    "description": "Confirm name change",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "change_username_to": "Alterar username de @{oldName} para @{newName}?",
+  "@change_username_to": {
+    "description": "Confirm username change",
+    "placeholders": {
+      "oldName": {
+        "type": "String"
+      },
+      "newName": {
+        "type": "String"
+      }
+    }
+  },
   "error_updating_name": "Erro ao atualizar nome",
   "error_updating_username": "Erro ao atualizar username",
   "error_updating_type": "Erro ao atualizar tipo",

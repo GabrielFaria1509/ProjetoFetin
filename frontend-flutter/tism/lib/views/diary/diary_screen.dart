@@ -131,6 +131,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         ),
         onTap: () => _editEntry(entry),
+        onLongPress: () => _showEntryOptions(entry),
       ),
     );
   }
@@ -145,6 +146,59 @@ class _DiaryScreenState extends State<DiaryScreen> {
       ),
     );
     _loadEntries();
+  }
+
+  void _showEntryOptions(DiaryEntry entry) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text('Editar observação'),
+              onTap: () {
+                Navigator.pop(context);
+                _editEntry(entry);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete, color: Colors.red),
+              title: const Text('Deletar observação', style: TextStyle(color: Colors.red)),
+              onTap: () {
+                Navigator.pop(context);
+                _deleteEntry(entry);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  void _deleteEntry(DiaryEntry entry) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Deletar Observação'),
+        content: const Text('Tem certeza que deseja deletar esta observação?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              DiaryService.deleteEntry(entry.id);
+              Navigator.pop(context);
+              _loadEntries();
+            },
+            child: const Text('Deletar', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
   }
 
   void _exportReport() {

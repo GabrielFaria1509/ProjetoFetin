@@ -93,7 +93,7 @@
   "wellness": "Bien-être",
   "night": "Soir",
   "all": "Toutes",
-  "welcome": "Bienvenue !",
+  "welcome": "Bonjour, bienvenue !",
   "profile_setup_desc": "Pour créer une routine personnalisée, configurons d'abord le profil de l'enfant.\\n\\nCela nous aide à suggérer des activités adaptées à l'âge et au niveau de soutien.",
   "create_profile": "Créer un profil",
   "edit_profile_menu": "Modifier le profil",
@@ -239,5 +239,5 @@
   "create_account": "Créer un compte",
   "account_created": "Compte créé ! Vérifiez votre email pour l'activer",
   "example123": "exemple123",
-  "@@locale": "fr_FR"
+  "@@locale": "fr"
 }

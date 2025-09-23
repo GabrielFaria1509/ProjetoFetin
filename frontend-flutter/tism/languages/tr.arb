@@ -93,7 +93,7 @@
   "wellness": "Sağlık",
   "night": "Gece",
   "all": "Tümü",
-  "welcome": "Hoş Geldiniz!",
+  "welcome": "Merhaba, hoş geldiniz!",
   "profile_setup_desc": "Kişiselleştirilmiş rutin oluşturmak için önce çocuğun profilini ayarlayalım.\\n\\nBu, yaşa uygun etkinlikler ve destek seviyesi önerebilmemize yardımcı olur.",
   "create_profile": "Profil Oluştur",
   "edit_profile_menu": "Profili Düzenle",
@@ -239,5 +239,5 @@
   "create_account": "Hesap oluştur",
   "account_created": "Hesap oluşturuldu! Etkinleştirmek için e-postanızı kontrol edin",
   "example123": "örnek123",
-  "@@locale": "tr_TR"
+  "@@locale": "tr"
 }

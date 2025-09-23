@@ -93,7 +93,7 @@
   "wellness": "웰빙",
   "night": "저녁",
   "all": "전체",
-  "welcome": "환영합니다!",
+  "welcome": "안녕하세요, 환영합니다!",
   "profile_setup_desc": "개인화된 루틴을 만들기 위해 먼저 아이의 프로필을 설정해보겠습니다.\\n\\n이를 통해 연령에 적합한 활동과 지원 수준을 제안할 수 있습니다.",
   "create_profile": "프로필 생성",
   "edit_profile_menu": "프로필 편집",
@@ -239,5 +239,5 @@
   "create_account": "계정 생성",
   "account_created": "계정이 생성되었습니다! 활성화를 위해 이메일을 확인하세요",
   "example123": "예시123",
-  "@@locale": "ko_KR"
+  "@@locale": "ko"
 }

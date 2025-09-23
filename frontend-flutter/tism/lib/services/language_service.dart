@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tism/l10n/app_localizations.dart';
 import 'secure_storage_service.dart';
 
-class LanguageService {
-  static Map<String, String> _strings = {};
-  static String _currentLanguage = 'pt';
+class LanguageService extends ChangeNotifier {
+  Map<String, String> _strings = {};
+  String _currentLanguage = 'pt';
+  Locale _currentLocale = const Locale('pt');
   
   // Idiomas disponíveis
   static const Map<String, String> availableLanguages = {
@@ -26,19 +28,21 @@ class LanguageService {
   };
   
   // Inicializar serviço de idioma
-  static Future<void> initialize([BuildContext? context]) async {
-    // Detectar idioma do sistema usando WidgetsBinding
+  Future<void> initialize([BuildContext? context]) async {
+    // Detectar idioma do sistema
     String systemLanguage = 'pt';
     
     try {
-      final locale = WidgetsBinding.instance.platformDispatcher.locale;
-      final languageCode = locale.languageCode.toLowerCase();
-      
-      // Usar código de idioma diretamente se disponível
-      if (availableLanguages.containsKey(languageCode)) {
-        systemLanguage = languageCode;
-      } else {
+      if (kIsWeb) {
+        // Para web, forçar português por enquanto
         systemLanguage = 'pt';
+      } else {
+        // Para mobile, usar WidgetsBinding
+        final locale = WidgetsBinding.instance.platformDispatcher.locale;
+        final languageCode = locale.languageCode.toLowerCase();
+        if (availableLanguages.containsKey(languageCode)) {
+          systemLanguage = languageCode;
+        }
       }
     } catch (e) {
       // Fallback para português se não conseguir detectar
@@ -53,10 +57,13 @@ class LanguageService {
     }
     
     await _loadLanguage(_currentLanguage);
+    print('LanguageService initialized with language: $_currentLanguage');
+    print('Loaded ${_strings.length} strings');
+    notifyListeners();
   }
   
   // Carregar arquivo de idioma
-  static Future<void> _loadLanguage(String languageCode) async {
+  Future<void> _loadLanguage(String languageCode) async {
     try {
       final arbString = await rootBundle.loadString('languages/$languageCode.arb');
       final Map<String, dynamic> arbData = json.decode(arbString);
@@ -71,6 +78,11 @@ class LanguageService {
       });
       
       _currentLanguage = languageCode;
+      _currentLocale = Locale(languageCode);
+      print('Loaded language $languageCode with ${_strings.length} strings');
+      if (_strings.isNotEmpty) {
+        print('Sample string - welcome: ${_strings['welcome']}');
+      }
     } catch (e) {
       // Se falhar, usar português como fallback
       if (languageCode != 'pt') {
@@ -80,15 +92,16 @@ class LanguageService {
   }
   
   // Alterar idioma
-  static Future<void> setLanguage(String languageCode) async {
+  Future<void> setLanguage(String languageCode) async {
     if (availableLanguages.containsKey(languageCode)) {
       await _loadLanguage(languageCode);
       await SecureStorageService.setSecureString('app_language', languageCode);
+      notifyListeners();
     }
   }
   
   // Obter string traduzida
-  static String getString(String key, [List<dynamic>? args]) {
+  String getString(String key, [List<dynamic>? args]) {
     String text = _strings[key] ?? key;
     
     // Substituir placeholders %s, %d
@@ -102,13 +115,16 @@ class LanguageService {
   }
   
   // Obter idioma atual
-  static String get currentLanguage => _currentLanguage;
+  String get currentLanguage => _currentLanguage;
+  
+  // Obter locale atual
+  Locale get currentLocale => _currentLocale;
   
   // Obter nome do idioma atual
-  static String get currentLanguageName => availableLanguages[_currentLanguage] ?? 'Português';
+  String get currentLanguageName => availableLanguages[_currentLanguage] ?? 'Português';
   
   // Verificar se é RTL
-  static bool get isRTL => _currentLanguage == 'ar';
+  bool get isRTL => _currentLanguage == 'ar';
   
   // Helper para obter AppLocalizations do contexto
   static AppLocalizations? of(BuildContext context) {
@@ -116,8 +132,11 @@ class LanguageService {
   }
 }
 
+// Instância global
+final languageService = LanguageService();
+
 // Extension para facilitar uso
 extension StringTranslation on String {
-  String get tr => LanguageService.getString(this);
-  String trArgs(List<dynamic> args) => LanguageService.getString(this, args);
+  String get tr => languageService.getString(this);
+  String trArgs(List<dynamic> args) => languageService.getString(this, args);
 }
