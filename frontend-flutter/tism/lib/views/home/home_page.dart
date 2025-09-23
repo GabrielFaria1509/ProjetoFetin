@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/secure_storage_service.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/utils/text_utils.dart';
 import 'dart:math';
 import 'package:tism/views/feed/feed_page.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TISM - Guia TEA'),
+        title: Text('app_title'.tr),
         backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Olá, ${_displayName.isNotEmpty ? _displayName : widget.nomeUsuario}! 👋',
+              '${'hello'.tr}, ${_displayName.isNotEmpty ? _displayName : widget.nomeUsuario}! 👋',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
               textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
@@ -104,13 +105,13 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   _buildMenuCard(
                     context,
-                    'Feed Educativo',
+                    'educational_feed'.tr,
                     Icons.article,
                     () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedPage())),
                   ),
                   _buildMenuCard(
                     context,
-                    'Rotina Personalizada',
+                    'personalized_routine'.tr,
                     Icons.schedule,
                     () => Navigator.push(
                       context,
@@ -119,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCard(
                     context,
-                    'Diário de Observações',
+                    'observation_diary'.tr,
                     Icons.book,
                     () => Navigator.push(
                       context,
@@ -128,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCardWithImage(
                     context,
-                    'Tina (Chatbot)',
+                    'tina_chatbot'.tr,
                     'assets/images/tinaSimpleIcon.png',
                     () => Navigator.push(
                       context,
@@ -137,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCard(
                     context,
-                    'Fórum TEA',
+                    'tea_forum'.tr,
                     Icons.forum,
                     () => Navigator.push(
                       context,
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
 
                   _buildMenuCard(
                     context,
-                    'Perfil',
+                    'profile'.tr,
                     Icons.person,
                     () => Navigator.push(
                       context,

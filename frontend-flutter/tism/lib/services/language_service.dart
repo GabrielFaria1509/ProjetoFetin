@@ -57,8 +57,6 @@ class LanguageService extends ChangeNotifier {
     }
     
     await _loadLanguage(_currentLanguage);
-    print('LanguageService initialized with language: $_currentLanguage');
-    print('Loaded ${_strings.length} strings');
     notifyListeners();
   }
   
@@ -79,10 +77,6 @@ class LanguageService extends ChangeNotifier {
       
       _currentLanguage = languageCode;
       _currentLocale = Locale(languageCode);
-      print('Loaded language $languageCode with ${_strings.length} strings');
-      if (_strings.isNotEmpty) {
-        print('Sample string - welcome: ${_strings['welcome']}');
-      }
     } catch (e) {
       // Se falhar, usar português como fallback
       if (languageCode != 'pt') {

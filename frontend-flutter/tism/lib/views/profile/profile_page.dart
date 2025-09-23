@@ -29,13 +29,41 @@ class _ProfilePageState extends State<ProfilePage> {
     _loadUserData();
   }
 
+  String _capitalizeUserType(String userType) {
+    switch (userType.toLowerCase()) {
+      case 'participante':
+        return 'Participante';
+      case 'responsavel':
+      case 'responsável':
+        return 'Responsável';
+      case 'profissional':
+        return 'Profissional';
+      default:
+        return 'Participante';
+    }
+  }
+
+  String _translateUserType(String userType) {
+    switch (userType) {
+      case 'Participante':
+        return 'participant'.tr;
+      case 'Responsável':
+        return 'responsible'.tr;
+      case 'Profissional':
+        return 'professional'.tr;
+      default:
+        return 'participant'.tr;
+    }
+  }
+
   Future<void> _loadUserData() async {
     final user = await UserService.getUser();
     if (user != null && mounted) {
       setState(() {
         _userName = user['name'] ?? user['username'] ?? widget.nomeUsuario;
         _userUsername = user['username'] ?? '';
-        _userType = (user['userType'] ?? 'participante').toLowerCase() == 'participante' ? 'Participante' : user['userType'] ?? 'Participante';
+        final userTypeRaw = (user['userType'] ?? 'participante').toLowerCase();
+        _userType = _capitalizeUserType(userTypeRaw);
       });
       _nameController.text = _userName;
       _usernameController.text = _userUsername;
@@ -123,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListTile(
               leading: const Icon(Icons.work),
               title: Text('user_type'.tr),
-              subtitle: Text(_userType),
+              subtitle: Text(_translateUserType(_userType)),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _showUserTypeDialog,
             ),

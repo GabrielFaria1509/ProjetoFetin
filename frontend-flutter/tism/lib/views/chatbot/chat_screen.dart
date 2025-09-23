@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'dart:convert';
 import 'chatbot_service.dart';
 import 'quick_suggestions.dart';
@@ -43,7 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ? const Color(0xFF121212) 
         : null,
       appBar: AppBar(
-        title: const Text('Tina - Assistente TEA'),
+        title: Text('tina_assistant'.tr),
         backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
@@ -73,10 +74,10 @@ class _ChatScreenState extends State<ChatScreen> {
             if (_isLoading)
               Container(
                 padding: const EdgeInsets.all(12),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                       height: 16,
                       child: CircularProgressIndicator(
@@ -84,8 +85,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         valueColor: AlwaysStoppedAnimation<Color>(tismAqua),
                       ),
                     ),
-                    SizedBox(width: 8),
-                    Text('Pensando...', style: TextStyle(fontSize: 12)),
+                    const SizedBox(width: 8),
+                    Text('thinking'.tr, style: const TextStyle(fontSize: 12)),
                   ],
                 ),
               ),
@@ -119,7 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 textCapitalization: TextCapitalization.sentences,
                 onSubmitted: _isLoading ? null : _sendMessage,
                 decoration: InputDecoration(
-                  hintText: 'Digite sua mensagem...',
+                  hintText: 'type_message'.tr,
                   hintStyle: TextStyle(color: Colors.grey[500], fontSize: 13),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -231,7 +232,7 @@ class _ChatScreenState extends State<ChatScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('💙 Sobre a Tina'),
+        title: Text('about_tina'.tr),
         content: MarkdownBody(
           data: '🤖 **Olá! Eu sou a Tina!**\n\n'
           'Sou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.\n\n'
@@ -252,7 +253,7 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Entendi, Tina! Vamos conversar! 😊'),
+            child: Text('understood_tina'.tr),
           ),
         ],
       ),

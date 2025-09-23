@@ -132,6 +132,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get search => '검색';
 
   @override
+  String get hello => 'Olá';
+
+  @override
   String hello_user(String name) {
     return '안녕하세요, %s님! 👋';
   }
@@ -141,6 +144,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get educational_feed => '교육 피드';
+
+  @override
+  String get personalized_routine => 'Rotina Personalizada';
 
   @override
   String get custom_routine => '맞춤 루틴';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/views/feed/resources_tab.dart';
 
 class FeedPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feed Educativo'),
+        title: Text('educational_feed'.tr),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         leading: IconButton(
@@ -40,14 +41,14 @@ class _FeedPageState extends State<FeedPage> with SingleTickerProviderStateMixin
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
           indicatorColor: Colors.white,
-          tabs: const [
+          tabs: [
             Tab(
-              text: 'Artigos',
-              icon: Icon(Icons.article, color: Colors.white),
+              text: 'articles'.tr,
+              icon: const Icon(Icons.article, color: Colors.white),
             ),
             Tab(
-              text: 'Biblioteca Digital',
-              icon: Icon(Icons.library_books, color: Colors.white),
+              text: 'digital_library'.tr,
+              icon: const Icon(Icons.library_books, color: Colors.white),
             ),
           ],
         ),

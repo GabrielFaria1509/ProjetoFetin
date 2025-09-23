@@ -132,6 +132,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get search => '検索';
 
   @override
+  String get hello => 'Olá';
+
+  @override
   String hello_user(String name) {
     return 'こんにちは、%sさん！ 👋';
   }
@@ -141,6 +144,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get educational_feed => '教育フィード';
+
+  @override
+  String get personalized_routine => 'Rotina Personalizada';
 
   @override
   String get custom_routine => 'カスタムルーティン';

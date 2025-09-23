@@ -47,6 +47,7 @@
   "dashboard": "Dashboard",
   "feed": "Feed",
   "search": "Buscar",
+  "hello": "Olá",
   "hello_user": "Olá, {name}! 👋",
   "@hello_user": {
     "description": "Greeting message with user name",
@@ -58,6 +59,7 @@
   },
   "explore_content": "Explore conteúdos educativos sobre o TEA",
   "educational_feed": "Feed Educativo",
+  "personalized_routine": "Rotina Personalizada",
   "custom_routine": "Rotina Personalizada",
   "observation_diary": "Diário de Observações",
   "tina_chatbot": "Tina (Chatbot)",

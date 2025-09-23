@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'diary_models.dart';
 import 'diary_service.dart';
 import 'add_entry_screen.dart';
@@ -32,7 +33,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Diário de Observações'),
+        title: Text('diary_observations'.tr),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: [
@@ -63,8 +64,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         : Colors.grey
                     ),
                     const SizedBox(height: 16),
-                    const Text('Nenhuma observação ainda'),
-                    const Text('Toque no + para começar'),
+                    Text('no_observations'.tr),
+                    Text('tap_plus_start'.tr),
                   ],
                 ),
               )
@@ -117,7 +118,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             Text('${entry.date.day}/${entry.date.month} - ${entry.observer.toUpperCase()}'),
             Text(entry.description, maxLines: 2, overflow: TextOverflow.ellipsis),
             if (entry.triggers.isNotEmpty)
-              Text('Gatilhos: ${entry.triggers.join(", ")}', 
+              Text('${'triggers'.tr}: ${entry.triggers.join(", ")}', 
                    style: const TextStyle(fontSize: 12, color: Colors.grey)),
           ],
         ),

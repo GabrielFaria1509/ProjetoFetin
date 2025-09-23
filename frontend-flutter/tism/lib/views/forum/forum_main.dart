@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'forum_feed.dart';
 
 import 'forum_search.dart';
@@ -39,7 +40,7 @@ class _ForumMainState extends State<ForumMain> with TickerProviderStateMixin {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fórum TEA'),
+        title: Text('tea_forum'.tr),
         backgroundColor: isDark ? const Color(0xFF1E1E1E) : tismAqua,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -49,9 +50,9 @@ class _ForumMainState extends State<ForumMain> with TickerProviderStateMixin {
           indicatorColor: Colors.white,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
-          tabs: const [
-            Tab(icon: Icon(Icons.home), text: 'Feed'),
-            Tab(icon: Icon(Icons.search), text: 'Buscar'),
+          tabs: [
+            Tab(icon: const Icon(Icons.home), text: 'feed'.tr),
+            Tab(icon: const Icon(Icons.search), text: 'search'.tr),
           ],
         ),
       ),

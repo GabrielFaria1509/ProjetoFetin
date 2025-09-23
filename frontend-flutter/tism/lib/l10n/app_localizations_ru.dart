@@ -132,6 +132,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get search => 'Поиск';
 
   @override
+  String get hello => 'Olá';
+
+  @override
   String hello_user(String name) {
     return 'Привет, %s! 👋';
   }
@@ -141,6 +144,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get educational_feed => 'Образовательная лента';
+
+  @override
+  String get personalized_routine => 'Rotina Personalizada';
 
   @override
   String get custom_routine => 'Индивидуальный распорядок';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 
 class PDFViewerImpl extends StatefulWidget {
@@ -15,16 +15,20 @@ class PDFViewerImpl extends StatefulWidget {
 }
 
 class _PDFViewerImplState extends State<PDFViewerImpl> {
+  String? localPath;
   bool isLoading = true;
   String? errorMessage;
+  int currentPage = 0;
+  int totalPages = 0;
+  PDFViewController? pdfController;
 
   @override
   void initState() {
     super.initState();
-    _openPDF();
+    _loadPDF();
   }
 
-  Future<void> _openPDF() async {
+  Future<void> _loadPDF() async {
     try {
       final bytes = await rootBundle.load(widget.assetPath);
       final dir = await getTemporaryDirectory();
@@ -36,20 +40,16 @@ class _PDFViewerImplState extends State<PDFViewerImpl> {
       final file = File('${dir.path}/$fileName.pdf');
       await file.writeAsBytes(bytes.buffer.asUint8List());
       
-      final uri = Uri.file(file.path);
-      
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-        if (mounted) {
-          Navigator.pop(context);
-        }
-      } else {
-        throw 'Não foi possível abrir o PDF';
+      if (mounted) {
+        setState(() {
+          localPath = file.path;
+          isLoading = false;
+        });
       }
     } catch (e) {
       if (mounted) {
         setState(() {
-          errorMessage = 'Erro ao abrir PDF: $e';
+          errorMessage = 'Erro ao carregar PDF: $e';
           isLoading = false;
         });
       }
@@ -59,16 +59,7 @@ class _PDFViewerImplState extends State<PDFViewerImpl> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Abrindo PDF...'),
-          ],
-        ),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
     
     if (errorMessage != null) {
@@ -86,20 +77,34 @@ class _PDFViewerImplState extends State<PDFViewerImpl> {
                   isLoading = true;
                   errorMessage = null;
                 });
-                _openPDF();
+                _loadPDF();
               },
               child: const Text('Tentar Novamente'),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Voltar'),
             ),
           ],
         ),
       );
     }
 
-    return const SizedBox.shrink();
+    return PDFView(
+      filePath: localPath!,
+      enableSwipe: true,
+      swipeHorizontal: false,
+      autoSpacing: false,
+      pageFling: true,
+      onRender: (pages) {
+        setState(() {
+          totalPages = pages ?? 0;
+        });
+      },
+      onViewCreated: (controller) {
+        pdfController = controller;
+      },
+      onPageChanged: (int? page, int? total) {
+        setState(() {
+          currentPage = page ?? 0;
+        });
+      },
+    );
   }
 }

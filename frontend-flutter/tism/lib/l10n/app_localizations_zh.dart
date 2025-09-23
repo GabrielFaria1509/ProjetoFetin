@@ -132,6 +132,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get search => '搜索';
 
   @override
+  String get hello => 'Olá';
+
+  @override
   String hello_user(String name) {
     return '您好，%s！👋';
   }
@@ -141,6 +144,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get educational_feed => '教育动态';
+
+  @override
+  String get personalized_routine => 'Rotina Personalizada';
 
   @override
   String get custom_routine => '自定义日程';

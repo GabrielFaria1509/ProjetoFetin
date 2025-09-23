@@ -366,6 +366,12 @@ abstract class AppLocalizations {
   /// **'Buscar'**
   String get search;
 
+  /// No description provided for @hello.
+  ///
+  /// In pt, this message translates to:
+  /// **'Olá'**
+  String get hello;
+
   /// Greeting message with user name
   ///
   /// In pt, this message translates to:
@@ -383,6 +389,12 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Feed Educativo'**
   String get educational_feed;
+
+  /// No description provided for @personalized_routine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rotina Personalizada'**
+  String get personalized_routine;
 
   /// No description provided for @custom_routine.
   ///
