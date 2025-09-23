@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tism/constants/theme.dart';
 import 'package:tism/services/theme_service.dart';
 import 'package:tism/services/language_service.dart';
 import 'package:tism/views/login/login_startup.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/services/secure_storage_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +42,27 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeService.themeMode,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt'),
+            Locale('en'),
+            Locale('fr'),
+            Locale('es'),
+            Locale('de'),
+            Locale('ru'),
+            Locale('ja'),
+            Locale('it'),
+            Locale('ko'),
+            Locale('tr'),
+            Locale('hi'),
+            Locale('ar'),
+            Locale('zh'),
+          ],
           home: const InitialScreen(),
           debugShowCheckedModeBanner: false,
         );

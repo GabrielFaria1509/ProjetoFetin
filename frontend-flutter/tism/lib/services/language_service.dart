@@ -1,44 +1,55 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:xml/xml.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'secure_storage_service.dart';
 
 class LanguageService {
   static Map<String, String> _strings = {};
-  static String _currentLanguage = 'pt-br';
+  static String _currentLanguage = 'pt';
   
   // Idiomas disponíveis
   static const Map<String, String> availableLanguages = {
-    'pt-br': 'Português (Brasil)',
-    'en-us': 'English (US)',
+    'pt': 'Português',
+    'en': 'English',
+    'fr': 'Français',
+    'es': 'Español',
+    'de': 'Deutsch',
+    'ru': 'Русский',
+    'ja': '日本語',
+    'it': 'Italiano',
+    'ko': '한국어',
+    'tr': 'Türkçe',
+    'hi': 'हिन्दी',
+    'ar': 'العربية',
+    'zh': '中文',
   };
   
   // Inicializar serviço de idioma
   static Future<void> initialize([BuildContext? context]) async {
     // Detectar idioma do sistema usando WidgetsBinding
-    String systemLanguage = 'pt-br';
+    String systemLanguage = 'pt';
     
     try {
       final locale = WidgetsBinding.instance.platformDispatcher.locale;
       final languageCode = locale.languageCode.toLowerCase();
       
-      // Mapear códigos de idioma para nossos arquivos
-      if (languageCode == 'en') {
-        systemLanguage = 'en-us';
-      } else if (languageCode == 'pt') {
-        systemLanguage = 'pt-br';
+      // Usar código de idioma diretamente se disponível
+      if (availableLanguages.containsKey(languageCode)) {
+        systemLanguage = languageCode;
+      } else {
+        systemLanguage = 'pt';
       }
     } catch (e) {
       // Fallback para português se não conseguir detectar
-      systemLanguage = 'pt-br';
+      systemLanguage = 'pt';
     }
     
     // Usar idioma do sistema se disponível, senão português
     if (availableLanguages.containsKey(systemLanguage)) {
       _currentLanguage = systemLanguage;
     } else {
-      _currentLanguage = 'pt-br';
+      _currentLanguage = 'pt';
     }
     
     await _loadLanguage(_currentLanguage);
@@ -47,26 +58,23 @@ class LanguageService {
   // Carregar arquivo de idioma
   static Future<void> _loadLanguage(String languageCode) async {
     try {
-      final xmlString = await rootBundle.loadString('languages/$languageCode.xml');
-      final document = XmlDocument.parse(xmlString);
+      final arbString = await rootBundle.loadString('languages/$languageCode.arb');
+      final Map<String, dynamic> arbData = json.decode(arbString);
       
       _strings.clear();
       
-      // Extrair strings do XML
-      for (final element in document.findAllElements('string')) {
-        final name = element.getAttribute('name');
-        final value = element.innerText;
-        
-        if (name != null && value.isNotEmpty) {
-          _strings[name] = value;
+      // Extrair strings do ARB (ignorar metadados que começam com @@)
+      arbData.forEach((key, value) {
+        if (!key.startsWith('@@') && value is String) {
+          _strings[key] = value;
         }
-      }
+      });
       
       _currentLanguage = languageCode;
     } catch (e) {
       // Se falhar, usar português como fallback
-      if (languageCode != 'pt-br') {
-        await _loadLanguage('pt-br');
+      if (languageCode != 'pt') {
+        await _loadLanguage('pt');
       }
     }
   }
@@ -97,10 +105,15 @@ class LanguageService {
   static String get currentLanguage => _currentLanguage;
   
   // Obter nome do idioma atual
-  static String get currentLanguageName => availableLanguages[_currentLanguage] ?? 'Português (Brasil)';
+  static String get currentLanguageName => availableLanguages[_currentLanguage] ?? 'Português';
   
-  // Verificar se é RTL (para idiomas futuros como árabe)
-  static bool get isRTL => false; // Por enquanto sempre LTR
+  // Verificar se é RTL
+  static bool get isRTL => _currentLanguage == 'ar';
+  
+  // Helper para obter AppLocalizations do contexto
+  static AppLocalizations? of(BuildContext context) {
+    return AppLocalizations.of(context);
+  }
 }
 
 // Extension para facilitar uso

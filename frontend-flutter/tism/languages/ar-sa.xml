@@ -1,294 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources>
-    <!-- App Name -->
-    <string name="app_name">TISM</string>
-    <string name="app_subtitle">‭كل ما تحتاج لمعرفته عن اضطراب طيف التوحد بنقرة واحدة‬</string>
-    <string name="app_title">‭TISM - دليل اضطراب طيف التوحد‬</string>
-    
-    <!-- Authentication -->
-    <string name="login">‭تسجيل الدخول‬</string>
-    <string name="register">‭إنشاء حساب‬</string>
-    <string name="email">‭البريد الإلكتروني‬</string>
-    <string name="password">‭كلمة المرور‬</string>
-    <string name="confirm_password">‭تأكيد كلمة المرور‬</string>
-    <string name="name">‭الاسم‬</string>
-    <string name="username">‭اسم المستخدم‬</string>
-    <string name="forgot_password">‭نسيت كلمة المرور‬</string>
-    <string name="login_success">‭تم تسجيل الدخول بنجاح‬</string>
-    <string name="register_success">‭تم إنشاء الحساب بنجاح‬</string>
-    <string name="logout">‭تسجيل الخروج‬</string>
-    <string name="logout_confirm">‭هل أنت متأكد من تسجيل الخروج؟‬</string>
-    
-    <!-- User Types -->
-    <string name="participant">‭مشارك‬</string>
-    <string name="participant_desc">‭مستخدم عادي لـ TISM‬</string>
-    <string name="responsible">‭مسؤول‬</string>
-    <string name="responsible_desc">‭فرد من العائلة أو مقدم رعاية‬</string>
-    <string name="professional">‭متخصص‬</string>
-    <string name="professional_desc">‭معالج، طبيب، مربي‬</string>
-    <string name="user_type">‭نوع المستخدم‬</string>
-    <string name="select_user_type">‭اختر نوعك‬</string>
-    
-    <!-- Profile -->
-    <string name="profile">‭الملف الشخصي‬</string>
-    <string name="edit_profile">‭تعديل الملف الشخصي‬</string>
-    <string name="edit_name">‭تعديل الاسم‬</string>
-    <string name="edit_username">‭تعديل اسم المستخدم‬</string>
-    <string name="full_name">‭الاسم الكامل‬</string>
-    <string name="account_type">‭نوع الحساب‬</string>
-    <string name="theme">‭المظهر‬</string>
-    <string name="light_theme">‭فاتح‬</string>
-    <string name="dark_theme">‭داكن‬</string>
-    <string name="system_theme">‭النظام‬</string>
-    <string name="system_theme_desc">‭اتبع مظهر الجهاز‬</string>
-    
-    <!-- Navigation -->
-    <string name="home">الرئيسية</string>
-    <string name="forum">المنتدى</string>
-    <string name="knowledge">المعرفة</string>
-    <string name="routine">الروتين</string>
-    <string name="dashboard">لوحة التحكم</string>
-    <string name="feed">التغذية</string>
-    <string name="search">البحث</string>
-    
-    <!-- Home Page -->
-    <string name="hello_user">مرحباً، %s! 👋</string>
-    <string name="explore_content">استكشف المحتوى التعليمي حول اضطراب طيف التوحد</string>
-    <string name="educational_feed">التغذية التعليمية</string>
-    <string name="custom_routine">روتين مخصص</string>
-    <string name="observation_diary">يوميات الملاحظة</string>
-    <string name="tina_chatbot">تينا (روبوت المحادثة)</string>
-    <string name="tea_forum">منتدى اضطراب طيف التوحد</string>
-    
-    <!-- Feed Page -->
-    <string name="articles">المقالات</string>
-    <string name="digital_library">المكتبة الرقمية</string>
-    
-    <!-- Forum -->
-    <string name="new_post">منشور جديد</string>
-    <string name="publish">نشر</string>
-    <string name="share_experience">شارك تجربتك أو سؤالك أو نصيحتك حول اضطراب طيف التوحد...</string>
-    <string name="write_something">اكتب شيئاً قبل النشر</string>
-    <string name="confirm_publication">تأكيد النشر</string>
-    <string name="want_to_publish">هل تريد نشر هذا المنشور في المنتدى؟</string>
-    <string name="post_published">تم نشر المنشور بنجاح!</string>
-    <string name="error_publishing">خطأ في النشر</string>
-    
-    <!-- Chatbot -->
-    <string name="tina_assistant">تينا - مساعد اضطراب طيف التوحد</string>
-    <string name="thinking">أفكر...</string>
-    <string name="type_message">اكتب رسالتك...</string>
-    <string name="about_tina">💙 حول تينا</string>
-    <string name="tina_intro">🤖 **مرحباً! أنا تينا!**\n\nأنا مساعد افتراضي متخصص في التوحد والتنوع العصبي، تم تطويري خصيصاً لـ TISM من قبل فريق متعدد التخصصات من الخبراء.</string>
-    <string name="tina_specialization">🎯 **تخصصي:**\n• 🧠 التطور والسلوك\n• 🏫 استراتيجيات التعليم الشامل\n• 💬 تقنيات التواصل والتفاعل الاجتماعي\n• 🌍 التكيفات البيئية والحسية\n• 🛠️ الموارد العملية للحياة اليومية</string>
-    <string name="tina_scientific">🔬 **الأساس العلمي:** تم تدريبي بمعرفة مُتحقق منها من قبل أطباء الأعصاب وعلماء النفس ومعالجي العلاج المهني ومعالجي النطق والمربين الخاصين.</string>
-    <string name="tina_important">⚠️ **مهم:** لا أقوم بالتشخيص ولا أحل محل المتخصصين في الرعاية الصحية. دوري تكميلي، أقدم الدعم المعلوماتي والعملي.</string>
-    <string name="tina_support">💙 **أنا هنا لدعمك بمعلومات موثوقة وتعاطف!**</string>
-    <string name="understood_tina">فهمت، تينا! دعنا نتحدث! 😊</string>
-    <string name="tina_welcome">مرحباً! أنا تينا، المساعد الافتراضي المتخصص في التوحد والتنوع العصبي من TISM!\n\nأنا هنا لتقديم الدعم المخصص والمعلومات القائمة على الأدلة العلمية حول:\n\n• التطور والسلوك\n• استراتيجيات التعليم الشامل\n• تقنيات التواصل والتفاعل الاجتماعي\n• التكيفات البيئية والحسية\n• الموارد والأدوات العملية للحياة اليومية\n\nتم تطوير قاعدة معرفتي من قبل فريق متعدد التخصصات من الخبراء، بما في ذلك أطباء الأعصاب وعلماء النفس ومعالجي العلاج المهني ومعالجي النطق والمربين الخاصين.\n\nمن المهم ملاحظة أنني لا أقوم بالتشخيص ولا أحل محل المتخصصين في الرعاية الصحية - دوري تكميلي، أقدم معلومات موثوقة ودعماً عملياً للعائلات ومقدمي الرعاية والأفراد ذوي التنوع العصبي.\n\nكيف يمكنني مساعدتك اليوم؟</string>
-    
-    <!-- Diary -->
-    <string name="diary_observations">يوميات الملاحظة</string>
-    <string name="no_observations">لا توجد ملاحظات بعد</string>
-    <string name="tap_plus_start">اضغط + للبدء</string>
-    <string name="report_copied">تم نسخ التقرير! الصق في البريد الإلكتروني أو WhatsApp</string>
-    <string name="progress">التقدم</string>
-    <string name="behavior">السلوك</string>
-    <string name="crisis">الأزمة</string>
-    <string name="difficulty">الصعوبة</string>
-    <string name="triggers">المحفزات</string>
-    
-    <!-- Routine -->
-    <string name="routine_of">روتين %s</string>
-    <string name="support_level">دعم %s</string>
-    <string name="filter_category">تصفية حسب الفئة:</string>
-    <string name="completed">مكتمل</string>
-    <string name="progress_count">التقدم: %d/%d</string>
-    <string name="no_activities">لم يتم العثور على أنشطة</string>
-    <string name="clear_filters">مسح المرشحات</string>
-    <string name="add_activity">إضافة نشاط</string>
-    <string name="edit_activity">تعديل النشاط</string>
-    
-    <!-- Categories -->
-    <string name="morning">الصباح</string>
-    <string name="education">التعليم</string>
-    <string name="food">الطعام</string>
-    <string name="leisure">الترفيه</string>
-    <string name="wellness">العافية</string>
-    <string name="night">الليل</string>
-    <string name="all">الكل</string>
-    
-    <!-- Profile Setup -->
-    <string name="welcome">مرحباً!</string>
-    <string name="profile_setup_desc">لإنشاء روتين مخصص، دعنا نقوم بإعداد ملف الطفل الشخصي أولاً.\n\nهذا يساعدنا على اقتراح أنشطة مناسبة للعمر ومستوى الدعم.</string>
-    <string name="create_profile">إنشاء ملف شخصي</string>
-    <string name="edit_profile_menu">تعديل الملف الشخصي</string>
-    <string name="switch_child">تبديل الطفل</string>
-    <string name="new_child">طفل جديد</string>
-    <string name="select_child">اختيار الطفل</string>
-    
-    <!-- Email Verification -->
-    <string name="verify_email">التحقق من البريد الإلكتروني</string>
-    <string name="verification_sent">تم إرسال بريد التحقق!</string>
-    <string name="check_email">تحقق من صندوق الوارد</string>
-    <string name="verification_desc">لقد أرسلنا رابط التحقق إلى بريدك الإلكتروني. انقر على الرابط لتفعيل حسابك.</string>
-    <string name="already_verified">تم التحقق بالفعل - تسجيل الدخول</string>
-    <string name="resend_verification">إعادة إرسال بريد التحقق</string>
-    <string name="verifying">جاري التحقق...</string>
-    
-    <!-- Account Deletion -->
-    <string name="delete_account">حذف الحساب</string>
-    <string name="delete_warning">هذا الإجراء غير قابل للإلغاء!\n\nستفقد جميع بياناتك نهائياً.</string>
-    <string name="delete_confirmation">للتأكيد، اكتب بالضبط:</string>
-    <string name="delete_phrase">احذف حسابي</string>
-    <string name="delete_input_hint">اكتب العبارة أعلاه</string>
-    <string name="delete_incorrect">عبارة خاطئة. تحقق من الأحرف الكبيرة والصغيرة.</string>
-    <string name="confirm_password_delete">تأكيد كلمة المرور</string>
-    <string name="enter_password">أدخل كلمة المرور</string>
-    
-    <!-- Common Actions -->
-    <string name="save">حفظ</string>
-    <string name="cancel">إلغاء</string>
-    <string name="confirm">تأكيد</string>
-    <string name="delete">حذف</string>
-    <string name="edit">تعديل</string>
-    <string name="add">إضافة</string>
-    <string name="remove">إزالة</string>
-    <string name="update">تحديث</string>
-    <string name="close">إغلاق</string>
-    <string name="ok">موافق</string>
-    <string name="yes">نعم</string>
-    <string name="no">لا</string>
-    <string name="share">مشاركة</string>
-    
-    <!-- Messages -->
-    <string name="success">نجح</string>
-    <string name="error">خطأ</string>
-    <string name="loading">جاري التحميل...</string>
-    <string name="connection_error">خطأ في الاتصال</string>
-    <string name="try_again">حاول مرة أخرى</string>
-    <string name="updated_successfully">تم التحديث بنجاح!</string>
-    <string name="deleted_successfully">تم الحذف بنجاح</string>
-    <string name="saved_successfully">تم الحفظ بنجاح!</string>
-    <string name="welcome_message">مرحباً، أهلاً وسهلاً!</string>
-    <string name="no_account">ليس لديك حساب؟ إنشاء حساب</string>
-    <string name="fill_all_fields">املأ جميع الحقول</string>
-    <string name="login_error">خطأ في تسجيل الدخول</string>
-    <string name="connection_error_detail">خطأ في الاتصال: %s</string>
-    
-    <!-- Validation -->
-    <string name="field_required">هذا الحقل مطلوب</string>
-    <string name="invalid_email">بريد إلكتروني غير صالح</string>
-    <string name="password_too_short">كلمة المرور يجب أن تكون 8 أحرف على الأقل</string>
-    <string name="passwords_dont_match">كلمات المرور غير متطابقة</string>
-    <string name="username_invalid">اسم المستخدم يجب أن يحتوي على أحرف صغيرة وأرقام و _ فقط</string>
-    
-    <!-- Cooldowns -->
-    <string name="name_cooldown">يمكن تغيير الاسم مرة واحدة فقط في اليوم</string>
-    <string name="username_cooldown">يمكن تغيير اسم المستخدم مرة واحدة كل 3 أيام</string>
-    <string name="user_type_cooldown">يمكن تغيير نوع المستخدم مرة واحدة فقط في اليوم</string>
-    
-    <!-- Activities -->
-    <string name="wake_up">الاستيقاظ</string>
-    <string name="wake_up_desc">الاستيقاظ على موسيقى هادئة</string>
-    <string name="brush_teeth">تنظيف الأسنان</string>
-    <string name="brush_teeth_desc">استخدام فرشاة ناعمة لمدة دقيقتين</string>
-    <string name="breakfast">الإفطار</string>
-    <string name="breakfast_desc">تناول الطعام جالساً على الطاولة</string>
-    <string name="educational_activity">نشاط تعليمي</string>
-    <string name="educational_activity_desc">ألعاب تعليمية أو المدرسة</string>
-    <string name="snack">وجبة خفيفة</string>
-    <string name="snack_desc">فواكه أو وجبة خفيفة صحية</string>
-    <string name="music">الموسيقى</string>
-    <string name="music_desc">الاستماع أو العزف</string>
-    <string name="draw">الرسم</string>
-    <string name="draw_desc">نشاط رسم حر</string>
-    <string name="numbers">الأرقام</string>
-    <string name="numbers_desc">ألعاب الأرقام</string>
-    <string name="sensory_break">استراحة حسية</string>
-    <string name="sensory_break_desc">وقت للهدوء والتنظيم الذاتي</string>
-    <string name="dinner">العشاء</string>
-    <string name="dinner_desc">وجبة عائلية</string>
-    <string name="bath">الاستحمام</string>
-    <string name="bath_desc">ماء دافئ، إسفنجة ناعمة</string>
-    <string name="sleep">النوم</string>
-    <string name="sleep_desc">موسيقى هادئة للنوم</string>
-    
-    <!-- Forum Specific -->
-    <string name="welcome_forum">مرحباً بك في منتدى اضطراب طيف التوحد! 💙</string>
-    <string name="first_post_message">كن أول من يشارك تجربة\nأو يسأل المجتمع</string>
-    <string name="create_first_post">إنشاء أول منشور</string>
-    <string name="delete_post">حذف المنشور</string>
-    <string name="delete_post_confirm">هل أنت متأكد من حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.</string>
-    <string name="post_deleted_success">تم حذف المنشور بنجاح</string>
-    <string name="error_deleting_post">خطأ في حذف المنشور: %s</string>
-    <string name="report_post">إبلاغ</string>
-    <string name="report_post_title">إبلاغ عن المنشور</string>
-    <string name="report_post_confirm">هل أنت متأكد من الإبلاغ عن هذا المنشور؟</string>
-    <string name="post_reported">تم الإبلاغ عن المنشور</string>
-    <string name="now">الآن</string>
-    
-    <!-- Search -->
-    <string name="search_posts">البحث عن منشورات أو أشخاص أو مواضيع...</string>
-    <string name="no_results_found">لم يتم العثور على نتائج</string>
-    <string name="try_different_keywords">جرب كلمات مفتاحية مختلفة أو\nاستكشف الفئات أدناه</string>
-    <string name="type_to_search">اكتب للبحث...</string>
-    <string name="find_posts_profiles">ابحث عن منشورات وملفات شخصية\nوهاشتاغات في مجتمع اضطراب طيف التوحد</string>
-    <string name="popular_categories">الفئات الشائعة</string>
-    <string name="recent_searches">البحثات الأخيرة</string>
-    <string name="searches_appear_here">ستظهر بحثاتك هنا</string>
-    <string name="general">عام</string>
-    <string name="tips">نصائح</string>
-    <string name="experiences">تجارب</string>
-    <string name="questions">أسئلة</string>
-    <string name="resources">موارد</string>
-    
-    <!-- Chatbot Suggestions -->
-    <string name="how_identify_autism">كيف أتعرف على التوحد؟</string>
-    <string name="child_not_speaking">طفلي لا يتكلم، هل هو توحد؟</string>
-    <string name="what_therapies_work">ما العلاجات التي تنجح؟</string>
-    <string name="help_at_school">كيف أساعد في المدرسة؟</string>
-    <string name="autism_rights">حقوق التوحد</string>
-    <string name="child_tantrums">نوبات غضب الطفل</string>
-    
-    <!-- Diary -->
-    <string name="new_observation">ملاحظة جديدة</string>
-    <string name="edit_observation">تعديل الملاحظة</string>
-    <string name="observation_type">النوع:</string>
-    <string name="title">العنوان</string>
-    <string name="detailed_description">وصف مفصل</string>
-    <string name="intensity">الشدة: %d</string>
-    <string name="observer">الملاحظ:</string>
-    <string name="possible_triggers">المحفزات المحتملة:</string>
-    <string name="delete_observation">حذف الملاحظة</string>
-    <string name="delete_observation_confirm">هل أنت متأكد من حذف هذه الملاحظة؟</string>
-    <string name="observation_title_empty">عنوان الملاحظة لا يمكن أن يكون فارغاً</string>
-    
-    <!-- Profile -->
-    <string name="not_defined">غير محدد</string>
-    <string name="confirm_change">تأكيد التغيير</string>
-    <string name="change_name_to">تغيير الاسم إلى "%s"؟</string>
-    <string name="change_username_to">تغيير اسم المستخدم من @%s إلى @%s؟</string>
-    <string name="error_updating_name">خطأ في تحديث الاسم</string>
-    <string name="error_updating_username">خطأ في تحديث اسم المستخدم</string>
-    <string name="error_updating_type">خطأ في تحديث النوع</string>
-    <string name="username_help">أحرف صغيرة وأرقام و _ فقط</string>
-    <string name="username_cooldown_info">يمكن تغيير اسم المستخدم مرة واحدة كل 3 أيام</string>
-    <string name="confirm_password_title">تأكيد كلمة المرور</string>
-    <string name="error_deleting_account">خطأ في حذف الحساب</string>
-    
-    <!-- Additional strings -->
-    <string name="type_updated">تم تحديث النوع!</string>
-    <string name="name_updated">تم تحديث الاسم!</string>
-    <string name="username_updated">تم تحديث اسم المستخدم!</string>
-    <string name="account_deleted">تم حذف الحساب بنجاح</string>
-    <string name="incorrect_password">كلمة مرور خاطئة</string>
-    <string name="user_not_found">المستخدم غير موجود</string>
-    <string name="email_not_verified">البريد الإلكتروني لم يتم التحقق منه بعد</string>
-    <string name="verification_email_sent">تم إعادة إرسال بريد التحقق!</string>
-    <string name="checking_verification">جاري التحقق...</string>
-    <string name="already_have_account">لديك حساب بالفعل؟ تسجيل الدخول</string>
-    <string name="create_account">إنشاء حساب</string>
-    <string name="account_created">تم إنشاء الحساب! تحقق من البريد الإلكتروني للتفعيل</string>
-    <string name="example123">مثال123</string>
-</resources>

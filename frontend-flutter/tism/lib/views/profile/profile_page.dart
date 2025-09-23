@@ -187,9 +187,9 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text('edit_name'.tr),
         content: TextField(
           controller: _nameController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             labelText: 'full_name'.tr,
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
           ),
           textCapitalization: TextCapitalization.words,
         ),
@@ -448,9 +448,9 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 12),
             TextField(
               controller: confirmController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'delete_input_hint'.tr,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
           ],

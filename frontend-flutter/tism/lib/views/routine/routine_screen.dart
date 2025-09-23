@@ -99,32 +99,32 @@ class _RoutineScreenState extends State<RoutineScreen> {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'edit',
                 child: Row(
                   children: [
-                    Icon(Icons.edit),
-                    SizedBox(width: 8),
+                    const Icon(Icons.edit),
+                    const SizedBox(width: 8),
                     Text('edit_profile_menu'.tr),
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'switch',
                 child: Row(
                   children: [
-                    Icon(Icons.swap_horiz),
-                    SizedBox(width: 8),
+                    const Icon(Icons.swap_horiz),
+                    const SizedBox(width: 8),
                     Text('switch_child'.tr),
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'new',
                 child: Row(
                   children: [
-                    Icon(Icons.person_add),
-                    SizedBox(width: 8),
+                    const Icon(Icons.person_add),
+                    const SizedBox(width: 8),
                     Text('new_child'.tr),
                   ],
                 ),
@@ -204,9 +204,9 @@ class _RoutineScreenState extends State<RoutineScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(
+              Flexible(
                 child: Text('filter_category'.tr, 
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -220,7 +220,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                       _applyFilters();
                     },
                   ),
-                  const Flexible(
+                  Flexible(
                     child: Text('completed'.tr, 
                       overflow: TextOverflow.ellipsis,
                     ),

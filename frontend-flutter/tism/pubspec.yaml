@@ -10,13 +10,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.6
   http: ^1.1.0
   flutter_secure_storage: ^9.2.2
   provider: ^6.1.2
   flutter_dotenv: ^5.1.0
-  xml: ^6.5.0
   google_generative_ai: ^0.4.3
+  intl: any
+  shared_preferences: ^2.2.2
+  crypto: ^3.0.3
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  google_sign_in: ^6.1.6
+  image_picker: ^1.0.4
+  image_cropper: ^7.1.0
+  flutter_markdown: ^0.6.18
+  url_launcher: ^6.2.1
+  flutter_pdfview: ^1.3.2
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -25,11 +38,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
   
   assets:
     - .env
     - assets/images/
-    - languages/
 
   fonts:
     - family: Roboto
