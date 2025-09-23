@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tism/constants/theme.dart';
 import 'package:tism/services/theme_service.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/views/login/login_startup.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/services/secure_storage_service.dart';
@@ -15,6 +16,9 @@ void main() async {
   } catch (e) {
     // Erro ao carregar .env silencioso
   }
+  
+  // Inicializar serviço de idiomas
+  await LanguageService.initialize();
   
   runApp(
     ChangeNotifierProvider(

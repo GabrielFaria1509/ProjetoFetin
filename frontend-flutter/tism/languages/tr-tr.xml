@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">TISM</string>
+    <string name="app_subtitle">OSB hakkında bilmeniz gereken her şey tek tıkla</string>
+    <string name="app_title">TISM - OSB Rehberi</string>
+    
+    <!-- Authentication -->
+    <string name="login">Giriş Yap</string>
+    <string name="register">Kayıt Ol</string>
+    <string name="email">E-posta</string>
+    <string name="password">Şifre</string>
+    <string name="confirm_password">Şifreyi Onayla</string>
+    <string name="name">İsim</string>
+    <string name="username">Kullanıcı Adı</string>
+    <string name="forgot_password">Şifremi Unuttum</string>
+    <string name="login_success">Giriş Başarılı</string>
+    <string name="register_success">Hesap Başarıyla Oluşturuldu</string>
+    <string name="logout">Çıkış Yap</string>
+    <string name="logout_confirm">Çıkış yapmak istediğinizden emin misiniz?</string>
+    
+    <!-- User Types -->
+    <string name="participant">Katılımcı</string>
+    <string name="participant_desc">Normal TISM kullanıcısı</string>
+    <string name="responsible">Sorumlu</string>
+    <string name="responsible_desc">Aile üyesi veya bakıcı</string>
+    <string name="professional">Uzman</string>
+    <string name="professional_desc">Terapist, doktor, eğitimci</string>
+    <string name="user_type">Kullanıcı Türü</string>
+    <string name="select_user_type">Türünüzü seçin</string>
+    
+    <!-- Profile -->
+    <string name="profile">Profil</string>
+    <string name="edit_profile">Profili Düzenle</string>
+    <string name="edit_name">İsmi Düzenle</string>
+    <string name="edit_username">Kullanıcı Adını Düzenle</string>
+    <string name="full_name">Tam İsim</string>
+    <string name="account_type">Hesap Türü</string>
+    <string name="theme">Tema</string>
+    <string name="light_theme">Açık</string>
+    <string name="dark_theme">Koyu</string>
+    <string name="system_theme">Sistem</string>
+    <string name="system_theme_desc">Cihaz temasını takip et</string>
+    
+    <!-- Navigation -->
+    <string name="home">Ana Sayfa</string>
+    <string name="forum">Forum</string>
+    <string name="knowledge">Bilgi</string>
+    <string name="routine">Rutin</string>
+    <string name="dashboard">Panel</string>
+    <string name="feed">Akış</string>
+    <string name="search">Ara</string>
+    
+    <!-- Home Page -->
+    <string name="hello_user">Merhaba, %s! 👋</string>
+    <string name="explore_content">OSB hakkında eğitici içerikleri keşfedin</string>
+    <string name="educational_feed">Eğitici Akış</string>
+    <string name="custom_routine">Özel Rutin</string>
+    <string name="observation_diary">Gözlem Günlüğü</string>
+    <string name="tina_chatbot">Tina (Sohbet Botu)</string>
+    <string name="tea_forum">OSB Forumu</string>
+    
+    <!-- Feed Page -->
+    <string name="articles">Makaleler</string>
+    <string name="digital_library">Dijital Kütüphane</string>
+    
+    <!-- Forum -->
+    <string name="new_post">Yeni Gönderi</string>
+    <string name="publish">Yayınla</string>
+    <string name="share_experience">OSB hakkında deneyiminizi, sorunuzu veya tavsiyenizi paylaşın...</string>
+    <string name="write_something">Yayınlamadan önce bir şeyler yazın</string>
+    <string name="confirm_publication">Yayını Onayla</string>
+    <string name="want_to_publish">Bu gönderiyi forumda yayınlamak istiyor musunuz?</string>
+    <string name="post_published">Gönderi başarıyla yayınlandı!</string>
+    <string name="error_publishing">Yayınlama hatası</string>
+    
+    <!-- Chatbot -->
+    <string name="tina_assistant">Tina - OSB Asistanı</string>
+    <string name="thinking">Düşünüyor...</string>
+    <string name="type_message">Mesajınızı yazın...</string>
+    <string name="about_tina">💙 Tina Hakkında</string>
+    <string name="tina_intro">🤖 **Merhaba! Ben Tina!**\n\nBen otizm ve nöroçeşitlilik konusunda uzmanlaşmış sanal asistanım, TISM için multidisipliner uzman ekibi tarafından özel olarak geliştirildi.</string>
+    <string name="tina_specialization">🎯 **Uzmanlık alanım:**\n• 🧠 Gelişim ve davranış\n• 🏫 Kapsayıcı eğitim stratejileri\n• 💬 İletişim ve sosyal etkileşim teknikleri\n• 🌍 Çevresel ve duyusal uyarlamalar\n• 🛠️ Günlük yaşam için pratik kaynaklar</string>
+    <string name="tina_scientific">🔬 **Bilimsel temel:** Nörologlar, psikologlar, ergoterapistler, dil ve konuşma terapistleri ve özel eğitim uzmanları tarafından doğrulanmış bilgilerle eğitildim.</string>
+    <string name="tina_important">⚠️ **Önemli:** Teşhis koymam ve sağlık uzmanlarının yerini almam. Rolüm tamamlayıcıdır, bilgilendirici ve pratik destek sunarım.</string>
+    <string name="tina_support">💙 **Güvenilir bilgi ve empatiyle sizi desteklemek için buradayım!**</string>
+    <string name="understood_tina">Anladım, Tina! Konuşalım! 😊</string>
+    <string name="tina_welcome">Merhaba! Ben TISM'in otizm ve nöroçeşitlilik konusunda uzmanlaşmış sanal asistanı Tina!\n\nAşağıdaki konularda bilimsel kanıtlara dayalı kişiselleştirilmiş destek ve bilgi sunmak için buradayım:\n\n• Gelişim ve davranış\n• Kapsayıcı eğitim stratejileri\n• İletişim ve sosyal etkileşim teknikleri\n• Çevresel ve duyusal uyarlamalar\n• Günlük yaşam için pratik kaynaklar ve araçlar\n\nBilgi tabanım nörologlar, psikologlar, ergoterapistler, dil ve konuşma terapistleri ve özel eğitim uzmanları dahil multidisipliner uzman ekibi tarafından geliştirildi.\n\nTeşhis koymadığımı ve sağlık uzmanlarının yerini almadığımı belirtmek önemlidir - rolüm tamamlayıcıdır, ailelere, bakıcılara ve nörofarklı bireylere güvenilir bilgi ve pratik destek sunarım.\n\nBugün size nasıl yardımcı olabilirim?</string>
+    
+    <!-- Diary -->
+    <string name="diary_observations">Gözlem Günlüğü</string>
+    <string name="no_observations">Henüz gözlem yok</string>
+    <string name="tap_plus_start">Başlamak için + tuşuna dokunun</string>
+    <string name="report_copied">Rapor kopyalandı! E-posta veya WhatsApp'a yapıştırın</string>
+    <string name="progress">İlerleme</string>
+    <string name="behavior">Davranış</string>
+    <string name="crisis">Kriz</string>
+    <string name="difficulty">Zorluk</string>
+    <string name="triggers">Tetikleyiciler</string>
+    
+    <!-- Routine -->
+    <string name="routine_of">%s'nin Rutini</string>
+    <string name="support_level">%s Desteği</string>
+    <string name="filter_category">Kategoriye göre filtrele:</string>
+    <string name="completed">Tamamlanan</string>
+    <string name="progress_count">İlerleme: %d/%d</string>
+    <string name="no_activities">Etkinlik bulunamadı</string>
+    <string name="clear_filters">Filtreleri Temizle</string>
+    <string name="add_activity">Etkinlik Ekle</string>
+    <string name="edit_activity">Etkinliği Düzenle</string>
+    
+    <!-- Categories -->
+    <string name="morning">Sabah</string>
+    <string name="education">Eğitim</string>
+    <string name="food">Yemek</string>
+    <string name="leisure">Boş Zaman</string>
+    <string name="wellness">Sağlık</string>
+    <string name="night">Gece</string>
+    <string name="all">Tümü</string>
+    
+    <!-- Profile Setup -->
+    <string name="welcome">Hoş Geldiniz!</string>
+    <string name="profile_setup_desc">Kişiselleştirilmiş rutin oluşturmak için önce çocuğun profilini ayarlayalım.\n\nBu, yaşa uygun etkinlikler ve destek seviyesi önerebilmemize yardımcı olur.</string>
+    <string name="create_profile">Profil Oluştur</string>
+    <string name="edit_profile_menu">Profili Düzenle</string>
+    <string name="switch_child">Çocuğu Değiştir</string>
+    <string name="new_child">Yeni Çocuk</string>
+    <string name="select_child">Çocuk Seç</string>
+    
+    <!-- Email Verification -->
+    <string name="verify_email">E-postayı Doğrula</string>
+    <string name="verification_sent">Doğrulama e-postası gönderildi!</string>
+    <string name="check_email">Gelen kutunuzu kontrol edin</string>
+    <string name="verification_desc">E-postanıza doğrulama bağlantısı gönderdik. Hesabınızı etkinleştirmek için bağlantıya tıklayın.</string>
+    <string name="already_verified">Zaten doğrulandı - Giriş Yap</string>
+    <string name="resend_verification">Doğrulama e-postasını yeniden gönder</string>
+    <string name="verifying">Doğrulanıyor...</string>
+    
+    <!-- Account Deletion -->
+    <string name="delete_account">Hesabı Sil</string>
+    <string name="delete_warning">Bu işlem GERİ ALINAMAZ!\n\nTüm verileriniz kalıcı olarak kaybolacak.</string>
+    <string name="delete_confirmation">Onaylamak için tam olarak yazın:</string>
+    <string name="delete_phrase">Hesabımı SİL</string>
+    <string name="delete_input_hint">Yukarıdaki ifadeyi yazın</string>
+    <string name="delete_incorrect">Yanlış ifade. Büyük-küçük harfleri kontrol edin.</string>
+    <string name="confirm_password_delete">Şifreyi Onayla</string>
+    <string name="enter_password">Şifrenizi girin</string>
+    
+    <!-- Common Actions -->
+    <string name="save">Kaydet</string>
+    <string name="cancel">İptal</string>
+    <string name="confirm">Onayla</string>
+    <string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="add">Ekle</string>
+    <string name="remove">Kaldır</string>
+    <string name="update">Güncelle</string>
+    <string name="close">Kapat</string>
+    <string name="ok">Tamam</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="share">Paylaş</string>
+    
+    <!-- Messages -->
+    <string name="success">Başarılı</string>
+    <string name="error">Hata</string>
+    <string name="loading">Yükleniyor...</string>
+    <string name="connection_error">Bağlantı hatası</string>
+    <string name="try_again">Tekrar dene</string>
+    <string name="updated_successfully">Başarıyla güncellendi!</string>
+    <string name="deleted_successfully">Başarıyla silindi</string>
+    <string name="saved_successfully">Başarıyla kaydedildi!</string>
+    <string name="welcome_message">Merhaba, hoş geldiniz!</string>
+    <string name="no_account">Hesabınız yok mu? Kayıt olun</string>
+    <string name="fill_all_fields">Tüm alanları doldurun</string>
+    <string name="login_error">Giriş hatası</string>
+    <string name="connection_error_detail">Bağlantı hatası: %s</string>
+    
+    <!-- Validation -->
+    <string name="field_required">Bu alan zorunludur</string>
+    <string name="invalid_email">Geçersiz e-posta</string>
+    <string name="password_too_short">Şifre en az 8 karakter olmalıdır</string>
+    <string name="passwords_dont_match">Şifreler eşleşmiyor</string>
+    <string name="username_invalid">Kullanıcı adı sadece küçük harf, rakam ve _ içerebilir</string>
+    
+    <!-- Cooldowns -->
+    <string name="name_cooldown">İsim günde sadece bir kez değiştirilebilir</string>
+    <string name="username_cooldown">Kullanıcı adı 3 günde bir kez değiştirilebilir</string>
+    <string name="user_type_cooldown">Kullanıcı türü günde sadece bir kez değiştirilebilir</string>
+    
+    <!-- Activities -->
+    <string name="wake_up">Uyanma</string>
+    <string name="wake_up_desc">Yumuşak müzikle uyanma</string>
+    <string name="brush_teeth">Diş fırçalama</string>
+    <string name="brush_teeth_desc">Yumuşak fırçayla 2 dakika</string>
+    <string name="breakfast">Kahvaltı</string>
+    <string name="breakfast_desc">Masada oturarak yemek</string>
+    <string name="educational_activity">Eğitici etkinlik</string>
+    <string name="educational_activity_desc">Eğitici oyunlar veya okul</string>
+    <string name="snack">Atıştırmalık</string>
+    <string name="snack_desc">Meyve veya sağlıklı atıştırmalık</string>
+    <string name="music">Müzik</string>
+    <string name="music_desc">Müzik dinleme veya çalma</string>
+    <string name="draw">Çizim</string>
+    <string name="draw_desc">Serbest çizim etkinliği</string>
+    <string name="numbers">Sayılar</string>
+    <string name="numbers_desc">Sayı oyunları</string>
+    <string name="sensory_break">Duyusal mola</string>
+    <string name="sensory_break_desc">Sakinleşme ve öz-düzenleme zamanı</string>
+    <string name="dinner">Akşam yemeği</string>
+    <string name="dinner_desc">Aile ile yemek</string>
+    <string name="bath">Banyo</string>
+    <string name="bath_desc">Ilık su, yumuşak sünger</string>
+    <string name="sleep">Uyku</string>
+    <string name="sleep_desc">Uyku için yumuşak müzik</string>
+    
+    <!-- Forum Specific -->
+    <string name="welcome_forum">OSB Forumuna Hoş Geldiniz! 💙</string>
+    <string name="first_post_message">Deneyim paylaşan veya\ntopluma soru soran ilk kişi olun</string>
+    <string name="create_first_post">İlk gönderiyi oluştur</string>
+    <string name="delete_post">Gönderiyi sil</string>
+    <string name="delete_post_confirm">Bu gönderiyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</string>
+    <string name="post_deleted_success">Gönderi başarıyla silindi</string>
+    <string name="error_deleting_post">Gönderi silme hatası: %s</string>
+    <string name="report_post">Şikayet et</string>
+    <string name="report_post_title">Gönderiyi şikayet et</string>
+    <string name="report_post_confirm">Bu gönderiyi şikayet etmek istediğinizden emin misiniz?</string>
+    <string name="post_reported">Gönderi şikayet edildi</string>
+    <string name="now">Şimdi</string>
+    
+    <!-- Search -->
+    <string name="search_posts">Gönderi, kişi veya konu ara...</string>
+    <string name="no_results_found">Sonuç bulunamadı</string>
+    <string name="try_different_keywords">Farklı anahtar kelimeler deneyin veya\naşağıdaki kategorileri keşfedin</string>
+    <string name="type_to_search">Aramak için yazın...</string>
+    <string name="find_posts_profiles">OSB topluluğunda gönderi, profil ve\netiket bulun</string>
+    <string name="popular_categories">Popüler kategoriler</string>
+    <string name="recent_searches">Son aramalar</string>
+    <string name="searches_appear_here">Aramalarınız burada görünecek</string>
+    <string name="general">Genel</string>
+    <string name="tips">İpuçları</string>
+    <string name="experiences">Deneyimler</string>
+    <string name="questions">Sorular</string>
+    <string name="resources">Kaynaklar</string>
+    
+    <!-- Chatbot Suggestions -->
+    <string name="how_identify_autism">Otizm nasıl tanınır?</string>
+    <string name="child_not_speaking">Çocuğum konuşmuyor, otizm mi?</string>
+    <string name="what_therapies_work">Hangi terapiler işe yarar?</string>
+    <string name="help_at_school">Okulda nasıl yardım edilir?</string>
+    <string name="autism_rights">Otizm hakları</string>
+    <string name="child_tantrums">Çocuk öfke nöbetleri</string>
+    
+    <!-- Diary -->
+    <string name="new_observation">Yeni gözlem</string>
+    <string name="edit_observation">Gözlemi düzenle</string>
+    <string name="observation_type">Tür:</string>
+    <string name="title">Başlık</string>
+    <string name="detailed_description">Detaylı açıklama</string>
+    <string name="intensity">Yoğunluk: %d</string>
+    <string name="observer">Gözlemci:</string>
+    <string name="possible_triggers">Olası tetikleyiciler:</string>
+    <string name="delete_observation">Gözlemi sil</string>
+    <string name="delete_observation_confirm">Bu gözlemi silmek istediğinizden emin misiniz?</string>
+    <string name="observation_title_empty">Gözlem başlığı boş olamaz</string>
+    
+    <!-- Profile -->
+    <string name="not_defined">Tanımlanmamış</string>
+    <string name="confirm_change">Değişikliği onayla</string>
+    <string name="change_name_to">İsmi "%s" olarak değiştir?</string>
+    <string name="change_username_to">Kullanıcı adını @%s'den @%s'ye değiştir?</string>
+    <string name="error_updating_name">İsim güncelleme hatası</string>
+    <string name="error_updating_username">Kullanıcı adı güncelleme hatası</string>
+    <string name="error_updating_type">Tür güncelleme hatası</string>
+    <string name="username_help">Sadece küçük harf, rakam ve _</string>
+    <string name="username_cooldown_info">Kullanıcı adı 3 günde bir kez değiştirilebilir</string>
+    <string name="confirm_password_title">Şifreyi onayla</string>
+    <string name="error_deleting_account">Hesap silme hatası</string>
+    
+    <!-- Additional strings -->
+    <string name="type_updated">Tür güncellendi!</string>
+    <string name="name_updated">İsim güncellendi!</string>
+    <string name="username_updated">Kullanıcı adı güncellendi!</string>
+    <string name="account_deleted">Hesap başarıyla silindi</string>
+    <string name="incorrect_password">Yanlış şifre</string>
+    <string name="user_not_found">Kullanıcı bulunamadı</string>
+    <string name="email_not_verified">E-posta henüz doğrulanmadı</string>
+    <string name="verification_email_sent">Doğrulama e-postası yeniden gönderildi!</string>
+    <string name="checking_verification">Kontrol ediliyor...</string>
+    <string name="already_have_account">Zaten hesabınız var mı? Giriş yapın</string>
+    <string name="create_account">Hesap oluştur</string>
+    <string name="account_created">Hesap oluşturuldu! Etkinleştirmek için e-postanızı kontrol edin</string>
+    <string name="example123">örnek123</string>
+</resources>

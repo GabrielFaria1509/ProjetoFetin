@@ -98,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen>
         );
       } else {
         if (mounted) {
-          Navigator.pushReplacement(
+          Navigator.pushReplacement( 
             context,
             MaterialPageRoute(builder: (_) => const LoginStartup()),
           );

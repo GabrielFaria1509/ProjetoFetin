@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'routine_models.dart';
 import 'routine_service.dart';
 import 'profile_setup.dart';
@@ -74,7 +75,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rotina Personalizada'),
+        title: Text('custom_routine'.tr),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: [
@@ -104,7 +105,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   children: [
                     Icon(Icons.edit),
                     SizedBox(width: 8),
-                    Text('Editar Perfil'),
+                    Text('edit_profile_menu'.tr),
                   ],
                 ),
               ),
@@ -114,7 +115,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   children: [
                     Icon(Icons.swap_horiz),
                     SizedBox(width: 8),
-                    Text('Trocar Criança'),
+                    Text('switch_child'.tr),
                   ],
                 ),
               ),
@@ -124,7 +125,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   children: [
                     Icon(Icons.person_add),
                     SizedBox(width: 8),
-                    Text('Nova Criança'),
+                    Text('new_child'.tr),
                   ],
                 ),
               ),
@@ -174,12 +175,12 @@ class _RoutineScreenState extends State<RoutineScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Rotina de ${profile?.name ?? "Criança"}',
+                  'routine_of'.trArgs([profile?.name ?? 'Criança']),
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${profile?.ageDisplay ?? "5 anos"} • Suporte ${profile?.supportLevel}',
+                  '${profile?.ageDisplay ?? "5 anos"} • ${'support_level'.trArgs([profile?.supportLevel ?? ''])}',
                   style: TextStyle(fontSize: 11, color: Colors.grey[600]),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -204,7 +205,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Flexible(
-                child: Text('Filtrar por categoria:', 
+                child: Text('filter_category'.tr, 
                   style: TextStyle(fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -220,7 +221,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                     },
                   ),
                   const Flexible(
-                    child: Text('Concluídas', 
+                    child: Text('completed'.tr, 
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -236,7 +237,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
               scrollDirection: Axis.horizontal,
               children: [
                 FilterChip(
-                  label: Text('Todas (${allActivities.length})',
+                  label: Text('${'all'.tr} (${allActivities.length})',
                     style: const TextStyle(fontSize: 12),
                   ),
                   selected: selectedCategory == null,
@@ -280,7 +281,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
             children: [
               Flexible(
                 child: Text(
-                  'Progresso: $completed/$total',
+                  'progress'.trArgs([completed, total]),
                   style: const TextStyle(fontSize: 13),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -316,11 +317,11 @@ class _RoutineScreenState extends State<RoutineScreen> {
               : Colors.grey
           ),
           const SizedBox(height: 16),
-          const Text('Nenhuma atividade encontrada'),
+          Text('no_activities'.tr),
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: _clearFilters,
-            child: const Text('Limpar filtros'),
+            child: Text('clear_filters'.tr),
           ),
         ],
       ),
@@ -416,10 +417,9 @@ class _RoutineScreenState extends State<RoutineScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('👶 Bem-vindo!'),
-        content: const Text(
-          'Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\n\n'
-          'Isso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.'
+        title: Text('👶 ${'welcome'.tr}!'),
+        content: Text(
+          'profile_setup_desc'.tr
         ),
         actions: [
           TextButton(
@@ -427,7 +427,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
               Navigator.pop(context);
               _showNewProfileSetup();
             },
-            child: const Text('Criar Perfil'),
+            child: Text('create_profile'.tr),
           ),
         ],
       ),
@@ -489,7 +489,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Selecionar Criança'),
+        title: Text('select_child'.tr),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -528,7 +528,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text('cancel'.tr),
           ),
         ],
       ),
@@ -592,11 +592,12 @@ class _RoutineScreenState extends State<RoutineScreen> {
   
   String _getCategoryDisplayName(String category) {
     switch (category) {
-      case 'manhã': return 'Manhã';
-      case 'educação': return 'Educação';
-      case 'lazer': return 'Lazer';
-      case 'bem-estar': return 'Bem-estar';
-      case 'noite': return 'Noite';
+      case 'manhã': return 'morning'.tr;
+      case 'educação': return 'education'.tr;
+      case 'alimentação': return 'food'.tr;
+      case 'lazer': return 'leisure'.tr;
+      case 'bem-estar': return 'wellness'.tr;
+      case 'noite': return 'night'.tr;
       default: return category;
     }
   }

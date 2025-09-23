@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/services/theme_service.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/views/login/login_page.dart';
 
 
@@ -45,16 +46,16 @@ class _ProfilePageState extends State<ProfilePage> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Confirmar logout'),
-        content: const Text('Tem certeza que deseja sair da sua conta?'),
+        title: Text('logout'.tr),
+        content: Text('logout_confirm'.tr),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: Text('cancel'.tr),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sair'),
+            child: Text('logout'.tr),
           ),
         ],
       ),
@@ -76,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil'), 
+        title: Text('profile'.tr), 
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
       ),
@@ -97,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.person),
-              title: const Text('Nome'),
+              title: Text('name'.tr),
               subtitle: Text(_userName.isNotEmpty ? _userName : widget.nomeUsuario),
               trailing: const Icon(Icons.edit),
               onTap: _showEditNameDialog,
@@ -109,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.alternate_email),
-              title: const Text('Username'),
+              title: Text('username'.tr),
               subtitle: Text(_userUsername.isNotEmpty ? '@$_userUsername' : 'Não definido'),
               trailing: const Icon(Icons.edit),
               onTap: _showEditUsernameDialog,
@@ -121,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.work),
-              title: const Text('Tipo de usuário'),
+              title: Text('user_type'.tr),
               subtitle: Text(_userType),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _showUserTypeDialog,
@@ -131,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.palette),
-              title: const Text('Tema'),
+              title: Text('theme'.tr),
               subtitle: Consumer<ThemeService>(
                 builder: (context, themeService, child) {
                   return Text(themeService.themeName);
@@ -153,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: _logout,
-              child: const Text('Sair do App'),
+              child: Text('logout'.tr),
             ),
           ),
 
@@ -168,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: _deleteAccount,
-              child: const Text('Deletar Conta'),
+              child: Text('delete_account'.tr),
             ),
           ),
         ],
@@ -183,11 +184,11 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Editar Nome'),
+        title: Text('edit_name'.tr),
         content: TextField(
           controller: _nameController,
           decoration: const InputDecoration(
-            labelText: 'Nome completo',
+            labelText: 'full_name'.tr,
             border: OutlineInputBorder(),
           ),
           textCapitalization: TextCapitalization.words,
@@ -227,8 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Nome atualizado com sucesso!'),
+                        SnackBar(
+                          content: Text('name_updated'.tr),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -257,12 +258,12 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Selecione seu tipo'),
+        title: Text('select_user_type'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<String>(
-              title: const Text('Participante'),
+              title: Text('participant'.tr),
               value: 'Participante',
               groupValue: _userType,
               onChanged: (value) async {
@@ -273,8 +274,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Tipo atualizado!'),
+                        SnackBar(
+                          content: Text('type_updated'.tr),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -293,7 +294,7 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             RadioListTile<String>(
-              title: const Text('Responsável'),
+              title: Text('responsible'.tr),
               value: 'Responsável',
               groupValue: _userType,
               onChanged: (value) async {
@@ -304,8 +305,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Tipo atualizado!'),
+                        SnackBar(
+                          content: Text('type_updated'.tr),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -324,7 +325,7 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             RadioListTile<String>(
-              title: const Text('Profissional'),
+              title: Text('professional'.tr),
               value: 'Profissional',
               groupValue: _userType,
               onChanged: (value) async {
@@ -364,14 +365,14 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Selecione o tema'),
+        title: Text('theme'.tr),
         content: Consumer<ThemeService>(
           builder: (context, themeService, child) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 RadioListTile<ThemeMode>(
-                  title: const Text('Claro'),
+                  title: Text('light_theme'.tr),
                   value: ThemeMode.light,
                   groupValue: themeService.themeMode,
                   onChanged: (value) async {
@@ -382,7 +383,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 RadioListTile<ThemeMode>(
-                  title: const Text('Escuro'),
+                  title: Text('dark_theme'.tr),
                   value: ThemeMode.dark,
                   groupValue: themeService.themeMode,
                   onChanged: (value) async {
@@ -393,8 +394,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 RadioListTile<ThemeMode>(
-                  title: const Text('Sistema'),
-                  subtitle: const Text('Segue o tema do dispositivo'),
+                  title: Text('system_theme'.tr),
+                  subtitle: Text('system_theme_desc'.tr),
                   value: ThemeMode.system,
                   groupValue: themeService.themeMode,
                   onChanged: (value) async {
@@ -418,17 +419,17 @@ class _ProfilePageState extends State<ProfilePage> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('⚠️ DELETAR CONTA'),
+        title: Text('delete_account'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Esta ação é IRREVERSÍVEL!\n\nTodos os seus dados serão perdidos permanentemente.',
+            Text(
+              'delete_warning'.tr,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            const Text('Para confirmar, digite exatamente:'),
+            Text('delete_confirmation'.tr),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(8),
@@ -436,8 +437,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Text(
-                'DELETAR minha conta',
+              child: Text(
+                'delete_phrase'.tr,
                 style: TextStyle(
                   fontFamily: 'monospace',
                   fontWeight: FontWeight.bold,
@@ -448,7 +449,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextField(
               controller: confirmController,
               decoration: const InputDecoration(
-                labelText: 'Digite a frase acima',
+                labelText: 'delete_input_hint'.tr,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -616,8 +617,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Username atualizado com sucesso!'),
+                        SnackBar(
+                          content: Text('username_updated'.tr),
                           backgroundColor: Colors.green,
                         ),
                       );

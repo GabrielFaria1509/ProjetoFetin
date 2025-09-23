@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/secure_storage_service.dart';
+import 'package:tism/utils/text_utils.dart';
 import 'dart:math';
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
@@ -23,91 +24,7 @@ class _HomePageState extends State<HomePage> {
   String _motivationalPhrase = '';
   
   final List<String> _phrases = [
-    'Explore conteúdos educativos sobre o TEA',
-    'Descubra recursos para apoiar o desenvolvimento',
-    'Conecte-se com informações especializadas',
-    'Acesse ferramentas para o dia a dia',
-    'Encontre suporte e orientação personalizada', 
-    'Navegue por conteúdos baseados em evidências',
-    'Construa rotinas adaptadas às necessidades',
-    'Cada pessoa com TEA é única e especial',
-    'Desenvolva habilidades no seu próprio ritmo',
-    'Celebre cada pequena conquista',
-    'A jornada do TEA é única para cada família',
-    'Conhecimento é a chave para a compreensão',
-    'Juntos somos mais fortes na jornada do TEA',
-    'Compartilhe experiências no nosso fórum',
-    'Registre os progressos no diário',
-    'Organize melhor a rotina diária',
-    'Aprenda mais sobre comunicação alternativa',
-    'Descubra estratégias sensoriais efetivas',
-    'Conecte-se com outros pais e cuidadores',
-    'Acompanhe o desenvolvimento passo a passo',
-    'Encontre dicas práticas para o dia a dia',
-    'Personalize as atividades conforme a necessidade',
-    'Mantenha-se informado sobre o TEA',
-    'Construa uma rede de apoio sólida',
-    'Explore diferentes abordagens terapêuticas',
-    'Aprenda sobre integração sensorial',
-    'Desenvolva estratégias de autorregulação',
-    'Fortaleça vínculos familiares',
-    'Promova a independência gradualmente',
-    'Celebre a neurodiversidade',
-    'Encontre recursos educacionais específicos',
-    'Aprenda sobre comunicação efetiva',
-    'Desenvolva habilidades sociais passo a passo',
-    'Explore atividades sensoriais benéficas',
-    'Construa uma rotina previsível e segura',
-    'Acompanhe marcos do desenvolvimento',
-    'Registre comportamentos importantes',
-    'Identifique gatilhos e padrões',
-    'Planeje transições suaves no dia a dia',
-    'Desenvolva estratégias de calma',
-    'Aprenda sobre alimentação seletiva',
-    'Explore técnicas de sono saudável',
-    'Encontre suporte profissional especializado',
-    'Compartilhe sucessos e desafios',
-    'Mantenha um registro de progressos',
-    'Adapte o ambiente para maior conforto',
-    'Aprenda sobre processamento sensorial',
-    'Desenvolva a autonomia com segurança',
-    'Explore interesses específicos',
-    'Construa pontes de comunicação',
-    'Fortaleça habilidades motoras',
-    'Promova interações sociais positivas',
-    'Aprenda sobre autorregulação emocional',
-    'Desenvolva rotinas de autocuidado',
-    'Explore recursos visuais de apoio',
-    'Construa histórias sociais personalizadas',
-    'Acompanhe o progresso educacional',
-    'Registre conquistas importantes',
-    'Identifique pontos fortes e talentos',
-    'Planeje atividades estruturadas',
-    'Desenvolva habilidades de vida diária',
-    'Aprenda sobre suporte comportamental',
-    'Explore terapias complementares',
-    'Encontre estratégias de inclusão escolar',
-    'Compartilhe momentos especiais',
-    'Mantenha a consistência na rotina',
-    'Adapte comunicação às necessidades',
-    'Aprenda sobre desenvolvimento sensorial',
-    'Desenvolva habilidades de brincadeira',
-    'Explore atividades terapêuticas em casa',
-    'Construa um ambiente de aprendizagem',
-    'Fortaleça a comunicação familiar',
-    'Promova independência nas atividades',
-    'Aprenda sobre gestão de ansiedade',
-    'Desenvolva estratégias de foco',
-    'Explore recursos de tecnologia assistiva',
-    'Construa momentos de conexão',
-    'Acompanhe mudanças de comportamento',
-    'Registre estratégias efetivas',
-    'Identifique interesses especiais',
-    'Planeje atividades sensoriais',
-    'Desenvolva habilidades de organização',
-    'Converse com Tina, nossa assistente virtual',
-    'Tire suas dúvidas sobre TEA',
-    'Encontre apoio na nossa comunidade'
+    'Explore conteúdos educativos sobre o TEA'
   ];
 
   @override
@@ -165,6 +82,8 @@ class _HomePageState extends State<HomePage> {
             Text(
               'Olá, ${_displayName.isNotEmpty ? _displayName : widget.nomeUsuario}! 👋',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+              textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
             ),
             const SizedBox(height: 8),
             Text(
@@ -175,6 +94,8 @@ class _HomePageState extends State<HomePage> {
                   ? Colors.grey[300] 
                   : Colors.grey[600]
               ),
+              textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+              textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
             ),
             const SizedBox(height: 32),
             Expanded(
@@ -273,6 +194,8 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.white 
                         : Colors.black87
                     ),
+                    textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                    textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
                   ),
                 ),
                 Icon(
@@ -321,6 +244,8 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.white 
                         : Colors.black87
                     ),
+                    textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                    textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
                   ),
                 ),
                 Icon(

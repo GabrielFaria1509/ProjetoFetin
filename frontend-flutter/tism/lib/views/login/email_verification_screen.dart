@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/views/home/home_page.dart';
-import 'package:tism/services/auth_integration_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -99,8 +99,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   Future<void> _resendVerification() async {
     // Reenviar email de verificação
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Email de verificação reenviado!'),
+      SnackBar(
+        content: Text('verification_email_sent'.tr),
         backgroundColor: Colors.green,
       ),
     );
@@ -136,7 +136,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               const SizedBox(height: 32),
               
               Text(
-                'Verifique seu email',
+                'verify_email'.tr,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -150,7 +150,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               const SizedBox(height: 16),
               
               Text(
-                'Enviamos um link de verificação para:',
+                'check_email'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   color: Theme.of(context).brightness == Brightness.dark 
@@ -175,7 +175,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               const SizedBox(height: 24),
               
               Text(
-                'Clique no link do email para ativar sua conta.\nVocê será redirecionado automaticamente.',
+                'verification_desc'.tr,
                 style: TextStyle(
                   fontSize: 14,
                   color: Theme.of(context).brightness == Brightness.dark 
@@ -201,7 +201,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'Verificando...',
+                      'verifying'.tr,
                       style: TextStyle(
                         color: tismAqua,
                         fontSize: 14,
@@ -218,8 +218,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   backgroundColor: tismAqua,
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 ),
-                child: const Text(
-                  'Já verifiquei - Entrar',
+                child: Text(
+                  'already_verified'.tr,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
@@ -229,7 +229,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               TextButton(
                 onPressed: _resendVerification,
                 child: Text(
-                  'Reenviar email de verificação',
+                  'resend_verification'.tr,
                   style: TextStyle(
                     color: tismAqua,
                     fontSize: 16,
@@ -243,8 +243,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'Voltar ao login',
+                child: Text(
+                  'login'.tr,
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 14,

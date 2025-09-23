@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">TISM</string>
+    <string name="app_subtitle">Alles was Sie über ASS in einem Klick wissen müssen</string>
+    <string name="app_title">TISM - ASS Leitfaden</string>
+    
+    <!-- Authentication -->
+    <string name="login">Anmelden</string>
+    <string name="register">Registrieren</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Passwort</string>
+    <string name="confirm_password">Passwort bestätigen</string>
+    <string name="name">Name</string>
+    <string name="username">Benutzername</string>
+    <string name="forgot_password">Passwort vergessen</string>
+    <string name="login_success">Anmeldung erfolgreich</string>
+    <string name="register_success">Konto erfolgreich erstellt</string>
+    <string name="logout">Abmelden</string>
+    <string name="logout_confirm">Sind Sie sicher, dass Sie sich abmelden möchten?</string>
+    
+    <!-- User Types -->
+    <string name="participant">Teilnehmer</string>
+    <string name="participant_desc">Regulärer TISM-Benutzer</string>
+    <string name="responsible">Betreuer</string>
+    <string name="responsible_desc">Familienmitglied oder Betreuer</string>
+    <string name="professional">Fachkraft</string>
+    <string name="professional_desc">Therapeut, Arzt, Pädagoge</string>
+    <string name="user_type">Benutzertyp</string>
+    <string name="select_user_type">Wählen Sie Ihren Typ</string>
+    
+    <!-- Profile -->
+    <string name="profile">Profil</string>
+    <string name="edit_profile">Profil bearbeiten</string>
+    <string name="edit_name">Name bearbeiten</string>
+    <string name="edit_username">Benutzername bearbeiten</string>
+    <string name="full_name">Vollständiger Name</string>
+    <string name="account_type">Kontotyp</string>
+    <string name="theme">Design</string>
+    <string name="light_theme">Hell</string>
+    <string name="dark_theme">Dunkel</string>
+    <string name="system_theme">System</string>
+    <string name="system_theme_desc">Geräte-Design folgen</string>
+    
+    <!-- Navigation -->
+    <string name="home">Startseite</string>
+    <string name="forum">Forum</string>
+    <string name="knowledge">Wissen</string>
+    <string name="routine">Routine</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="feed">Feed</string>
+    <string name="search">Suchen</string>
+    
+    <!-- Home Page -->
+    <string name="hello_user">Hallo, %s! 👋</string>
+    <string name="explore_content">Entdecken Sie Bildungsinhalte über ASS</string>
+    <string name="educational_feed">Bildungs-Feed</string>
+    <string name="custom_routine">Individuelle Routine</string>
+    <string name="observation_diary">Beobachtungstagebuch</string>
+    <string name="tina_chatbot">Tina (Chatbot)</string>
+    <string name="tea_forum">ASS-Forum</string>
+    
+    <!-- Feed Page -->
+    <string name="articles">Artikel</string>
+    <string name="digital_library">Digitale Bibliothek</string>
+    
+    <!-- Forum -->
+    <string name="new_post">Neuer Beitrag</string>
+    <string name="publish">Veröffentlichen</string>
+    <string name="share_experience">Teilen Sie Ihre Erfahrung, Frage oder Tipp über ASS...</string>
+    <string name="write_something">Schreiben Sie etwas vor der Veröffentlichung</string>
+    <string name="confirm_publication">Veröffentlichung bestätigen</string>
+    <string name="want_to_publish">Möchten Sie diesen Beitrag im Forum veröffentlichen?</string>
+    <string name="post_published">Beitrag erfolgreich veröffentlicht!</string>
+    <string name="error_publishing">Fehler beim Veröffentlichen</string>
+    
+    <!-- Chatbot -->
+    <string name="tina_assistant">Tina - ASS-Assistent</string>
+    <string name="thinking">Denke nach...</string>
+    <string name="type_message">Geben Sie Ihre Nachricht ein...</string>
+    <string name="about_tina">💙 Über Tina</string>
+    <string name="tina_intro">🤖 **Hallo! Ich bin Tina!**\n\nIch bin ein virtueller Assistent, spezialisiert auf Autismus und Neurodiversität, entwickelt speziell für TISM von einem multidisziplinären Expertenteam.</string>
+    <string name="tina_specialization">🎯 **Meine Spezialisierung:**\n• 🧠 Entwicklung und Verhalten\n• 🏫 Inklusive Bildungsstrategien\n• 💬 Kommunikations- und soziale Interaktionstechniken\n• 🌍 Umwelt- und sensorische Anpassungen\n• 🛠️ Praktische Ressourcen für den Alltag</string>
+    <string name="tina_scientific">🔬 **Wissenschaftliche Grundlage:** Ich wurde mit Wissen trainiert, das von Neurologen, Psychologen, Ergotherapeuten, Logopäden und Sonderpädagogen validiert wurde.</string>
+    <string name="tina_important">⚠️ **Wichtig:** Ich stelle keine Diagnosen und ersetze keine Gesundheitsfachkräfte. Meine Rolle ist ergänzend und bietet informativen und praktischen Support.</string>
+    <string name="tina_support">💙 **Ich bin hier, um Sie mit zuverlässigen Informationen und Empathie zu unterstützen!**</string>
+    <string name="understood_tina">Verstanden, Tina! Lass uns reden! 😊</string>
+    <string name="tina_welcome">Hallo! Ich bin Tina, ein virtueller Assistent spezialisiert auf Autismus und Neurodiversität von TISM!\n\nIch bin hier, um personalisierte Unterstützung und Informationen basierend auf wissenschaftlichen Erkenntnissen anzubieten über:\n\n• Entwicklung und Verhalten\n• Inklusive Bildungsstrategien\n• Kommunikations- und soziale Interaktionstechniken\n• Umwelt- und sensorische Anpassungen\n• Praktische Ressourcen und Werkzeuge für den Alltag\n\nMeine Wissensbasis wurde von einem multidisziplinären Expertenteam entwickelt, einschließlich Neurologen, Psychologen, Ergotherapeuten, Logopäden und Sonderpädagogen.\n\nEs ist wichtig zu beachten, dass ich keine Diagnosen stelle oder Gesundheitsfachkräfte ersetze - meine Rolle ist ergänzend und bietet zuverlässige Informationen und praktische Unterstützung für Familien, Betreuer und neurodivergente Menschen.\n\nWie kann ich Ihnen heute helfen?</string>
+    
+    <!-- Diary -->
+    <string name="diary_observations">Beobachtungstagebuch</string>
+    <string name="no_observations">Noch keine Beobachtungen</string>
+    <string name="tap_plus_start">Tippen Sie auf + um zu beginnen</string>
+    <string name="report_copied">Bericht kopiert! In E-Mail oder WhatsApp einfügen</string>
+    <string name="progress">Fortschritt</string>
+    <string name="behavior">Verhalten</string>
+    <string name="crisis">Krise</string>
+    <string name="difficulty">Schwierigkeit</string>
+    <string name="triggers">Auslöser</string>
+    
+    <!-- Routine -->
+    <string name="routine_of">%s's Routine</string>
+    <string name="support_level">%s Unterstützung</string>
+    <string name="filter_category">Nach Kategorie filtern:</string>
+    <string name="completed">Abgeschlossen</string>
+    <string name="progress_count">Fortschritt: %d/%d</string>
+    <string name="no_activities">Keine Aktivitäten gefunden</string>
+    <string name="clear_filters">Filter löschen</string>
+    <string name="add_activity">Aktivität hinzufügen</string>
+    <string name="edit_activity">Aktivität bearbeiten</string>
+    
+    <!-- Categories -->
+    <string name="morning">Morgen</string>
+    <string name="education">Bildung</string>
+    <string name="food">Ernährung</string>
+    <string name="leisure">Freizeit</string>
+    <string name="wellness">Wohlbefinden</string>
+    <string name="night">Abend</string>
+    <string name="all">Alle</string>
+    
+    <!-- Profile Setup -->
+    <string name="welcome">Willkommen!</string>
+    <string name="profile_setup_desc">Um eine personalisierte Routine zu erstellen, richten wir zuerst das Profil des Kindes ein.\n\nDies hilft uns, altersgerechte Aktivitäten und Unterstützungsebenen vorzuschlagen.</string>
+    <string name="create_profile">Profil erstellen</string>
+    <string name="edit_profile_menu">Profil bearbeiten</string>
+    <string name="switch_child">Kind wechseln</string>
+    <string name="new_child">Neues Kind</string>
+    <string name="select_child">Kind auswählen</string>
+    
+    <!-- Email Verification -->
+    <string name="verify_email">E-Mail verifizieren</string>
+    <string name="verification_sent">Verifizierungs-E-Mail gesendet!</string>
+    <string name="check_email">Überprüfen Sie Ihren Posteingang</string>
+    <string name="verification_desc">Wir haben einen Verifizierungslink an Ihre E-Mail gesendet. Klicken Sie auf den Link, um Ihr Konto zu aktivieren.</string>
+    <string name="already_verified">Bereits verifiziert - Anmelden</string>
+    <string name="resend_verification">Verifizierungs-E-Mail erneut senden</string>
+    <string name="verifying">Verifiziere...</string>
+    
+    <!-- Account Deletion -->
+    <string name="delete_account">Konto löschen</string>
+    <string name="delete_warning">Diese Aktion ist UNUMKEHRBAR!\n\nAlle Ihre Daten gehen dauerhaft verloren.</string>
+    <string name="delete_confirmation">Zur Bestätigung geben Sie genau ein:</string>
+    <string name="delete_phrase">LÖSCHEN mein Konto</string>
+    <string name="delete_input_hint">Geben Sie den obigen Satz ein</string>
+    <string name="delete_incorrect">Falscher Satz. Überprüfen Sie Groß- und Kleinschreibung.</string>
+    <string name="confirm_password_delete">Passwort bestätigen</string>
+    <string name="enter_password">Geben Sie Ihr Passwort ein</string>
+    
+    <!-- Common Actions -->
+    <string name="save">Speichern</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="delete">Löschen</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="add">Hinzufügen</string>
+    <string name="remove">Entfernen</string>
+    <string name="update">Aktualisieren</string>
+    <string name="close">Schließen</string>
+    <string name="ok">OK</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="share">Teilen</string>
+    
+    <!-- Messages -->
+    <string name="success">Erfolg</string>
+    <string name="error">Fehler</string>
+    <string name="loading">Lädt...</string>
+    <string name="connection_error">Verbindungsfehler</string>
+    <string name="try_again">Erneut versuchen</string>
+    <string name="updated_successfully">Erfolgreich aktualisiert!</string>
+    <string name="deleted_successfully">Erfolgreich gelöscht</string>
+    <string name="saved_successfully">Erfolgreich gespeichert!</string>
+    <string name="welcome_message">Hallo, willkommen!</string>
+    <string name="no_account">Kein Konto? Registrieren Sie sich</string>
+    <string name="fill_all_fields">Alle Felder ausfüllen</string>
+    <string name="login_error">Anmeldefehler</string>
+    <string name="connection_error_detail">Verbindungsfehler: %s</string>
+    
+    <!-- Validation -->
+    <string name="field_required">Dieses Feld ist erforderlich</string>
+    <string name="invalid_email">Ungültige E-Mail</string>
+    <string name="password_too_short">Passwort muss mindestens 8 Zeichen haben</string>
+    <string name="passwords_dont_match">Passwörter stimmen nicht überein</string>
+    <string name="username_invalid">Benutzername darf nur Kleinbuchstaben, Zahlen und _ enthalten</string>
+    
+    <!-- Cooldowns -->
+    <string name="name_cooldown">Name kann nur einmal pro Tag geändert werden</string>
+    <string name="username_cooldown">Benutzername kann nur einmal alle 3 Tage geändert werden</string>
+    <string name="user_type_cooldown">Benutzertyp kann nur einmal pro Tag geändert werden</string>
+    
+    <!-- Activities -->
+    <string name="wake_up">Aufwachen</string>
+    <string name="wake_up_desc">Mit sanfter Musik aufwachen</string>
+    <string name="brush_teeth">Zähne putzen</string>
+    <string name="brush_teeth_desc">Weiche Bürste für 2 Minuten verwenden</string>
+    <string name="breakfast">Frühstück</string>
+    <string name="breakfast_desc">Sitzend am Tisch essen</string>
+    <string name="educational_activity">Bildungsaktivität</string>
+    <string name="educational_activity_desc">Lernspiele oder Schule</string>
+    <string name="snack">Snack</string>
+    <string name="snack_desc">Obst oder gesunder Snack</string>
+    <string name="music">Musik</string>
+    <string name="music_desc">Musik hören oder spielen</string>
+    <string name="draw">Zeichnen</string>
+    <string name="draw_desc">Freie Zeichenaktivität</string>
+    <string name="numbers">Zahlen</string>
+    <string name="numbers_desc">Zahlenspiele</string>
+    <string name="sensory_break">Sensorische Pause</string>
+    <string name="sensory_break_desc">Moment der Ruhe und Selbstregulation</string>
+    <string name="dinner">Abendessen</string>
+    <string name="dinner_desc">Familienmahlzeit</string>
+    <string name="bath">Bad</string>
+    <string name="bath_desc">Warmes Wasser, weicher Schwamm</string>
+    <string name="sleep">Schlafen</string>
+    <string name="sleep_desc">Sanfte Musik zum Schlafen</string>
+    
+    <!-- Forum Specific -->
+    <string name="welcome_forum">Willkommen im ASS-Forum! 💙</string>
+    <string name="first_post_message">Seien Sie der Erste, der eine Erfahrung teilt\noder der Gemeinschaft eine Frage stellt</string>
+    <string name="create_first_post">Ersten Beitrag erstellen</string>
+    <string name="delete_post">Beitrag löschen</string>
+    <string name="delete_post_confirm">Sind Sie sicher, dass Sie diesen Beitrag löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="post_deleted_success">Beitrag erfolgreich gelöscht</string>
+    <string name="error_deleting_post">Fehler beim Löschen des Beitrags: %s</string>
+    <string name="report_post">Melden</string>
+    <string name="report_post_title">Beitrag melden</string>
+    <string name="report_post_confirm">Sind Sie sicher, dass Sie diesen Beitrag melden möchten?</string>
+    <string name="post_reported">Beitrag erfolgreich gemeldet</string>
+    <string name="now">Jetzt</string>
+    
+    <!-- Search -->
+    <string name="search_posts">Beiträge, Personen oder Themen suchen...</string>
+    <string name="no_results_found">Keine Ergebnisse gefunden</string>
+    <string name="try_different_keywords">Versuchen Sie andere Suchbegriffe\noder erkunden Sie die Kategorien unten</string>
+    <string name="type_to_search">Zum Suchen eingeben...</string>
+    <string name="find_posts_profiles">Finden Sie Beiträge, Profile und Hashtags\nin der ASS-Gemeinschaft</string>
+    <string name="popular_categories">Beliebte Kategorien</string>
+    <string name="recent_searches">Letzte Suchen</string>
+    <string name="searches_appear_here">Ihre Suchen erscheinen hier</string>
+    <string name="general">Allgemein</string>
+    <string name="tips">Tipps</string>
+    <string name="experiences">Erfahrungen</string>
+    <string name="questions">Fragen</string>
+    <string name="resources">Ressourcen</string>
+    
+    <!-- Chatbot Suggestions -->
+    <string name="how_identify_autism">Wie erkennt man Autismus?</string>
+    <string name="child_not_speaking">Mein Kind spricht nicht, ist es Autismus?</string>
+    <string name="what_therapies_work">Welche Therapien funktionieren?</string>
+    <string name="help_at_school">Wie kann man in der Schule helfen?</string>
+    <string name="autism_rights">Rechte von Autisten</string>
+    <string name="child_tantrums">Kind mit Wutanfällen</string>
+    
+    <!-- Diary -->
+    <string name="new_observation">Neue Beobachtung</string>
+    <string name="edit_observation">Beobachtung bearbeiten</string>
+    <string name="observation_type">Typ:</string>
+    <string name="title">Titel</string>
+    <string name="detailed_description">Detaillierte Beschreibung</string>
+    <string name="intensity">Intensität: %d</string>
+    <string name="observer">Beobachter:</string>
+    <string name="possible_triggers">Mögliche Auslöser:</string>
+    <string name="delete_observation">Beobachtung löschen</string>
+    <string name="delete_observation_confirm">Sind Sie sicher, dass Sie diese Beobachtung löschen möchten?</string>
+    <string name="observation_title_empty">Der Beobachtungstitel darf nicht leer sein</string>
+    
+    <!-- Profile -->
+    <string name="not_defined">Nicht definiert</string>
+    <string name="confirm_change">Änderung bestätigen</string>
+    <string name="change_name_to">Name zu "%s" ändern?</string>
+    <string name="change_username_to">Benutzername von @%s zu @%s ändern?</string>
+    <string name="error_updating_name">Fehler beim Aktualisieren des Namens</string>
+    <string name="error_updating_username">Fehler beim Aktualisieren des Benutzernamens</string>
+    <string name="error_updating_type">Fehler beim Aktualisieren des Typs</string>
+    <string name="username_help">Nur Kleinbuchstaben, Zahlen und _</string>
+    <string name="username_cooldown_info">Benutzername kann nur einmal alle 3 Tage geändert werden</string>
+    <string name="confirm_password_title">Passwort bestätigen</string>
+    <string name="error_deleting_account">Fehler beim Löschen des Kontos</string>
+    
+    <!-- Additional strings -->
+    <string name="type_updated">Typ aktualisiert!</string>
+    <string name="name_updated">Name aktualisiert!</string>
+    <string name="username_updated">Benutzername aktualisiert!</string>
+    <string name="account_deleted">Konto erfolgreich gelöscht</string>
+    <string name="incorrect_password">Falsches Passwort</string>
+    <string name="user_not_found">Benutzer nicht gefunden</string>
+    <string name="email_not_verified">E-Mail noch nicht verifiziert</string>
+    <string name="verification_email_sent">Verifizierungs-E-Mail erneut gesendet!</string>
+    <string name="checking_verification">Überprüfe...</string>
+    <string name="already_have_account">Haben Sie bereits ein Konto? Anmelden</string>
+    <string name="create_account">Konto erstellen</string>
+    <string name="account_created">Konto erstellt! Überprüfen Sie Ihre E-Mail zur Aktivierung</string>
+    <string name="example123">beispiel123</string>
+</resources>

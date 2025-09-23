@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">TISM</string>
+    <string name="app_subtitle">ASDについて知る必要があることをワンクリックで</string>
+    <string name="app_title">TISM - ASDガイド</string>
+    
+    <!-- Authentication -->
+    <string name="login">ログイン</string>
+    <string name="register">登録</string>
+    <string name="email">メール</string>
+    <string name="password">パスワード</string>
+    <string name="confirm_password">パスワード確認</string>
+    <string name="name">名前</string>
+    <string name="username">ユーザー名</string>
+    <string name="forgot_password">パスワードを忘れた</string>
+    <string name="login_success">ログイン成功</string>
+    <string name="register_success">アカウント作成成功</string>
+    <string name="logout">ログアウト</string>
+    <string name="logout_confirm">ログアウトしますか？</string>
+    
+    <!-- User Types -->
+    <string name="participant">参加者</string>
+    <string name="participant_desc">一般的なTISMユーザー</string>
+    <string name="responsible">保護者</string>
+    <string name="responsible_desc">家族または介護者</string>
+    <string name="professional">専門家</string>
+    <string name="professional_desc">セラピスト、医師、教育者</string>
+    <string name="user_type">ユーザータイプ</string>
+    <string name="select_user_type">タイプを選択</string>
+    
+    <!-- Profile -->
+    <string name="profile">プロフィール</string>
+    <string name="edit_profile">プロフィール編集</string>
+    <string name="edit_name">名前編集</string>
+    <string name="edit_username">ユーザー名編集</string>
+    <string name="full_name">フルネーム</string>
+    <string name="account_type">アカウントタイプ</string>
+    <string name="theme">テーマ</string>
+    <string name="light_theme">ライト</string>
+    <string name="dark_theme">ダーク</string>
+    <string name="system_theme">システム</string>
+    <string name="system_theme_desc">デバイステーマに従う</string>
+    
+    <!-- Navigation -->
+    <string name="home">ホーム</string>
+    <string name="forum">フォーラム</string>
+    <string name="knowledge">知識</string>
+    <string name="routine">ルーティン</string>
+    <string name="dashboard">ダッシュボード</string>
+    <string name="feed">フィード</string>
+    <string name="search">検索</string>
+    
+    <!-- Home Page -->
+    <string name="hello_user">こんにちは、%sさん！ 👋</string>
+    <string name="explore_content">ASDに関する教育コンテンツを探索</string>
+    <string name="educational_feed">教育フィード</string>
+    <string name="custom_routine">カスタムルーティン</string>
+    <string name="observation_diary">観察日記</string>
+    <string name="tina_chatbot">ティナ（チャットボット）</string>
+    <string name="tea_forum">ASDフォーラム</string>
+    
+    <!-- Feed Page -->
+    <string name="articles">記事</string>
+    <string name="digital_library">デジタルライブラリ</string>
+    
+    <!-- Forum -->
+    <string name="new_post">新しい投稿</string>
+    <string name="publish">投稿</string>
+    <string name="share_experience">ASDについての経験、質問、アドバイスを共有...</string>
+    <string name="write_something">投稿前に何か書いてください</string>
+    <string name="confirm_publication">投稿確認</string>
+    <string name="want_to_publish">この投稿をフォーラムに投稿しますか？</string>
+    <string name="post_published">投稿が成功しました！</string>
+    <string name="error_publishing">投稿エラー</string>
+    
+    <!-- Chatbot -->
+    <string name="tina_assistant">ティナ - ASDアシスタント</string>
+    <string name="thinking">考え中...</string>
+    <string name="type_message">メッセージを入力...</string>
+    <string name="about_tina">💙 ティナについて</string>
+    <string name="tina_intro">🤖 **こんにちは！私はティナです！**\n\n私は自閉症と神経多様性に特化したバーチャルアシスタントで、専門家の学際的チームによってTISM専用に開発されました。</string>
+    <string name="tina_specialization">🎯 **私の専門分野：**\n• 🧠 発達と行動\n• 🏫 包括的教育戦略\n• 💬 コミュニケーションと社会的相互作用技術\n• 🌍 環境と感覚の適応\n• 🛠️ 日常生活の実用的リソース</string>
+    <string name="tina_scientific">🔬 **科学的基盤：** 私は神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者によって検証された知識で訓練されました。</string>
+    <string name="tina_important">⚠️ **重要：** 私は診断を行わず、医療専門家の代替ではありません。私の役割は補完的で、情報提供と実用的サポートを提供します。</string>
+    <string name="tina_support">💙 **信頼できる情報と共感でサポートします！**</string>
+    <string name="understood_tina">わかりました、ティナ！話しましょう！ 😊</string>
+    <string name="tina_welcome">こんにちは！私はTISMの自閉症と神経多様性に特化したバーチャルアシスタント、ティナです！\n\n以下について科学的証拠に基づいた個別サポートと情報を提供します：\n\n• 発達と行動\n• 包括的教育戦略\n• コミュニケーションと社会的相互作用技術\n• 環境と感覚の適応\n• 日常生活の実用的リソースとツール\n\n私の知識ベースは、神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者を含む学際的専門家チームによって開発されました。\n\n私は診断を行わず、医療専門家の代替ではないことが重要です - 私の役割は補完的で、家族、介護者、神経多様な人々に信頼できる情報と実用的サポートを提供します。\n\n今日はどのようにお手伝いできますか？</string>
+    
+    <!-- Diary -->
+    <string name="diary_observations">観察日記</string>
+    <string name="no_observations">まだ観察がありません</string>
+    <string name="tap_plus_start">+をタップして開始</string>
+    <string name="report_copied">レポートをコピーしました！メールやWhatsAppに貼り付け</string>
+    <string name="progress">進歩</string>
+    <string name="behavior">行動</string>
+    <string name="crisis">危機</string>
+    <string name="difficulty">困難</string>
+    <string name="triggers">トリガー</string>
+    
+    <!-- Routine -->
+    <string name="routine_of">%sのルーティン</string>
+    <string name="support_level">%sサポート</string>
+    <string name="filter_category">カテゴリでフィルター：</string>
+    <string name="completed">完了</string>
+    <string name="progress_count">進捗：%d/%d</string>
+    <string name="no_activities">アクティビティが見つかりません</string>
+    <string name="clear_filters">フィルタークリア</string>
+    <string name="add_activity">アクティビティ追加</string>
+    <string name="edit_activity">アクティビティ編集</string>
+    
+    <!-- Categories -->
+    <string name="morning">朝</string>
+    <string name="education">教育</string>
+    <string name="food">食事</string>
+    <string name="leisure">レジャー</string>
+    <string name="wellness">ウェルネス</string>
+    <string name="night">夜</string>
+    <string name="all">すべて</string>
+    
+    <!-- Profile Setup -->
+    <string name="welcome">ようこそ！</string>
+    <string name="profile_setup_desc">個別ルーティンを作成するため、まず子どものプロフィールを設定しましょう。\n\nこれにより年齢に適したアクティビティとサポートレベルを提案できます。</string>
+    <string name="create_profile">プロフィール作成</string>
+    <string name="edit_profile_menu">プロフィール編集</string>
+    <string name="switch_child">子ども切り替え</string>
+    <string name="new_child">新しい子ども</string>
+    <string name="select_child">子ども選択</string>
+    
+    <!-- Email Verification -->
+    <string name="verify_email">メール確認</string>
+    <string name="verification_sent">確認メール送信済み！</string>
+    <string name="check_email">受信箱を確認</string>
+    <string name="verification_desc">確認リンクをメールに送信しました。リンクをクリックしてアカウントを有効化してください。</string>
+    <string name="already_verified">確認済み - ログイン</string>
+    <string name="resend_verification">確認メール再送信</string>
+    <string name="verifying">確認中...</string>
+    
+    <!-- Account Deletion -->
+    <string name="delete_account">アカウント削除</string>
+    <string name="delete_warning">この操作は元に戻せません！\n\nすべてのデータが永久に失われます。</string>
+    <string name="delete_confirmation">確認のため、正確に入力してください：</string>
+    <string name="delete_phrase">削除 私のアカウント</string>
+    <string name="delete_input_hint">上記のフレーズを入力</string>
+    <string name="delete_incorrect">フレーズが間違っています。大文字小文字を確認してください。</string>
+    <string name="confirm_password_delete">パスワード確認</string>
+    <string name="enter_password">パスワードを入力</string>
+    
+    <!-- Common Actions -->
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    <string name="confirm">確認</string>
+    <string name="delete">削除</string>
+    <string name="edit">編集</string>
+    <string name="add">追加</string>
+    <string name="remove">削除</string>
+    <string name="update">更新</string>
+    <string name="close">閉じる</string>
+    <string name="ok">OK</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="share">共有</string>
+    
+    <!-- Messages -->
+    <string name="success">成功</string>
+    <string name="error">エラー</string>
+    <string name="loading">読み込み中...</string>
+    <string name="connection_error">接続エラー</string>
+    <string name="try_again">再試行</string>
+    <string name="updated_successfully">更新成功！</string>
+    <string name="deleted_successfully">削除成功</string>
+    <string name="saved_successfully">保存成功！</string>
+    <string name="welcome_message">こんにちは、ようこそ！</string>
+    <string name="no_account">アカウントがありませんか？登録</string>
+    <string name="fill_all_fields">すべてのフィールドを入力</string>
+    <string name="login_error">ログインエラー</string>
+    <string name="connection_error_detail">接続エラー：%s</string>
+    
+    <!-- Validation -->
+    <string name="field_required">このフィールドは必須です</string>
+    <string name="invalid_email">無効なメール</string>
+    <string name="password_too_short">パスワードは8文字以上である必要があります</string>
+    <string name="passwords_dont_match">パスワードが一致しません</string>
+    <string name="username_invalid">ユーザー名は小文字、数字、_のみ使用可能</string>
+    
+    <!-- Cooldowns -->
+    <string name="name_cooldown">名前は1日に1回のみ変更可能</string>
+    <string name="username_cooldown">ユーザー名は3日に1回のみ変更可能</string>
+    <string name="user_type_cooldown">ユーザータイプは1日に1回のみ変更可能</string>
+    
+    <!-- Activities -->
+    <string name="wake_up">起床</string>
+    <string name="wake_up_desc">優しい音楽で起床</string>
+    <string name="brush_teeth">歯磨き</string>
+    <string name="brush_teeth_desc">柔らかいブラシで2分間</string>
+    <string name="breakfast">朝食</string>
+    <string name="breakfast_desc">テーブルに座って食事</string>
+    <string name="educational_activity">教育活動</string>
+    <string name="educational_activity_desc">教育ゲームまたは学校</string>
+    <string name="snack">おやつ</string>
+    <string name="snack_desc">果物または健康的なおやつ</string>
+    <string name="music">音楽</string>
+    <string name="music_desc">音楽を聞くまたは演奏</string>
+    <string name="draw">お絵描き</string>
+    <string name="draw_desc">自由なお絵描き活動</string>
+    <string name="numbers">数字</string>
+    <string name="numbers_desc">数字ゲーム</string>
+    <string name="sensory_break">感覚休憩</string>
+    <string name="sensory_break_desc">落ち着きと自己調整の時間</string>
+    <string name="dinner">夕食</string>
+    <string name="dinner_desc">家族での食事</string>
+    <string name="bath">お風呂</string>
+    <string name="bath_desc">温かいお湯、柔らかいスポンジ</string>
+    <string name="sleep">就寝</string>
+    <string name="sleep_desc">眠るための優しい音楽</string>
+    
+    <!-- Forum Specific -->
+    <string name="welcome_forum">ASDフォーラムへようこそ！ 💙</string>
+    <string name="first_post_message">最初に経験を共有するか\nコミュニティに質問してください</string>
+    <string name="create_first_post">最初の投稿を作成</string>
+    <string name="delete_post">投稿削除</string>
+    <string name="delete_post_confirm">この投稿を削除しますか？この操作は元に戻せません。</string>
+    <string name="post_deleted_success">投稿削除成功</string>
+    <string name="error_deleting_post">投稿削除エラー：%s</string>
+    <string name="report_post">報告</string>
+    <string name="report_post_title">投稿を報告</string>
+    <string name="report_post_confirm">この投稿を報告しますか？</string>
+    <string name="post_reported">投稿報告成功</string>
+    <string name="now">今</string>
+    
+    <!-- Search -->
+    <string name="search_posts">投稿、人、トピックを検索...</string>
+    <string name="no_results_found">結果が見つかりません</string>
+    <string name="try_different_keywords">異なるキーワードを試すか\n下のカテゴリを探索してください</string>
+    <string name="type_to_search">検索するために入力...</string>
+    <string name="find_posts_profiles">ASDコミュニティで投稿、プロフィール、\nハッシュタグを見つける</string>
+    <string name="popular_categories">人気カテゴリ</string>
+    <string name="recent_searches">最近の検索</string>
+    <string name="searches_appear_here">検索履歴がここに表示されます</string>
+    <string name="general">一般</string>
+    <string name="tips">ヒント</string>
+    <string name="experiences">経験</string>
+    <string name="questions">質問</string>
+    <string name="resources">リソース</string>
+    
+    <!-- Chatbot Suggestions -->
+    <string name="how_identify_autism">自閉症の見分け方は？</string>
+    <string name="child_not_speaking">子どもが話さない、自閉症？</string>
+    <string name="what_therapies_work">どの療法が効果的？</string>
+    <string name="help_at_school">学校でのサポート方法は？</string>
+    <string name="autism_rights">自閉症者の権利</string>
+    <string name="child_tantrums">子どものかんしゃく</string>
+    
+    <!-- Diary -->
+    <string name="new_observation">新しい観察</string>
+    <string name="edit_observation">観察編集</string>
+    <string name="observation_type">タイプ：</string>
+    <string name="title">タイトル</string>
+    <string name="detailed_description">詳細説明</string>
+    <string name="intensity">強度：%d</string>
+    <string name="observer">観察者：</string>
+    <string name="possible_triggers">可能なトリガー：</string>
+    <string name="delete_observation">観察削除</string>
+    <string name="delete_observation_confirm">この観察を削除しますか？</string>
+    <string name="observation_title_empty">観察タイトルは空にできません</string>
+    
+    <!-- Profile -->
+    <string name="not_defined">未定義</string>
+    <string name="confirm_change">変更確認</string>
+    <string name="change_name_to">名前を"%s"に変更しますか？</string>
+    <string name="change_username_to">ユーザー名を@%sから@%sに変更しますか？</string>
+    <string name="error_updating_name">名前更新エラー</string>
+    <string name="error_updating_username">ユーザー名更新エラー</string>
+    <string name="error_updating_type">タイプ更新エラー</string>
+    <string name="username_help">小文字、数字、_のみ</string>
+    <string name="username_cooldown_info">ユーザー名は3日に1回のみ変更可能</string>
+    <string name="confirm_password_title">パスワード確認</string>
+    <string name="error_deleting_account">アカウント削除エラー</string>
+    
+    <!-- Additional strings -->
+    <string name="type_updated">タイプ更新！</string>
+    <string name="name_updated">名前更新！</string>
+    <string name="username_updated">ユーザー名更新！</string>
+    <string name="account_deleted">アカウント削除成功</string>
+    <string name="incorrect_password">パスワードが間違っています</string>
+    <string name="user_not_found">ユーザーが見つかりません</string>
+    <string name="email_not_verified">メールがまだ確認されていません</string>
+    <string name="verification_email_sent">確認メール再送信！</string>
+    <string name="checking_verification">確認中...</string>
+    <string name="already_have_account">アカウントをお持ちですか？ログイン</string>
+    <string name="create_account">アカウント作成</string>
+    <string name="account_created">アカウント作成！有効化のためメールを確認</string>
+    <string name="example123">例123</string>
+</resources>

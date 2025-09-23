@@ -3,6 +3,8 @@ import 'package:tism/constants/colors.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
 import 'package:tism/services/auth_integration_service.dart';
+import 'package:tism/services/language_service.dart';
+import 'package:tism/utils/text_utils.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,8 +26,8 @@ class _LoginPageState extends State<LoginPage> {
 
     if (email.isEmpty || senha.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Preencha todos os campos'),
+        SnackBar(
+          content: Text('field_required'.tr),
           backgroundColor: Colors.red,
         ),
       );
@@ -34,8 +36,8 @@ class _LoginPageState extends State<LoginPage> {
 
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Digite um email válido'),
+        SnackBar(
+          content: Text('invalid_email'.tr),
           backgroundColor: Colors.red,
         ),
       );
@@ -44,8 +46,8 @@ class _LoginPageState extends State<LoginPage> {
 
     if (senha.length < 8) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('A senha deve ter pelo menos 8 caracteres'),
+        SnackBar(
+          content: Text('password_too_short'.tr),
           backgroundColor: Colors.red,
         ),
       );
@@ -78,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(result['error'] ?? 'Erro no login'),
+                content: Text(result['error'] ?? 'login_error'.tr),
                 backgroundColor: Colors.red,
               ),
             );
@@ -92,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erro de conexão: $e'),
+            content: Text('connection_error_detail'.trArgs([e])),
             backgroundColor: Colors.red,
           ),
         );
@@ -121,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 24),
               Text(
-                'Olá, seja bem vindo(a)!',
+                'welcome'.tr,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -129,13 +131,15 @@ class _LoginPageState extends State<LoginPage> {
                     ? Colors.white 
                     : tismAqua,
                 ),
+                textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  labelText: 'email'.tr,
                   prefixIcon: const Icon(Icons.email),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -160,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: 'Senha',
+                  labelText: 'password'.tr,
                   prefixIcon: const Icon(Icons.lock),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -201,9 +205,10 @@ class _LoginPageState extends State<LoginPage> {
                             strokeWidth: 2,
                           ),
                         )
-                      : const Text(
-                          'Entrar',
+                      : Text(
+                          'login'.tr,
                           style: TextStyle(fontSize: 16, color: Colors.white),
+                          textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
                         ),
                 ),
               ),
@@ -215,17 +220,22 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (_) => const RegisterPage()),
                   );
                 },
-                child: const Text('Ainda não tem conta ? Cadastre-se'),
+                child: Text(
+                  'no_account'.tr,
+                  textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                ),
               ),
               const SizedBox(height: 16),
               Text(
-                'Tudo o que você precisa saber sobre o TEA em um clique 💙',
+                'app_subtitle'.tr,
                 style: TextStyle(
                   fontSize: 12, 
                   color: Theme.of(context).brightness == Brightness.dark 
                     ? Colors.grey[400] 
                     : Colors.black54
                 ),
+                textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

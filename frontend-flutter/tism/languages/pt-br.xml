@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">TISM</string>
+    <string name="app_subtitle">Tudo o que você precisa saber sobre o TEA em um clique</string>
+    <string name="app_title">TISM - Guia TEA</string>
+    
+    <!-- Authentication -->
+    <string name="login">Entrar</string>
+    <string name="register">Cadastrar</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="name">Nome</string>
+    <string name="username">Username</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="login_success">Login realizado com sucesso</string>
+    <string name="register_success">Conta criada com sucesso</string>
+    <string name="logout">Sair</string>
+    <string name="logout_confirm">Tem certeza que deseja sair da sua conta?</string>
+    
+    <!-- User Types -->
+    <string name="participant">Participante</string>
+    <string name="participant_desc">Usuário comum do TISM</string>
+    <string name="responsible">Responsável</string>
+    <string name="responsible_desc">Familiar ou cuidador</string>
+    <string name="professional">Profissional</string>
+    <string name="professional_desc">Terapeuta, médico, educador</string>
+    <string name="user_type">Tipo de usuário</string>
+    <string name="select_user_type">Selecione seu tipo</string>
+    
+    <!-- Profile -->
+    <string name="profile">Perfil</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="edit_name">Editar Nome</string>
+    <string name="edit_username">Editar Username</string>
+    <string name="full_name">Nome completo</string>
+    <string name="account_type">Tipo de conta</string>
+    <string name="theme">Tema</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Escuro</string>
+    <string name="system_theme">Sistema</string>
+    <string name="system_theme_desc">Segue o tema do dispositivo</string>
+    
+    <!-- Navigation -->
+    <string name="home">Início</string>
+    <string name="forum">Fórum</string>
+    <string name="knowledge">Conhecimento</string>
+    <string name="routine">Rotina</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="feed">Feed</string>
+    <string name="search">Buscar</string>
+    
+    <!-- Home Page -->
+    <string name="hello_user">Olá, %s! 👋</string>
+    <string name="explore_content">Explore conteúdos educativos sobre o TEA</string>
+    <string name="educational_feed">Feed Educativo</string>
+    <string name="custom_routine">Rotina Personalizada</string>
+    <string name="observation_diary">Diário de Observações</string>
+    <string name="tina_chatbot">Tina (Chatbot)</string>
+    <string name="tea_forum">Fórum TEA</string>
+    
+    <!-- Feed Page -->
+    <string name="articles">Artigos</string>
+    <string name="digital_library">Biblioteca Digital</string>
+    
+    <!-- Forum -->
+    <string name="new_post">Novo Post</string>
+    <string name="publish">Publicar</string>
+    <string name="share_experience">Compartilhe sua experiência, dúvida ou dica sobre TEA...</string>
+    <string name="write_something">Escreva algo antes de publicar</string>
+    <string name="confirm_publication">Confirmar Publicação</string>
+    <string name="want_to_publish">Deseja publicar este post no fórum?</string>
+    <string name="post_published">Post publicado com sucesso!</string>
+    <string name="error_publishing">Erro ao publicar post</string>
+    
+    <!-- Chatbot -->
+    <string name="tina_assistant">Tina - Assistente TEA</string>
+    <string name="thinking">Pensando...</string>
+    <string name="type_message">Digite sua mensagem...</string>
+    <string name="about_tina">💙 Sobre a Tina</string>
+    <string name="tina_intro">🤖 **Olá! Eu sou a Tina!**\n\nSou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.</string>
+    <string name="tina_specialization">🎯 **Minha especialização:**\n• 🧠 Desenvolvimento e comportamento\n• 🏫 Estratégias educacionais inclusivas\n• 💬 Técnicas de comunicação e interação social\n• 🌍 Adaptações ambientais e sensoriais\n• 🛠️ Recursos práticos para o dia a dia</string>
+    <string name="tina_scientific">🔬 **Base científica:** Fui treinada com conhecimento validado por neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.</string>
+    <string name="tina_important">⚠️ **Importante:** Não realizo diagnósticos nem substituo profissionais de saúde. Meu papel é complementar, oferecendo suporte informativo e prático.</string>
+    <string name="tina_support">💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**</string>
+    <string name="understood_tina">Entendi, Tina! Vamos conversar! 😊</string>
+    <string name="tina_welcome">Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?</string>
+    
+    <!-- Diary -->
+    <string name="diary_observations">Diário de Observações</string>
+    <string name="no_observations">Nenhuma observação ainda</string>
+    <string name="tap_plus_start">Toque no + para começar</string>
+    <string name="report_copied">Relatório copiado! Cole em email ou WhatsApp</string>
+    <string name="progress">Progresso</string>
+    <string name="behavior">Comportamento</string>
+    <string name="crisis">Crise</string>
+    <string name="difficulty">Dificuldade</string>
+    <string name="triggers">Gatilhos</string>
+    
+    <!-- Routine -->
+    <string name="routine_of">Rotina de %s</string>
+    <string name="support_level">Suporte %s</string>
+    <string name="filter_category">Filtrar por categoria:</string>
+    <string name="completed">Concluídas</string>
+    <string name="progress_count">Progresso: %d/%d</string>
+    <string name="no_activities">Nenhuma atividade encontrada</string>
+    <string name="clear_filters">Limpar filtros</string>
+    <string name="add_activity">Adicionar Atividade</string>
+    <string name="edit_activity">Editar Atividade</string>
+    
+    <!-- Categories -->
+    <string name="morning">Manhã</string>
+    <string name="education">Educação</string>
+    <string name="food">Alimentação</string>
+    <string name="leisure">Lazer</string>
+    <string name="wellness">Bem-estar</string>
+    <string name="night">Noite</string>
+    <string name="all">Todas</string>
+    
+    <!-- Profile Setup -->
+    <string name="welcome">Bem-vindo!</string>
+    <string name="profile_setup_desc">Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\n\nIsso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.</string>
+    <string name="create_profile">Criar Perfil</string>
+    <string name="edit_profile_menu">Editar Perfil</string>
+    <string name="switch_child">Trocar Criança</string>
+    <string name="new_child">Nova Criança</string>
+    <string name="select_child">Selecionar Criança</string>
+    
+    <!-- Email Verification -->
+    <string name="verify_email">Verificar Email</string>
+    <string name="verification_sent">Email de verificação enviado!</string>
+    <string name="check_email">Verifique sua caixa de entrada</string>
+    <string name="verification_desc">Enviamos um link de verificação para seu email. Clique no link para ativar sua conta.</string>
+    <string name="already_verified">Já verifiquei - Entrar</string>
+    <string name="resend_verification">Reenviar email de verificação</string>
+    <string name="verifying">Verificando...</string>
+    
+    <!-- Account Deletion -->
+    <string name="delete_account">Deletar Conta</string>
+    <string name="delete_warning">Esta ação é IRREVERSÍVEL!\n\nTodos os seus dados serão perdidos permanentemente.</string>
+    <string name="delete_confirmation">Para confirmar, digite exatamente:</string>
+    <string name="delete_phrase">DELETAR minha conta</string>
+    <string name="delete_input_hint">Digite a frase acima</string>
+    <string name="delete_incorrect">Frase incorreta. Verifique maiúsculas e minúsculas.</string>
+    <string name="confirm_password_delete">Confirmar senha</string>
+    <string name="enter_password">Digite sua senha</string>
+    
+    <!-- Common Actions -->
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="delete">Deletar</string>
+    <string name="edit">Editar</string>
+    <string name="add">Adicionar</string>
+    <string name="remove">Remover</string>
+    <string name="update">Atualizar</string>
+    <string name="close">Fechar</string>
+    <string name="ok">OK</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="share">Compartilhar</string>
+    
+    <!-- Messages -->
+    <string name="success">Sucesso</string>
+    <string name="error">Erro</string>
+    <string name="loading">Carregando...</string>
+    <string name="connection_error">Erro de conexão</string>
+    <string name="try_again">Tente novamente</string>
+    <string name="updated_successfully">Atualizado com sucesso!</string>
+    <string name="deleted_successfully">Deletado com sucesso</string>
+    <string name="saved_successfully">Salvo com sucesso!</string>
+    <string name="welcome_message">Olá, seja bem vindo(a)!</string>
+    <string name="no_account">Ainda não tem conta? Cadastre-se</string>
+    <string name="fill_all_fields">Preencha todos os campos</string>
+    <string name="login_error">Erro no login</string>
+    <string name="connection_error_detail">Erro de conexão: %s</string>
+    
+    <!-- Validation -->
+    <string name="field_required">Este campo é obrigatório</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="password_too_short">Senha deve ter pelo menos 8 caracteres</string>
+    <string name="passwords_dont_match">Senhas não coincidem</string>
+    <string name="username_invalid">Username deve conter apenas letras minúsculas, números e _</string>
+    
+    <!-- Cooldowns -->
+    <string name="name_cooldown">Nome pode ser alterado apenas 1 vez por dia</string>
+    <string name="username_cooldown">Username pode ser alterado apenas 1 vez a cada 3 dias</string>
+    <string name="user_type_cooldown">Tipo de usuário pode ser alterado apenas 1 vez por dia</string>
+    
+    <!-- Activities -->
+    <string name="wake_up">Acordar</string>
+    <string name="wake_up_desc">Despertar com música suave</string>
+    <string name="brush_teeth">Escovar dentes</string>
+    <string name="brush_teeth_desc">Usar escova macia por 2 minutos</string>
+    <string name="breakfast">Café da manhã</string>
+    <string name="breakfast_desc">Comer sentado na mesa</string>
+    <string name="educational_activity">Atividade educativa</string>
+    <string name="educational_activity_desc">Jogos educativos ou escola</string>
+    <string name="snack">Lanche</string>
+    <string name="snack_desc">Fruta ou lanche saudável</string>
+    <string name="music">Música</string>
+    <string name="music_desc">Ouvir ou tocar música</string>
+    <string name="draw">Desenhar</string>
+    <string name="draw_desc">Atividade de desenho livre</string>
+    <string name="numbers">Números</string>
+    <string name="numbers_desc">Jogos com números</string>
+    <string name="sensory_break">Pausa sensorial</string>
+    <string name="sensory_break_desc">Momento de calma e autorregulação</string>
+    <string name="dinner">Jantar</string>
+    <string name="dinner_desc">Refeição em família</string>
+    <string name="bath">Banho</string>
+    <string name="bath_desc">Água morna, esponja macia</string>
+    <string name="sleep">Dormir</string>
+    <string name="sleep_desc">Música suave para dormir</string>
+    
+    <!-- Forum Specific -->
+    <string name="welcome_forum">Bem-vindo ao Fórum TEA! 💙</string>
+    <string name="first_post_message">Seja o primeiro a compartilhar uma experiência\nou fazer uma pergunta para a comunidade</string>
+    <string name="create_first_post">Criar primeiro post</string>
+    <string name="delete_post">Deletar Post</string>
+    <string name="delete_post_confirm">Tem certeza que deseja deletar este post? Esta ação não pode ser desfeita.</string>
+    <string name="post_deleted_success">Post deletado com sucesso</string>
+    <string name="error_deleting_post">Erro ao deletar post: %s</string>
+    <string name="report_post">Denunciar</string>
+    <string name="report_post_title">Denunciar Post</string>
+    <string name="report_post_confirm">Tem certeza que deseja denunciar este post?</string>
+    <string name="post_reported">Post denunciado com sucesso</string>
+    <string name="now">Agora</string>
+    
+    <!-- Search -->
+    <string name="search_posts">Buscar posts, pessoas ou tópicos...</string>
+    <string name="no_results_found">Nenhum resultado encontrado</string>
+    <string name="try_different_keywords">Tente usar palavras-chave diferentes\nou explore as categorias abaixo</string>
+    <string name="type_to_search">Digite para buscar...</string>
+    <string name="find_posts_profiles">Encontre posts, perfis e hashtags\nna comunidade TEA</string>
+    <string name="popular_categories">Categorias Populares</string>
+    <string name="recent_searches">Buscas Recentes</string>
+    <string name="searches_appear_here">Suas buscas aparecerão aqui</string>
+    <string name="general">Geral</string>
+    <string name="tips">Dicas</string>
+    <string name="experiences">Experiências</string>
+    <string name="questions">Dúvidas</string>
+    <string name="resources">Recursos</string>
+    
+    <!-- Chatbot Suggestions -->
+    <string name="how_identify_autism">Como identificar autismo?</string>
+    <string name="child_not_speaking">Meu filho não fala, é autismo?</string>
+    <string name="what_therapies_work">Que terapias funcionam?</string>
+    <string name="help_at_school">Como ajudar na escola?</string>
+    <string name="autism_rights">Direitos do autista</string>
+    <string name="child_tantrums">Criança com birras</string>
+    
+    <!-- Diary -->
+    <string name="new_observation">Nova Observação</string>
+    <string name="edit_observation">Editar Observação</string>
+    <string name="observation_type">Tipo:</string>
+    <string name="title">Título</string>
+    <string name="detailed_description">Descrição detalhada</string>
+    <string name="intensity">Intensidade: %d</string>
+    <string name="observer">Observador:</string>
+    <string name="possible_triggers">Possíveis gatilhos:</string>
+    <string name="delete_observation">Excluir Observação</string>
+    <string name="delete_observation_confirm">Tem certeza que deseja excluir esta observação?</string>
+    <string name="observation_title_empty">O título da observação não pode estar vazio</string>
+    
+    <!-- Profile -->
+    <string name="not_defined">Não definido</string>
+    <string name="confirm_change">Confirmar alteração</string>
+    <string name="change_name_to">Alterar nome para "%s"?</string>
+    <string name="change_username_to">Alterar username de @%s para @%s?</string>
+    <string name="error_updating_name">Erro ao atualizar nome</string>
+    <string name="error_updating_username">Erro ao atualizar username</string>
+    <string name="error_updating_type">Erro ao atualizar tipo</string>
+    <string name="username_help">Apenas letras minúsculas, números e _</string>
+    <string name="username_cooldown_info">Username pode ser alterado apenas 1 vez a cada 3 dias</string>
+    <string name="confirm_password_title">Confirmar senha</string>
+    <string name="error_deleting_account">Erro ao deletar conta</string>
+    
+    <!-- Additional strings -->
+    <string name="type_updated">Tipo atualizado!</string>
+    <string name="name_updated">Nome atualizado!</string>
+    <string name="username_updated">Username atualizado!</string>
+    <string name="account_deleted">Conta deletada com sucesso</string>
+    <string name="incorrect_password">Senha incorreta</string>
+    <string name="user_not_found">Usuário não encontrado</string>
+    <string name="email_not_verified">Email ainda não verificado</string>
+    <string name="verification_email_sent">Email de verificação reenviado!</string>
+    <string name="checking_verification">Verificando...</string>
+    <string name="already_have_account">Já tem conta? Faça login</string>
+    <string name="create_account">Criar conta</string>
+    <string name="account_created">Conta criada! Verifique seu email para ativar</string>
+    <string name="example123">exemplo123</string>
+</resources>
