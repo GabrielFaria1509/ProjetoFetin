@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
 
@@ -17,7 +18,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Novo Post'),
+        title: Text(AppLocalizations.of(context)!.new_post),
         backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
@@ -25,9 +26,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         actions: [
           TextButton(
             onPressed: _isLoading ? null : _showConfirmDialog,
-            child: const Text(
-              'Publicar',
-              style: TextStyle(
+            child: Text(
+              AppLocalizations.of(context)!.publish,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -45,11 +46,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 maxLines: null,
                 expands: true,
                 textAlignVertical: TextAlignVertical.top,
-                decoration: const InputDecoration(
-                  hintText:
-                      'Compartilhe sua experiência, dúvida ou dica sobre TEA...',
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(16),
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.share_experience,
+                  border: const OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(16),
                 ),
               ),
             ),
@@ -64,7 +64,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   void _showConfirmDialog() {
     if (_controller.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Escreva algo antes de publicar')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.write_something)),
       );
       return;
     }
@@ -72,12 +72,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Confirmar Publicação'),
-        content: const Text('Deseja publicar este post no fórum?'),
+        title: Text(AppLocalizations.of(context)!.confirm_publication),
+        content: Text(AppLocalizations.of(context)!.want_to_publish),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -85,9 +85,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               _createPost();
             },
             style: ElevatedButton.styleFrom(backgroundColor: tismAqua),
-            child: const Text(
-              'Publicar',
-              style: TextStyle(color: Colors.white),
+            child: Text(
+              AppLocalizations.of(context)!.publish,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ],
@@ -106,15 +106,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       if (success) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Post publicado com sucesso!'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.post_published),
             backgroundColor: Colors.green,
           ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Erro ao publicar post'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.error_publishing),
             backgroundColor: Colors.red,
           ),
         );

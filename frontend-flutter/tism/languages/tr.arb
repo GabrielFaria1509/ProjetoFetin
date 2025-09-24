@@ -40,7 +40,15 @@
   "dashboard": "Panel",
   "feed": "Akış",
   "search": "Ara",
-  "hello_user": "Merhaba, %s! 👋",
+  "hello_user": "Merhaba, {name}! 👋",
+  "@hello_user": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "explore_content": "OSB hakkında eğitici içerikleri keşfedin",
   "educational_feed": "Eğitici Akış",
   "custom_routine": "Özel Rutin",
@@ -77,11 +85,38 @@
   "crisis": "Kriz",
   "difficulty": "Zorluk",
   "triggers": "Tetikleyiciler",
-  "routine_of": "%s'nin Rutini",
-  "support_level": "%s Desteği",
+  "routine_of": "{name}'nin Rutini",
+  "@routine_of": {
+    "description": "Routine of user",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "support_level": "{level} Desteği",
+  "@support_level": {
+    "description": "Support level",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "filter_category": "Kategoriye göre filtrele:",
   "completed": "Tamamlanan",
-  "progress_count": "İlerleme: %d/%d",
+  "progress_count": "İlerleme: {completed}/{total}",
+  "@progress_count": {
+    "description": "Progress counter",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "no_activities": "Etkinlik bulunamadı",
   "clear_filters": "Filtreleri Temizle",
   "add_activity": "Etkinlik Ekle",
@@ -140,7 +175,15 @@
   "no_account": "Hesabınız yok mu? Kayıt olun",
   "fill_all_fields": "Tüm alanları doldurun",
   "login_error": "Giriş hatası",
-  "connection_error_detail": "Bağlantı hatası: %s",
+  "connection_error_detail": "Bağlantı hatası: {error}",
+  "@connection_error_detail": {
+    "description": "Connection error with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "field_required": "Bu alan zorunludur",
   "invalid_email": "Geçersiz e-posta",
   "password_too_short": "Şifre en az 8 karakter olmalıdır",
@@ -179,7 +222,15 @@
   "delete_post": "Gönderiyi sil",
   "delete_post_confirm": "Bu gönderiyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
   "post_deleted_success": "Gönderi başarıyla silindi",
-  "error_deleting_post": "Gönderi silme hatası: %s",
+  "error_deleting_post": "Gönderi silme hatası: {error}",
+  "@error_deleting_post": {
+    "description": "Error deleting post",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "report_post": "Şikayet et",
   "report_post_title": "Gönderiyi şikayet et",
   "report_post_confirm": "Bu gönderiyi şikayet etmek istediğinizden emin misiniz?",
@@ -209,7 +260,15 @@
   "observation_type": "Tür:",
   "title": "Başlık",
   "detailed_description": "Detaylı açıklama",
-  "intensity": "Yoğunluk: %d",
+  "intensity": "Yoğunluk: {level}",
+  "@intensity": {
+    "description": "Intensity level",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "observer": "Gözlemci:",
   "possible_triggers": "Olası tetikleyiciler:",
   "delete_observation": "Gözlemi sil",
@@ -217,8 +276,27 @@
   "observation_title_empty": "Gözlem başlığı boş olamaz",
   "not_defined": "Tanımlanmamış",
   "confirm_change": "Değişikliği onayla",
-  "change_name_to": "İsmi \"%s\" olarak değiştir?",
-  "change_username_to": "Kullanıcı adını @%s'den @%s'ye değiştir?",
+  "change_name_to": "İsmi \"{name}\" olarak değiştir?",
+  "@change_name_to": {
+    "description": "Confirm name change",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "change_username_to": "Kullanıcı adını @{oldName}'den @{newName}'ye değiştir?",
+  "@change_username_to": {
+    "description": "Confirm username change",
+    "placeholders": {
+      "oldName": {
+        "type": "String"
+      },
+      "newName": {
+        "type": "String"
+      }
+    }
+  },
   "error_updating_name": "İsim güncelleme hatası",
   "error_updating_username": "Kullanıcı adı güncelleme hatası",
   "error_updating_type": "Tür güncelleme hatası",
@@ -239,5 +317,20 @@
   "create_account": "Hesap oluştur",
   "account_created": "Hesap oluşturuldu! Etkinleştirmek için e-postanızı kontrol edin",
   "example123": "örnek123",
+  "new_routine": "Yeni Rutin",
+  "edit_routine": "Rutini Düzenle",
+  "activity_title": "Etkinlik başlığı",
+  "activity_description": "Etkinlik açıklaması",
+  "time_format": "Saat (00:00 - 23:59)",
+  "category": "Kategori",
+  "icon": "Simge",
+  "color": "Renk",
+  "create_routine": "Rutin Oluştur",
+  "save_changes": "Değişiklikleri Kaydet",
+  "routine_title_empty": "Rutin başlığı boş olamaz",
+  "invalid_time_format": "Geçersiz saat. 24 saat formatını kullanın (00:00 - 23:59)",
+  "delete_routine": "Rutini Sil",
+  "delete_routine_confirm": "Bu rutini silmek istediğinizden emin misiniz?",
+  "new_child": "Yeni Çocuk",
   "@@locale": "tr"
 }

@@ -40,7 +40,15 @@
   "dashboard": "Dashboard",
   "feed": "Feed",
   "search": "Cerca",
-  "hello_user": "Ciao, %s! 👋",
+  "hello_user": "Ciao, {name}! 👋",
+  "@hello_user": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "explore_content": "Esplora contenuti educativi sui DSA",
   "educational_feed": "Feed educativo",
   "custom_routine": "Routine personalizzata",
@@ -61,13 +69,13 @@
   "thinking": "Sto pensando...",
   "type_message": "Scrivi il tuo messaggio...",
   "about_tina": "💙 Informazioni su Tina",
-  "tina_intro": "🤖 **Ciao! Sono Tina!**\\n\\nSono un assistente virtuale specializzato in autismo e neurodiversità, sviluppato appositamente per TISM da un team multidisciplinare di esperti.",
-  "tina_specialization": "🎯 **La mia specializzazione:**\\n• 🧠 Sviluppo e comportamento\\n• 🏫 Strategie educative inclusive\\n• 💬 Tecniche di comunicazione e interazione sociale\\n• 🌍 Adattamenti ambientali e sensoriali\\n• 🛠️ Risorse pratiche per la vita quotidiana",
+  "tina_intro": "🤖 **Ciao! Sono Tina!**\n\nSono un assistente virtuale specializzato in autismo e neurodiversità, sviluppato appositamente per TISM da un team multidisciplinare di esperti.",
+  "tina_specialization": "🎯 **La mia specializzazione:**\n• 🧠 Sviluppo e comportamento\n• 🏫 Strategie educative inclusive\n• 💬 Tecniche di comunicazione e interazione sociale\n• 🌍 Adattamenti ambientali e sensoriali\n• 🛠️ Risorse pratiche per la vita quotidiana",
   "tina_scientific": "🔬 **Base scientifica:** Sono stata addestrata con conoscenze validate da neurologi, psicologi, terapisti occupazionali, logopedisti ed educatori speciali.",
   "tina_important": "⚠️ **Importante:** Non faccio diagnosi né sostituisco i professionisti sanitari. Il mio ruolo è complementare, offrendo supporto informativo e pratico.",
   "tina_support": "💙 **Sono qui per supportarti con informazioni affidabili ed empatia!**",
   "understood_tina": "Capito, Tina! Parliamo! 😊",
-  "tina_welcome": "Ciao! Sono Tina, un assistente virtuale specializzato in autismo e neurodiversità di TISM!\\n\\nSono qui per offrire supporto personalizzato e informazioni basate su evidenze scientifiche riguardo:\\n\\n• Sviluppo e comportamento\\n• Strategie educative inclusive\\n• Tecniche di comunicazione e interazione sociale\\n• Adattamenti ambientali e sensoriali\\n• Risorse e strumenti pratici per la vita quotidiana\\n\\nLa mia base di conoscenza è stata sviluppata da un team multidisciplinare di esperti, inclusi neurologi, psicologi, terapisti occupazionali, logopedisti ed educatori speciali.\\n\\nÈ importante notare che non faccio diagnosi né sostituisco i professionisti sanitari - il mio ruolo è complementare, offrendo informazioni affidabili e supporto pratico a famiglie, caregiver e persone neurodivergenti.\\n\\nCome posso aiutarti oggi?",
+  "tina_welcome": "Ciao! Sono Tina, un assistente virtuale specializzato in autismo e neurodiversità di TISM!\n\nSono qui per offrire supporto personalizzato e informazioni basate su evidenze scientifiche riguardo:\n\n• Sviluppo e comportamento\n• Strategie educative inclusive\n• Tecniche di comunicazione e interazione sociale\n• Adattamenti ambientali e sensoriali\n• Risorse e strumenti pratici per la vita quotidiana\n\nLa mia base di conoscenza è stata sviluppata da un team multidisciplinare di esperti, inclusi neurologi, psicologi, terapisti occupazionali, logopedisti ed educatori speciali.\n\nÈ importante notare che non faccio diagnosi né sostituisco i professionisti sanitari - il mio ruolo è complementare, offrendo informazioni affidabili e supporto pratico a famiglie, caregiver e persone neurodivergenti.\n\nCome posso aiutarti oggi?",
   "diary_observations": "Diario delle osservazioni",
   "no_observations": "Nessuna osservazione ancora",
   "tap_plus_start": "Tocca + per iniziare",
@@ -77,11 +85,38 @@
   "crisis": "Crisi",
   "difficulty": "Difficoltà",
   "triggers": "Trigger",
-  "routine_of": "Routine di %s",
-  "support_level": "Supporto %s",
+  "routine_of": "Routine di {name}",
+  "@routine_of": {
+    "description": "Routine of user",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "support_level": "Supporto {level}",
+  "@support_level": {
+    "description": "Support level",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "filter_category": "Filtra per categoria:",
   "completed": "Completate",
-  "progress_count": "Progresso: %d/%d",
+  "progress_count": "Progresso: {completed}/{total}",
+  "@progress_count": {
+    "description": "Progress counter",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "no_activities": "Nessuna attività trovata",
   "clear_filters": "Cancella filtri",
   "add_activity": "Aggiungi attività",
@@ -94,7 +129,7 @@
   "night": "Sera",
   "all": "Tutte",
   "welcome": "Ciao, benvenuto(a)!",
-  "profile_setup_desc": "Per creare una routine personalizzata, impostiamo prima il profilo del bambino.\\n\\nQuesto ci aiuta a suggerire attività appropriate per l'età e il livello di supporto.",
+  "profile_setup_desc": "Per creare una routine personalizzata, impostiamo prima il profilo del bambino.\n\nQuesto ci aiuta a suggerire attività appropriate per l'età e il livello di supporto.",
   "create_profile": "Crea profilo",
   "edit_profile_menu": "Modifica profilo",
   "switch_child": "Cambia bambino",
@@ -108,7 +143,7 @@
   "resend_verification": "Reinvia email di verifica",
   "verifying": "Verificando...",
   "delete_account": "Elimina account",
-  "delete_warning": "Questa azione è IRREVERSIBILE!\\n\\nTutti i tuoi dati saranno persi permanentemente.",
+  "delete_warning": "Questa azione è IRREVERSIBILE!\n\nTutti i tuoi dati saranno persi permanentemente.",
   "delete_confirmation": "Per confermare, digita esattamente:",
   "delete_phrase": "ELIMINA il mio account",
   "delete_input_hint": "Digita la frase sopra",
@@ -140,7 +175,15 @@
   "no_account": "Non hai un account? Registrati",
   "fill_all_fields": "Compila tutti i campi",
   "login_error": "Errore di accesso",
-  "connection_error_detail": "Errore di connessione: %s",
+  "connection_error_detail": "Errore di connessione: {error}",
+  "@connection_error_detail": {
+    "description": "Connection error with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "field_required": "Questo campo è obbligatorio",
   "invalid_email": "Email non valida",
   "password_too_short": "La password deve avere almeno 8 caratteri",
@@ -174,12 +217,20 @@
   "sleep": "Dormire",
   "sleep_desc": "Musica dolce per dormire",
   "welcome_forum": "Benvenuto nel Forum DSA! 💙",
-  "first_post_message": "Sii il primo a condividere un'esperienza\\no fare una domanda alla comunità",
+  "first_post_message": "Sii il primo a condividere un'esperienza\no fare una domanda alla comunità",
   "create_first_post": "Crea il primo post",
   "delete_post": "Elimina post",
   "delete_post_confirm": "Sei sicuro di voler eliminare questo post? Questa azione non può essere annullata.",
   "post_deleted_success": "Post eliminato con successo",
-  "error_deleting_post": "Errore nell'eliminazione del post: %s",
+  "error_deleting_post": "Errore nell'eliminazione del post: {error}",
+  "@error_deleting_post": {
+    "description": "Error deleting post",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "report_post": "Segnala",
   "report_post_title": "Segnala post",
   "report_post_confirm": "Sei sicuro di voler segnalare questo post?",
@@ -187,9 +238,9 @@
   "now": "Ora",
   "search_posts": "Cerca post, persone o argomenti...",
   "no_results_found": "Nessun risultato trovato",
-  "try_different_keywords": "Prova parole chiave diverse\\no esplora le categorie qui sotto",
+  "try_different_keywords": "Prova parole chiave diverse\no esplora le categorie qui sotto",
   "type_to_search": "Digita per cercare...",
-  "find_posts_profiles": "Trova post, profili e hashtag\\nnella comunità DSA",
+  "find_posts_profiles": "Trova post, profili e hashtag\nnella comunità DSA",
   "popular_categories": "Categorie popolari",
   "recent_searches": "Ricerche recenti",
   "searches_appear_here": "Le tue ricerche appariranno qui",
@@ -209,7 +260,15 @@
   "observation_type": "Tipo:",
   "title": "Titolo",
   "detailed_description": "Descrizione dettagliata",
-  "intensity": "Intensità: %d",
+  "intensity": "Intensità: {level}",
+  "@intensity": {
+    "description": "Intensity level",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "observer": "Osservatore:",
   "possible_triggers": "Possibili trigger:",
   "delete_observation": "Elimina osservazione",
@@ -217,8 +276,27 @@
   "observation_title_empty": "Il titolo dell'osservazione non può essere vuoto",
   "not_defined": "Non definito",
   "confirm_change": "Conferma modifica",
-  "change_name_to": "Cambiare nome in \"%s\"?",
-  "change_username_to": "Cambiare nome utente da @%s a @%s?",
+  "change_name_to": "Cambiare nome in \"{name}\"?",
+  "@change_name_to": {
+    "description": "Confirm name change",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "change_username_to": "Cambiare nome utente da @{oldName} a @{newName}?",
+  "@change_username_to": {
+    "description": "Confirm username change",
+    "placeholders": {
+      "oldName": {
+        "type": "String"
+      },
+      "newName": {
+        "type": "String"
+      }
+    }
+  },
   "error_updating_name": "Errore nell'aggiornamento del nome",
   "error_updating_username": "Errore nell'aggiornamento del nome utente",
   "error_updating_type": "Errore nell'aggiornamento del tipo",
@@ -239,5 +317,20 @@
   "create_account": "Crea account",
   "account_created": "Account creato! Controlla la tua email per attivarlo",
   "example123": "esempio123",
+  "new_routine": "Nuova Routine",
+  "edit_routine": "Modifica Routine",
+  "activity_title": "Titolo dell'attività",
+  "activity_description": "Descrizione dell'attività",
+  "time_format": "Ora (00:00 - 23:59)",
+  "category": "Categoria",
+  "icon": "Icona",
+  "color": "Colore",
+  "create_routine": "Crea Routine",
+  "save_changes": "Salva Modifiche",
+  "routine_title_empty": "Il titolo della routine non può essere vuoto",
+  "invalid_time_format": "Ora non valida. Usa il formato 24h (00:00 - 23:59)",
+  "delete_routine": "Elimina Routine",
+  "delete_routine_confirm": "Sei sicuro di voler eliminare questa routine?",
+  "new_child": "Nuovo Bambino",
   "@@locale": "it"
 }

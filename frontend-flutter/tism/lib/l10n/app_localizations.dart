@@ -507,13 +507,13 @@ abstract class AppLocalizations {
   /// No description provided for @tina_intro.
   ///
   /// In pt, this message translates to:
-  /// **'🤖 **Olá! Eu sou a Tina!**\\n\\nSou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.'**
+  /// **'🤖 **Olá! Eu sou a Tina!**\n\nSou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.'**
   String get tina_intro;
 
   /// No description provided for @tina_specialization.
   ///
   /// In pt, this message translates to:
-  /// **'🎯 **Minha especialização:**\\n• 🧠 Desenvolvimento e comportamento\\n• 🏫 Estratégias educacionais inclusivas\\n• 💬 Técnicas de comunicação e interação social\\n• 🌍 Adaptações ambientais e sensoriais\\n• 🛠️ Recursos práticos para o dia a dia'**
+  /// **'🎯 **Minha especialização:**\n• 🧠 Desenvolvimento e comportamento\n• 🏫 Estratégias educacionais inclusivas\n• 💬 Técnicas de comunicação e interação social\n• 🌍 Adaptações ambientais e sensoriais\n• 🛠️ Recursos práticos para o dia a dia'**
   String get tina_specialization;
 
   /// No description provided for @tina_scientific.
@@ -543,13 +543,13 @@ abstract class AppLocalizations {
   /// No description provided for @tina_welcome.
   ///
   /// In pt, this message translates to:
-  /// **'Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\\n\\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\\n\\n• Desenvolvimento e comportamento\\n• Estratégias educacionais inclusivas\\n• Técnicas de comunicação e interação social\\n• Adaptações ambientais e sensoriais\\n• Recursos e ferramentas práticas para o dia a dia\\n\\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\\n\\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\\n\\nComo posso ajudar você hoje?'**
+  /// **'Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?'**
   String get tina_welcome;
 
   /// No description provided for @diary_observations.
   ///
   /// In pt, this message translates to:
-  /// **'Diário de Observações'**
+  /// **'Observações do Diário'**
   String get diary_observations;
 
   /// No description provided for @no_observations.
@@ -624,7 +624,7 @@ abstract class AppLocalizations {
   /// **'Concluídas'**
   String get completed;
 
-  /// Progress counter
+  /// No description provided for @progress_count.
   ///
   /// In pt, this message translates to:
   /// **'Progresso: {completed}/{total}'**
@@ -705,7 +705,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_setup_desc.
   ///
   /// In pt, this message translates to:
-  /// **'Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\\n\\nIsso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.'**
+  /// **'Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\n\nIsso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.'**
   String get profile_setup_desc;
 
   /// No description provided for @create_profile.
@@ -759,7 +759,7 @@ abstract class AppLocalizations {
   /// No description provided for @verification_desc.
   ///
   /// In pt, this message translates to:
-  /// **'Enviamos um link de verificação para seu email. Clique no link para ativar sua conta.'**
+  /// **'Clique no link do email para ativar sua conta.\nVocê será redirecionado automaticamente.'**
   String get verification_desc;
 
   /// No description provided for @already_verified.
@@ -789,7 +789,7 @@ abstract class AppLocalizations {
   /// No description provided for @delete_warning.
   ///
   /// In pt, this message translates to:
-  /// **'Esta ação é IRREVERSÍVEL!\\n\\nTodos os seus dados serão perdidos permanentemente.'**
+  /// **'Esta ação é IRREVERSÍVEL!\n\nTodos os seus dados serão perdidos permanentemente.'**
   String get delete_warning;
 
   /// No description provided for @delete_confirmation.
@@ -1185,7 +1185,7 @@ abstract class AppLocalizations {
   /// No description provided for @first_post_message.
   ///
   /// In pt, this message translates to:
-  /// **'Seja o primeiro a compartilhar uma experiência\\nou fazer uma pergunta para a comunidade'**
+  /// **'Seja o primeiro a compartilhar uma experiência\nou fazer uma pergunta para a comunidade'**
   String get first_post_message;
 
   /// No description provided for @create_first_post.
@@ -1263,7 +1263,7 @@ abstract class AppLocalizations {
   /// No description provided for @try_different_keywords.
   ///
   /// In pt, this message translates to:
-  /// **'Tente usar palavras-chave diferentes\\nou explore as categorias abaixo'**
+  /// **'Tente usar palavras-chave diferentes\nou explore as categorias abaixo'**
   String get try_different_keywords;
 
   /// No description provided for @type_to_search.
@@ -1275,56 +1275,8 @@ abstract class AppLocalizations {
   /// No description provided for @find_posts_profiles.
   ///
   /// In pt, this message translates to:
-  /// **'Encontre posts, perfis e hashtags\\nna comunidade TEA'**
+  /// **'Encontre posts, perfis e hashtags\nna comunidade TEA'**
   String get find_posts_profiles;
-
-  /// No description provided for @popular_categories.
-  ///
-  /// In pt, this message translates to:
-  /// **'Categorias Populares'**
-  String get popular_categories;
-
-  /// No description provided for @recent_searches.
-  ///
-  /// In pt, this message translates to:
-  /// **'Buscas Recentes'**
-  String get recent_searches;
-
-  /// No description provided for @searches_appear_here.
-  ///
-  /// In pt, this message translates to:
-  /// **'Suas buscas aparecerão aqui'**
-  String get searches_appear_here;
-
-  /// No description provided for @general.
-  ///
-  /// In pt, this message translates to:
-  /// **'Geral'**
-  String get general;
-
-  /// No description provided for @tips.
-  ///
-  /// In pt, this message translates to:
-  /// **'Dicas'**
-  String get tips;
-
-  /// No description provided for @experiences.
-  ///
-  /// In pt, this message translates to:
-  /// **'Experiências'**
-  String get experiences;
-
-  /// No description provided for @questions.
-  ///
-  /// In pt, this message translates to:
-  /// **'Dúvidas'**
-  String get questions;
-
-  /// No description provided for @resources.
-  ///
-  /// In pt, this message translates to:
-  /// **'Recursos'**
-  String get resources;
 
   /// No description provided for @how_identify_autism.
   ///
@@ -1571,6 +1523,876 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'exemplo123'**
   String get example123;
+
+  /// No description provided for @new_routine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova Rotina'**
+  String get new_routine;
+
+  /// No description provided for @edit_routine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar Rotina'**
+  String get edit_routine;
+
+  /// No description provided for @activity_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Título da atividade'**
+  String get activity_title;
+
+  /// No description provided for @activity_description.
+  ///
+  /// In pt, this message translates to:
+  /// **'Descrição da atividade'**
+  String get activity_description;
+
+  /// No description provided for @time_format.
+  ///
+  /// In pt, this message translates to:
+  /// **'Horário (00:00 - 23:59)'**
+  String get time_format;
+
+  /// No description provided for @category.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categoria'**
+  String get category;
+
+  /// No description provided for @icon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ícone'**
+  String get icon;
+
+  /// No description provided for @color.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cor'**
+  String get color;
+
+  /// No description provided for @create_routine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar Rotina'**
+  String get create_routine;
+
+  /// No description provided for @save_changes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar Alterações'**
+  String get save_changes;
+
+  /// No description provided for @routine_title_empty.
+  ///
+  /// In pt, this message translates to:
+  /// **'O título da rotina não pode estar vazio'**
+  String get routine_title_empty;
+
+  /// No description provided for @invalid_time_format.
+  ///
+  /// In pt, this message translates to:
+  /// **'Horário inválido. Use formato 24h (00:00 - 23:59)'**
+  String get invalid_time_format;
+
+  /// No description provided for @delete_routine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deletar Rotina'**
+  String get delete_routine;
+
+  /// No description provided for @delete_routine_confirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tem certeza que deseja deletar esta rotina?'**
+  String get delete_routine_confirm;
+
+  /// No description provided for @hello_user_name.
+  ///
+  /// In pt, this message translates to:
+  /// **'Olá, {name}! 👋'**
+  String hello_user_name(Object name);
+
+  /// No description provided for @statistics.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estatísticas'**
+  String get statistics;
+
+  /// No description provided for @general_summary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resumo Geral'**
+  String get general_summary;
+
+  /// No description provided for @total.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @progress_plural.
+  ///
+  /// In pt, this message translates to:
+  /// **'Progressos'**
+  String get progress_plural;
+
+  /// No description provided for @crisis_plural.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crises'**
+  String get crisis_plural;
+
+  /// No description provided for @type_distribution.
+  ///
+  /// In pt, this message translates to:
+  /// **'Distribuição por Tipo'**
+  String get type_distribution;
+
+  /// No description provided for @most_frequent_triggers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gatilhos Mais Frequentes'**
+  String get most_frequent_triggers;
+
+  /// No description provided for @weekly_trend.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tendência Semanal'**
+  String get weekly_trend;
+
+  /// Observations count in last 7 days
+  ///
+  /// In pt, this message translates to:
+  /// **'Observações nos últimos 7 dias: {count}'**
+  String observations_last_7_days(int count);
+
+  /// No description provided for @child_name.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome da criança'**
+  String get child_name;
+
+  /// No description provided for @age.
+  ///
+  /// In pt, this message translates to:
+  /// **'Idade'**
+  String get age;
+
+  /// No description provided for @support_level_label.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nível de suporte'**
+  String get support_level_label;
+
+  /// No description provided for @sensory_preferences.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preferências sensoriais'**
+  String get sensory_preferences;
+
+  /// No description provided for @interests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Interesses'**
+  String get interests;
+
+  /// No description provided for @child_name_empty.
+  ///
+  /// In pt, this message translates to:
+  /// **'O nome da criança não pode estar vazio'**
+  String get child_name_empty;
+
+  /// Observations count in last 7 days
+  ///
+  /// In pt, this message translates to:
+  /// **'Observações nos últimos 7 dias: {count}'**
+  String observations_last_7_days_count(int count);
+
+  /// No description provided for @configure_profile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Configurar Perfil'**
+  String get configure_profile;
+
+  /// No description provided for @edit_username_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar Username'**
+  String get edit_username_title;
+
+  /// No description provided for @account_deleted_success.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta deletada com sucesso'**
+  String get account_deleted_success;
+
+  /// No description provided for @theme_light.
+  ///
+  /// In pt, this message translates to:
+  /// **'Claro'**
+  String get theme_light;
+
+  /// No description provided for @theme_dark.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escuro'**
+  String get theme_dark;
+
+  /// No description provided for @theme_system.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sistema'**
+  String get theme_system;
+
+  /// No description provided for @edit_observation_action.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar observação'**
+  String get edit_observation_action;
+
+  /// No description provided for @delete_observation_action.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deletar observação'**
+  String get delete_observation_action;
+
+  /// No description provided for @delete_observation_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deletar Observação'**
+  String get delete_observation_title;
+
+  /// No description provided for @delete_observation_message.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tem certeza que deseja deletar esta observação?'**
+  String get delete_observation_message;
+
+  /// No description provided for @trigger_routine_change.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mudança de rotina'**
+  String get trigger_routine_change;
+
+  /// No description provided for @trigger_loud_noise.
+  ///
+  /// In pt, this message translates to:
+  /// **'Barulho alto'**
+  String get trigger_loud_noise;
+
+  /// No description provided for @trigger_crowd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Multidão'**
+  String get trigger_crowd;
+
+  /// No description provided for @trigger_tiredness.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cansaço'**
+  String get trigger_tiredness;
+
+  /// No description provided for @trigger_hunger.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fome'**
+  String get trigger_hunger;
+
+  /// No description provided for @trigger_frustration.
+  ///
+  /// In pt, this message translates to:
+  /// **'Frustração'**
+  String get trigger_frustration;
+
+  /// No description provided for @trigger_transition.
+  ///
+  /// In pt, this message translates to:
+  /// **'Transição'**
+  String get trigger_transition;
+
+  /// No description provided for @trigger_new_environment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ambiente novo'**
+  String get trigger_new_environment;
+
+  /// No description provided for @trigger_bright_light.
+  ///
+  /// In pt, this message translates to:
+  /// **'Luz muito forte'**
+  String get trigger_bright_light;
+
+  /// No description provided for @trigger_unpleasant_texture.
+  ///
+  /// In pt, this message translates to:
+  /// **'Textura desagradável'**
+  String get trigger_unpleasant_texture;
+
+  /// No description provided for @trigger_strong_smell.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cheiro forte'**
+  String get trigger_strong_smell;
+
+  /// No description provided for @trigger_temperature.
+  ///
+  /// In pt, this message translates to:
+  /// **'Temperatura'**
+  String get trigger_temperature;
+
+  /// No description provided for @trigger_tight_clothes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Roupa apertada'**
+  String get trigger_tight_clothes;
+
+  /// No description provided for @trigger_insufficient_sleep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sono insuficiente'**
+  String get trigger_insufficient_sleep;
+
+  /// No description provided for @trigger_physical_pain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dor física'**
+  String get trigger_physical_pain;
+
+  /// No description provided for @trigger_medication.
+  ///
+  /// In pt, this message translates to:
+  /// **'Medicação'**
+  String get trigger_medication;
+
+  /// No description provided for @trigger_medical_visit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Visita médica'**
+  String get trigger_medical_visit;
+
+  /// No description provided for @trigger_new_school.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escola nova'**
+  String get trigger_new_school;
+
+  /// No description provided for @trigger_substitute_teacher.
+  ///
+  /// In pt, this message translates to:
+  /// **'Professor substituto'**
+  String get trigger_substitute_teacher;
+
+  /// No description provided for @trigger_test_evaluation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prova/avaliação'**
+  String get trigger_test_evaluation;
+
+  /// No description provided for @trigger_party_event.
+  ///
+  /// In pt, this message translates to:
+  /// **'Festa/evento'**
+  String get trigger_party_event;
+
+  /// No description provided for @trigger_travel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Viagem'**
+  String get trigger_travel;
+
+  /// No description provided for @trigger_rain_storm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chuva/temporal'**
+  String get trigger_rain_storm;
+
+  /// No description provided for @trigger_parents_separation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Separação dos pais'**
+  String get trigger_parents_separation;
+
+  /// No description provided for @trigger_broken_toy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Brinquedo quebrado'**
+  String get trigger_broken_toy;
+
+  /// No description provided for @trigger_not_getting_something.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não conseguir algo'**
+  String get trigger_not_getting_something;
+
+  /// No description provided for @trigger_activity_interruption.
+  ///
+  /// In pt, this message translates to:
+  /// **'Interrupção atividade'**
+  String get trigger_activity_interruption;
+
+  /// No description provided for @trigger_waiting_too_long.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esperar muito tempo'**
+  String get trigger_waiting_too_long;
+
+  /// No description provided for @observer_father.
+  ///
+  /// In pt, this message translates to:
+  /// **'pai'**
+  String get observer_father;
+
+  /// No description provided for @observer_mother.
+  ///
+  /// In pt, this message translates to:
+  /// **'mãe'**
+  String get observer_mother;
+
+  /// No description provided for @observer_grandfather.
+  ///
+  /// In pt, this message translates to:
+  /// **'avô'**
+  String get observer_grandfather;
+
+  /// No description provided for @observer_grandmother.
+  ///
+  /// In pt, this message translates to:
+  /// **'avó'**
+  String get observer_grandmother;
+
+  /// No description provided for @observer_uncle.
+  ///
+  /// In pt, this message translates to:
+  /// **'tio'**
+  String get observer_uncle;
+
+  /// No description provided for @observer_aunt.
+  ///
+  /// In pt, this message translates to:
+  /// **'tia'**
+  String get observer_aunt;
+
+  /// No description provided for @observer_brother.
+  ///
+  /// In pt, this message translates to:
+  /// **'irmão'**
+  String get observer_brother;
+
+  /// No description provided for @observer_sister.
+  ///
+  /// In pt, this message translates to:
+  /// **'irmã'**
+  String get observer_sister;
+
+  /// No description provided for @observer_son.
+  ///
+  /// In pt, this message translates to:
+  /// **'filho'**
+  String get observer_son;
+
+  /// No description provided for @observer_daughter.
+  ///
+  /// In pt, this message translates to:
+  /// **'filha'**
+  String get observer_daughter;
+
+  /// No description provided for @observer_grandson.
+  ///
+  /// In pt, this message translates to:
+  /// **'neto'**
+  String get observer_grandson;
+
+  /// No description provided for @observer_granddaughter.
+  ///
+  /// In pt, this message translates to:
+  /// **'neta'**
+  String get observer_granddaughter;
+
+  /// No description provided for @observer_nephew.
+  ///
+  /// In pt, this message translates to:
+  /// **'sobrinho'**
+  String get observer_nephew;
+
+  /// No description provided for @observer_niece.
+  ///
+  /// In pt, this message translates to:
+  /// **'sobrinha'**
+  String get observer_niece;
+
+  /// No description provided for @observer_male_cousin.
+  ///
+  /// In pt, this message translates to:
+  /// **'primo'**
+  String get observer_male_cousin;
+
+  /// No description provided for @observer_female_cousin.
+  ///
+  /// In pt, this message translates to:
+  /// **'prima'**
+  String get observer_female_cousin;
+
+  /// No description provided for @observer_male_friend.
+  ///
+  /// In pt, this message translates to:
+  /// **'amigo'**
+  String get observer_male_friend;
+
+  /// No description provided for @observer_female_friend.
+  ///
+  /// In pt, this message translates to:
+  /// **'amiga'**
+  String get observer_female_friend;
+
+  /// No description provided for @observer_relative.
+  ///
+  /// In pt, this message translates to:
+  /// **'parente'**
+  String get observer_relative;
+
+  /// No description provided for @observer_caregiver.
+  ///
+  /// In pt, this message translates to:
+  /// **'cuidador'**
+  String get observer_caregiver;
+
+  /// No description provided for @observer_teacher.
+  ///
+  /// In pt, this message translates to:
+  /// **'professor'**
+  String get observer_teacher;
+
+  /// No description provided for @observer_therapist.
+  ///
+  /// In pt, this message translates to:
+  /// **'terapeuta'**
+  String get observer_therapist;
+
+  /// No description provided for @observer_doctor.
+  ///
+  /// In pt, this message translates to:
+  /// **'médico'**
+  String get observer_doctor;
+
+  /// No description provided for @observer_psychologist.
+  ///
+  /// In pt, this message translates to:
+  /// **'psicólogo'**
+  String get observer_psychologist;
+
+  /// No description provided for @support_level_mild.
+  ///
+  /// In pt, this message translates to:
+  /// **'leve'**
+  String get support_level_mild;
+
+  /// No description provided for @support_level_moderate.
+  ///
+  /// In pt, this message translates to:
+  /// **'moderado'**
+  String get support_level_moderate;
+
+  /// No description provided for @support_level_severe.
+  ///
+  /// In pt, this message translates to:
+  /// **'severo'**
+  String get support_level_severe;
+
+  /// No description provided for @sensory_visual.
+  ///
+  /// In pt, this message translates to:
+  /// **'Visual'**
+  String get sensory_visual;
+
+  /// No description provided for @sensory_auditory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Auditivo'**
+  String get sensory_auditory;
+
+  /// No description provided for @sensory_tactile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tátil'**
+  String get sensory_tactile;
+
+  /// No description provided for @sensory_movement.
+  ///
+  /// In pt, this message translates to:
+  /// **'Movimento'**
+  String get sensory_movement;
+
+  /// No description provided for @sensory_olfactory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Olfativo'**
+  String get sensory_olfactory;
+
+  /// No description provided for @sensory_gustatory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gustativo'**
+  String get sensory_gustatory;
+
+  /// No description provided for @sensory_proprioceptive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Proprioceptivo'**
+  String get sensory_proprioceptive;
+
+  /// No description provided for @sensory_vestibular.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vestibular'**
+  String get sensory_vestibular;
+
+  /// No description provided for @sensory_deep_pressure.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pressão Profunda'**
+  String get sensory_deep_pressure;
+
+  /// No description provided for @sensory_soft_textures.
+  ///
+  /// In pt, this message translates to:
+  /// **'Texturas Suaves'**
+  String get sensory_soft_textures;
+
+  /// No description provided for @sensory_rough_textures.
+  ///
+  /// In pt, this message translates to:
+  /// **'Texturas Ásperas'**
+  String get sensory_rough_textures;
+
+  /// No description provided for @sensory_low_sounds.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sons Baixos'**
+  String get sensory_low_sounds;
+
+  /// No description provided for @sensory_high_sounds.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sons Altos'**
+  String get sensory_high_sounds;
+
+  /// No description provided for @sensory_soft_lights.
+  ///
+  /// In pt, this message translates to:
+  /// **'Luzes Suaves'**
+  String get sensory_soft_lights;
+
+  /// No description provided for @sensory_bright_lights.
+  ///
+  /// In pt, this message translates to:
+  /// **'Luzes Brilhantes'**
+  String get sensory_bright_lights;
+
+  /// No description provided for @sensory_hot_temperatures.
+  ///
+  /// In pt, this message translates to:
+  /// **'Temperaturas Quentes'**
+  String get sensory_hot_temperatures;
+
+  /// No description provided for @sensory_cold_temperatures.
+  ///
+  /// In pt, this message translates to:
+  /// **'Temperaturas Frias'**
+  String get sensory_cold_temperatures;
+
+  /// No description provided for @interest_music.
+  ///
+  /// In pt, this message translates to:
+  /// **'Música'**
+  String get interest_music;
+
+  /// No description provided for @interest_drawing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desenho'**
+  String get interest_drawing;
+
+  /// No description provided for @interest_numbers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Números'**
+  String get interest_numbers;
+
+  /// No description provided for @interest_animals.
+  ///
+  /// In pt, this message translates to:
+  /// **'Animais'**
+  String get interest_animals;
+
+  /// No description provided for @interest_cars.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carros'**
+  String get interest_cars;
+
+  /// No description provided for @interest_books.
+  ///
+  /// In pt, this message translates to:
+  /// **'Livros'**
+  String get interest_books;
+
+  /// No description provided for @interest_games.
+  ///
+  /// In pt, this message translates to:
+  /// **'Jogos'**
+  String get interest_games;
+
+  /// No description provided for @interest_computer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Computador'**
+  String get interest_computer;
+
+  /// No description provided for @interest_tablet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tablet'**
+  String get interest_tablet;
+
+  /// No description provided for @interest_toys.
+  ///
+  /// In pt, this message translates to:
+  /// **'Brinquedos'**
+  String get interest_toys;
+
+  /// No description provided for @interest_sports.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esportes'**
+  String get interest_sports;
+
+  /// No description provided for @interest_dance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dança'**
+  String get interest_dance;
+
+  /// No description provided for @interest_cooking.
+  ///
+  /// In pt, this message translates to:
+  /// **'Culinária'**
+  String get interest_cooking;
+
+  /// No description provided for @interest_gardening.
+  ///
+  /// In pt, this message translates to:
+  /// **'Jardinagem'**
+  String get interest_gardening;
+
+  /// No description provided for @interest_science.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ciência'**
+  String get interest_science;
+
+  /// No description provided for @interest_math.
+  ///
+  /// In pt, this message translates to:
+  /// **'Matemática'**
+  String get interest_math;
+
+  /// No description provided for @interest_art.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arte'**
+  String get interest_art;
+
+  /// No description provided for @interest_photography.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fotografia'**
+  String get interest_photography;
+
+  /// No description provided for @interest_videos.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vídeos'**
+  String get interest_videos;
+
+  /// No description provided for @interest_movies.
+  ///
+  /// In pt, this message translates to:
+  /// **'Filmes'**
+  String get interest_movies;
+
+  /// No description provided for @interest_series.
+  ///
+  /// In pt, this message translates to:
+  /// **'Séries'**
+  String get interest_series;
+
+  /// No description provided for @interest_puzzles.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quebra-cabeças'**
+  String get interest_puzzles;
+
+  /// No description provided for @interest_lego.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lego'**
+  String get interest_lego;
+
+  /// No description provided for @interest_dolls.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bonecas'**
+  String get interest_dolls;
+
+  /// No description provided for @interest_superheroes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Super-heróis'**
+  String get interest_superheroes;
+
+  /// No description provided for @delete_post_action.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deletar'**
+  String get delete_post_action;
+
+  /// No description provided for @report_post_action.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar'**
+  String get report_post_action;
+
+  /// No description provided for @clear_search.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limpar busca'**
+  String get clear_search;
+
+  /// No description provided for @month.
+  ///
+  /// In pt, this message translates to:
+  /// **'mês'**
+  String get month;
+
+  /// No description provided for @months.
+  ///
+  /// In pt, this message translates to:
+  /// **'meses'**
+  String get months;
+
+  /// No description provided for @year.
+  ///
+  /// In pt, this message translates to:
+  /// **'ano'**
+  String get year;
+
+  /// No description provided for @years.
+  ///
+  /// In pt, this message translates to:
+  /// **'anos'**
+  String get years;
 }
 
 class _AppLocalizationsDelegate

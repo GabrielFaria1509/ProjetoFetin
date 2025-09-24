@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/language_service.dart';
 import 'routine_models.dart';
@@ -68,14 +67,7 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Consumer<LanguageService>(
-          builder: (context, languageService, child) {
-            final isEnglish = languageService.currentLocale.languageCode == 'en';
-            return Text(widget.activityToEdit != null 
-                ? (isEnglish ? 'Edit Routine' : 'Editar Rotina')
-                : (isEnglish ? 'New Routine' : 'Nova Rotina'));
-          },
-        ),
+        title: Text(widget.activityToEdit != null ? 'edit_routine'.tr : 'new_routine'.tr),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: widget.activityToEdit != null ? [
@@ -119,16 +111,9 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
                     backgroundColor: tismAqua,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: Consumer<LanguageService>(
-                    builder: (context, languageService, child) {
-                      final isEnglish = languageService.currentLocale.languageCode == 'en';
-                      return Text(
-                        widget.activityToEdit != null 
-                            ? (isEnglish ? 'Save Changes' : 'Salvar Alterações')
-                            : (isEnglish ? 'Create Routine' : 'Criar Rotina'),
-                        style: const TextStyle(color: Colors.white),
-                      );
-                    },
+                  child: Text(
+                    widget.activityToEdit != null ? 'save_changes'.tr : 'create_routine'.tr,
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -143,7 +128,7 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return TextField(
       controller: _titleController,
       decoration: InputDecoration(
-        labelText: context.watch<LanguageService>().currentLocale.languageCode == 'en' ? 'Activity title' : 'Título da atividade',
+        labelText: 'activity_title'.tr,
         border: const OutlineInputBorder(),
       ),
     );
@@ -154,7 +139,7 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
       controller: _timeController,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        labelText: context.watch<LanguageService>().currentLocale.languageCode == 'en' ? 'Time (00:00 - 23:59)' : 'Horário (00:00 - 23:59)',
+        labelText: 'time_format'.tr,
         border: const OutlineInputBorder(),
         hintText: '08:00',
       ),
@@ -175,7 +160,7 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
       controller: _descriptionController,
       maxLines: 3,
       decoration: InputDecoration(
-        labelText: context.watch<LanguageService>().currentLocale.languageCode == 'en' ? 'Activity description' : 'Descrição da atividade',
+        labelText: 'activity_description'.tr,
         border: const OutlineInputBorder(),
       ),
     );
@@ -185,30 +170,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Consumer<LanguageService>(
-          builder: (context, languageService, child) {
-            final isEnglish = languageService.currentLocale.languageCode == 'en';
-            return Text(isEnglish ? 'Category:' : 'Categoria:', style: const TextStyle(fontWeight: FontWeight.bold));
-          },
-        ),
+        Text('${'category'.tr}:', style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           children: _categories.map((category) => ChoiceChip(
-            label: Consumer<LanguageService>(
-              builder: (context, languageService, child) {
-                final isEnglish = languageService.currentLocale.languageCode == 'en';
-                final categoryNames = {
-                  'manhã': isEnglish ? 'MORNING' : 'MANHÃ',
-                  'educação': isEnglish ? 'EDUCATION' : 'EDUCAÇÃO',
-                  'alimentação': isEnglish ? 'FEEDING' : 'ALIMENTAÇÃO',
-                  'lazer': isEnglish ? 'LEISURE' : 'LAZER',
-                  'bem-estar': isEnglish ? 'WELLNESS' : 'BEM-ESTAR',
-                  'noite': isEnglish ? 'NIGHT' : 'NOITE',
-                };
-                return Text(categoryNames[category] ?? category.toUpperCase());
-              },
-            ),
+            label: Text(_getCategoryName(category)),
             selected: _selectedCategory == category,
             onSelected: (selected) {
               if (selected) {
@@ -227,12 +194,7 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
       children: [
         Row(
           children: [
-            Consumer<LanguageService>(
-              builder: (context, languageService, child) {
-                final isEnglish = languageService.currentLocale.languageCode == 'en';
-                return Text(isEnglish ? 'Icon:' : 'Ícone:', style: const TextStyle(fontWeight: FontWeight.bold));
-              },
-            ),
+            Text('${'icon'.tr}:', style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(width: 8),
             Container(
               padding: const EdgeInsets.all(8),
@@ -294,12 +256,7 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Consumer<LanguageService>(
-          builder: (context, languageService, child) {
-            final isEnglish = languageService.currentLocale.languageCode == 'en';
-            return Text(isEnglish ? 'Color:' : 'Cor:', style: const TextStyle(fontWeight: FontWeight.bold));
-          },
-        ),
+        Text('${'color'.tr}:', style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -327,30 +284,22 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
   }
 
   void _saveActivity() {
-    // Validar se título não é apenas whitespace ou caracteres invisíveis
     final title = _titleController.text.trim();
     if (title.isEmpty || title.replaceAll(RegExp(r'\s+'), '').isEmpty) {
-      final languageService = context.read<LanguageService>();
-      final isEnglish = languageService.currentLocale.languageCode == 'en';
-      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(isEnglish ? 'Routine title cannot be empty' : 'O título da rotina não pode estar vazio'),
+          content: Text('routine_title_empty'.tr),
           backgroundColor: Colors.red,
         ),
       );
       return;
     }
 
-    // Validar horário
     final time = _timeController.text.trim();
     if (!_isValidTime(time)) {
-      final languageService = context.read<LanguageService>();
-      final isEnglish = languageService.currentLocale.languageCode == 'en';
-      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(isEnglish ? 'Invalid time. Use 24h format (00:00 - 23:59)' : 'Horário inválido. Use formato 24h (00:00 - 23:59)'),
+          content: Text('invalid_time_format'.tr),
           backgroundColor: Colors.red,
         ),
       );
@@ -383,27 +332,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Consumer<LanguageService>(
-          builder: (context, languageService, child) {
-            final isEnglish = languageService.currentLocale.languageCode == 'en';
-            return Text(isEnglish ? 'Delete Routine' : 'Deletar Rotina');
-          },
-        ),
-        content: Consumer<LanguageService>(
-          builder: (context, languageService, child) {
-            final isEnglish = languageService.currentLocale.languageCode == 'en';
-            return Text(isEnglish ? 'Are you sure you want to delete this routine?' : 'Tem certeza que deseja deletar esta rotina?');
-          },
-        ),
+        title: Text('delete_routine'.tr),
+        content: Text('delete_routine_confirm'.tr),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Consumer<LanguageService>(
-              builder: (context, languageService, child) {
-                final isEnglish = languageService.currentLocale.languageCode == 'en';
-                return Text(isEnglish ? 'Cancel' : 'Cancelar');
-              },
-            ),
+            child: Text('cancel'.tr),
           ),
           TextButton(
             onPressed: () {
@@ -411,15 +345,22 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
               Navigator.pop(context); // Close edit screen
               widget.onActivityDeleted?.call();
             },
-            child: Consumer<LanguageService>(
-              builder: (context, languageService, child) {
-                final isEnglish = languageService.currentLocale.languageCode == 'en';
-                return Text(isEnglish ? 'Delete' : 'Deletar', style: const TextStyle(color: Colors.red));
-              },
-            ),
+            child: Text('delete'.tr, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
     );
+  }
+  
+  String _getCategoryName(String category) {
+    switch (category) {
+      case 'manhã': return 'morning'.tr.toUpperCase();
+      case 'educação': return 'education'.tr.toUpperCase();
+      case 'alimentação': return 'food'.tr.toUpperCase();
+      case 'lazer': return 'leisure'.tr.toUpperCase();
+      case 'bem-estar': return 'wellness'.tr.toUpperCase();
+      case 'noite': return 'night'.tr.toUpperCase();
+      default: return category.toUpperCase();
+    }
   }
 }

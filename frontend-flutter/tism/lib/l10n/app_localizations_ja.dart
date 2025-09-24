@@ -12,10 +12,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get app_name => 'TISM';
 
   @override
-  String get app_subtitle => 'ASDについて知る必要があることをワンクリックで';
+  String get app_subtitle => '自閉症について知る必要があることすべてをワンクリックで';
 
   @override
-  String get app_title => 'TISM - ASDガイド';
+  String get app_title => 'TISM - 自閉症ガイド';
 
   @override
   String get login => 'ログイン';
@@ -51,16 +51,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get logout => 'ログアウト';
 
   @override
-  String get logout_confirm => 'ログアウトしますか？';
+  String get logout_confirm => '本当にログアウトしますか？';
 
   @override
   String get participant => '参加者';
 
   @override
-  String get participant_desc => '一般的なTISMユーザー';
+  String get participant_desc => 'TISM一般ユーザー';
 
   @override
-  String get responsible => '保護者';
+  String get responsible => '責任者';
 
   @override
   String get responsible_desc => '家族または介護者';
@@ -132,21 +132,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get search => '検索';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'こんにちは';
 
   @override
   String hello_user(String name) {
-    return 'こんにちは、%sさん！ 👋';
+    return 'こんにちは、$nameさん！👋';
   }
 
   @override
-  String get explore_content => 'ASDに関する教育コンテンツを探索';
+  String get explore_content => '自閉症に関する教育コンテンツを探索';
 
   @override
   String get educational_feed => '教育フィード';
 
   @override
-  String get personalized_routine => 'Rotina Personalizada';
+  String get personalized_routine => 'パーソナライズされたルーティン';
 
   @override
   String get custom_routine => 'カスタムルーティン';
@@ -158,7 +158,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tina_chatbot => 'ティナ（チャットボット）';
 
   @override
-  String get tea_forum => 'ASDフォーラム';
+  String get tea_forum => '自閉症フォーラム';
 
   @override
   String get articles => '記事';
@@ -170,28 +170,28 @@ class AppLocalizationsJa extends AppLocalizations {
   String get new_post => '新しい投稿';
 
   @override
-  String get publish => '投稿';
+  String get publish => '公開';
 
   @override
-  String get share_experience => 'ASDについての経験、質問、アドバイスを共有...';
+  String get share_experience => '自閉症に関する経験、質問、アドバイスを共有してください...';
 
   @override
-  String get write_something => '投稿前に何か書いてください';
+  String get write_something => '公開前に何か書いてください';
 
   @override
-  String get confirm_publication => '投稿確認';
+  String get confirm_publication => '公開確認';
 
   @override
-  String get want_to_publish => 'この投稿をフォーラムに投稿しますか？';
+  String get want_to_publish => 'この投稿をフォーラムに公開しますか？';
 
   @override
-  String get post_published => '投稿が成功しました！';
+  String get post_published => '投稿が正常に公開されました！';
 
   @override
-  String get error_publishing => '投稿エラー';
+  String get error_publishing => '投稿の公開エラー';
 
   @override
-  String get tina_assistant => 'ティナ - ASDアシスタント';
+  String get tina_assistant => 'ティナ - 自閉症アシスタント';
 
   @override
   String get thinking => '考え中...';
@@ -212,24 +212,24 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tina_scientific =>
-      '🔬 **科学的基盤：** 私は神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者によって検証された知識で訓練されました。';
+      '🔬 **科学的基盤：** 神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者によって検証された知識で訓練されました。';
 
   @override
   String get tina_important =>
-      '⚠️ **重要：** 私は診断を行わず、医療専門家の代替ではありません。私の役割は補完的で、情報提供と実用的サポートを提供します。';
+      '⚠️ **重要：** 診断は行わず、医療専門家の代替ではありません。私の役割は補完的で、情報提供と実用的サポートを提供します。';
 
   @override
   String get tina_support => '💙 **信頼できる情報と共感でサポートします！**';
 
   @override
-  String get understood_tina => 'わかりました、ティナ！話しましょう！ 😊';
+  String get understood_tina => 'わかりました、ティナ！話しましょう！😊';
 
   @override
   String get tina_welcome =>
-      'こんにちは！私はTISMの自閉症と神経多様性に特化したバーチャルアシスタント、ティナです！\\n\\n以下について科学的証拠に基づいた個別サポートと情報を提供します：\\n\\n• 発達と行動\\n• 包括的教育戦略\\n• コミュニケーションと社会的相互作用技術\\n• 環境と感覚の適応\\n• 日常生活の実用的リソースとツール\\n\\n私の知識ベースは、神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者を含む学際的専門家チームによって開発されました。\\n\\n私は診断を行わず、医療専門家の代替ではないことが重要です - 私の役割は補完的で、家族、介護者、神経多様な人々に信頼できる情報と実用的サポートを提供します。\\n\\n今日はどのようにお手伝いできますか？';
+      'こんにちは！私はティナ、TISMの自閉症と神経多様性専門のバーチャルアシスタントです！\\n\\n以下について個別サポートと科学的証拠に基づく情報を提供します：\\n\\n• 発達と行動\\n• 包括的教育戦略\\n• コミュニケーションと社会的相互作用技術\\n• 環境と感覚の適応\\n• 日常生活の実用的リソースとツール\\n\\n私の知識ベースは、神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者を含む学際的専門家チームによって開発されました。\\n\\n診断は行わず、医療専門家の代替ではないことを強調することが重要です - 私の役割は補完的で、家族、介護者、神経多様性のある人々に信頼できる情報と実用的サポートを提供します。\\n\\n今日はどのようにお手伝いできますか？';
 
   @override
-  String get diary_observations => '観察日記';
+  String get diary_observations => '日記の観察';
 
   @override
   String get no_observations => 'まだ観察がありません';
@@ -238,7 +238,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tap_plus_start => '+をタップして開始';
 
   @override
-  String get report_copied => 'レポートをコピーしました！メールやWhatsAppに貼り付け';
+  String get report_copied => 'レポートがコピーされました！メールやWhatsAppに貼り付けてください';
 
   @override
   String get progress => '進歩';
@@ -257,30 +257,30 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String routine_of(String name) {
-    return '%sのルーティン';
+    return '$nameのルーティン';
   }
 
   @override
   String support_level(String level) {
-    return '%sサポート';
+    return 'サポート$level';
   }
 
   @override
   String get filter_category => 'カテゴリでフィルター：';
 
   @override
-  String get completed => '完了';
+  String get completed => '完了済み';
 
   @override
   String progress_count(int completed, int total) {
-    return '進捗：%d/%d';
+    return '進捗：$completed/$total';
   }
 
   @override
   String get no_activities => 'アクティビティが見つかりません';
 
   @override
-  String get clear_filters => 'フィルタークリア';
+  String get clear_filters => 'フィルターをクリア';
 
   @override
   String get add_activity => 'アクティビティ追加';
@@ -314,7 +314,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get profile_setup_desc =>
-      '個別ルーティンを作成するため、まず子どものプロフィールを設定しましょう。\\n\\nこれにより年齢に適したアクティビティとサポートレベルを提案できます。';
+      'パーソナライズされたルーティンを作成するために、まず子どものプロフィールを設定しましょう。\\n\\nこれにより、年齢とサポートレベルに適したアクティビティを提案できます。';
 
   @override
   String get create_profile => 'プロフィール作成';
@@ -323,31 +323,32 @@ class AppLocalizationsJa extends AppLocalizations {
   String get edit_profile_menu => 'プロフィール編集';
 
   @override
-  String get switch_child => '子ども切り替え';
+  String get switch_child => '子どもを切り替え';
 
   @override
   String get new_child => '新しい子ども';
 
   @override
-  String get select_child => '子ども選択';
+  String get select_child => '子どもを選択';
 
   @override
   String get verify_email => 'メール確認';
 
   @override
-  String get verification_sent => '確認メール送信済み！';
+  String get verification_sent => '確認メールを送信しました！';
 
   @override
-  String get check_email => '受信箱を確認';
+  String get check_email => '受信トレイを確認してください';
 
   @override
-  String get verification_desc => '確認リンクをメールに送信しました。リンクをクリックしてアカウントを有効化してください。';
+  String get verification_desc =>
+      'メール内のリンクをクリックしてアカウントを有効化してください。\\n自動的にリダイレクトされます。';
 
   @override
-  String get already_verified => '確認済み - ログイン';
+  String get already_verified => 'すでに確認済み - ログイン';
 
   @override
-  String get resend_verification => '確認メール再送信';
+  String get resend_verification => '確認メールを再送信';
 
   @override
   String get verifying => '確認中...';
@@ -362,7 +363,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get delete_confirmation => '確認のため、正確に入力してください：';
 
   @override
-  String get delete_phrase => '削除 私のアカウント';
+  String get delete_phrase => 'アカウントを削除';
 
   @override
   String get delete_input_hint => '上記のフレーズを入力';
@@ -431,29 +432,29 @@ class AppLocalizationsJa extends AppLocalizations {
   String get try_again => '再試行';
 
   @override
-  String get updated_successfully => '更新成功！';
+  String get updated_successfully => '正常に更新されました！';
 
   @override
-  String get deleted_successfully => '削除成功';
+  String get deleted_successfully => '正常に削除されました';
 
   @override
-  String get saved_successfully => '保存成功！';
+  String get saved_successfully => '正常に保存されました！';
 
   @override
   String get welcome_message => 'こんにちは、ようこそ！';
 
   @override
-  String get no_account => 'アカウントがありませんか？登録';
+  String get no_account => 'アカウントをお持ちでない方は登録してください';
 
   @override
-  String get fill_all_fields => 'すべてのフィールドを入力';
+  String get fill_all_fields => 'すべてのフィールドを入力してください';
 
   @override
   String get login_error => 'ログインエラー';
 
   @override
   String connection_error_detail(String error) {
-    return '接続エラー：%s';
+    return '接続エラー：$error';
   }
 
   @override
@@ -469,34 +470,34 @@ class AppLocalizationsJa extends AppLocalizations {
   String get passwords_dont_match => 'パスワードが一致しません';
 
   @override
-  String get username_invalid => 'ユーザー名は小文字、数字、_のみ使用可能';
+  String get username_invalid => 'ユーザー名は小文字、数字、_のみ含む必要があります';
 
   @override
-  String get name_cooldown => '名前は1日に1回のみ変更可能';
+  String get name_cooldown => '名前は1日に1回のみ変更可能です';
 
   @override
-  String get username_cooldown => 'ユーザー名は3日に1回のみ変更可能';
+  String get username_cooldown => 'ユーザー名は3日に1回のみ変更可能です';
 
   @override
-  String get user_type_cooldown => 'ユーザータイプは1日に1回のみ変更可能';
+  String get user_type_cooldown => 'ユーザータイプは1日に1回のみ変更可能です';
 
   @override
   String get wake_up => '起床';
 
   @override
-  String get wake_up_desc => '優しい音楽で起床';
+  String get wake_up_desc => '優しい音楽で目覚める';
 
   @override
   String get brush_teeth => '歯磨き';
 
   @override
-  String get brush_teeth_desc => '柔らかいブラシで2分間';
+  String get brush_teeth_desc => '柔らかい歯ブラシで2分間';
 
   @override
   String get breakfast => '朝食';
 
   @override
-  String get breakfast_desc => 'テーブルに座って食事';
+  String get breakfast_desc => 'テーブルに座って食べる';
 
   @override
   String get educational_activity => '教育活動';
@@ -508,52 +509,52 @@ class AppLocalizationsJa extends AppLocalizations {
   String get snack => 'おやつ';
 
   @override
-  String get snack_desc => '果物または健康的なおやつ';
+  String get snack_desc => '果物または健康的なスナック';
 
   @override
   String get music => '音楽';
 
   @override
-  String get music_desc => '音楽を聞くまたは演奏';
+  String get music_desc => '音楽を聞くまたは演奏する';
 
   @override
-  String get draw => 'お絵描き';
+  String get draw => '描画';
 
   @override
-  String get draw_desc => '自由なお絵描き活動';
+  String get draw_desc => '自由な描画活動';
 
   @override
   String get numbers => '数字';
 
   @override
-  String get numbers_desc => '数字ゲーム';
+  String get numbers_desc => '数字を使ったゲーム';
 
   @override
   String get sensory_break => '感覚休憩';
 
   @override
-  String get sensory_break_desc => '落ち着きと自己調整の時間';
+  String get sensory_break_desc => '静寂と自己調整の時間';
 
   @override
   String get dinner => '夕食';
 
   @override
-  String get dinner_desc => '家族での食事';
+  String get dinner_desc => '家族との食事';
 
   @override
-  String get bath => 'お風呂';
+  String get bath => '入浴';
 
   @override
   String get bath_desc => '温かいお湯、柔らかいスポンジ';
 
   @override
-  String get sleep => '就寝';
+  String get sleep => '睡眠';
 
   @override
-  String get sleep_desc => '眠るための優しい音楽';
+  String get sleep_desc => '眠りのための優しい音楽';
 
   @override
-  String get welcome_forum => 'ASDフォーラムへようこそ！ 💙';
+  String get welcome_forum => '自閉症フォーラムへようこそ！💙';
 
   @override
   String get first_post_message => '最初に経験を共有するか\\nコミュニティに質問してください';
@@ -565,14 +566,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get delete_post => '投稿削除';
 
   @override
-  String get delete_post_confirm => 'この投稿を削除しますか？この操作は元に戻せません。';
+  String get delete_post_confirm => 'この投稿を削除してもよろしいですか？この操作は元に戻せません。';
 
   @override
-  String get post_deleted_success => '投稿削除成功';
+  String get post_deleted_success => '投稿が正常に削除されました';
 
   @override
   String error_deleting_post(String error) {
-    return '投稿削除エラー：%s';
+    return '投稿削除エラー：$error';
   }
 
   @override
@@ -582,10 +583,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get report_post_title => '投稿を報告';
 
   @override
-  String get report_post_confirm => 'この投稿を報告しますか？';
+  String get report_post_confirm => 'この投稿を報告してもよろしいですか？';
 
   @override
-  String get post_reported => '投稿報告成功';
+  String get post_reported => '投稿が正常に報告されました';
 
   @override
   String get now => '今';
@@ -597,40 +598,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get no_results_found => '結果が見つかりません';
 
   @override
-  String get try_different_keywords => '異なるキーワードを試すか\\n下のカテゴリを探索してください';
+  String get try_different_keywords => '異なるキーワードを試すか\\n以下のカテゴリを探索してください';
 
   @override
   String get type_to_search => '検索するために入力...';
 
   @override
-  String get find_posts_profiles => 'ASDコミュニティで投稿、プロフィール、\\nハッシュタグを見つける';
+  String get find_posts_profiles => '自閉症コミュニティで投稿、プロフィール、\\nハッシュタグを見つける';
 
   @override
-  String get popular_categories => '人気カテゴリ';
-
-  @override
-  String get recent_searches => '最近の検索';
-
-  @override
-  String get searches_appear_here => '検索履歴がここに表示されます';
-
-  @override
-  String get general => '一般';
-
-  @override
-  String get tips => 'ヒント';
-
-  @override
-  String get experiences => '経験';
-
-  @override
-  String get questions => '質問';
-
-  @override
-  String get resources => 'リソース';
-
-  @override
-  String get how_identify_autism => '自閉症の見分け方は？';
+  String get how_identify_autism => '自閉症をどう識別するか？';
 
   @override
   String get child_not_speaking => '子どもが話さない、自閉症？';
@@ -639,13 +616,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get what_therapies_work => 'どの療法が効果的？';
 
   @override
-  String get help_at_school => '学校でのサポート方法は？';
+  String get help_at_school => '学校でどう助けるか？';
 
   @override
   String get autism_rights => '自閉症者の権利';
 
   @override
-  String get child_tantrums => '子どものかんしゃく';
+  String get child_tantrums => 'かんしゃくを起こす子ども';
 
   @override
   String get new_observation => '新しい観察';
@@ -660,11 +637,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get title => 'タイトル';
 
   @override
-  String get detailed_description => '詳細説明';
+  String get detailed_description => '詳細な説明';
 
   @override
   String intensity(int level) {
-    return '強度：%d';
+    return '強度：$level';
   }
 
   @override
@@ -674,13 +651,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get possible_triggers => '可能なトリガー：';
 
   @override
-  String get delete_observation => '観察削除';
+  String get delete_observation => '観察を削除';
 
   @override
-  String get delete_observation_confirm => 'この観察を削除しますか？';
+  String get delete_observation_confirm => 'この観察を削除してもよろしいですか？';
 
   @override
-  String get observation_title_empty => '観察タイトルは空にできません';
+  String get observation_title_empty => '観察のタイトルは空にできません';
 
   @override
   String get not_defined => '未定義';
@@ -690,12 +667,12 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String change_name_to(String name) {
-    return '名前を\"%s\"に変更しますか？';
+    return '名前を\"$name\"に変更しますか？';
   }
 
   @override
   String change_username_to(String oldName, String newName) {
-    return 'ユーザー名を@%sから@%sに変更しますか？';
+    return 'ユーザー名を@$oldNameから@$newNameに変更しますか？';
   }
 
   @override
@@ -720,16 +697,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get error_deleting_account => 'アカウント削除エラー';
 
   @override
-  String get type_updated => 'タイプ更新！';
+  String get type_updated => 'タイプが更新されました！';
 
   @override
-  String get name_updated => '名前更新！';
+  String get name_updated => '名前が更新されました！';
 
   @override
-  String get username_updated => 'ユーザー名更新！';
+  String get username_updated => 'ユーザー名が更新されました！';
 
   @override
-  String get account_deleted => 'アカウント削除成功';
+  String get account_deleted => 'アカウントが正常に削除されました';
 
   @override
   String get incorrect_password => 'パスワードが間違っています';
@@ -741,7 +718,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get email_not_verified => 'メールがまだ確認されていません';
 
   @override
-  String get verification_email_sent => '確認メール再送信！';
+  String get verification_email_sent => '確認メールを再送信しました！';
 
   @override
   String get checking_verification => '確認中...';
@@ -753,8 +730,449 @@ class AppLocalizationsJa extends AppLocalizations {
   String get create_account => 'アカウント作成';
 
   @override
-  String get account_created => 'アカウント作成！有効化のためメールを確認';
+  String get account_created => 'アカウントが作成されました！有効化のためメールを確認してください';
 
   @override
   String get example123 => '例123';
+
+  @override
+  String get new_routine => '新しいルーティン';
+
+  @override
+  String get edit_routine => 'ルーティン編集';
+
+  @override
+  String get activity_title => 'アクティビティタイトル';
+
+  @override
+  String get activity_description => 'アクティビティ説明';
+
+  @override
+  String get time_format => '時間（00:00 - 23:59）';
+
+  @override
+  String get category => 'カテゴリ';
+
+  @override
+  String get icon => 'アイコン';
+
+  @override
+  String get color => '色';
+
+  @override
+  String get create_routine => 'ルーティン作成';
+
+  @override
+  String get save_changes => '変更を保存';
+
+  @override
+  String get routine_title_empty => 'ルーティンタイトルは空にできません';
+
+  @override
+  String get invalid_time_format => '無効な時間形式。24時間形式を使用してください（00:00 - 23:59）';
+
+  @override
+  String get delete_routine => 'ルーティン削除';
+
+  @override
+  String get delete_routine_confirm => 'このルーティンを削除してもよろしいですか？';
+
+  @override
+  String hello_user_name(Object name) {
+    return 'こんにちは、$nameさん！👋';
+  }
+
+  @override
+  String get statistics => '統計';
+
+  @override
+  String get general_summary => '一般的な要約';
+
+  @override
+  String get total => '合計';
+
+  @override
+  String get progress_plural => '進歩';
+
+  @override
+  String get crisis_plural => '危機';
+
+  @override
+  String get type_distribution => 'タイプ別分布';
+
+  @override
+  String get most_frequent_triggers => '最も頻繁なトリガー';
+
+  @override
+  String get weekly_trend => '週間トレンド';
+
+  @override
+  String observations_last_7_days(int count) {
+    return '過去7日間の観察：$count';
+  }
+
+  @override
+  String get child_name => '子どもの名前';
+
+  @override
+  String get age => '年齢';
+
+  @override
+  String get support_level_label => 'サポートレベル';
+
+  @override
+  String get sensory_preferences => '感覚の好み';
+
+  @override
+  String get interests => '興味';
+
+  @override
+  String get child_name_empty => '子どもの名前は空にできません';
+
+  @override
+  String observations_last_7_days_count(int count) {
+    return '過去7日間の観察：$count';
+  }
+
+  @override
+  String get configure_profile => 'プロフィール設定';
+
+  @override
+  String get edit_username_title => 'ユーザー名編集';
+
+  @override
+  String get account_deleted_success => 'アカウントが正常に削除されました';
+
+  @override
+  String get theme_light => 'ライト';
+
+  @override
+  String get theme_dark => 'ダーク';
+
+  @override
+  String get theme_system => 'システム';
+
+  @override
+  String get edit_observation_action => '観察を編集';
+
+  @override
+  String get delete_observation_action => '観察を削除';
+
+  @override
+  String get delete_observation_title => '観察削除';
+
+  @override
+  String get delete_observation_message => 'この観察を削除してもよろしいですか？';
+
+  @override
+  String get trigger_routine_change => 'ルーティンの変更';
+
+  @override
+  String get trigger_loud_noise => '大きな音';
+
+  @override
+  String get trigger_crowd => '群衆';
+
+  @override
+  String get trigger_tiredness => '疲労';
+
+  @override
+  String get trigger_hunger => '空腹';
+
+  @override
+  String get trigger_frustration => 'フラストレーション';
+
+  @override
+  String get trigger_transition => '移行';
+
+  @override
+  String get trigger_new_environment => '新しい環境';
+
+  @override
+  String get trigger_bright_light => '非常に明るい光';
+
+  @override
+  String get trigger_unpleasant_texture => '不快な質感';
+
+  @override
+  String get trigger_strong_smell => '強い匂い';
+
+  @override
+  String get trigger_temperature => '温度';
+
+  @override
+  String get trigger_tight_clothes => 'きつい服';
+
+  @override
+  String get trigger_insufficient_sleep => '睡眠不足';
+
+  @override
+  String get trigger_physical_pain => '身体的痛み';
+
+  @override
+  String get trigger_medication => '薬';
+
+  @override
+  String get trigger_medical_visit => '医療訪問';
+
+  @override
+  String get trigger_new_school => '新しい学校';
+
+  @override
+  String get trigger_substitute_teacher => '代替教師';
+
+  @override
+  String get trigger_test_evaluation => 'テスト/評価';
+
+  @override
+  String get trigger_party_event => 'パーティー/イベント';
+
+  @override
+  String get trigger_travel => '旅行';
+
+  @override
+  String get trigger_rain_storm => '雨/嵐';
+
+  @override
+  String get trigger_parents_separation => '両親の別居';
+
+  @override
+  String get trigger_broken_toy => '壊れたおもちゃ';
+
+  @override
+  String get trigger_not_getting_something => '何かを得られない';
+
+  @override
+  String get trigger_activity_interruption => '活動の中断';
+
+  @override
+  String get trigger_waiting_too_long => '長時間の待機';
+
+  @override
+  String get observer_father => '父';
+
+  @override
+  String get observer_mother => '母';
+
+  @override
+  String get observer_grandfather => '祖父';
+
+  @override
+  String get observer_grandmother => '祖母';
+
+  @override
+  String get observer_uncle => '叔父';
+
+  @override
+  String get observer_aunt => '叔母';
+
+  @override
+  String get observer_brother => '兄弟';
+
+  @override
+  String get observer_sister => '姉妹';
+
+  @override
+  String get observer_son => '息子';
+
+  @override
+  String get observer_daughter => '娘';
+
+  @override
+  String get observer_grandson => '孫';
+
+  @override
+  String get observer_granddaughter => '孫娘';
+
+  @override
+  String get observer_nephew => '甥';
+
+  @override
+  String get observer_niece => '姪';
+
+  @override
+  String get observer_male_cousin => 'いとこ（男）';
+
+  @override
+  String get observer_female_cousin => 'いとこ（女）';
+
+  @override
+  String get observer_male_friend => '友人（男）';
+
+  @override
+  String get observer_female_friend => '友人（女）';
+
+  @override
+  String get observer_relative => '親戚';
+
+  @override
+  String get observer_caregiver => '介護者';
+
+  @override
+  String get observer_teacher => '教師';
+
+  @override
+  String get observer_therapist => 'セラピスト';
+
+  @override
+  String get observer_doctor => '医師';
+
+  @override
+  String get observer_psychologist => '心理学者';
+
+  @override
+  String get support_level_mild => '軽度';
+
+  @override
+  String get support_level_moderate => '中度';
+
+  @override
+  String get support_level_severe => '重度';
+
+  @override
+  String get sensory_visual => '視覚';
+
+  @override
+  String get sensory_auditory => '聴覚';
+
+  @override
+  String get sensory_tactile => '触覚';
+
+  @override
+  String get sensory_movement => '動き';
+
+  @override
+  String get sensory_olfactory => '嗅覚';
+
+  @override
+  String get sensory_gustatory => '味覚';
+
+  @override
+  String get sensory_proprioceptive => '固有受容覚';
+
+  @override
+  String get sensory_vestibular => '前庭覚';
+
+  @override
+  String get sensory_deep_pressure => '深部圧覚';
+
+  @override
+  String get sensory_soft_textures => '柔らかい質感';
+
+  @override
+  String get sensory_rough_textures => '粗い質感';
+
+  @override
+  String get sensory_low_sounds => '低い音';
+
+  @override
+  String get sensory_high_sounds => '高い音';
+
+  @override
+  String get sensory_soft_lights => '柔らかい光';
+
+  @override
+  String get sensory_bright_lights => '明るい光';
+
+  @override
+  String get sensory_hot_temperatures => '高温';
+
+  @override
+  String get sensory_cold_temperatures => '低温';
+
+  @override
+  String get interest_music => '音楽';
+
+  @override
+  String get interest_drawing => '描画';
+
+  @override
+  String get interest_numbers => '数字';
+
+  @override
+  String get interest_animals => '動物';
+
+  @override
+  String get interest_cars => '車';
+
+  @override
+  String get interest_books => '本';
+
+  @override
+  String get interest_games => 'ゲーム';
+
+  @override
+  String get interest_computer => 'コンピューター';
+
+  @override
+  String get interest_tablet => 'タブレット';
+
+  @override
+  String get interest_toys => 'おもちゃ';
+
+  @override
+  String get interest_sports => 'スポーツ';
+
+  @override
+  String get interest_dance => 'ダンス';
+
+  @override
+  String get interest_cooking => '料理';
+
+  @override
+  String get interest_gardening => '園芸';
+
+  @override
+  String get interest_science => '科学';
+
+  @override
+  String get interest_math => '数学';
+
+  @override
+  String get interest_art => '芸術';
+
+  @override
+  String get interest_photography => '写真';
+
+  @override
+  String get interest_videos => '動画';
+
+  @override
+  String get interest_movies => '映画';
+
+  @override
+  String get interest_series => 'シリーズ';
+
+  @override
+  String get interest_puzzles => 'パズル';
+
+  @override
+  String get interest_lego => 'レゴ';
+
+  @override
+  String get interest_dolls => '人形';
+
+  @override
+  String get interest_superheroes => 'スーパーヒーロー';
+
+  @override
+  String get delete_post_action => '削除';
+
+  @override
+  String get report_post_action => '報告';
+
+  @override
+  String get clear_search => '検索をクリア';
+
+  @override
+  String get month => 'ヶ月';
+
+  @override
+  String get months => 'ヶ月';
+
+  @override
+  String get year => '歳';
+
+  @override
+  String get years => '歳';
 }

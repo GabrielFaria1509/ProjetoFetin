@@ -12,104 +12,103 @@ class AppLocalizationsAr extends AppLocalizations {
   String get app_name => 'TISM';
 
   @override
-  String get app_subtitle =>
-      '‭كل ما تحتاج لمعرفته عن اضطراب طيف التوحد بنقرة واحدة‬';
+  String get app_subtitle => 'كل ما تحتاج لمعرفته عن التوحد بنقرة واحدة';
 
   @override
-  String get app_title => '‭TISM - دليل اضطراب طيف التوحد‬';
+  String get app_title => 'TISM - دليل التوحد';
 
   @override
-  String get login => '‭تسجيل الدخول‬';
+  String get login => 'تسجيل الدخول';
 
   @override
-  String get register => '‭إنشاء حساب‬';
+  String get register => 'إنشاء حساب';
 
   @override
-  String get email => '‭البريد الإلكتروني‬';
+  String get email => 'البريد الإلكتروني';
 
   @override
-  String get password => '‭كلمة المرور‬';
+  String get password => 'كلمة المرور';
 
   @override
-  String get confirm_password => '‭تأكيد كلمة المرور‬';
+  String get confirm_password => 'تأكيد كلمة المرور';
 
   @override
-  String get name => '‭الاسم‬';
+  String get name => 'الاسم';
 
   @override
-  String get username => '‭اسم المستخدم‬';
+  String get username => 'اسم المستخدم';
 
   @override
-  String get forgot_password => '‭نسيت كلمة المرور‬';
+  String get forgot_password => 'نسيت كلمة المرور';
 
   @override
-  String get login_success => '‭تم تسجيل الدخول بنجاح‬';
+  String get login_success => 'تم تسجيل الدخول بنجاح';
 
   @override
-  String get register_success => '‭تم إنشاء الحساب بنجاح‬';
+  String get register_success => 'تم إنشاء الحساب بنجاح';
 
   @override
-  String get logout => '‭تسجيل الخروج‬';
+  String get logout => 'تسجيل الخروج';
 
   @override
-  String get logout_confirm => '‭هل أنت متأكد من تسجيل الخروج؟‬';
+  String get logout_confirm => 'هل أنت متأكد من تسجيل الخروج؟';
 
   @override
-  String get participant => '‭مشارك‬';
+  String get participant => 'مشارك';
 
   @override
-  String get participant_desc => '‭مستخدم عادي لـ TISM‬';
+  String get participant_desc => 'مستخدم عادي لـ TISM';
 
   @override
-  String get responsible => '‭مسؤول‬';
+  String get responsible => 'مسؤول';
 
   @override
-  String get responsible_desc => '‭فرد من العائلة أو مقدم رعاية‬';
+  String get responsible_desc => 'أحد أفراد الأسرة أو مقدم الرعاية';
 
   @override
-  String get professional => '‭متخصص‬';
+  String get professional => 'محترف';
 
   @override
-  String get professional_desc => '‭معالج، طبيب، مربي‬';
+  String get professional_desc => 'معالج، طبيب، مربي';
 
   @override
-  String get user_type => '‭نوع المستخدم‬';
+  String get user_type => 'نوع المستخدم';
 
   @override
-  String get select_user_type => '‭اختر نوعك‬';
+  String get select_user_type => 'اختر نوعك';
 
   @override
-  String get profile => '‭الملف الشخصي‬';
+  String get profile => 'الملف الشخصي';
 
   @override
-  String get edit_profile => '‭تعديل الملف الشخصي‬';
+  String get edit_profile => 'تعديل الملف الشخصي';
 
   @override
-  String get edit_name => '‭تعديل الاسم‬';
+  String get edit_name => 'تعديل الاسم';
 
   @override
-  String get edit_username => '‭تعديل اسم المستخدم‬';
+  String get edit_username => 'تعديل اسم المستخدم';
 
   @override
-  String get full_name => '‭الاسم الكامل‬';
+  String get full_name => 'الاسم الكامل';
 
   @override
-  String get account_type => '‭نوع الحساب‬';
+  String get account_type => 'نوع الحساب';
 
   @override
-  String get theme => '‭المظهر‬';
+  String get theme => 'المظهر';
 
   @override
-  String get light_theme => '‭فاتح‬';
+  String get light_theme => 'فاتح';
 
   @override
-  String get dark_theme => '‭داكن‬';
+  String get dark_theme => 'داكن';
 
   @override
-  String get system_theme => '‭النظام‬';
+  String get system_theme => 'النظام';
 
   @override
-  String get system_theme_desc => '‭اتبع مظهر الجهاز‬';
+  String get system_theme_desc => 'يتبع مظهر الجهاز';
 
   @override
   String get home => 'الرئيسية';
@@ -133,33 +132,33 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search => 'البحث';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'مرحبا';
 
   @override
   String hello_user(String name) {
-    return 'مرحباً، %s! 👋';
+    return 'مرحبا، $name! 👋';
   }
 
   @override
-  String get explore_content => 'استكشف المحتوى التعليمي حول اضطراب طيف التوحد';
+  String get explore_content => 'استكشف المحتوى التعليمي حول التوحد';
 
   @override
   String get educational_feed => 'التغذية التعليمية';
 
   @override
-  String get personalized_routine => 'Rotina Personalizada';
+  String get personalized_routine => 'روتين شخصي';
 
   @override
-  String get custom_routine => 'روتين مخصص';
+  String get custom_routine => 'روتين شخصي';
 
   @override
-  String get observation_diary => 'يوميات الملاحظة';
+  String get observation_diary => 'يوميات الملاحظات';
 
   @override
-  String get tina_chatbot => 'تينا (روبوت المحادثة)';
+  String get tina_chatbot => 'تينا (الروبوت المحادث)';
 
   @override
-  String get tea_forum => 'منتدى اضطراب طيف التوحد';
+  String get tea_forum => 'منتدى التوحد';
 
   @override
   String get articles => 'المقالات';
@@ -174,11 +173,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get publish => 'نشر';
 
   @override
-  String get share_experience =>
-      'شارك تجربتك أو سؤالك أو نصيحتك حول اضطراب طيف التوحد...';
+  String get share_experience => 'شارك تجربتك أو سؤالك أو نصيحتك حول التوحد...';
 
   @override
-  String get write_something => 'اكتب شيئاً قبل النشر';
+  String get write_something => 'اكتب شيئا قبل النشر';
 
   @override
   String get confirm_publication => 'تأكيد النشر';
@@ -190,10 +188,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get post_published => 'تم نشر المنشور بنجاح!';
 
   @override
-  String get error_publishing => 'خطأ في النشر';
+  String get error_publishing => 'خطأ في نشر المنشور';
 
   @override
-  String get tina_assistant => 'تينا - مساعد اضطراب طيف التوحد';
+  String get tina_assistant => 'تينا - مساعد التوحد';
 
   @override
   String get thinking => 'أفكر...';
@@ -206,19 +204,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tina_intro =>
-      '🤖 **مرحباً! أنا تينا!**\\n\\nأنا مساعد افتراضي متخصص في التوحد والتنوع العصبي، تم تطويري خصيصاً لـ TISM من قبل فريق متعدد التخصصات من الخبراء.';
+      '🤖 **مرحبا! أنا تينا!**\\n\\nأنا مساعد افتراضي متخصص في التوحد والتنوع العصبي، تم تطويري خصيصا لـ TISM من قبل فريق متعدد التخصصات من الخبراء.';
 
   @override
   String get tina_specialization =>
-      '🎯 **تخصصي:**\\n• 🧠 التطور والسلوك\\n• 🏫 استراتيجيات التعليم الشامل\\n• 💬 تقنيات التواصل والتفاعل الاجتماعي\\n• 🌍 التكيفات البيئية والحسية\\n• 🛠️ الموارد العملية للحياة اليومية';
+      '🎯 **تخصصي:**\\n• 🧠 التطوير والسلوك\\n• 🏫 استراتيجيات تعليمية شاملة\\n• 💬 تقنيات التواصل والتفاعل الاجتماعي\\n• 🌍 التكيفات البيئية والحسية\\n• 🛠️ موارد عملية للحياة اليومية';
 
   @override
   String get tina_scientific =>
-      '🔬 **الأساس العلمي:** تم تدريبي بمعرفة مُتحقق منها من قبل أطباء الأعصاب وعلماء النفس ومعالجي العلاج المهني ومعالجي النطق والمربين الخاصين.';
+      '🔬 **الأساس العلمي:** تم تدريبي بمعرفة مصدقة من قبل أطباء الأعصاب وعلماء النفس والمعالجين المهنيين وأخصائيي النطق والمربين الخاصين.';
 
   @override
   String get tina_important =>
-      '⚠️ **مهم:** لا أقوم بالتشخيص ولا أحل محل المتخصصين في الرعاية الصحية. دوري تكميلي، أقدم الدعم المعلوماتي والعملي.';
+      '⚠️ **مهم:** لا أقوم بالتشخيص ولا أحل محل المهنيين الصحيين. دوري تكميلي، أقدم الدعم المعلوماتي والعملي.';
 
   @override
   String get tina_support => '💙 **أنا هنا لدعمك بمعلومات موثوقة وتعاطف!**';
@@ -228,20 +226,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tina_welcome =>
-      'مرحباً! أنا تينا، المساعد الافتراضي المتخصص في التوحد والتنوع العصبي من TISM!\\n\\nأنا هنا لتقديم الدعم المخصص والمعلومات القائمة على الأدلة العلمية حول:\\n\\n• التطور والسلوك\\n• استراتيجيات التعليم الشامل\\n• تقنيات التواصل والتفاعل الاجتماعي\\n• التكيفات البيئية والحسية\\n• الموارد والأدوات العملية للحياة اليومية\\n\\nتم تطوير قاعدة معرفتي من قبل فريق متعدد التخصصات من الخبراء، بما في ذلك أطباء الأعصاب وعلماء النفس ومعالجي العلاج المهني ومعالجي النطق والمربين الخاصين.\\n\\nمن المهم ملاحظة أنني لا أقوم بالتشخيص ولا أحل محل المتخصصين في الرعاية الصحية - دوري تكميلي، أقدم معلومات موثوقة ودعماً عملياً للعائلات ومقدمي الرعاية والأفراد ذوي التنوع العصبي.\\n\\nكيف يمكنني مساعدتك اليوم؟';
+      'مرحبا! أنا تينا، مساعد افتراضي متخصص في التوحد والتنوع العصبي من TISM!\\n\\nأنا هنا لتقديم الدعم الشخصي والمعلومات المبنية على الأدلة العلمية حول:\\n\\n• التطوير والسلوك\\n• استراتيجيات تعليمية شاملة\\n• تقنيات التواصل والتفاعل الاجتماعي\\n• التكيفات البيئية والحسية\\n• موارد وأدوات عملية للحياة اليومية\\n\\nتم تطوير قاعدة معرفتي من قبل فريق متعدد التخصصات من الخبراء، بما في ذلك أطباء الأعصاب وعلماء النفس والمعالجين المهنيين وأخصائيي النطق والمربين الخاصين.\\n\\nمن المهم التأكيد على أنني لا أقوم بالتشخيص أو أحل محل المهنيين الصحيين - دوري تكميلي، أقدم معلومات موثوقة ودعم عملي للعائلات ومقدمي الرعاية والأشخاص ذوي التنوع العصبي.\\n\\nكيف يمكنني مساعدتك اليوم؟';
 
   @override
-  String get diary_observations => 'يوميات الملاحظة';
+  String get diary_observations => 'يوميات الملاحظات';
 
   @override
   String get no_observations => 'لا توجد ملاحظات بعد';
 
   @override
-  String get tap_plus_start => 'اضغط + للبدء';
+  String get tap_plus_start => 'اضغط على + للبدء';
 
   @override
   String get report_copied =>
-      'تم نسخ التقرير! الصق في البريد الإلكتروني أو WhatsApp';
+      'تم نسخ التقرير! الصق في البريد الإلكتروني أو واتساب';
 
   @override
   String get progress => 'التقدم';
@@ -250,33 +248,33 @@ class AppLocalizationsAr extends AppLocalizations {
   String get behavior => 'السلوك';
 
   @override
-  String get crisis => 'الأزمة';
+  String get crisis => 'أزمة';
 
   @override
-  String get difficulty => 'الصعوبة';
+  String get difficulty => 'صعوبة';
 
   @override
   String get triggers => 'المحفزات';
 
   @override
   String routine_of(String name) {
-    return 'روتين %s';
+    return 'روتين $name';
   }
 
   @override
   String support_level(String level) {
-    return 'دعم %s';
+    return 'دعم $level';
   }
 
   @override
   String get filter_category => 'تصفية حسب الفئة:';
 
   @override
-  String get completed => 'مكتمل';
+  String get completed => 'مكتملة';
 
   @override
   String progress_count(int completed, int total) {
-    return 'التقدم: %d/%d';
+    return 'التقدم: $completed/$total';
   }
 
   @override
@@ -313,11 +311,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get all => 'الكل';
 
   @override
-  String get welcome => 'مرحبا، أهلاً وسهلاً!';
+  String get welcome => 'مرحبا، أهلا وسهلا!';
 
   @override
   String get profile_setup_desc =>
-      'لإنشاء روتين مخصص، دعنا نقوم بإعداد ملف الطفل الشخصي أولاً.\\n\\nهذا يساعدنا على اقتراح أنشطة مناسبة للعمر ومستوى الدعم.';
+      'لإنشاء روتين شخصي، دعنا أولا نقوم بإعداد ملف الطفل الشخصي.\\n\\nهذا يساعدنا على اقتراح أنشطة مناسبة للعمر ومستوى الدعم.';
 
   @override
   String get create_profile => 'إنشاء ملف شخصي';
@@ -345,7 +343,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get verification_desc =>
-      'لقد أرسلنا رابط التحقق إلى بريدك الإلكتروني. انقر على الرابط لتفعيل حسابك.';
+      'انقر على الرابط في البريد الإلكتروني لتفعيل حسابك.\\nسيتم إعادة توجيهك تلقائيا.';
 
   @override
   String get already_verified => 'تم التحقق بالفعل - تسجيل الدخول';
@@ -361,7 +359,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get delete_warning =>
-      'هذا الإجراء غير قابل للإلغاء!\\n\\nستفقد جميع بياناتك نهائياً.';
+      'هذا الإجراء لا يمكن التراجع عنه!\\n\\nسيتم فقدان جميع بياناتك نهائيا.';
 
   @override
   String get delete_confirmation => 'للتأكيد، اكتب بالضبط:';
@@ -446,10 +444,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saved_successfully => 'تم الحفظ بنجاح!';
 
   @override
-  String get welcome_message => 'مرحباً، أهلاً وسهلاً!';
+  String get welcome_message => 'مرحبا، أهلا وسهلا!';
 
   @override
-  String get no_account => 'ليس لديك حساب؟ إنشاء حساب';
+  String get no_account => 'ليس لديك حساب؟ سجل';
 
   @override
   String get fill_all_fields => 'املأ جميع الحقول';
@@ -459,7 +457,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String connection_error_detail(String error) {
-    return 'خطأ في الاتصال: %s';
+    return 'خطأ في الاتصال: $error';
   }
 
   @override
@@ -469,30 +467,29 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalid_email => 'بريد إلكتروني غير صالح';
 
   @override
-  String get password_too_short => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
+  String get password_too_short => 'يجب أن تكون كلمة المرور 8 أحرف على الأقل';
 
   @override
   String get passwords_dont_match => 'كلمات المرور غير متطابقة';
 
   @override
   String get username_invalid =>
-      'اسم المستخدم يجب أن يحتوي على أحرف صغيرة وأرقام و _ فقط';
+      'يجب أن يحتوي اسم المستخدم على أحرف صغيرة وأرقام و _ فقط';
 
   @override
-  String get name_cooldown => 'يمكن تغيير الاسم مرة واحدة فقط في اليوم';
+  String get name_cooldown => 'يمكن تغيير الاسم مرة واحدة فقط يوميا';
 
   @override
   String get username_cooldown => 'يمكن تغيير اسم المستخدم مرة واحدة كل 3 أيام';
 
   @override
-  String get user_type_cooldown =>
-      'يمكن تغيير نوع المستخدم مرة واحدة فقط في اليوم';
+  String get user_type_cooldown => 'يمكن تغيير نوع المستخدم مرة واحدة يوميا';
 
   @override
   String get wake_up => 'الاستيقاظ';
 
   @override
-  String get wake_up_desc => 'الاستيقاظ على موسيقى هادئة';
+  String get wake_up_desc => 'الاستيقاظ بموسيقى هادئة';
 
   @override
   String get brush_teeth => 'تنظيف الأسنان';
@@ -504,22 +501,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get breakfast => 'الإفطار';
 
   @override
-  String get breakfast_desc => 'تناول الطعام جالساً على الطاولة';
+  String get breakfast_desc => 'تناول الطعام جالسا على الطاولة';
 
   @override
   String get educational_activity => 'نشاط تعليمي';
 
   @override
-  String get educational_activity_desc => 'ألعاب تعليمية أو المدرسة';
+  String get educational_activity_desc => 'ألعاب تعليمية أو مدرسة';
 
   @override
   String get snack => 'وجبة خفيفة';
 
   @override
-  String get snack_desc => 'فواكه أو وجبة خفيفة صحية';
+  String get snack_desc => 'فاكهة أو وجبة خفيفة صحية';
 
   @override
-  String get music => 'الموسيقى';
+  String get music => 'موسيقى';
 
   @override
   String get music_desc => 'الاستماع أو العزف';
@@ -534,19 +531,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get numbers => 'الأرقام';
 
   @override
-  String get numbers_desc => 'ألعاب الأرقام';
+  String get numbers_desc => 'ألعاب بالأرقام';
 
   @override
   String get sensory_break => 'استراحة حسية';
 
   @override
-  String get sensory_break_desc => 'وقت للهدوء والتنظيم الذاتي';
+  String get sensory_break_desc => 'لحظة هدوء وتنظيم ذاتي';
 
   @override
   String get dinner => 'العشاء';
 
   @override
-  String get dinner_desc => 'وجبة عائلية';
+  String get dinner_desc => 'وجبة مع العائلة';
 
   @override
   String get bath => 'الاستحمام';
@@ -561,10 +558,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sleep_desc => 'موسيقى هادئة للنوم';
 
   @override
-  String get welcome_forum => 'مرحباً بك في منتدى اضطراب طيف التوحد! 💙';
+  String get welcome_forum => 'مرحبا بك في منتدى التوحد! 💙';
 
   @override
-  String get first_post_message => 'كن أول من يشارك تجربة\\nأو يسأل المجتمع';
+  String get first_post_message =>
+      'كن أول من يشارك تجربة\\nأو يطرح سؤالا للمجتمع';
 
   @override
   String get create_first_post => 'إنشاء أول منشور';
@@ -581,20 +579,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String error_deleting_post(String error) {
-    return 'خطأ في حذف المنشور: %s';
+    return 'خطأ في حذف المنشور: $error';
   }
 
   @override
   String get report_post => 'إبلاغ';
 
   @override
-  String get report_post_title => 'إبلاغ عن المنشور';
+  String get report_post_title => 'إبلاغ عن منشور';
 
   @override
   String get report_post_confirm => 'هل أنت متأكد من الإبلاغ عن هذا المنشور؟';
 
   @override
-  String get post_reported => 'تم الإبلاغ عن المنشور';
+  String get post_reported => 'تم الإبلاغ عن المنشور بنجاح';
 
   @override
   String get now => 'الآن';
@@ -607,38 +605,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get try_different_keywords =>
-      'جرب كلمات مفتاحية مختلفة أو\\nاستكشف الفئات أدناه';
+      'جرب كلمات مفتاحية مختلفة\\nأو استكشف الفئات أدناه';
 
   @override
   String get type_to_search => 'اكتب للبحث...';
 
   @override
   String get find_posts_profiles =>
-      'ابحث عن منشورات وملفات شخصية\\nوهاشتاغات في مجتمع اضطراب طيف التوحد';
-
-  @override
-  String get popular_categories => 'الفئات الشائعة';
-
-  @override
-  String get recent_searches => 'البحثات الأخيرة';
-
-  @override
-  String get searches_appear_here => 'ستظهر بحثاتك هنا';
-
-  @override
-  String get general => 'عام';
-
-  @override
-  String get tips => 'نصائح';
-
-  @override
-  String get experiences => 'تجارب';
-
-  @override
-  String get questions => 'أسئلة';
-
-  @override
-  String get resources => 'موارد';
+      'ابحث عن منشورات وملفات شخصية وهاشتاغات\\nفي مجتمع التوحد';
 
   @override
   String get how_identify_autism => 'كيف أتعرف على التوحد؟';
@@ -653,10 +627,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get help_at_school => 'كيف أساعد في المدرسة؟';
 
   @override
-  String get autism_rights => 'حقوق التوحد';
+  String get autism_rights => 'حقوق الشخص المتوحد';
 
   @override
-  String get child_tantrums => 'نوبات غضب الطفل';
+  String get child_tantrums => 'طفل بنوبات غضب';
 
   @override
   String get new_observation => 'ملاحظة جديدة';
@@ -675,11 +649,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String intensity(int level) {
-    return 'الشدة: %d';
+    return 'الشدة: $level';
   }
 
   @override
-  String get observer => 'الملاحظ:';
+  String get observer => 'المراقب:';
 
   @override
   String get possible_triggers => 'المحفزات المحتملة:';
@@ -691,7 +665,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get delete_observation_confirm => 'هل أنت متأكد من حذف هذه الملاحظة؟';
 
   @override
-  String get observation_title_empty => 'عنوان الملاحظة لا يمكن أن يكون فارغاً';
+  String get observation_title_empty => 'لا يمكن أن يكون عنوان الملاحظة فارغا';
 
   @override
   String get not_defined => 'غير محدد';
@@ -701,12 +675,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String change_name_to(String name) {
-    return 'تغيير الاسم إلى \"%s\"؟';
+    return 'تغيير الاسم إلى \"$name\"؟';
   }
 
   @override
   String change_username_to(String oldName, String newName) {
-    return 'تغيير اسم المستخدم من @%s إلى @%s؟';
+    return 'تغيير اسم المستخدم من @$oldName إلى @$newName؟';
   }
 
   @override
@@ -750,7 +724,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get user_not_found => 'المستخدم غير موجود';
 
   @override
-  String get email_not_verified => 'البريد الإلكتروني لم يتم التحقق منه بعد';
+  String get email_not_verified => 'البريد الإلكتروني غير مؤكد بعد';
 
   @override
   String get verification_email_sent => 'تم إعادة إرسال بريد التحقق!';
@@ -759,15 +733,457 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checking_verification => 'جاري التحقق...';
 
   @override
-  String get already_have_account => 'لديك حساب بالفعل؟ تسجيل الدخول';
+  String get already_have_account => 'لديك حساب؟ سجل الدخول';
 
   @override
   String get create_account => 'إنشاء حساب';
 
   @override
   String get account_created =>
-      'تم إنشاء الحساب! تحقق من البريد الإلكتروني للتفعيل';
+      'تم إنشاء الحساب! تحقق من بريدك الإلكتروني للتفعيل';
 
   @override
   String get example123 => 'مثال123';
+
+  @override
+  String get new_routine => 'روتين جديد';
+
+  @override
+  String get edit_routine => 'تعديل الروتين';
+
+  @override
+  String get activity_title => 'عنوان النشاط';
+
+  @override
+  String get activity_description => 'وصف النشاط';
+
+  @override
+  String get time_format => 'الوقت (00:00 - 23:59)';
+
+  @override
+  String get category => 'الفئة';
+
+  @override
+  String get icon => 'الأيقونة';
+
+  @override
+  String get color => 'اللون';
+
+  @override
+  String get create_routine => 'إنشاء روتين';
+
+  @override
+  String get save_changes => 'حفظ التغييرات';
+
+  @override
+  String get routine_title_empty => 'لا يمكن أن يكون عنوان الروتين فارغا';
+
+  @override
+  String get invalid_time_format =>
+      'تنسيق وقت غير صالح. استخدم تنسيق 24 ساعة (00:00 - 23:59)';
+
+  @override
+  String get delete_routine => 'حذف الروتين';
+
+  @override
+  String get delete_routine_confirm => 'هل أنت متأكد من حذف هذا الروتين؟';
+
+  @override
+  String hello_user_name(Object name) {
+    return 'مرحبا، $name! 👋';
+  }
+
+  @override
+  String get statistics => 'الإحصائيات';
+
+  @override
+  String get general_summary => 'ملخص عام';
+
+  @override
+  String get total => 'المجموع';
+
+  @override
+  String get progress_plural => 'التقدم';
+
+  @override
+  String get crisis_plural => 'الأزمات';
+
+  @override
+  String get type_distribution => 'التوزيع حسب النوع';
+
+  @override
+  String get most_frequent_triggers => 'المحفزات الأكثر تكرارا';
+
+  @override
+  String get weekly_trend => 'الاتجاه الأسبوعي';
+
+  @override
+  String observations_last_7_days(int count) {
+    return 'الملاحظات في آخر 7 أيام: $count';
+  }
+
+  @override
+  String get child_name => 'اسم الطفل';
+
+  @override
+  String get age => 'العمر';
+
+  @override
+  String get support_level_label => 'مستوى الدعم';
+
+  @override
+  String get sensory_preferences => 'التفضيلات الحسية';
+
+  @override
+  String get interests => 'الاهتمامات';
+
+  @override
+  String get child_name_empty => 'لا يمكن أن يكون اسم الطفل فارغا';
+
+  @override
+  String observations_last_7_days_count(int count) {
+    return 'الملاحظات في آخر 7 أيام: $count';
+  }
+
+  @override
+  String get configure_profile => 'إعداد الملف الشخصي';
+
+  @override
+  String get edit_username_title => 'تعديل اسم المستخدم';
+
+  @override
+  String get account_deleted_success => 'تم حذف الحساب بنجاح';
+
+  @override
+  String get theme_light => 'فاتح';
+
+  @override
+  String get theme_dark => 'داكن';
+
+  @override
+  String get theme_system => 'النظام';
+
+  @override
+  String get edit_observation_action => 'تعديل الملاحظة';
+
+  @override
+  String get delete_observation_action => 'حذف الملاحظة';
+
+  @override
+  String get delete_observation_title => 'حذف الملاحظة';
+
+  @override
+  String get delete_observation_message => 'هل أنت متأكد من حذف هذه الملاحظة؟';
+
+  @override
+  String get trigger_routine_change => 'تغيير الروتين';
+
+  @override
+  String get trigger_loud_noise => 'ضوضاء عالية';
+
+  @override
+  String get trigger_crowd => 'حشد';
+
+  @override
+  String get trigger_tiredness => 'تعب';
+
+  @override
+  String get trigger_hunger => 'جوع';
+
+  @override
+  String get trigger_frustration => 'إحباط';
+
+  @override
+  String get trigger_transition => 'انتقال';
+
+  @override
+  String get trigger_new_environment => 'بيئة جديدة';
+
+  @override
+  String get trigger_bright_light => 'ضوء ساطع جدا';
+
+  @override
+  String get trigger_unpleasant_texture => 'ملمس غير مريح';
+
+  @override
+  String get trigger_strong_smell => 'رائحة قوية';
+
+  @override
+  String get trigger_temperature => 'درجة الحرارة';
+
+  @override
+  String get trigger_tight_clothes => 'ملابس ضيقة';
+
+  @override
+  String get trigger_insufficient_sleep => 'نوم غير كاف';
+
+  @override
+  String get trigger_physical_pain => 'ألم جسدي';
+
+  @override
+  String get trigger_medication => 'دواء';
+
+  @override
+  String get trigger_medical_visit => 'زيارة طبية';
+
+  @override
+  String get trigger_new_school => 'مدرسة جديدة';
+
+  @override
+  String get trigger_substitute_teacher => 'مدرس بديل';
+
+  @override
+  String get trigger_test_evaluation => 'امتحان/تقييم';
+
+  @override
+  String get trigger_party_event => 'حفلة/حدث';
+
+  @override
+  String get trigger_travel => 'سفر';
+
+  @override
+  String get trigger_rain_storm => 'مطر/عاصفة';
+
+  @override
+  String get trigger_parents_separation => 'انفصال الوالدين';
+
+  @override
+  String get trigger_broken_toy => 'لعبة مكسورة';
+
+  @override
+  String get trigger_not_getting_something => 'عدم الحصول على شيء';
+
+  @override
+  String get trigger_activity_interruption => 'مقاطعة النشاط';
+
+  @override
+  String get trigger_waiting_too_long => 'انتظار طويل جدا';
+
+  @override
+  String get observer_father => 'أب';
+
+  @override
+  String get observer_mother => 'أم';
+
+  @override
+  String get observer_grandfather => 'جد';
+
+  @override
+  String get observer_grandmother => 'جدة';
+
+  @override
+  String get observer_uncle => 'عم';
+
+  @override
+  String get observer_aunt => 'عمة';
+
+  @override
+  String get observer_brother => 'أخ';
+
+  @override
+  String get observer_sister => 'أخت';
+
+  @override
+  String get observer_son => 'ابن';
+
+  @override
+  String get observer_daughter => 'ابنة';
+
+  @override
+  String get observer_grandson => 'حفيد';
+
+  @override
+  String get observer_granddaughter => 'حفيدة';
+
+  @override
+  String get observer_nephew => 'ابن أخ';
+
+  @override
+  String get observer_niece => 'ابنة أخ';
+
+  @override
+  String get observer_male_cousin => 'ابن عم';
+
+  @override
+  String get observer_female_cousin => 'ابنة عم';
+
+  @override
+  String get observer_male_friend => 'صديق';
+
+  @override
+  String get observer_female_friend => 'صديقة';
+
+  @override
+  String get observer_relative => 'قريب';
+
+  @override
+  String get observer_caregiver => 'مقدم رعاية';
+
+  @override
+  String get observer_teacher => 'مدرس';
+
+  @override
+  String get observer_therapist => 'معالج';
+
+  @override
+  String get observer_doctor => 'طبيب';
+
+  @override
+  String get observer_psychologist => 'طبيب نفسي';
+
+  @override
+  String get support_level_mild => 'خفيف';
+
+  @override
+  String get support_level_moderate => 'متوسط';
+
+  @override
+  String get support_level_severe => 'شديد';
+
+  @override
+  String get sensory_visual => 'بصري';
+
+  @override
+  String get sensory_auditory => 'سمعي';
+
+  @override
+  String get sensory_tactile => 'لمسي';
+
+  @override
+  String get sensory_movement => 'حركة';
+
+  @override
+  String get sensory_olfactory => 'شمي';
+
+  @override
+  String get sensory_gustatory => 'ذوقي';
+
+  @override
+  String get sensory_proprioceptive => 'حس الوضعة';
+
+  @override
+  String get sensory_vestibular => 'دهليزي';
+
+  @override
+  String get sensory_deep_pressure => 'ضغط عميق';
+
+  @override
+  String get sensory_soft_textures => 'ملامس ناعمة';
+
+  @override
+  String get sensory_rough_textures => 'ملامس خشنة';
+
+  @override
+  String get sensory_low_sounds => 'أصوات منخفضة';
+
+  @override
+  String get sensory_high_sounds => 'أصوات عالية';
+
+  @override
+  String get sensory_soft_lights => 'أضواء ناعمة';
+
+  @override
+  String get sensory_bright_lights => 'أضواء ساطعة';
+
+  @override
+  String get sensory_hot_temperatures => 'درجات حرارة ساخنة';
+
+  @override
+  String get sensory_cold_temperatures => 'درجات حرارة باردة';
+
+  @override
+  String get interest_music => 'موسيقى';
+
+  @override
+  String get interest_drawing => 'رسم';
+
+  @override
+  String get interest_numbers => 'أرقام';
+
+  @override
+  String get interest_animals => 'حيوانات';
+
+  @override
+  String get interest_cars => 'سيارات';
+
+  @override
+  String get interest_books => 'كتب';
+
+  @override
+  String get interest_games => 'ألعاب';
+
+  @override
+  String get interest_computer => 'كمبيوتر';
+
+  @override
+  String get interest_tablet => 'جهاز لوحي';
+
+  @override
+  String get interest_toys => 'ألعاب';
+
+  @override
+  String get interest_sports => 'رياضة';
+
+  @override
+  String get interest_dance => 'رقص';
+
+  @override
+  String get interest_cooking => 'طبخ';
+
+  @override
+  String get interest_gardening => 'بستنة';
+
+  @override
+  String get interest_science => 'علوم';
+
+  @override
+  String get interest_math => 'رياضيات';
+
+  @override
+  String get interest_art => 'فن';
+
+  @override
+  String get interest_photography => 'تصوير';
+
+  @override
+  String get interest_videos => 'فيديوهات';
+
+  @override
+  String get interest_movies => 'أفلام';
+
+  @override
+  String get interest_series => 'مسلسلات';
+
+  @override
+  String get interest_puzzles => 'ألغاز';
+
+  @override
+  String get interest_lego => 'ليغو';
+
+  @override
+  String get interest_dolls => 'دمى';
+
+  @override
+  String get interest_superheroes => 'أبطال خارقون';
+
+  @override
+  String get delete_post_action => 'Deletar';
+
+  @override
+  String get report_post_action => 'Denunciar';
+
+  @override
+  String get clear_search => 'Limpar busca';
+
+  @override
+  String get month => 'mês';
+
+  @override
+  String get months => 'meses';
+
+  @override
+  String get year => 'ano';
+
+  @override
+  String get years => 'anos';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/services/forum_service.dart';
 import 'package:tism/services/secure_storage_service.dart';
 import 'post_widget.dart';
@@ -88,7 +89,7 @@ class _ForumFeedState extends State<ForumFeed> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Bem-vindo ao Fórum TEA! 💙',
+            AppLocalizations.of(context)!.welcome_forum,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -97,7 +98,7 @@ class _ForumFeedState extends State<ForumFeed> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Seja o primeiro a compartilhar uma experiência\nou fazer uma pergunta para a comunidade',
+            AppLocalizations.of(context)!.first_post_message,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -113,7 +114,7 @@ class _ForumFeedState extends State<ForumFeed> {
               ).then((_) => _loadPosts());
             },
             icon: const Icon(Icons.add),
-            label: const Text('Criar primeiro post'),
+            label: Text(AppLocalizations.of(context)!.create_first_post),
             style: ElevatedButton.styleFrom(
               backgroundColor: tismAqua,
               foregroundColor: Colors.white,
@@ -193,17 +194,17 @@ class _ForumFeedState extends State<ForumFeed> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Deletar Post'),
-        content: const Text('Tem certeza que deseja deletar este post? Esta ação não pode ser desfeita.'),
+        title: Text(AppLocalizations.of(context)!.delete_post),
+        content: Text(AppLocalizations.of(context)!.delete_post_confirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Deletar'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -217,8 +218,8 @@ class _ForumFeedState extends State<ForumFeed> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Post deletado com sucesso'),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.post_deleted_success),
               backgroundColor: Colors.green,
             ),
           );
@@ -227,7 +228,7 @@ class _ForumFeedState extends State<ForumFeed> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Erro ao deletar post: $e'),
+              content: Text(AppLocalizations.of(context)!.error_deleting_post(e.toString())),
               backgroundColor: Colors.red,
             ),
           );

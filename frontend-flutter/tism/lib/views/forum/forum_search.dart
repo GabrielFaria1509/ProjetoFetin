@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
 import 'post_widget.dart';
@@ -17,7 +18,7 @@ class _ForumSearchState extends State<ForumSearch> {
   bool _isSearching = false;
   bool _hasSubmitted = false;
 
-  final List<String> _categories = ['Geral', 'Dicas', 'Experiências', 'Dúvidas', 'Recursos'];
+
 
   @override
   void initState() {
@@ -38,13 +39,7 @@ class _ForumSearchState extends State<ForumSearch> {
 
     setState(() {
       _hasSubmitted = false; // Reset quando digita
-      _suggestions = [
-        'atividades sensoriais',
-        'terapia ABA',
-        'escola inclusiva',
-        'comunicação alternativa',
-        'rotina diária',
-      ].where((s) => s.toLowerCase().contains(query.toLowerCase())).toList();
+      _suggestions = [];
     });
   }
 
@@ -87,7 +82,7 @@ class _ForumSearchState extends State<ForumSearch> {
               TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: 'Buscar posts, pessoas ou tópicos...',
+                  hintText: AppLocalizations.of(context)!.search_posts,
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: _searchController.text.isNotEmpty
                       ? IconButton(
@@ -209,7 +204,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Nenhum resultado encontrado',
+            AppLocalizations.of(context)!.no_results_found,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -218,7 +213,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Tente usar palavras-chave diferentes\nou explore as categorias abaixo',
+            AppLocalizations.of(context)!.try_different_keywords,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -242,7 +237,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Digite para buscar...',
+            AppLocalizations.of(context)!.type_to_search,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -251,7 +246,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Encontre posts, perfis e hashtags\nna comunidade TEA',
+            AppLocalizations.of(context)!.find_posts_profiles,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -264,48 +259,31 @@ class _ForumSearchState extends State<ForumSearch> {
   }
 
   Widget _buildInitialState() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+    return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Categorias Populares',
+          Icon(
+            Icons.search,
+            size: 80,
+            color: Colors.grey[400],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            AppLocalizations.of(context)!.type_to_search,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
+              color: Colors.grey[600],
             ),
           ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: _categories.map((category) {
-              return ActionChip(
-                label: Text(category),
-                onPressed: () {
-                  _searchController.text = category;
-                  _performSearch(category);
-                },
-                backgroundColor: tismAqua.withValues(alpha: 0.1),
-                labelStyle: const TextStyle(color: tismAqua),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 24),
-          const Text(
-            'Buscas Recentes',
+          const SizedBox(height: 8),
+          Text(
+            AppLocalizations.of(context)!.find_posts_profiles,
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Suas buscas aparecerão aqui',
-            style: TextStyle(
-              color: Colors.grey,
               fontSize: 16,
+              color: Colors.grey[500],
             ),
           ),
         ],

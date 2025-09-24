@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/services/theme_service.dart';
-import 'package:tism/services/language_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/views/login/login_page.dart';
 
 
@@ -44,15 +44,16 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   String _translateUserType(String userType) {
+    final l10n = AppLocalizations.of(context)!;
     switch (userType) {
       case 'Participante':
-        return 'participant'.tr;
+        return l10n.participant;
       case 'Responsável':
-        return 'responsible'.tr;
+        return l10n.responsible;
       case 'Profissional':
-        return 'professional'.tr;
+        return l10n.professional;
       default:
-        return 'participant'.tr;
+        return l10n.participant;
     }
   }
 
@@ -74,16 +75,16 @@ class _ProfilePageState extends State<ProfilePage> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('logout'.tr),
-        content: Text('logout_confirm'.tr),
+        title: Text(AppLocalizations.of(context)!.logout),
+        content: Text(AppLocalizations.of(context)!.logout_confirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('cancel'.tr),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('logout'.tr),
+            child: Text(AppLocalizations.of(context)!.logout),
           ),
         ],
       ),
@@ -105,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('profile'.tr), 
+        title: Text(AppLocalizations.of(context)!.profile), 
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
       ),
@@ -126,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.person),
-              title: Text('name'.tr),
+              title: Text(AppLocalizations.of(context)!.name),
               subtitle: Text(_userName.isNotEmpty ? _userName : widget.nomeUsuario),
               trailing: const Icon(Icons.edit),
               onTap: _showEditNameDialog,
@@ -138,8 +139,8 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.alternate_email),
-              title: Text('username'.tr),
-              subtitle: Text(_userUsername.isNotEmpty ? '@$_userUsername' : 'Não definido'),
+              title: Text(AppLocalizations.of(context)!.username),
+              subtitle: Text(_userUsername.isNotEmpty ? '@$_userUsername' : AppLocalizations.of(context)!.not_defined),
               trailing: const Icon(Icons.edit),
               onTap: _showEditUsernameDialog,
             ),
@@ -150,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.work),
-              title: Text('user_type'.tr),
+              title: Text(AppLocalizations.of(context)!.user_type),
               subtitle: Text(_translateUserType(_userType)),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _showUserTypeDialog,
@@ -160,10 +161,18 @@ class _ProfilePageState extends State<ProfilePage> {
           Card(
             child: ListTile(
               leading: const Icon(Icons.palette),
-              title: Text('theme'.tr),
+              title: Text(AppLocalizations.of(context)!.theme),
               subtitle: Consumer<ThemeService>(
                 builder: (context, themeService, child) {
-                  return Text(themeService.themeName);
+                  final l10n = AppLocalizations.of(context)!;
+                  switch (themeService.themeMode) {
+                    case ThemeMode.light:
+                      return Text(l10n.theme_light);
+                    case ThemeMode.dark:
+                      return Text(l10n.theme_dark);
+                    case ThemeMode.system:
+                      return Text(l10n.theme_system);
+                  }
                 },
               ),
               trailing: const Icon(Icons.arrow_forward_ios),
@@ -182,7 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: _logout,
-              child: Text('logout'.tr),
+              child: Text(AppLocalizations.of(context)!.logout),
             ),
           ),
 
@@ -197,7 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: _deleteAccount,
-              child: Text('delete_account'.tr),
+              child: Text(AppLocalizations.of(context)!.delete_account),
             ),
           ),
         ],
@@ -212,11 +221,11 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('edit_name'.tr),
+        title: Text(AppLocalizations.of(context)!.edit_name),
         content: TextField(
           controller: _nameController,
           decoration: InputDecoration(
-            labelText: 'full_name'.tr,
+            labelText: AppLocalizations.of(context)!.full_name,
             border: const OutlineInputBorder(),
           ),
           textCapitalization: TextCapitalization.words,
@@ -224,26 +233,25 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () async {
               final inputName = _nameController.text.trim();
               if (inputName.isNotEmpty) {
-                // Popup de confirmação
                 final confirm = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text('Confirmar alteração'),
-                    content: Text('Alterar nome para "$inputName"?'),
+                    title: Text(AppLocalizations.of(context)!.confirm_change),
+                    content: Text(AppLocalizations.of(context)!.change_name_to(inputName)),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context, false),
-                        child: const Text('Cancelar'),
+                        child: Text(AppLocalizations.of(context)!.cancel),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(context, true),
-                        child: const Text('Confirmar'),
+                        child: Text(AppLocalizations.of(context)!.confirm),
                       ),
                     ],
                   ),
@@ -257,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('name_updated'.tr),
+                          content: Text(AppLocalizations.of(context)!.name_updated),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -266,7 +274,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(result['error'] ?? 'Erro ao atualizar nome'),
+                          content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_name),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -275,7 +283,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
               }
             },
-            child: const Text('Salvar'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -286,12 +294,12 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('select_user_type'.tr),
+        title: Text(AppLocalizations.of(context)!.select_user_type),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<String>(
-              title: Text('participant'.tr),
+              title: Text(AppLocalizations.of(context)!.participant),
               value: 'Participante',
               groupValue: _userType,
               onChanged: (value) async {
@@ -303,7 +311,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('type_updated'.tr),
+                          content: Text(AppLocalizations.of(context)!.type_updated),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -312,7 +320,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(result['error'] ?? 'Erro ao atualizar tipo'),
+                          content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_type),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -322,7 +330,7 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             RadioListTile<String>(
-              title: Text('responsible'.tr),
+              title: Text(AppLocalizations.of(context)!.responsible),
               value: 'Responsável',
               groupValue: _userType,
               onChanged: (value) async {
@@ -334,7 +342,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('type_updated'.tr),
+                          content: Text(AppLocalizations.of(context)!.type_updated),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -343,7 +351,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(result['error'] ?? 'Erro ao atualizar tipo'),
+                          content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_type),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -353,7 +361,7 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             RadioListTile<String>(
-              title: Text('professional'.tr),
+              title: Text(AppLocalizations.of(context)!.professional),
               value: 'Profissional',
               groupValue: _userType,
               onChanged: (value) async {
@@ -364,8 +372,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Tipo atualizado!'),
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.type_updated),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -374,7 +382,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(result['error'] ?? 'Erro ao atualizar tipo'),
+                          content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_type),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -393,14 +401,14 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('theme'.tr),
+        title: Text(AppLocalizations.of(context)!.theme),
         content: Consumer<ThemeService>(
           builder: (context, themeService, child) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 RadioListTile<ThemeMode>(
-                  title: Text('light_theme'.tr),
+                  title: Text(AppLocalizations.of(context)!.light_theme),
                   value: ThemeMode.light,
                   groupValue: themeService.themeMode,
                   onChanged: (value) async {
@@ -411,7 +419,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 RadioListTile<ThemeMode>(
-                  title: Text('dark_theme'.tr),
+                  title: Text(AppLocalizations.of(context)!.dark_theme),
                   value: ThemeMode.dark,
                   groupValue: themeService.themeMode,
                   onChanged: (value) async {
@@ -422,8 +430,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 RadioListTile<ThemeMode>(
-                  title: Text('system_theme'.tr),
-                  subtitle: Text('system_theme_desc'.tr),
+                  title: Text(AppLocalizations.of(context)!.system_theme),
+                  subtitle: Text(AppLocalizations.of(context)!.system_theme_desc),
                   value: ThemeMode.system,
                   groupValue: themeService.themeMode,
                   onChanged: (value) async {
@@ -447,17 +455,17 @@ class _ProfilePageState extends State<ProfilePage> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('delete_account'.tr),
+        title: Text(AppLocalizations.of(context)!.delete_account),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'delete_warning'.tr,
+              AppLocalizations.of(context)!.delete_warning,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            Text('delete_confirmation'.tr),
+            Text(AppLocalizations.of(context)!.delete_confirmation),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(8),
@@ -466,7 +474,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
-                'delete_phrase'.tr,
+                AppLocalizations.of(context)!.delete_phrase,
                 style: const TextStyle(
                   fontFamily: 'monospace',
                   fontWeight: FontWeight.bold,
@@ -477,7 +485,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextField(
               controller: confirmController,
               decoration: InputDecoration(
-                labelText: 'delete_input_hint'.tr,
+                labelText: AppLocalizations.of(context)!.delete_input_hint,
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -486,7 +494,7 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -494,46 +502,44 @@ class _ProfilePageState extends State<ProfilePage> {
                 Navigator.pop(context, true);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Frase incorreta. Verifique maiúsculas e minúsculas.'),
+                  SnackBar(
+                    content: Text(AppLocalizations.of(context)!.delete_incorrect),
                     backgroundColor: Colors.red,
                   ),
                 );
               }
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('DELETAR'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
     );
     
     if (confirm == true) {
-      // Deletar conta - pedir senha real
       final user = await UserService.getUser();
       if (user != null) {
-        // Pedir senha do usuário
         final passwordController = TextEditingController();
         final password = await showDialog<String>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Confirmar senha'),
+            title: Text(AppLocalizations.of(context)!.confirm_password_title),
             content: TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Digite sua senha',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.enter_password,
+                border: const OutlineInputBorder(),
               ),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancelar'),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, passwordController.text),
-                child: const Text('Confirmar'),
+                child: Text(AppLocalizations.of(context)!.confirm),
               ),
             ],
           ),
@@ -550,7 +556,7 @@ class _ProfilePageState extends State<ProfilePage> {
           if (result['success']) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(result['message'] ?? 'Conta deletada com sucesso'),
+                content: Text(result['message'] ?? AppLocalizations.of(context)!.account_deleted_success),
                 backgroundColor: Colors.green,
               ),
             );
@@ -563,7 +569,7 @@ class _ProfilePageState extends State<ProfilePage> {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(result['error'] ?? 'Erro ao deletar conta'),
+                content: Text(result['error'] ?? AppLocalizations.of(context)!.error_deleting_account),
                 backgroundColor: Colors.red,
               ),
             );
@@ -579,21 +585,20 @@ class _ProfilePageState extends State<ProfilePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Editar Username'),
+        title: Text(AppLocalizations.of(context)!.edit_username_title),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Username',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.username,
                 prefixText: '@',
-                border: OutlineInputBorder(),
-                hintText: 'exemplo123',
-                helperText: 'Apenas letras minúsculas, números e _',
+                border: const OutlineInputBorder(),
+                hintText: AppLocalizations.of(context)!.example123,
+                helperText: AppLocalizations.of(context)!.username_help,
               ),
               onChanged: (value) {
-                // Normalizar em tempo real
                 final normalized = value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9_]'), '');
                 if (normalized != value) {
                   _usernameController.value = _usernameController.value.copyWith(
@@ -604,35 +609,34 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Username pode ser alterado apenas 1 vez a cada 3 dias',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+            Text(
+              AppLocalizations.of(context)!.username_cooldown_info,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () async {
               final inputUsername = _usernameController.text.trim();
               if (inputUsername.isNotEmpty) {
-                // Popup de confirmação
                 final confirm = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text('Confirmar alteração'),
-                    content: Text('Alterar username de @$_userUsername para @${inputUsername.toLowerCase()}?'),
+                    title: Text(AppLocalizations.of(context)!.confirm_change),
+                    content: Text(AppLocalizations.of(context)!.change_username_to(_userUsername, inputUsername.toLowerCase())),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context, false),
-                        child: const Text('Cancelar'),
+                        child: Text(AppLocalizations.of(context)!.cancel),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(context, true),
-                        child: const Text('Confirmar'),
+                        child: Text(AppLocalizations.of(context)!.confirm),
                       ),
                     ],
                   ),
@@ -646,7 +650,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('username_updated'.tr),
+                          content: Text(AppLocalizations.of(context)!.username_updated),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -655,7 +659,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(result['error'] ?? 'Erro ao atualizar username'),
+                          content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_username),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -664,7 +668,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
               }
             },
-            child: const Text('Salvar'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),

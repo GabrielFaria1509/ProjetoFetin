@@ -38,15 +38,18 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     _selectedTriggers.addAll(entry.triggers);
   }
 
-  final List<String> _commonTriggers = [
-    'Mudança de rotina', 'Barulho alto', 'Multidão', 'Cansaço',
-    'Fome', 'Frustração', 'Transição', 'Ambiente novo',
-    'Luz muito forte', 'Textura desagradável', 'Cheiro forte', 'Temperatura',
-    'Roupa apertada', 'Sono insuficiente', 'Dor física', 'Medicação',
-    'Visita médica', 'Escola nova', 'Professor substituto', 'Prova/avaliação',
-    'Festa/evento', 'Viagem', 'Chuva/temporal', 'Separação dos pais',
-    'Brinquedo quebrado', 'Não conseguir algo', 'Interrupção atividade', 'Esperar muito tempo'
-  ];
+  List<String> get _commonTriggers {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      l10n.trigger_routine_change, l10n.trigger_loud_noise, l10n.trigger_crowd, l10n.trigger_tiredness,
+      l10n.trigger_hunger, l10n.trigger_frustration, l10n.trigger_transition, l10n.trigger_new_environment,
+      l10n.trigger_bright_light, l10n.trigger_unpleasant_texture, l10n.trigger_strong_smell, l10n.trigger_temperature,
+      l10n.trigger_tight_clothes, l10n.trigger_insufficient_sleep, l10n.trigger_physical_pain, l10n.trigger_medication,
+      l10n.trigger_medical_visit, l10n.trigger_new_school, l10n.trigger_substitute_teacher, l10n.trigger_test_evaluation,
+      l10n.trigger_party_event, l10n.trigger_travel, l10n.trigger_rain_storm, l10n.trigger_parents_separation,
+      l10n.trigger_broken_toy, l10n.trigger_not_getting_something, l10n.trigger_activity_interruption, l10n.trigger_waiting_too_long
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,13 +174,8 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
         Text(AppLocalizations.of(context)!.observer, style: const TextStyle(fontWeight: FontWeight.bold)),
         DropdownButton<String>(
           value: _observer,
-          items: [
-            'pai', 'mãe', 'avô', 'avó', 'tio', 'tia', 'irmão', 'irmã', 
-            'filho', 'filha', 'neto', 'neta', 'sobrinho', 'sobrinha',
-            'primo', 'prima', 'amigo', 'amiga', 'parente', 'cuidador',
-            'professor', 'terapeuta', 'médico', 'psicólogo'
-          ].map((observer) =>
-            DropdownMenuItem(value: observer, child: Text(observer.toUpperCase()))
+          items: _getObserverOptions().map((observer) =>
+            DropdownMenuItem(value: observer['value'], child: Text(observer['display'] ?? ''))
           ).toList(),
           onChanged: (value) => setState(() => _observer = value!),
         ),
@@ -260,6 +258,36 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
         ],
       ),
     );
+  }
+
+  List<Map<String, String>> _getObserverOptions() {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      {'value': 'pai', 'display': l10n.observer_father.toUpperCase()},
+      {'value': 'mãe', 'display': l10n.observer_mother.toUpperCase()},
+      {'value': 'avô', 'display': l10n.observer_grandfather.toUpperCase()},
+      {'value': 'avó', 'display': l10n.observer_grandmother.toUpperCase()},
+      {'value': 'tio', 'display': l10n.observer_uncle.toUpperCase()},
+      {'value': 'tia', 'display': l10n.observer_aunt.toUpperCase()},
+      {'value': 'irmão', 'display': l10n.observer_brother.toUpperCase()},
+      {'value': 'irmã', 'display': l10n.observer_sister.toUpperCase()},
+      {'value': 'filho', 'display': l10n.observer_son.toUpperCase()},
+      {'value': 'filha', 'display': l10n.observer_daughter.toUpperCase()},
+      {'value': 'neto', 'display': l10n.observer_grandson.toUpperCase()},
+      {'value': 'neta', 'display': l10n.observer_granddaughter.toUpperCase()},
+      {'value': 'sobrinho', 'display': l10n.observer_nephew.toUpperCase()},
+      {'value': 'sobrinha', 'display': l10n.observer_niece.toUpperCase()},
+      {'value': 'primo', 'display': l10n.observer_male_cousin.toUpperCase()},
+      {'value': 'prima', 'display': l10n.observer_female_cousin.toUpperCase()},
+      {'value': 'amigo', 'display': l10n.observer_male_friend.toUpperCase()},
+      {'value': 'amiga', 'display': l10n.observer_female_friend.toUpperCase()},
+      {'value': 'parente', 'display': l10n.observer_relative.toUpperCase()},
+      {'value': 'cuidador', 'display': l10n.observer_caregiver.toUpperCase()},
+      {'value': 'professor', 'display': l10n.observer_teacher.toUpperCase()},
+      {'value': 'terapeuta', 'display': l10n.observer_therapist.toUpperCase()},
+      {'value': 'médico', 'display': l10n.observer_doctor.toUpperCase()},
+      {'value': 'psicólogo', 'display': l10n.observer_psychologist.toUpperCase()},
+    ];
   }
 
   String _getTypeDisplayName(ObservationType type) {

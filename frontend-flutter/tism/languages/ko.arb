@@ -40,7 +40,15 @@
   "dashboard": "대시보드",
   "feed": "피드",
   "search": "검색",
-  "hello_user": "안녕하세요, %s님! 👋",
+  "hello_user": "안녕하세요, {name}님! 👋",
+  "@hello_user": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "explore_content": "ASD에 대한 교육 콘텐츠 탐색",
   "educational_feed": "교육 피드",
   "custom_routine": "맞춤 루틴",
@@ -77,11 +85,38 @@
   "crisis": "위기",
   "difficulty": "어려움",
   "triggers": "유발요인",
-  "routine_of": "%s의 루틴",
-  "support_level": "%s 지원",
+  "routine_of": "{name}의 루틴",
+  "@routine_of": {
+    "description": "Routine of user",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "support_level": "{level} 지원",
+  "@support_level": {
+    "description": "Support level",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "filter_category": "카테고리별 필터:",
   "completed": "완료됨",
-  "progress_count": "진행률: %d/%d",
+  "progress_count": "진행률: {completed}/{total}",
+  "@progress_count": {
+    "description": "Progress counter",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "no_activities": "활동을 찾을 수 없습니다",
   "clear_filters": "필터 지우기",
   "add_activity": "활동 추가",
@@ -140,7 +175,15 @@
   "no_account": "계정이 없으신가요? 회원가입",
   "fill_all_fields": "모든 필드를 입력하세요",
   "login_error": "로그인 오류",
-  "connection_error_detail": "연결 오류: %s",
+  "connection_error_detail": "연결 오류: {error}",
+  "@connection_error_detail": {
+    "description": "Connection error with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "field_required": "이 필드는 필수입니다",
   "invalid_email": "유효하지 않은 이메일",
   "password_too_short": "비밀번호는 최소 8자 이상이어야 합니다",
@@ -179,7 +222,15 @@
   "delete_post": "게시물 삭제",
   "delete_post_confirm": "이 게시물을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
   "post_deleted_success": "게시물이 성공적으로 삭제되었습니다",
-  "error_deleting_post": "게시물 삭제 오류: %s",
+  "error_deleting_post": "게시물 삭제 오류: {error}",
+  "@error_deleting_post": {
+    "description": "Error deleting post",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "report_post": "신고",
   "report_post_title": "게시물 신고",
   "report_post_confirm": "이 게시물을 신고하시겠습니까?",
@@ -209,7 +260,15 @@
   "observation_type": "유형:",
   "title": "제목",
   "detailed_description": "상세 설명",
-  "intensity": "강도: %d",
+  "intensity": "강도: {level}",
+  "@intensity": {
+    "description": "Intensity level",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "observer": "관찰자:",
   "possible_triggers": "가능한 유발요인:",
   "delete_observation": "관찰 삭제",
@@ -217,8 +276,27 @@
   "observation_title_empty": "관찰 제목은 비워둘 수 없습니다",
   "not_defined": "정의되지 않음",
   "confirm_change": "변경 확인",
-  "change_name_to": "이름을 \"%s\"로 변경하시겠습니까?",
-  "change_username_to": "사용자명을 @%s에서 @%s로 변경하시겠습니까?",
+  "change_name_to": "이름을 \"{name}\"로 변경하시겠습니까?",
+  "@change_name_to": {
+    "description": "Confirm name change",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "change_username_to": "사용자명을 @{oldName}에서 @{newName}로 변경하시겠습니까?",
+  "@change_username_to": {
+    "description": "Confirm username change",
+    "placeholders": {
+      "oldName": {
+        "type": "String"
+      },
+      "newName": {
+        "type": "String"
+      }
+    }
+  },
   "error_updating_name": "이름 업데이트 오류",
   "error_updating_username": "사용자명 업데이트 오류",
   "error_updating_type": "유형 업데이트 오류",
@@ -239,5 +317,20 @@
   "create_account": "계정 생성",
   "account_created": "계정이 생성되었습니다! 활성화를 위해 이메일을 확인하세요",
   "example123": "예시123",
+  "new_routine": "새 루틴",
+  "edit_routine": "루틴 편집",
+  "activity_title": "활동 제목",
+  "activity_description": "활동 설명",
+  "time_format": "시간 (00:00 - 23:59)",
+  "category": "카테고리",
+  "icon": "아이콘",
+  "color": "색상",
+  "create_routine": "루틴 만들기",
+  "save_changes": "변경사항 저장",
+  "routine_title_empty": "루틴 제목은 비워둘 수 없습니다",
+  "invalid_time_format": "잘못된 시간입니다. 24시간 형식을 사용하세요 (00:00 - 23:59)",
+  "delete_routine": "루틴 삭제",
+  "delete_routine_confirm": "이 루틴을 삭제하시겠습니까?",
+  "new_child": "새 아이",
   "@@locale": "ko"
 }

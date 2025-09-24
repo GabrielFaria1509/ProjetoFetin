@@ -14,27 +14,27 @@ class StatisticsScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('Estatísticas'),
+        title: Text(AppLocalizations.of(context)!.statistics),
         backgroundColor: tismAqua,
       ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            _buildSummaryCard(entries),
+            _buildSummaryCard(entries, context),
             const SizedBox(height: 16),
-            _buildTypeDistribution(entries),
+            _buildTypeDistribution(entries, context),
             const SizedBox(height: 16),
-            _buildTriggerAnalysis(triggerFreq),
+            _buildTriggerAnalysis(triggerFreq, context),
             const SizedBox(height: 16),
-            _buildWeeklyTrend(entries),
+            _buildWeeklyTrend(entries, context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSummaryCard(List<DiaryEntry> entries) {
+  Widget _buildSummaryCard(List<DiaryEntry> entries, BuildContext context) {
     final progressCount = entries.where((e) => e.type == ObservationType.progresso).length;
     final criseCount = entries.where((e) => e.type == ObservationType.crise).length;
     
@@ -44,18 +44,21 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('📊 Resumo Geral', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
+            Text('📊 ${AppLocalizations.of(context)!.general_summary}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _buildStatItem('Total', entries.length.toString(), Colors.blue),
-                    _buildStatItem('Progressos', progressCount.toString(), Colors.green),
-                    _buildStatItem('Crises', criseCount.toString(), Colors.red),
-                  ],
+                Expanded(
+                  child: _buildStatItem(AppLocalizations.of(context)!.total, entries.length.toString(), Colors.blue),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _buildStatItem(AppLocalizations.of(context)!.progress_plural, progressCount.toString(), Colors.green),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _buildStatItem(AppLocalizations.of(context)!.crisis_plural, criseCount.toString(), Colors.red),
                 ),
               ],
             ),
@@ -66,15 +69,25 @@ class StatisticsScreen extends StatelessWidget {
   }
 
   Widget _buildStatItem(String label, String value, Color color) {
-    return Column(
-      children: [
-        Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)),
-        Text(label, style: const TextStyle(fontSize: 12)),
-      ],
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)),
+          const SizedBox(height: 4),
+          Text(label, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center),
+        ],
+      ),
     );
   }
 
-  Widget _buildTypeDistribution(List<DiaryEntry> entries) {
+  Widget _buildTypeDistribution(List<DiaryEntry> entries, BuildContext context) {
     final distribution = <ObservationType, int>{};
     for (final entry in entries) {
       distribution[entry.type] = (distribution[entry.type] ?? 0) + 1;
@@ -86,7 +99,7 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('📈 Distribuição por Tipo', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('📈 ${AppLocalizations.of(context)!.type_distribution}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             ...distribution.entries.map((entry) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -107,7 +120,7 @@ class StatisticsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTriggerAnalysis(Map<String, int> triggerFreq) {
+  Widget _buildTriggerAnalysis(Map<String, int> triggerFreq, BuildContext context) {
     final sortedTriggers = triggerFreq.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
 
@@ -117,7 +130,7 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('⚠️ Gatilhos Mais Frequentes', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('⚠️ ${AppLocalizations.of(context)!.most_frequent_triggers}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             ...sortedTriggers.take(5).map((entry) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -141,7 +154,7 @@ class StatisticsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWeeklyTrend(List<DiaryEntry> entries) {
+  Widget _buildWeeklyTrend(List<DiaryEntry> entries, BuildContext context) {
     final lastWeek = DateTime.now().subtract(const Duration(days: 7));
     final recentEntries = entries.where((e) => e.date.isAfter(lastWeek)).length;
     
@@ -151,9 +164,9 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('📅 Tendência Semanal', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('📅 ${AppLocalizations.of(context)!.weekly_trend}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
-            Text('Observações nos últimos 7 dias: $recentEntries'),
+            Text(AppLocalizations.of(context)!.observations_last_7_days_count(recentEntries)),
             const SizedBox(height: 8),
             LinearProgressIndicator(
               value: recentEntries / (entries.isNotEmpty ? entries.length : 1),

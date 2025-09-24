@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/services/language_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'diary_models.dart';
 import 'diary_service.dart';
 import 'add_entry_screen.dart';
@@ -33,7 +33,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('diary_observations'.tr),
+        title: Text(AppLocalizations.of(context)!.diary_observations),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: [
@@ -64,8 +64,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         : Colors.grey
                     ),
                     const SizedBox(height: 16),
-                    Text('no_observations'.tr),
-                    Text('tap_plus_start'.tr),
+                    Text(AppLocalizations.of(context)!.no_observations),
+                    Text(AppLocalizations.of(context)!.tap_plus_start),
                   ],
                 ),
               )
@@ -118,7 +118,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             Text('${entry.date.day}/${entry.date.month} - ${entry.observer.toUpperCase()}'),
             Text(entry.description, maxLines: 2, overflow: TextOverflow.ellipsis),
             if (entry.triggers.isNotEmpty)
-              Text('${'triggers'.tr}: ${entry.triggers.join(", ")}', 
+              Text('${AppLocalizations.of(context)!.triggers}: ${entry.triggers.join(", ")}', 
                    style: const TextStyle(fontSize: 12, color: Colors.grey)),
           ],
         ),
@@ -158,7 +158,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.edit),
-              title: const Text('Editar observação'),
+              title: Text(AppLocalizations.of(context)!.edit_observation_action),
               onTap: () {
                 Navigator.pop(context);
                 _editEntry(entry);
@@ -166,7 +166,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
-              title: const Text('Deletar observação', style: TextStyle(color: Colors.red)),
+              title: Text(AppLocalizations.of(context)!.delete_observation_action, style: TextStyle(color: Colors.red)),
               onTap: () {
                 Navigator.pop(context);
                 _deleteEntry(entry);
@@ -182,12 +182,12 @@ class _DiaryScreenState extends State<DiaryScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Deletar Observação'),
-        content: const Text('Tem certeza que deseja deletar esta observação?'),
+        title: Text(AppLocalizations.of(context)!.delete_observation_title),
+        content: Text(AppLocalizations.of(context)!.delete_observation_message),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -195,7 +195,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               Navigator.pop(context);
               _loadEntries();
             },
-            child: const Text('Deletar', style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -206,7 +206,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
     final report = DiaryService.generateReport();
     Clipboard.setData(ClipboardData(text: report));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Relatório copiado! Cole em email ou WhatsApp')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.report_copied)),
     );
   }
 }

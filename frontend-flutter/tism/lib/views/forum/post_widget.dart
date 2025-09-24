@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/widgets/account_badge.dart';
 
@@ -127,23 +128,23 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
                       }
                     },
                     itemBuilder: (context) => [
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'delete',
                         child: Row(
                           children: [
-                            Icon(Icons.delete, color: Colors.red),
-                            SizedBox(width: 8),
-                            Text('Deletar', style: TextStyle(color: Colors.red)),
+                            const Icon(Icons.delete, color: Colors.red),
+                            const SizedBox(width: 8),
+                            Text(AppLocalizations.of(context)!.delete_post_action, style: const TextStyle(color: Colors.red)),
                           ],
                         ),
                       ),
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'report',
                         child: Row(
                           children: [
-                            Icon(Icons.flag_outlined),
-                            SizedBox(width: 8),
-                            Text('Denunciar'),
+                            const Icon(Icons.flag_outlined),
+                            const SizedBox(width: 8),
+                            Text(AppLocalizations.of(context)!.report_post_action),
                           ],
                         ),
                       ),
@@ -283,7 +284,7 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
     final difference = now.difference(dateTime);
     
     if (difference.inMinutes < 1) {
-      return 'Agora';
+      return AppLocalizations.of(context)!.now;
     } else if (difference.inHours < 1) {
       return '${difference.inMinutes}min';
     } else if (difference.inDays < 1) {
@@ -310,21 +311,21 @@ class _PostWidgetState extends State<PostWidget> with TickerProviderStateMixin {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Denunciar Post'),
-        content: const Text('Tem certeza que deseja denunciar este post?'),
+        title: Text(AppLocalizations.of(context)!.report_post_title),
+        content: Text(AppLocalizations.of(context)!.report_post_confirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Post denunciado com sucesso')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.post_reported)),
               );
             },
-            child: const Text('Denunciar'),
+            child: Text(AppLocalizations.of(context)!.report_post),
           ),
         ],
       ),

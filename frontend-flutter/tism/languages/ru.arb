@@ -40,7 +40,15 @@
   "dashboard": "Панель",
   "feed": "Лента",
   "search": "Поиск",
-  "hello_user": "Привет, %s! 👋",
+  "hello_user": "Привет, {name}! 👋",
+  "@hello_user": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "explore_content": "Изучайте образовательный контент о РАС",
   "educational_feed": "Образовательная лента",
   "custom_routine": "Индивидуальный распорядок",
@@ -77,11 +85,38 @@
   "crisis": "Кризис",
   "difficulty": "Трудность",
   "triggers": "Триггеры",
-  "routine_of": "Распорядок %s",
-  "support_level": "Поддержка %s",
+  "routine_of": "Распорядок {name}",
+  "@routine_of": {
+    "description": "Routine of user",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "support_level": "Поддержка {level}",
+  "@support_level": {
+    "description": "Support level",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "filter_category": "Фильтр по категории:",
   "completed": "Завершённые",
-  "progress_count": "Прогресс: %d/%d",
+  "progress_count": "Прогресс: {completed}/{total}",
+  "@progress_count": {
+    "description": "Progress counter",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "no_activities": "Активности не найдены",
   "clear_filters": "Очистить фильтры",
   "add_activity": "Добавить активность",
@@ -140,7 +175,15 @@
   "no_account": "Нет аккаунта? Зарегистрируйтесь",
   "fill_all_fields": "Заполните все поля",
   "login_error": "Ошибка входа",
-  "connection_error_detail": "Ошибка соединения: %s",
+  "connection_error_detail": "Ошибка соединения: {error}",
+  "@connection_error_detail": {
+    "description": "Connection error with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "field_required": "Это поле обязательно",
   "invalid_email": "Неверный email",
   "password_too_short": "Пароль должен содержать минимум 8 символов",
@@ -179,7 +222,15 @@
   "delete_post": "Удалить пост",
   "delete_post_confirm": "Вы уверены, что хотите удалить этот пост? Это действие нельзя отменить.",
   "post_deleted_success": "Пост успешно удалён",
-  "error_deleting_post": "Ошибка удаления поста: %s",
+  "error_deleting_post": "Ошибка удаления поста: {error}",
+  "@error_deleting_post": {
+    "description": "Error deleting post",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "report_post": "Пожаловаться",
   "report_post_title": "Пожаловаться на пост",
   "report_post_confirm": "Вы уверены, что хотите пожаловаться на этот пост?",
@@ -209,7 +260,15 @@
   "observation_type": "Тип:",
   "title": "Заголовок",
   "detailed_description": "Подробное описание",
-  "intensity": "Интенсивность: %d",
+  "intensity": "Интенсивность: {level}",
+  "@intensity": {
+    "description": "Intensity level",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "observer": "Наблюдатель:",
   "possible_triggers": "Возможные триггеры:",
   "delete_observation": "Удалить наблюдение",
@@ -217,8 +276,27 @@
   "observation_title_empty": "Заголовок наблюдения не может быть пустым",
   "not_defined": "Не определено",
   "confirm_change": "Подтвердить изменение",
-  "change_name_to": "Изменить имя на \"%s\"?",
-  "change_username_to": "Изменить имя пользователя с @%s на @%s?",
+  "change_name_to": "Изменить имя на \"{name}\"?",
+  "@change_name_to": {
+    "description": "Confirm name change",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "change_username_to": "Изменить имя пользователя с @{oldName} на @{newName}?",
+  "@change_username_to": {
+    "description": "Confirm username change",
+    "placeholders": {
+      "oldName": {
+        "type": "String"
+      },
+      "newName": {
+        "type": "String"
+      }
+    }
+  },
   "error_updating_name": "Ошибка обновления имени",
   "error_updating_username": "Ошибка обновления имени пользователя",
   "error_updating_type": "Ошибка обновления типа",
@@ -239,5 +317,20 @@
   "create_account": "Создать аккаунт",
   "account_created": "Аккаунт создан! Проверьте email для активации",
   "example123": "пример123",
+  "new_routine": "Новая Рутина",
+  "edit_routine": "Редактировать Рутину",
+  "activity_title": "Название деятельности",
+  "activity_description": "Описание деятельности",
+  "time_format": "Время (00:00 - 23:59)",
+  "category": "Категория",
+  "icon": "Иконка",
+  "color": "Цвет",
+  "create_routine": "Создать Рутину",
+  "save_changes": "Сохранить Изменения",
+  "routine_title_empty": "Название рутины не может быть пустым",
+  "invalid_time_format": "Неверное время. Используйте 24-часовой формат (00:00 - 23:59)",
+  "delete_routine": "Удалить Рутину",
+  "delete_routine_confirm": "Вы уверены, что хотите удалить эту рутину?",
+  "new_child": "Новый Ребёнок",
   "@@locale": "ru"
 }

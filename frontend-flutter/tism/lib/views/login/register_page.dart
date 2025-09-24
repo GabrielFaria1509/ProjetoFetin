@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/auth_integration_service.dart';
-import 'package:tism/services/language_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/views/login/email_verification_screen.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -31,27 +31,27 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => erro = null);
 
     if (nome.isEmpty || username.isEmpty || email.isEmpty || senha.isEmpty || confirmar.isEmpty) {
-      setState(() => erro = 'field_required'.tr);
+      setState(() => erro = AppLocalizations.of(context)!.field_required);
       return;
     }
 
     if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(username)) {
-      setState(() => erro = 'username_invalid'.tr);
+      setState(() => erro = AppLocalizations.of(context)!.username_invalid);
       return;
     }
 
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
-      setState(() => erro = 'invalid_email'.tr);
+      setState(() => erro = AppLocalizations.of(context)!.invalid_email);
       return;
     }
 
     if (senha.length < 8) {
-      setState(() => erro = 'password_too_short'.tr);
+      setState(() => erro = AppLocalizations.of(context)!.password_too_short);
       return;
     }
 
     if (senha != confirmar) {
-      setState(() => erro = 'passwords_dont_match'.tr);
+      setState(() => erro = AppLocalizations.of(context)!.passwords_dont_match);
       return;
     }
 
@@ -84,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(result['message'] ?? 'account_created'.tr),
+                content: Text(result['message'] ?? AppLocalizations.of(context)!.account_created),
                 backgroundColor: Colors.green,
                 duration: const Duration(seconds: 5),
               ),
@@ -99,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (mounted) {
         setState(() {
           _isLoading = false;
-          erro = 'connection_error_detail'.trArgs([e]);
+          erro = AppLocalizations.of(context)!.connection_error_detail(e.toString());
         });
       }
     }
@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
         foregroundColor: Colors.white,
-        title: Text('register'.tr),
+        title: Text(AppLocalizations.of(context)!.register),
       ),
       body: SafeArea(
         child: Padding(
@@ -127,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextField(
                 controller: nomeController,
                 decoration: InputDecoration(
-                  labelText: 'full_name'.tr,
+                  labelText: AppLocalizations.of(context)!.full_name,
                   prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -142,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
-                  labelText: 'username'.tr,
+                  labelText: AppLocalizations.of(context)!.username,
                   prefixText: '@',
                   prefixIcon: const Icon(Icons.alternate_email),
                   hintText: 'exemplo123',
@@ -160,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'email'.tr,
+                  labelText: AppLocalizations.of(context)!.email,
                   prefixIcon: const Icon(Icons.email),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -176,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: 'password'.tr,
+                  labelText: AppLocalizations.of(context)!.password,
                   prefixIcon: const Icon(Icons.lock),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -192,7 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: confirmarSenhaController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: 'confirm_password'.tr,
+                  labelText: AppLocalizations.of(context)!.confirm_password,
                   prefixIcon: const Icon(Icons.lock_outline),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -207,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
               DropdownButtonFormField<String>(
                 value: _userType,
                 decoration: InputDecoration(
-                  labelText: 'user_type'.tr,
+                  labelText: AppLocalizations.of(context)!.user_type,
                   prefixIcon: const Icon(Icons.work),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -227,8 +227,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('participant'.tr),
-                        Text('participant_desc'.tr, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text(AppLocalizations.of(context)!.participant),
+                        Text(AppLocalizations.of(context)!.participant_desc, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -238,8 +238,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('responsible'.tr),
-                        Text('responsible_desc'.tr, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text(AppLocalizations.of(context)!.responsible),
+                        Text(AppLocalizations.of(context)!.responsible_desc, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -249,16 +249,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('professional'.tr),
-                        Text('professional_desc'.tr, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text(AppLocalizations.of(context)!.professional),
+                        Text(AppLocalizations.of(context)!.professional_desc, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                   ),
                 ],
                 selectedItemBuilder: (context) => [
-                  Text('participant'.tr),
-                  Text('responsible'.tr),
-                  Text('professional'.tr),
+                  Text(AppLocalizations.of(context)!.participant),
+                  Text(AppLocalizations.of(context)!.responsible),
+                  Text(AppLocalizations.of(context)!.professional),
                 ],
                 onChanged: (value) {
                   setState(() => _userType = value!);
@@ -286,7 +286,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         )
                       : Text(
-                          'register'.tr,
+                          AppLocalizations.of(context)!.register,
                           style: const TextStyle(fontSize: 16, color: Colors.white),
                         ),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/services/language_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -100,7 +100,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     // Reenviar email de verificação
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('verification_email_sent'.tr),
+        content: Text(AppLocalizations.of(context)!.verification_email_sent),
         backgroundColor: Colors.green,
       ),
     );
@@ -136,7 +136,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               const SizedBox(height: 32),
               
               Text(
-                'verify_email'.tr,
+                AppLocalizations.of(context)!.verify_email,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -150,7 +150,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               const SizedBox(height: 16),
               
               Text(
-                'check_email'.tr,
+                AppLocalizations.of(context)!.check_email,
                 style: TextStyle(
                   fontSize: 16,
                   color: Theme.of(context).brightness == Brightness.dark 
@@ -175,7 +175,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               const SizedBox(height: 24),
               
               Text(
-                'verification_desc'.tr,
+                AppLocalizations.of(context)!.verification_desc,
                 style: TextStyle(
                   fontSize: 14,
                   color: Theme.of(context).brightness == Brightness.dark 
@@ -201,7 +201,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      'verifying'.tr,
+                      AppLocalizations.of(context)!.verifying,
                       style: const TextStyle(
                         color: tismAqua,
                         fontSize: 14,
@@ -219,7 +219,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 ),
                 child: Text(
-                  'already_verified'.tr,
+                  AppLocalizations.of(context)!.already_verified,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
@@ -229,7 +229,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               TextButton(
                 onPressed: _resendVerification,
                 child: Text(
-                  'resend_verification'.tr,
+                  AppLocalizations.of(context)!.resend_verification,
                   style: const TextStyle(
                     color: tismAqua,
                     fontSize: 16,
@@ -244,7 +244,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  'login'.tr,
+                  AppLocalizations.of(context)!.login,
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 14,
