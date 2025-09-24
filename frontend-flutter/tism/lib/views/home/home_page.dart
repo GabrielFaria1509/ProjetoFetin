@@ -83,8 +83,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               AppLocalizations.of(context)!.hello_user(_displayName.isNotEmpty ? _displayName : widget.nomeUsuario),
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
-              textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
+              textDirection: TextUtils.getTextDirection(),
             ),
             const SizedBox(height: 8),
             Text(
@@ -95,8 +94,7 @@ class _HomePageState extends State<HomePage> {
                   ? Colors.grey[300] 
                   : Colors.grey[600]
               ),
-              textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
-              textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
+              textDirection: TextUtils.getTextDirection(),
             ),
             const SizedBox(height: 32),
             Expanded(
@@ -195,8 +193,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.white 
                         : Colors.black87
                     ),
-                    textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
-                    textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
+                    textDirection: TextUtils.getTextDirection(),
                   ),
                 ),
                 Icon(
@@ -245,8 +242,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.white 
                         : Colors.black87
                     ),
-                    textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
-                    textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
+                    textDirection: TextUtils.getTextDirection(),
                   ),
                 ),
                 Icon(

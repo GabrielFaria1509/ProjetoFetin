@@ -12,10 +12,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get app_name => 'TISM';
 
   @override
-  String get app_subtitle => 'OSB hakkında bilmeniz gereken her şey tek tıkla';
+  String get app_subtitle =>
+      'Otizm spektrum bozukluğu hakkında bilmeniz gereken her şey tek tıkla';
 
   @override
-  String get app_title => 'TISM - OSB Rehberi';
+  String get app_title => 'TISM - Otizm Rehberi';
 
   @override
   String get login => 'Giriş Yap';
@@ -42,10 +43,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get forgot_password => 'Şifremi Unuttum';
 
   @override
-  String get login_success => 'Giriş Başarılı';
+  String get login_success => 'Giriş başarılı';
 
   @override
-  String get register_success => 'Hesap Başarıyla Oluşturuldu';
+  String get register_success => 'Hesap başarıyla oluşturuldu';
 
   @override
   String get logout => 'Çıkış Yap';
@@ -57,7 +58,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get participant => 'Katılımcı';
 
   @override
-  String get participant_desc => 'Normal TISM kullanıcısı';
+  String get participant_desc => 'Sıradan TISM kullanıcısı';
 
   @override
   String get responsible => 'Sorumlu';
@@ -66,13 +67,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get responsible_desc => 'Aile üyesi veya bakıcı';
 
   @override
-  String get professional => 'Uzman';
+  String get professional => 'Profesyonel';
 
   @override
   String get professional_desc => 'Terapist, doktor, eğitimci';
 
   @override
-  String get user_type => 'Kullanıcı Türü';
+  String get user_type => 'Kullanıcı türü';
 
   @override
   String get select_user_type => 'Türünüzü seçin';
@@ -90,10 +91,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get edit_username => 'Kullanıcı Adını Düzenle';
 
   @override
-  String get full_name => 'Tam İsim';
+  String get full_name => 'Tam ad';
 
   @override
-  String get account_type => 'Hesap Türü';
+  String get account_type => 'Hesap türü';
 
   @override
   String get theme => 'Tema';
@@ -108,7 +109,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get system_theme => 'Sistem';
 
   @override
-  String get system_theme_desc => 'Cihaz temasını takip et';
+  String get system_theme_desc => 'Cihaz temasını takip eder';
 
   @override
   String get home => 'Ana Sayfa';
@@ -123,7 +124,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get routine => 'Rutin';
 
   @override
-  String get dashboard => 'Panel';
+  String get dashboard => 'Kontrol Paneli';
 
   @override
   String get feed => 'Akış';
@@ -132,7 +133,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get search => 'Ara';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'Merhaba';
 
   @override
   String hello_user(String name) {
@@ -140,13 +141,13 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get explore_content => 'OSB hakkında eğitici içerikleri keşfedin';
+  String get explore_content => 'Otizm hakkında eğitici içerikleri keşfedin';
 
   @override
   String get educational_feed => 'Eğitici Akış';
 
   @override
-  String get personalized_routine => 'Rotina Personalizada';
+  String get personalized_routine => 'Kişiselleştirilmiş Rutin';
 
   @override
   String get custom_routine => 'Özel Rutin';
@@ -158,7 +159,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tina_chatbot => 'Tina (Sohbet Botu)';
 
   @override
-  String get tea_forum => 'OSB Forumu';
+  String get tea_forum => 'Otizm Forumu';
 
   @override
   String get articles => 'Makaleler';
@@ -174,7 +175,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get share_experience =>
-      'OSB hakkında deneyiminizi, sorunuzu veya tavsiyenizi paylaşın...';
+      'Otizm hakkında deneyiminizi, sorunuzu veya tavsiyenizi paylaşın...';
 
   @override
   String get write_something => 'Yayınlamadan önce bir şeyler yazın';
@@ -193,7 +194,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get error_publishing => 'Yayınlama hatası';
 
   @override
-  String get tina_assistant => 'Tina - OSB Asistanı';
+  String get tina_assistant => 'Tina - Otizm Asistanı';
 
   @override
   String get thinking => 'Düşünüyor...';
@@ -206,30 +207,50 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get tina_intro =>
-      '🤖 **Merhaba! Ben Tina!**\\n\\nBen otizm ve nöroçeşitlilik konusunda uzmanlaşmış sanal asistanım, TISM için multidisipliner uzman ekibi tarafından özel olarak geliştirildi.';
+      '🤖 **Merhaba! Ben Tina!**\n\nOtizm ve nöroçeşitlilik konusunda uzmanlaşmış sanal asistanım, TISM için multidisipliner uzman ekibi tarafından özel olarak geliştirildi.';
 
   @override
   String get tina_specialization =>
-      '🎯 **Uzmanlık alanım:**\\n• 🧠 Gelişim ve davranış\\n• 🏫 Kapsayıcı eğitim stratejileri\\n• 💬 İletişim ve sosyal etkileşim teknikleri\\n• 🌍 Çevresel ve duyusal uyarlamalar\\n• 🛠️ Günlük yaşam için pratik kaynaklar';
+      '🎯 **Uzmanlık alanım:**\n• 🧠 Gelişim ve davranış\n• 🏫 Kapsayıcı eğitim stratejileri\n• 💬 İletişim ve sosyal etkileşim teknikleri\n• 🌍 Çevresel ve duyusal uyarlamalar\n• 🛠️ Günlük yaşam için pratik kaynaklar';
 
   @override
   String get tina_scientific =>
-      '🔬 **Bilimsel temel:** Nörologlar, psikologlar, ergoterapistler, dil ve konuşma terapistleri ve özel eğitim uzmanları tarafından doğrulanmış bilgilerle eğitildim.';
+      '🔬 **Bilimsel temel:** Nörologlar, psikologlar, meslek terapistleri, konuşma terapistleri ve özel eğitimciler tarafından doğrulanmış bilgilerle eğitildim.';
 
   @override
   String get tina_important =>
-      '⚠️ **Önemli:** Teşhis koymam ve sağlık uzmanlarının yerini almam. Rolüm tamamlayıcıdır, bilgilendirici ve pratik destek sunarım.';
+      '⚠️ **Önemli:** Teşhis koymam ve sağlık profesyonellerinin yerini almam. Rolüm tamamlayıcıdır, bilgilendirici ve pratik destek sunarım.';
 
   @override
   String get tina_support =>
-      '💙 **Güvenilir bilgi ve empatiyle sizi desteklemek için buradayım!**';
+      '💙 **Güvenilir bilgi ve empati ile sizi desteklemek için buradayım!**';
 
   @override
   String get understood_tina => 'Anladım, Tina! Konuşalım! 😊';
 
   @override
   String get tina_welcome =>
-      'Merhaba! Ben TISM\'in otizm ve nöroçeşitlilik konusunda uzmanlaşmış sanal asistanı Tina!\\n\\nAşağıdaki konularda bilimsel kanıtlara dayalı kişiselleştirilmiş destek ve bilgi sunmak için buradayım:\\n\\n• Gelişim ve davranış\\n• Kapsayıcı eğitim stratejileri\\n• İletişim ve sosyal etkileşim teknikleri\\n• Çevresel ve duyusal uyarlamalar\\n• Günlük yaşam için pratik kaynaklar ve araçlar\\n\\nBilgi tabanım nörologlar, psikologlar, ergoterapistler, dil ve konuşma terapistleri ve özel eğitim uzmanları dahil multidisipliner uzman ekibi tarafından geliştirildi.\\n\\nTeşhis koymadığımı ve sağlık uzmanlarının yerini almadığımı belirtmek önemlidir - rolüm tamamlayıcıdır, ailelere, bakıcılara ve nörofarklı bireylere güvenilir bilgi ve pratik destek sunarım.\\n\\nBugün size nasıl yardımcı olabilirim?';
+      'Merhaba! Ben Tina, TISM\'den otizm ve nöroçeşitlilik konusunda uzmanlaşmış sanal asistan!\n\nŞu konularda bilimsel kanıtlara dayalı kişiselleştirilmiş destek ve bilgi sunmak için buradayım:\n\n• Gelişim ve davranış\n• Kapsayıcı eğitim stratejileri\n• İletişim ve sosyal etkileşim teknikleri\n• Çevresel ve duyusal uyarlamalar\n• Günlük yaşam için pratik kaynaklar ve araçlar\n\nBilgi tabanım nörologlar, psikologlar, meslek terapistleri, konuşma terapistleri ve özel eğitimciler dahil multidisipliner uzman ekibi tarafından geliştirildi.\n\nTeşhis koymadığımı ve sağlık profesyonellerinin yerini almadığımı belirtmek önemlidir - rolüm tamamlayıcıdır, aileler, bakıcılar ve nörofarklı bireyler için güvenilir bilgi ve pratik destek sunarım.\n\nBugün size nasıl yardımcı olabilirim?';
+
+  @override
+  String get tina_connection_error =>
+      'Şu anda bağlanmakta zorluk yaşıyorum. Çok fazla kullanıcı sistemi kullanıyor. Birkaç dakika sonra tekrar deneyin! 😅';
+
+  @override
+  String get tina_general_error =>
+      'Hay aksi! Burada bir şeyler ters gitti. Birkaç an sonra tekrar deneyin! 🤖';
+
+  @override
+  String get tina_api_key_error =>
+      'Geçersiz API anahtarı. .env dosyasında Gemini anahtarının doğru olduğunu kontrol edin';
+
+  @override
+  String get tina_quota_error =>
+      'API kullanım limiti aşıldı. Daha sonra tekrar deneyin.';
+
+  @override
+  String get tina_network_error =>
+      'Bağlantı hatası. İnternetinizi kontrol edin ve tekrar deneyin.';
 
   @override
   String get diary_observations => 'Gözlem Günlüğü';
@@ -238,7 +259,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get no_observations => 'Henüz gözlem yok';
 
   @override
-  String get tap_plus_start => 'Başlamak için + tuşuna dokunun';
+  String get tap_plus_start => 'Başlamak için + \'ya dokunun';
 
   @override
   String get report_copied =>
@@ -261,12 +282,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String routine_of(String name) {
-    return '$name\'nin Rutini';
+    return '$name\'in Rutini';
   }
 
   @override
   String support_level(String level) {
-    return '$level Desteği';
+    return '$level Destek';
   }
 
   @override
@@ -284,7 +305,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get no_activities => 'Etkinlik bulunamadı';
 
   @override
-  String get clear_filters => 'Filtreleri Temizle';
+  String get clear_filters => 'Filtreleri temizle';
 
   @override
   String get add_activity => 'Etkinlik Ekle';
@@ -318,7 +339,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get profile_setup_desc =>
-      'Kişiselleştirilmiş rutin oluşturmak için önce çocuğun profilini ayarlayalım.\\n\\nBu, yaşa uygun etkinlikler ve destek seviyesi önerebilmemize yardımcı olur.';
+      'Kişiselleştirilmiş rutin oluşturmak için önce çocuğun profilini ayarlayalım.\n\nBu, yaş ve destek seviyesine uygun etkinlikler önermemize yardımcı olur.';
 
   @override
   String get create_profile => 'Profil Oluştur';
@@ -346,7 +367,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get verification_desc =>
-      'E-postanıza doğrulama bağlantısı gönderdik. Hesabınızı etkinleştirmek için bağlantıya tıklayın.';
+      'Hesabınızı etkinleştirmek için e-postadaki bağlantıya tıklayın.\nOtomatik olarak yönlendirileceksiniz.';
 
   @override
   String get already_verified => 'Zaten doğrulandı - Giriş Yap';
@@ -362,7 +383,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get delete_warning =>
-      'Bu işlem GERİ ALINAMAZ!\\n\\nTüm verileriniz kalıcı olarak kaybolacak.';
+      'Bu işlem GERİ ALINAMAZ!\n\nTüm verileriniz kalıcı olarak kaybolacak.';
 
   @override
   String get delete_confirmation => 'Onaylamak için tam olarak yazın:';
@@ -375,10 +396,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get delete_incorrect =>
-      'Yanlış ifade. Büyük-küçük harfleri kontrol edin.';
+      'Yanlış ifade. Büyük ve küçük harfleri kontrol edin.';
 
   @override
-  String get confirm_password_delete => 'Şifreyi Onayla';
+  String get confirm_password_delete => 'Şifreyi onayla';
 
   @override
   String get enter_password => 'Şifrenizi girin';
@@ -450,7 +471,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get welcome_message => 'Merhaba, hoş geldiniz!';
 
   @override
-  String get no_account => 'Hesabınız yok mu? Kayıt olun';
+  String get no_account => 'Henüz hesabınız yok mu? Kayıt olun';
 
   @override
   String get fill_all_fields => 'Tüm alanları doldurun';
@@ -464,7 +485,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get field_required => 'Bu alan zorunludur';
+  String get field_required => 'Bu alan gereklidir';
 
   @override
   String get invalid_email => 'Geçersiz e-posta';
@@ -477,7 +498,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get username_invalid =>
-      'Kullanıcı adı sadece küçük harf, rakam ve _ içerebilir';
+      'Kullanıcı adı sadece küçük harf, rakam ve _ içermelidir';
 
   @override
   String get name_cooldown => 'İsim günde sadece bir kez değiştirilebilir';
@@ -491,16 +512,16 @@ class AppLocalizationsTr extends AppLocalizations {
       'Kullanıcı türü günde sadece bir kez değiştirilebilir';
 
   @override
-  String get wake_up => 'Uyanma';
+  String get wake_up => 'Uyanmak';
 
   @override
-  String get wake_up_desc => 'Yumuşak müzikle uyanma';
+  String get wake_up_desc => 'Yumuşak müzikle uyanmak';
 
   @override
-  String get brush_teeth => 'Diş fırçalama';
+  String get brush_teeth => 'Diş fırçalamak';
 
   @override
-  String get brush_teeth_desc => 'Yumuşak fırçayla 2 dakika';
+  String get brush_teeth_desc => '2 dakika yumuşak fırça kullanmak';
 
   @override
   String get breakfast => 'Kahvaltı';
@@ -524,10 +545,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get music => 'Müzik';
 
   @override
-  String get music_desc => 'Müzik dinleme veya çalma';
+  String get music_desc => 'Müzik dinlemek veya çalmak';
 
   @override
-  String get draw => 'Çizim';
+  String get draw => 'Çizmek';
 
   @override
   String get draw_desc => 'Serbest çizim etkinliği';
@@ -542,13 +563,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get sensory_break => 'Duyusal mola';
 
   @override
-  String get sensory_break_desc => 'Sakinleşme ve öz-düzenleme zamanı';
+  String get sensory_break_desc => 'Sakinlik ve öz-düzenleme anı';
 
   @override
   String get dinner => 'Akşam yemeği';
 
   @override
-  String get dinner_desc => 'Aile ile yemek';
+  String get dinner_desc => 'Aile yemeği';
 
   @override
   String get bath => 'Banyo';
@@ -557,23 +578,23 @@ class AppLocalizationsTr extends AppLocalizations {
   String get bath_desc => 'Ilık su, yumuşak sünger';
 
   @override
-  String get sleep => 'Uyku';
+  String get sleep => 'Uyumak';
 
   @override
-  String get sleep_desc => 'Uyku için yumuşak müzik';
+  String get sleep_desc => 'Uyumak için yumuşak müzik';
 
   @override
-  String get welcome_forum => 'OSB Forumuna Hoş Geldiniz! 💙';
+  String get welcome_forum => 'Otizm Forumuna Hoş Geldiniz! 💙';
 
   @override
   String get first_post_message =>
-      'Deneyim paylaşan veya\\ntopluma soru soran ilk kişi olun';
+      'Bir deneyim paylaşan\nveya topluluğa soru soran ilk kişi olun';
 
   @override
   String get create_first_post => 'İlk gönderiyi oluştur';
 
   @override
-  String get delete_post => 'Gönderiyi sil';
+  String get delete_post => 'Gönderiyi Sil';
 
   @override
   String get delete_post_confirm =>
@@ -588,17 +609,17 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get report_post => 'Şikayet et';
+  String get report_post => 'Şikayet Et';
 
   @override
-  String get report_post_title => 'Gönderiyi şikayet et';
+  String get report_post_title => 'Gönderiyi Şikayet Et';
 
   @override
   String get report_post_confirm =>
       'Bu gönderiyi şikayet etmek istediğinizden emin misiniz?';
 
   @override
-  String get post_reported => 'Gönderi şikayet edildi';
+  String get post_reported => 'Gönderi başarıyla şikayet edildi';
 
   @override
   String get now => 'Şimdi';
@@ -611,14 +632,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get try_different_keywords =>
-      'Farklı anahtar kelimeler deneyin veya\\naşağıdaki kategorileri keşfedin';
+      'Farklı anahtar kelimeler deneyin\nveya aşağıdaki kategorileri keşfedin';
 
   @override
   String get type_to_search => 'Aramak için yazın...';
 
   @override
   String get find_posts_profiles =>
-      'OSB topluluğunda gönderi, profil ve\\netiket bulun';
+      'Otizm topluluğunda\ngönderi, profil ve hashtag bulun';
 
   @override
   String get how_identify_autism => 'Otizm nasıl tanınır?';
@@ -627,7 +648,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get child_not_speaking => 'Çocuğum konuşmuyor, otizm mi?';
 
   @override
-  String get what_therapies_work => 'Hangi terapiler işe yarar?';
+  String get what_therapies_work => 'Hangi tedaviler işe yarar?';
 
   @override
   String get help_at_school => 'Okulda nasıl yardım edilir?';
@@ -636,13 +657,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get autism_rights => 'Otizm hakları';
 
   @override
-  String get child_tantrums => 'Çocuk öfke nöbetleri';
+  String get child_tantrums => 'Öfke nöbeti geçiren çocuk';
 
   @override
-  String get new_observation => 'Yeni gözlem';
+  String get new_observation => 'Yeni Gözlem';
 
   @override
-  String get edit_observation => 'Gözlemi düzenle';
+  String get edit_observation => 'Gözlemi Düzenle';
 
   @override
   String get observation_type => 'Tür:';
@@ -665,7 +686,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get possible_triggers => 'Olası tetikleyiciler:';
 
   @override
-  String get delete_observation => 'Gözlemi sil';
+  String get delete_observation => 'Gözlemi Sil';
 
   @override
   String get delete_observation_confirm =>
@@ -687,7 +708,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String change_username_to(String oldName, String newName) {
-    return 'Kullanıcı adını @$oldName\'den @$newName\'ye değiştir?';
+    return 'Kullanıcı adını @$oldName\'den @$newName\'e değiştir?';
   }
 
   @override
@@ -772,7 +793,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get category => 'Kategori';
 
   @override
-  String get icon => 'Simge';
+  String get icon => 'İkon';
 
   @override
   String get color => 'Renk';
@@ -788,7 +809,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get invalid_time_format =>
-      'Geçersiz saat. 24 saat formatını kullanın (00:00 - 23:59)';
+      'Geçersiz saat. 24 saat formatı kullanın (00:00 - 23:59)';
 
   @override
   String get delete_routine => 'Rutini Sil';
@@ -799,401 +820,401 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String hello_user_name(Object name) {
-    return 'Olá, $name! 👋';
+    return 'Merhaba, $name! 👋';
   }
 
   @override
-  String get statistics => 'Estatísticas';
+  String get statistics => 'İstatistikler';
 
   @override
-  String get general_summary => 'Resumo Geral';
+  String get general_summary => 'Genel Özet';
 
   @override
-  String get total => 'Total';
+  String get total => 'Toplam';
 
   @override
-  String get progress_plural => 'Progressos';
+  String get progress_plural => 'İlerleme';
 
   @override
-  String get crisis_plural => 'Crises';
+  String get crisis_plural => 'Krizler';
 
   @override
-  String get type_distribution => 'Distribuição por Tipo';
+  String get type_distribution => 'Türe Göre Dağılım';
 
   @override
-  String get most_frequent_triggers => 'Gatilhos Mais Frequentes';
+  String get most_frequent_triggers => 'En Sık Tetikleyiciler';
 
   @override
-  String get weekly_trend => 'Tendência Semanal';
+  String get weekly_trend => 'Haftalık Eğilim';
 
   @override
   String observations_last_7_days(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return 'Son 7 gündeki gözlemler: $count';
   }
 
   @override
-  String get child_name => 'Nome da criança';
+  String get child_name => 'Çocuğun adı';
 
   @override
-  String get age => 'Idade';
+  String get age => 'Yaş';
 
   @override
-  String get support_level_label => 'Nível de suporte';
+  String get support_level_label => 'Destek seviyesi';
 
   @override
-  String get sensory_preferences => 'Preferências sensoriais';
+  String get sensory_preferences => 'Duyusal tercihler';
 
   @override
-  String get interests => 'Interesses';
+  String get interests => 'İlgi alanları';
 
   @override
-  String get child_name_empty => 'O nome da criança não pode estar vazio';
+  String get child_name_empty => 'Çocuğun adı boş olamaz';
 
   @override
   String observations_last_7_days_count(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return 'Son 7 gündeki gözlemler: $count';
   }
 
   @override
-  String get configure_profile => 'Configurar Perfil';
+  String get configure_profile => 'Profili Yapılandır';
 
   @override
-  String get edit_username_title => 'Editar Username';
+  String get edit_username_title => 'Kullanıcı Adını Düzenle';
 
   @override
-  String get account_deleted_success => 'Conta deletada com sucesso';
+  String get account_deleted_success => 'Hesap başarıyla silindi';
 
   @override
-  String get theme_light => 'Claro';
+  String get theme_light => 'Açık';
 
   @override
-  String get theme_dark => 'Escuro';
+  String get theme_dark => 'Koyu';
 
   @override
-  String get theme_system => 'Sistema';
+  String get theme_system => 'Sistem';
 
   @override
-  String get edit_observation_action => 'Editar observação';
+  String get edit_observation_action => 'Gözlemi düzenle';
 
   @override
-  String get delete_observation_action => 'Deletar observação';
+  String get delete_observation_action => 'Gözlemi sil';
 
   @override
-  String get delete_observation_title => 'Deletar Observação';
+  String get delete_observation_title => 'Gözlemi Sil';
 
   @override
   String get delete_observation_message =>
-      'Tem certeza que deseja deletar esta observação?';
+      'Bu gözlemi silmek istediğinizden emin misiniz?';
 
   @override
-  String get trigger_routine_change => 'Mudança de rotina';
+  String get trigger_routine_change => 'Rutin değişikliği';
 
   @override
-  String get trigger_loud_noise => 'Barulho alto';
+  String get trigger_loud_noise => 'Yüksek ses';
 
   @override
-  String get trigger_crowd => 'Multidão';
+  String get trigger_crowd => 'Kalabalık';
 
   @override
-  String get trigger_tiredness => 'Cansaço';
+  String get trigger_tiredness => 'Yorgunluk';
 
   @override
-  String get trigger_hunger => 'Fome';
+  String get trigger_hunger => 'Açlık';
 
   @override
-  String get trigger_frustration => 'Frustração';
+  String get trigger_frustration => 'Hayal kırıklığı';
 
   @override
-  String get trigger_transition => 'Transição';
+  String get trigger_transition => 'Geçiş';
 
   @override
-  String get trigger_new_environment => 'Ambiente novo';
+  String get trigger_new_environment => 'Yeni ortam';
 
   @override
-  String get trigger_bright_light => 'Luz muito forte';
+  String get trigger_bright_light => 'Parlak ışık';
 
   @override
-  String get trigger_unpleasant_texture => 'Textura desagradável';
+  String get trigger_unpleasant_texture => 'Hoş olmayan doku';
 
   @override
-  String get trigger_strong_smell => 'Cheiro forte';
+  String get trigger_strong_smell => 'Güçlü koku';
 
   @override
-  String get trigger_temperature => 'Temperatura';
+  String get trigger_temperature => 'Sıcaklık';
 
   @override
-  String get trigger_tight_clothes => 'Roupa apertada';
+  String get trigger_tight_clothes => 'Dar kıyafet';
 
   @override
-  String get trigger_insufficient_sleep => 'Sono insuficiente';
+  String get trigger_insufficient_sleep => 'Yetersiz uyku';
 
   @override
-  String get trigger_physical_pain => 'Dor física';
+  String get trigger_physical_pain => 'Fiziksel ağrı';
 
   @override
-  String get trigger_medication => 'Medicação';
+  String get trigger_medication => 'İlaç';
 
   @override
-  String get trigger_medical_visit => 'Visita médica';
+  String get trigger_medical_visit => 'Tıbbi ziyaret';
 
   @override
-  String get trigger_new_school => 'Escola nova';
+  String get trigger_new_school => 'Yeni okul';
 
   @override
-  String get trigger_substitute_teacher => 'Professor substituto';
+  String get trigger_substitute_teacher => 'Vekil öğretmen';
 
   @override
-  String get trigger_test_evaluation => 'Prova/avaliação';
+  String get trigger_test_evaluation => 'Test/değerlendirme';
 
   @override
-  String get trigger_party_event => 'Festa/evento';
+  String get trigger_party_event => 'Parti/etkinlik';
 
   @override
-  String get trigger_travel => 'Viagem';
+  String get trigger_travel => 'Seyahat';
 
   @override
-  String get trigger_rain_storm => 'Chuva/temporal';
+  String get trigger_rain_storm => 'Yağmur/fırtına';
 
   @override
-  String get trigger_parents_separation => 'Separação dos pais';
+  String get trigger_parents_separation => 'Ebeveyn ayrılığı';
 
   @override
-  String get trigger_broken_toy => 'Brinquedo quebrado';
+  String get trigger_broken_toy => 'Kırık oyuncak';
 
   @override
-  String get trigger_not_getting_something => 'Não conseguir algo';
+  String get trigger_not_getting_something => 'Bir şey alamama';
 
   @override
-  String get trigger_activity_interruption => 'Interrupção atividade';
+  String get trigger_activity_interruption => 'Etkinlik kesintisi';
 
   @override
-  String get trigger_waiting_too_long => 'Esperar muito tempo';
+  String get trigger_waiting_too_long => 'Çok uzun bekleme';
 
   @override
-  String get observer_father => 'pai';
+  String get observer_father => 'baba';
 
   @override
-  String get observer_mother => 'mãe';
+  String get observer_mother => 'anne';
 
   @override
-  String get observer_grandfather => 'avô';
+  String get observer_grandfather => 'dede';
 
   @override
-  String get observer_grandmother => 'avó';
+  String get observer_grandmother => 'nine';
 
   @override
-  String get observer_uncle => 'tio';
+  String get observer_uncle => 'amca';
 
   @override
-  String get observer_aunt => 'tia';
+  String get observer_aunt => 'teyze';
 
   @override
-  String get observer_brother => 'irmão';
+  String get observer_brother => 'kardeş';
 
   @override
-  String get observer_sister => 'irmã';
+  String get observer_sister => 'kız kardeş';
 
   @override
-  String get observer_son => 'filho';
+  String get observer_son => 'oğul';
 
   @override
-  String get observer_daughter => 'filha';
+  String get observer_daughter => 'kız';
 
   @override
-  String get observer_grandson => 'neto';
+  String get observer_grandson => 'torun';
 
   @override
-  String get observer_granddaughter => 'neta';
+  String get observer_granddaughter => 'kız torun';
 
   @override
-  String get observer_nephew => 'sobrinho';
+  String get observer_nephew => 'yeğen';
 
   @override
-  String get observer_niece => 'sobrinha';
+  String get observer_niece => 'kız yeğen';
 
   @override
-  String get observer_male_cousin => 'primo';
+  String get observer_male_cousin => 'erkek kuzen';
 
   @override
-  String get observer_female_cousin => 'prima';
+  String get observer_female_cousin => 'kız kuzen';
 
   @override
-  String get observer_male_friend => 'amigo';
+  String get observer_male_friend => 'erkek arkadaş';
 
   @override
-  String get observer_female_friend => 'amiga';
+  String get observer_female_friend => 'kız arkadaş';
 
   @override
-  String get observer_relative => 'parente';
+  String get observer_relative => 'akraba';
 
   @override
-  String get observer_caregiver => 'cuidador';
+  String get observer_caregiver => 'bakıcı';
 
   @override
-  String get observer_teacher => 'professor';
+  String get observer_teacher => 'öğretmen';
 
   @override
-  String get observer_therapist => 'terapeuta';
+  String get observer_therapist => 'terapist';
 
   @override
-  String get observer_doctor => 'médico';
+  String get observer_doctor => 'doktor';
 
   @override
-  String get observer_psychologist => 'psicólogo';
+  String get observer_psychologist => 'psikolog';
 
   @override
-  String get support_level_mild => 'leve';
+  String get support_level_mild => 'hafif';
 
   @override
-  String get support_level_moderate => 'moderado';
+  String get support_level_moderate => 'orta';
 
   @override
-  String get support_level_severe => 'severo';
+  String get support_level_severe => 'ağır';
 
   @override
-  String get sensory_visual => 'Visual';
+  String get sensory_visual => 'Görsel';
 
   @override
-  String get sensory_auditory => 'Auditivo';
+  String get sensory_auditory => 'İşitsel';
 
   @override
-  String get sensory_tactile => 'Tátil';
+  String get sensory_tactile => 'Dokunsal';
 
   @override
-  String get sensory_movement => 'Movimento';
+  String get sensory_movement => 'Hareket';
 
   @override
-  String get sensory_olfactory => 'Olfativo';
+  String get sensory_olfactory => 'Koku';
 
   @override
-  String get sensory_gustatory => 'Gustativo';
+  String get sensory_gustatory => 'Tat';
 
   @override
-  String get sensory_proprioceptive => 'Proprioceptivo';
+  String get sensory_proprioceptive => 'Proprioseptif';
 
   @override
-  String get sensory_vestibular => 'Vestibular';
+  String get sensory_vestibular => 'Vestibüler';
 
   @override
-  String get sensory_deep_pressure => 'Pressão Profunda';
+  String get sensory_deep_pressure => 'Derin Basınç';
 
   @override
-  String get sensory_soft_textures => 'Texturas Suaves';
+  String get sensory_soft_textures => 'Yumuşak Dokular';
 
   @override
-  String get sensory_rough_textures => 'Texturas Ásperas';
+  String get sensory_rough_textures => 'Pürüzlü Dokular';
 
   @override
-  String get sensory_low_sounds => 'Sons Baixos';
+  String get sensory_low_sounds => 'Düşük Sesler';
 
   @override
-  String get sensory_high_sounds => 'Sons Altos';
+  String get sensory_high_sounds => 'Yüksek Sesler';
 
   @override
-  String get sensory_soft_lights => 'Luzes Suaves';
+  String get sensory_soft_lights => 'Yumuşak Işıklar';
 
   @override
-  String get sensory_bright_lights => 'Luzes Brilhantes';
+  String get sensory_bright_lights => 'Parlak Işıklar';
 
   @override
-  String get sensory_hot_temperatures => 'Temperaturas Quentes';
+  String get sensory_hot_temperatures => 'Sıcak Sıcaklıklar';
 
   @override
-  String get sensory_cold_temperatures => 'Temperaturas Frias';
+  String get sensory_cold_temperatures => 'Soğuk Sıcaklıklar';
 
   @override
-  String get interest_music => 'Música';
+  String get interest_music => 'Müzik';
 
   @override
-  String get interest_drawing => 'Desenho';
+  String get interest_drawing => 'Çizim';
 
   @override
-  String get interest_numbers => 'Números';
+  String get interest_numbers => 'Sayılar';
 
   @override
-  String get interest_animals => 'Animais';
+  String get interest_animals => 'Hayvanlar';
 
   @override
-  String get interest_cars => 'Carros';
+  String get interest_cars => 'Arabalar';
 
   @override
-  String get interest_books => 'Livros';
+  String get interest_books => 'Kitaplar';
 
   @override
-  String get interest_games => 'Jogos';
+  String get interest_games => 'Oyunlar';
 
   @override
-  String get interest_computer => 'Computador';
+  String get interest_computer => 'Bilgisayar';
 
   @override
   String get interest_tablet => 'Tablet';
 
   @override
-  String get interest_toys => 'Brinquedos';
+  String get interest_toys => 'Oyuncaklar';
 
   @override
-  String get interest_sports => 'Esportes';
+  String get interest_sports => 'Spor';
 
   @override
-  String get interest_dance => 'Dança';
+  String get interest_dance => 'Dans';
 
   @override
-  String get interest_cooking => 'Culinária';
+  String get interest_cooking => 'Yemek Pişirme';
 
   @override
-  String get interest_gardening => 'Jardinagem';
+  String get interest_gardening => 'Bahçıvanlık';
 
   @override
-  String get interest_science => 'Ciência';
+  String get interest_science => 'Bilim';
 
   @override
-  String get interest_math => 'Matemática';
+  String get interest_math => 'Matematik';
 
   @override
-  String get interest_art => 'Arte';
+  String get interest_art => 'Sanat';
 
   @override
-  String get interest_photography => 'Fotografia';
+  String get interest_photography => 'Fotoğrafçılık';
 
   @override
-  String get interest_videos => 'Vídeos';
+  String get interest_videos => 'Videolar';
 
   @override
-  String get interest_movies => 'Filmes';
+  String get interest_movies => 'Filmler';
 
   @override
-  String get interest_series => 'Séries';
+  String get interest_series => 'Diziler';
 
   @override
-  String get interest_puzzles => 'Quebra-cabeças';
+  String get interest_puzzles => 'Bulmacalar';
 
   @override
   String get interest_lego => 'Lego';
 
   @override
-  String get interest_dolls => 'Bonecas';
+  String get interest_dolls => 'Bebekler';
 
   @override
-  String get interest_superheroes => 'Super-heróis';
+  String get interest_superheroes => 'Süper Kahramanlar';
 
   @override
-  String get delete_post_action => 'Deletar';
+  String get delete_post_action => 'Sil';
 
   @override
-  String get report_post_action => 'Denunciar';
+  String get report_post_action => 'Şikayet Et';
 
   @override
-  String get clear_search => 'Limpar busca';
+  String get clear_search => 'Aramayı temizle';
 
   @override
-  String get month => 'mês';
+  String get month => 'ay';
 
   @override
-  String get months => 'meses';
+  String get months => 'ay';
 
   @override
-  String get year => 'ano';
+  String get year => 'yaş';
 
   @override
-  String get years => 'anos';
+  String get years => 'yaş';
 }

@@ -12,7 +12,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get app_name => 'TISM';
 
   @override
-  String get app_subtitle => 'Всё что нужно знать о РАС одним кликом';
+  String get app_subtitle => 'Всё, что нужно знать об РАС в одном клике';
 
   @override
   String get app_title => 'TISM - Руководство по РАС';
@@ -24,7 +24,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get register => 'Регистрация';
 
   @override
-  String get email => 'Электронная почта';
+  String get email => 'Email';
 
   @override
   String get password => 'Пароль';
@@ -39,13 +39,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get username => 'Имя пользователя';
 
   @override
-  String get forgot_password => 'Забыли пароль';
+  String get forgot_password => 'Забыл пароль';
 
   @override
-  String get login_success => 'Успешный вход';
+  String get login_success => 'Вход выполнен успешно';
 
   @override
-  String get register_success => 'Аккаунт успешно создан';
+  String get register_success => 'Аккаунт создан успешно';
 
   @override
   String get logout => 'Выйти';
@@ -60,7 +60,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get participant_desc => 'Обычный пользователь TISM';
 
   @override
-  String get responsible => 'Опекун';
+  String get responsible => 'Ответственный';
 
   @override
   String get responsible_desc => 'Член семьи или опекун';
@@ -81,13 +81,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile => 'Профиль';
 
   @override
-  String get edit_profile => 'Редактировать профиль';
+  String get edit_profile => 'Редактировать Профиль';
 
   @override
-  String get edit_name => 'Редактировать имя';
+  String get edit_name => 'Редактировать Имя';
 
   @override
-  String get edit_username => 'Редактировать имя пользователя';
+  String get edit_username => 'Редактировать Имя пользователя';
 
   @override
   String get full_name => 'Полное имя';
@@ -108,7 +108,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get system_theme => 'Системная';
 
   @override
-  String get system_theme_desc => 'Следовать теме устройства';
+  String get system_theme_desc => 'Следует теме устройства';
 
   @override
   String get home => 'Главная';
@@ -132,7 +132,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get search => 'Поиск';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'Привет';
 
   @override
   String hello_user(String name) {
@@ -143,19 +143,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get explore_content => 'Изучайте образовательный контент о РАС';
 
   @override
-  String get educational_feed => 'Образовательная лента';
+  String get educational_feed => 'Образовательная Лента';
 
   @override
-  String get personalized_routine => 'Rotina Personalizada';
+  String get personalized_routine => 'Персонализированный Распорядок';
 
   @override
-  String get custom_routine => 'Индивидуальный распорядок';
+  String get custom_routine => 'Персональный Распорядок';
 
   @override
-  String get observation_diary => 'Дневник наблюдений';
+  String get observation_diary => 'Дневник Наблюдений';
 
   @override
-  String get tina_chatbot => 'Тина (Чат-бот)';
+  String get tina_chatbot => 'Тина (Чатбот)';
 
   @override
   String get tea_forum => 'Форум РАС';
@@ -164,10 +164,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get articles => 'Статьи';
 
   @override
-  String get digital_library => 'Цифровая библиотека';
+  String get digital_library => 'Цифровая Библиотека';
 
   @override
-  String get new_post => 'Новый пост';
+  String get new_post => 'Новый Пост';
 
   @override
   String get publish => 'Опубликовать';
@@ -180,13 +180,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get write_something => 'Напишите что-нибудь перед публикацией';
 
   @override
-  String get confirm_publication => 'Подтвердить публикацию';
+  String get confirm_publication => 'Подтвердить Публикацию';
 
   @override
   String get want_to_publish => 'Хотите опубликовать этот пост на форуме?';
 
   @override
-  String get post_published => 'Пост успешно опубликован!';
+  String get post_published => 'Пост опубликован успешно!';
 
   @override
   String get error_publishing => 'Ошибка публикации';
@@ -205,15 +205,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tina_intro =>
-      '🤖 **Привет! Я Тина!**\\n\\nЯ виртуальный помощник, специализирующийся на аутизме и нейроразнообразии, разработанный специально для TISM мультидисциплинарной командой экспертов.';
+      '🤖 **Привет! Я Тина!**\n\nЯ виртуальный помощник, специализирующийся на аутизме и нейроразнообразии, разработанный специально для TISM мультидисциплинарной командой экспертов.';
 
   @override
   String get tina_specialization =>
-      '🎯 **Моя специализация:**\\n• 🧠 Развитие и поведение\\n• 🏫 Инклюзивные образовательные стратегии\\n• 💬 Техники коммуникации и социального взаимодействия\\n• 🌍 Экологические и сенсорные адаптации\\n• 🛠️ Практические ресурсы для повседневной жизни';
+      '🎯 **Моя специализация:**\n• 🧠 Развитие и поведение\n• 🏫 Инклюзивные образовательные стратегии\n• 💬 Техники коммуникации и социального взаимодействия\n• 🌍 Экологические и сенсорные адаптации\n• 🛠️ Практические ресурсы для повседневной жизни';
 
   @override
   String get tina_scientific =>
-      '🔬 **Научная база:** Я была обучена знаниями, подтвержденными неврологами, психологами, эрготерапевтами, логопедами и специальными педагогами.';
+      '🔬 **Научная основа:** Я была обучена знаниями, подтверждёнными неврологами, психологами, эрготерапевтами, логопедами и специальными педагогами.';
 
   @override
   String get tina_important =>
@@ -221,17 +221,37 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tina_support =>
-      '💙 **Я здесь, чтобы поддержать вас надежной информацией и эмпатией!**';
+      '💙 **Я здесь, чтобы поддержать вас надёжной информацией и эмпатией!**';
 
   @override
   String get understood_tina => 'Понятно, Тина! Давайте поговорим! 😊';
 
   @override
   String get tina_welcome =>
-      'Привет! Я Тина, виртуальный помощник, специализирующийся на аутизме и нейроразнообразии от TISM!\\n\\nЯ здесь, чтобы предложить персонализированную поддержку и информацию, основанную на научных данных о:\\n\\n• Развитии и поведении\\n• Инклюзивных образовательных стратегиях\\n• Техниках коммуникации и социального взаимодействия\\n• Экологических и сенсорных адаптациях\\n• Практических ресурсах и инструментах для повседневной жизни\\n\\nМоя база знаний была разработана мультидисциплинарной командой экспертов, включая неврологов, психологов, эрготерапевтов, логопедов и специальных педагогов.\\n\\nВажно отметить, что я не ставлю диагнозы и не заменяю медицинских специалистов - моя роль дополнительная, предлагающая надежную информацию и практическую поддержку семьям, опекунам и нейроотличным людям.\\n\\nКак я могу помочь вам сегодня?';
+      'Привет! Я Тина, виртуальный помощник, специализирующийся на аутизме и нейроразнообразии от TISM!\n\nЯ здесь, чтобы предложить персонализированную поддержку и информацию, основанную на научных данных о:\n\n• Развитии и поведении\n• Инклюзивных образовательных стратегиях\n• Техниках коммуникации и социального взаимодействия\n• Экологических и сенсорных адаптациях\n• Практических ресурсах и инструментах для повседневной жизни\n\nМоя база знаний была разработана мультидисциплинарной командой экспертов, включая неврологов, психологов, эрготерапевтов, логопедов и специальных педагогов.\n\nВажно отметить, что я не ставлю диагнозы и не заменяю медицинских специалистов - моя роль дополнительная, предлагающая надёжную информацию и практическую поддержку для семей, опекунов и нейроразнообразных людей.\n\nКак я могу помочь вам сегодня?';
 
   @override
-  String get diary_observations => 'Дневник наблюдений';
+  String get tina_connection_error =>
+      'У меня сейчас проблемы с подключением. Много пользователей используют систему. Попробуйте через несколько минут! 😅';
+
+  @override
+  String get tina_general_error =>
+      'Ой! Что-то пошло не так. Попробуйте через несколько мгновений! 🤖';
+
+  @override
+  String get tina_api_key_error =>
+      'Неверный API-ключ. Проверьте, что ключ Gemini корректен в файле .env';
+
+  @override
+  String get tina_quota_error =>
+      'Превышен лимит использования API. Попробуйте позже.';
+
+  @override
+  String get tina_network_error =>
+      'Ошибка соединения. Проверьте интернет и попробуйте снова.';
+
+  @override
+  String get diary_observations => 'Дневник Наблюдений';
 
   @override
   String get no_observations => 'Пока нет наблюдений';
@@ -240,7 +260,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tap_plus_start => 'Нажмите + чтобы начать';
 
   @override
-  String get report_copied => 'Отчет скопирован! Вставьте в email или WhatsApp';
+  String get report_copied => 'Отчёт скопирован! Вставьте в email или WhatsApp';
 
   @override
   String get progress => 'Прогресс';
@@ -285,10 +305,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get clear_filters => 'Очистить фильтры';
 
   @override
-  String get add_activity => 'Добавить активность';
+  String get add_activity => 'Добавить Активность';
 
   @override
-  String get edit_activity => 'Редактировать активность';
+  String get edit_activity => 'Редактировать Активность';
 
   @override
   String get morning => 'Утро';
@@ -306,7 +326,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get wellness => 'Благополучие';
 
   @override
-  String get night => 'Вечер';
+  String get night => 'Ночь';
 
   @override
   String get all => 'Все';
@@ -316,25 +336,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profile_setup_desc =>
-      'Чтобы создать персонализированный распорядок, давайте сначала настроим профиль ребенка.\\n\\nЭто поможет нам предложить подходящие по возрасту активности и уровень поддержки.';
+      'Чтобы создать персонализированный распорядок, давайте сначала настроим профиль ребёнка.\n\nЭто поможет нам предложить подходящие по возрасту активности и уровню поддержки.';
 
   @override
-  String get create_profile => 'Создать профиль';
+  String get create_profile => 'Создать Профиль';
 
   @override
-  String get edit_profile_menu => 'Редактировать профиль';
+  String get edit_profile_menu => 'Редактировать Профиль';
 
   @override
-  String get switch_child => 'Сменить ребенка';
+  String get switch_child => 'Сменить Ребёнка';
 
   @override
   String get new_child => 'Новый Ребёнок';
 
   @override
-  String get select_child => 'Выбрать ребенка';
+  String get select_child => 'Выбрать Ребёнка';
 
   @override
-  String get verify_email => 'Подтвердить email';
+  String get verify_email => 'Подтвердить Email';
 
   @override
   String get verification_sent => 'Email подтверждения отправлен!';
@@ -344,10 +364,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get verification_desc =>
-      'Мы отправили ссылку подтверждения на ваш email. Нажмите на ссылку, чтобы активировать аккаунт.';
+      'Нажмите на ссылку в email, чтобы активировать ваш аккаунт.\nВы будете перенаправлены автоматически.';
 
   @override
-  String get already_verified => 'Уже подтверждено - Войти';
+  String get already_verified => 'Уже подтверждён - Войти';
 
   @override
   String get resend_verification => 'Отправить email подтверждения повторно';
@@ -356,11 +376,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get verifying => 'Проверяю...';
 
   @override
-  String get delete_account => 'Удалить аккаунт';
+  String get delete_account => 'Удалить Аккаунт';
 
   @override
   String get delete_warning =>
-      'Это действие НЕОБРАТИМО!\\n\\nВсе ваши данные будут безвозвратно потеряны.';
+      'Это действие НЕОБРАТИМО!\n\nВсе ваши данные будут потеряны навсегда.';
 
   @override
   String get delete_confirmation => 'Для подтверждения введите точно:';
@@ -373,7 +393,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get delete_incorrect =>
-      'Неверная фраза. Проверьте заглавные и строчные буквы.';
+      'Неправильная фраза. Проверьте заглавные и строчные буквы.';
 
   @override
   String get confirm_password_delete => 'Подтвердить пароль';
@@ -385,7 +405,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get save => 'Сохранить';
 
   @override
-  String get cancel => 'Отмена';
+  String get cancel => 'Отменить';
 
   @override
   String get confirm => 'Подтвердить';
@@ -400,7 +420,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get add => 'Добавить';
 
   @override
-  String get remove => 'Убрать';
+  String get remove => 'Удалить';
 
   @override
   String get update => 'Обновить';
@@ -409,7 +429,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get close => 'Закрыть';
 
   @override
-  String get ok => 'ОК';
+  String get ok => 'OK';
 
   @override
   String get yes => 'Да';
@@ -436,19 +456,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get try_again => 'Попробовать снова';
 
   @override
-  String get updated_successfully => 'Успешно обновлено!';
+  String get updated_successfully => 'Обновлено успешно!';
 
   @override
-  String get deleted_successfully => 'Успешно удалено';
+  String get deleted_successfully => 'Удалено успешно';
 
   @override
-  String get saved_successfully => 'Успешно сохранено!';
+  String get saved_successfully => 'Сохранено успешно!';
 
   @override
   String get welcome_message => 'Привет, добро пожаловать!';
 
   @override
-  String get no_account => 'Нет аккаунта? Зарегистрируйтесь';
+  String get no_account => 'Ещё нет аккаунта? Зарегистрируйтесь';
 
   @override
   String get fill_all_fields => 'Заполните все поля';
@@ -489,10 +509,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Тип пользователя можно изменить только раз в день';
 
   @override
-  String get wake_up => 'Проснуться';
+  String get wake_up => 'Просыпаться';
 
   @override
-  String get wake_up_desc => 'Просыпаться под тихую музыку';
+  String get wake_up_desc => 'Просыпаться под мягкую музыку';
 
   @override
   String get brush_teeth => 'Чистить зубы';
@@ -510,7 +530,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get educational_activity => 'Образовательная активность';
 
   @override
-  String get educational_activity_desc => 'Развивающие игры или школа';
+  String get educational_activity_desc => 'Образовательные игры или школа';
 
   @override
   String get snack => 'Перекус';
@@ -531,10 +551,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get draw_desc => 'Свободное рисование';
 
   @override
-  String get numbers => 'Цифры';
+  String get numbers => 'Числа';
 
   @override
-  String get numbers_desc => 'Игры с цифрами';
+  String get numbers_desc => 'Игры с числами';
 
   @override
   String get sensory_break => 'Сенсорная пауза';
@@ -558,27 +578,27 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sleep => 'Спать';
 
   @override
-  String get sleep_desc => 'Тихая музыка для сна';
+  String get sleep_desc => 'Мягкая музыка для сна';
 
   @override
   String get welcome_forum => 'Добро пожаловать на Форум РАС! 💙';
 
   @override
   String get first_post_message =>
-      'Будьте первым, кто поделится опытом\\nили задаст вопрос сообществу';
+      'Будьте первым, кто поделится опытом\nили задаст вопрос сообществу';
 
   @override
   String get create_first_post => 'Создать первый пост';
 
   @override
-  String get delete_post => 'Удалить пост';
+  String get delete_post => 'Удалить Пост';
 
   @override
   String get delete_post_confirm =>
       'Вы уверены, что хотите удалить этот пост? Это действие нельзя отменить.';
 
   @override
-  String get post_deleted_success => 'Пост успешно удалён';
+  String get post_deleted_success => 'Пост удалён успешно';
 
   @override
   String error_deleting_post(String error) {
@@ -589,14 +609,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get report_post => 'Пожаловаться';
 
   @override
-  String get report_post_title => 'Пожаловаться на пост';
+  String get report_post_title => 'Пожаловаться на Пост';
 
   @override
   String get report_post_confirm =>
       'Вы уверены, что хотите пожаловаться на этот пост?';
 
   @override
-  String get post_reported => 'Жалоба на пост отправлена';
+  String get post_reported => 'Жалоба на пост отправлена успешно';
 
   @override
   String get now => 'Сейчас';
@@ -609,14 +629,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get try_different_keywords =>
-      'Попробуйте другие ключевые слова\\nили изучите категории ниже';
+      'Попробуйте использовать другие ключевые слова\nили изучите категории ниже';
 
   @override
   String get type_to_search => 'Введите для поиска...';
 
   @override
   String get find_posts_profiles =>
-      'Найдите посты, профили и хештеги\\nв сообществе РАС';
+      'Найдите посты, профили и хештеги\nв сообществе РАС';
 
   @override
   String get how_identify_autism => 'Как определить аутизм?';
@@ -637,10 +657,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get child_tantrums => 'Ребёнок с истериками';
 
   @override
-  String get new_observation => 'Новое наблюдение';
+  String get new_observation => 'Новое Наблюдение';
 
   @override
-  String get edit_observation => 'Редактировать наблюдение';
+  String get edit_observation => 'Редактировать Наблюдение';
 
   @override
   String get observation_type => 'Тип:';
@@ -663,7 +683,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get possible_triggers => 'Возможные триггеры:';
 
   @override
-  String get delete_observation => 'Удалить наблюдение';
+  String get delete_observation => 'Удалить Наблюдение';
 
   @override
   String get delete_observation_confirm =>
@@ -721,7 +741,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get username_updated => 'Имя пользователя обновлено!';
 
   @override
-  String get account_deleted => 'Аккаунт успешно удалён';
+  String get account_deleted => 'Аккаунт удалён успешно';
 
   @override
   String get incorrect_password => 'Неверный пароль';
@@ -730,7 +750,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get user_not_found => 'Пользователь не найден';
 
   @override
-  String get email_not_verified => 'Email еще не подтвержден';
+  String get email_not_verified => 'Email ещё не подтверждён';
 
   @override
   String get verification_email_sent =>
@@ -752,16 +772,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get example123 => 'пример123';
 
   @override
-  String get new_routine => 'Новая Рутина';
+  String get new_routine => 'Новый Распорядок';
 
   @override
-  String get edit_routine => 'Редактировать Рутину';
+  String get edit_routine => 'Редактировать Распорядок';
 
   @override
-  String get activity_title => 'Название деятельности';
+  String get activity_title => 'Название активности';
 
   @override
-  String get activity_description => 'Описание деятельности';
+  String get activity_description => 'Описание активности';
 
   @override
   String get time_format => 'Время (00:00 - 23:59)';
@@ -776,422 +796,422 @@ class AppLocalizationsRu extends AppLocalizations {
   String get color => 'Цвет';
 
   @override
-  String get create_routine => 'Создать Рутину';
+  String get create_routine => 'Создать Распорядок';
 
   @override
   String get save_changes => 'Сохранить Изменения';
 
   @override
-  String get routine_title_empty => 'Название рутины не может быть пустым';
+  String get routine_title_empty => 'Название распорядка не может быть пустым';
 
   @override
   String get invalid_time_format =>
       'Неверное время. Используйте 24-часовой формат (00:00 - 23:59)';
 
   @override
-  String get delete_routine => 'Удалить Рутину';
+  String get delete_routine => 'Удалить Распорядок';
 
   @override
   String get delete_routine_confirm =>
-      'Вы уверены, что хотите удалить эту рутину?';
+      'Вы уверены, что хотите удалить этот распорядок?';
 
   @override
   String hello_user_name(Object name) {
-    return 'Olá, $name! 👋';
+    return 'Привет, $name! 👋';
   }
 
   @override
-  String get statistics => 'Estatísticas';
+  String get statistics => 'Статистика';
 
   @override
-  String get general_summary => 'Resumo Geral';
+  String get general_summary => 'Общая Сводка';
 
   @override
-  String get total => 'Total';
+  String get total => 'Всего';
 
   @override
-  String get progress_plural => 'Progressos';
+  String get progress_plural => 'Прогресс';
 
   @override
-  String get crisis_plural => 'Crises';
+  String get crisis_plural => 'Кризисы';
 
   @override
-  String get type_distribution => 'Distribuição por Tipo';
+  String get type_distribution => 'Распределение по Типам';
 
   @override
-  String get most_frequent_triggers => 'Gatilhos Mais Frequentes';
+  String get most_frequent_triggers => 'Наиболее Частые Триггеры';
 
   @override
-  String get weekly_trend => 'Tendência Semanal';
+  String get weekly_trend => 'Недельная Тенденция';
 
   @override
   String observations_last_7_days(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return 'Наблюдения за последние 7 дней: $count';
   }
 
   @override
-  String get child_name => 'Nome da criança';
+  String get child_name => 'Имя ребёнка';
 
   @override
-  String get age => 'Idade';
+  String get age => 'Возраст';
 
   @override
-  String get support_level_label => 'Nível de suporte';
+  String get support_level_label => 'Уровень поддержки';
 
   @override
-  String get sensory_preferences => 'Preferências sensoriais';
+  String get sensory_preferences => 'Сенсорные предпочтения';
 
   @override
-  String get interests => 'Interesses';
+  String get interests => 'Интересы';
 
   @override
-  String get child_name_empty => 'O nome da criança não pode estar vazio';
+  String get child_name_empty => 'Имя ребёнка не может быть пустым';
 
   @override
   String observations_last_7_days_count(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return 'Наблюдения за последние 7 дней: $count';
   }
 
   @override
-  String get configure_profile => 'Configurar Perfil';
+  String get configure_profile => 'Настроить Профиль';
 
   @override
-  String get edit_username_title => 'Editar Username';
+  String get edit_username_title => 'Редактировать Имя пользователя';
 
   @override
-  String get account_deleted_success => 'Conta deletada com sucesso';
+  String get account_deleted_success => 'Аккаунт удалён успешно';
 
   @override
-  String get theme_light => 'Claro';
+  String get theme_light => 'Светлая';
 
   @override
-  String get theme_dark => 'Escuro';
+  String get theme_dark => 'Тёмная';
 
   @override
-  String get theme_system => 'Sistema';
+  String get theme_system => 'Системная';
 
   @override
-  String get edit_observation_action => 'Editar observação';
+  String get edit_observation_action => 'Редактировать наблюдение';
 
   @override
-  String get delete_observation_action => 'Deletar observação';
+  String get delete_observation_action => 'Удалить наблюдение';
 
   @override
-  String get delete_observation_title => 'Deletar Observação';
+  String get delete_observation_title => 'Удалить Наблюдение';
 
   @override
   String get delete_observation_message =>
-      'Tem certeza que deseja deletar esta observação?';
+      'Вы уверены, что хотите удалить это наблюдение?';
 
   @override
-  String get trigger_routine_change => 'Mudança de rotina';
+  String get trigger_routine_change => 'Изменение распорядка';
 
   @override
-  String get trigger_loud_noise => 'Barulho alto';
+  String get trigger_loud_noise => 'Громкий шум';
 
   @override
-  String get trigger_crowd => 'Multidão';
+  String get trigger_crowd => 'Толпа';
 
   @override
-  String get trigger_tiredness => 'Cansaço';
+  String get trigger_tiredness => 'Усталость';
 
   @override
-  String get trigger_hunger => 'Fome';
+  String get trigger_hunger => 'Голод';
 
   @override
-  String get trigger_frustration => 'Frustração';
+  String get trigger_frustration => 'Фрустрация';
 
   @override
-  String get trigger_transition => 'Transição';
+  String get trigger_transition => 'Переход';
 
   @override
-  String get trigger_new_environment => 'Ambiente novo';
+  String get trigger_new_environment => 'Новая среда';
 
   @override
-  String get trigger_bright_light => 'Luz muito forte';
+  String get trigger_bright_light => 'Яркий свет';
 
   @override
-  String get trigger_unpleasant_texture => 'Textura desagradável';
+  String get trigger_unpleasant_texture => 'Неприятная текстура';
 
   @override
-  String get trigger_strong_smell => 'Cheiro forte';
+  String get trigger_strong_smell => 'Сильный запах';
 
   @override
-  String get trigger_temperature => 'Temperatura';
+  String get trigger_temperature => 'Температура';
 
   @override
-  String get trigger_tight_clothes => 'Roupa apertada';
+  String get trigger_tight_clothes => 'Тесная одежда';
 
   @override
-  String get trigger_insufficient_sleep => 'Sono insuficiente';
+  String get trigger_insufficient_sleep => 'Недостаточный сон';
 
   @override
-  String get trigger_physical_pain => 'Dor física';
+  String get trigger_physical_pain => 'Физическая боль';
 
   @override
-  String get trigger_medication => 'Medicação';
+  String get trigger_medication => 'Медикаменты';
 
   @override
-  String get trigger_medical_visit => 'Visita médica';
+  String get trigger_medical_visit => 'Визит к врачу';
 
   @override
-  String get trigger_new_school => 'Escola nova';
+  String get trigger_new_school => 'Новая школа';
 
   @override
-  String get trigger_substitute_teacher => 'Professor substituto';
+  String get trigger_substitute_teacher => 'Учитель-заместитель';
 
   @override
-  String get trigger_test_evaluation => 'Prova/avaliação';
+  String get trigger_test_evaluation => 'Тест/оценка';
 
   @override
-  String get trigger_party_event => 'Festa/evento';
+  String get trigger_party_event => 'Вечеринка/событие';
 
   @override
-  String get trigger_travel => 'Viagem';
+  String get trigger_travel => 'Путешествие';
 
   @override
-  String get trigger_rain_storm => 'Chuva/temporal';
+  String get trigger_rain_storm => 'Дождь/буря';
 
   @override
-  String get trigger_parents_separation => 'Separação dos pais';
+  String get trigger_parents_separation => 'Разлука родителей';
 
   @override
-  String get trigger_broken_toy => 'Brinquedo quebrado';
+  String get trigger_broken_toy => 'Сломанная игрушка';
 
   @override
-  String get trigger_not_getting_something => 'Não conseguir algo';
+  String get trigger_not_getting_something => 'Не получить что-то';
 
   @override
-  String get trigger_activity_interruption => 'Interrupção atividade';
+  String get trigger_activity_interruption => 'Прерывание активности';
 
   @override
-  String get trigger_waiting_too_long => 'Esperar muito tempo';
+  String get trigger_waiting_too_long => 'Слишком долгое ожидание';
 
   @override
-  String get observer_father => 'pai';
+  String get observer_father => 'отец';
 
   @override
-  String get observer_mother => 'mãe';
+  String get observer_mother => 'мать';
 
   @override
-  String get observer_grandfather => 'avô';
+  String get observer_grandfather => 'дедушка';
 
   @override
-  String get observer_grandmother => 'avó';
+  String get observer_grandmother => 'бабушка';
 
   @override
-  String get observer_uncle => 'tio';
+  String get observer_uncle => 'дядя';
 
   @override
-  String get observer_aunt => 'tia';
+  String get observer_aunt => 'тётя';
 
   @override
-  String get observer_brother => 'irmão';
+  String get observer_brother => 'брат';
 
   @override
-  String get observer_sister => 'irmã';
+  String get observer_sister => 'сестра';
 
   @override
-  String get observer_son => 'filho';
+  String get observer_son => 'сын';
 
   @override
-  String get observer_daughter => 'filha';
+  String get observer_daughter => 'дочь';
 
   @override
-  String get observer_grandson => 'neto';
+  String get observer_grandson => 'внук';
 
   @override
-  String get observer_granddaughter => 'neta';
+  String get observer_granddaughter => 'внучка';
 
   @override
-  String get observer_nephew => 'sobrinho';
+  String get observer_nephew => 'племянник';
 
   @override
-  String get observer_niece => 'sobrinha';
+  String get observer_niece => 'племянница';
 
   @override
-  String get observer_male_cousin => 'primo';
+  String get observer_male_cousin => 'двоюродный брат';
 
   @override
-  String get observer_female_cousin => 'prima';
+  String get observer_female_cousin => 'двоюродная сестра';
 
   @override
-  String get observer_male_friend => 'amigo';
+  String get observer_male_friend => 'друг';
 
   @override
-  String get observer_female_friend => 'amiga';
+  String get observer_female_friend => 'подруга';
 
   @override
-  String get observer_relative => 'parente';
+  String get observer_relative => 'родственник';
 
   @override
-  String get observer_caregiver => 'cuidador';
+  String get observer_caregiver => 'опекун';
 
   @override
-  String get observer_teacher => 'professor';
+  String get observer_teacher => 'учитель';
 
   @override
-  String get observer_therapist => 'terapeuta';
+  String get observer_therapist => 'терапевт';
 
   @override
-  String get observer_doctor => 'médico';
+  String get observer_doctor => 'врач';
 
   @override
-  String get observer_psychologist => 'psicólogo';
+  String get observer_psychologist => 'психолог';
 
   @override
-  String get support_level_mild => 'leve';
+  String get support_level_mild => 'лёгкий';
 
   @override
-  String get support_level_moderate => 'moderado';
+  String get support_level_moderate => 'умеренный';
 
   @override
-  String get support_level_severe => 'severo';
+  String get support_level_severe => 'тяжёлый';
 
   @override
-  String get sensory_visual => 'Visual';
+  String get sensory_visual => 'Визуальный';
 
   @override
-  String get sensory_auditory => 'Auditivo';
+  String get sensory_auditory => 'Слуховой';
 
   @override
-  String get sensory_tactile => 'Tátil';
+  String get sensory_tactile => 'Тактильный';
 
   @override
-  String get sensory_movement => 'Movimento';
+  String get sensory_movement => 'Движение';
 
   @override
-  String get sensory_olfactory => 'Olfativo';
+  String get sensory_olfactory => 'Обонятельный';
 
   @override
-  String get sensory_gustatory => 'Gustativo';
+  String get sensory_gustatory => 'Вкусовой';
 
   @override
-  String get sensory_proprioceptive => 'Proprioceptivo';
+  String get sensory_proprioceptive => 'Проприоцептивный';
 
   @override
-  String get sensory_vestibular => 'Vestibular';
+  String get sensory_vestibular => 'Вестибулярный';
 
   @override
-  String get sensory_deep_pressure => 'Pressão Profunda';
+  String get sensory_deep_pressure => 'Глубокое Давление';
 
   @override
-  String get sensory_soft_textures => 'Texturas Suaves';
+  String get sensory_soft_textures => 'Мягкие Текстуры';
 
   @override
-  String get sensory_rough_textures => 'Texturas Ásperas';
+  String get sensory_rough_textures => 'Грубые Текстуры';
 
   @override
-  String get sensory_low_sounds => 'Sons Baixos';
+  String get sensory_low_sounds => 'Тихие Звуки';
 
   @override
-  String get sensory_high_sounds => 'Sons Altos';
+  String get sensory_high_sounds => 'Громкие Звуки';
 
   @override
-  String get sensory_soft_lights => 'Luzes Suaves';
+  String get sensory_soft_lights => 'Мягкий Свет';
 
   @override
-  String get sensory_bright_lights => 'Luzes Brilhantes';
+  String get sensory_bright_lights => 'Яркий Свет';
 
   @override
-  String get sensory_hot_temperatures => 'Temperaturas Quentes';
+  String get sensory_hot_temperatures => 'Горячие Температуры';
 
   @override
-  String get sensory_cold_temperatures => 'Temperaturas Frias';
+  String get sensory_cold_temperatures => 'Холодные Температуры';
 
   @override
-  String get interest_music => 'Música';
+  String get interest_music => 'Музыка';
 
   @override
-  String get interest_drawing => 'Desenho';
+  String get interest_drawing => 'Рисование';
 
   @override
-  String get interest_numbers => 'Números';
+  String get interest_numbers => 'Числа';
 
   @override
-  String get interest_animals => 'Animais';
+  String get interest_animals => 'Животные';
 
   @override
-  String get interest_cars => 'Carros';
+  String get interest_cars => 'Машины';
 
   @override
-  String get interest_books => 'Livros';
+  String get interest_books => 'Книги';
 
   @override
-  String get interest_games => 'Jogos';
+  String get interest_games => 'Игры';
 
   @override
-  String get interest_computer => 'Computador';
+  String get interest_computer => 'Компьютер';
 
   @override
-  String get interest_tablet => 'Tablet';
+  String get interest_tablet => 'Планшет';
 
   @override
-  String get interest_toys => 'Brinquedos';
+  String get interest_toys => 'Игрушки';
 
   @override
-  String get interest_sports => 'Esportes';
+  String get interest_sports => 'Спорт';
 
   @override
-  String get interest_dance => 'Dança';
+  String get interest_dance => 'Танцы';
 
   @override
-  String get interest_cooking => 'Culinária';
+  String get interest_cooking => 'Готовка';
 
   @override
-  String get interest_gardening => 'Jardinagem';
+  String get interest_gardening => 'Садоводство';
 
   @override
-  String get interest_science => 'Ciência';
+  String get interest_science => 'Наука';
 
   @override
-  String get interest_math => 'Matemática';
+  String get interest_math => 'Математика';
 
   @override
-  String get interest_art => 'Arte';
+  String get interest_art => 'Искусство';
 
   @override
-  String get interest_photography => 'Fotografia';
+  String get interest_photography => 'Фотография';
 
   @override
-  String get interest_videos => 'Vídeos';
+  String get interest_videos => 'Видео';
 
   @override
-  String get interest_movies => 'Filmes';
+  String get interest_movies => 'Фильмы';
 
   @override
-  String get interest_series => 'Séries';
+  String get interest_series => 'Сериалы';
 
   @override
-  String get interest_puzzles => 'Quebra-cabeças';
+  String get interest_puzzles => 'Пазлы';
 
   @override
-  String get interest_lego => 'Lego';
+  String get interest_lego => 'Лего';
 
   @override
-  String get interest_dolls => 'Bonecas';
+  String get interest_dolls => 'Куклы';
 
   @override
-  String get interest_superheroes => 'Super-heróis';
+  String get interest_superheroes => 'Супергерои';
 
   @override
-  String get delete_post_action => 'Deletar';
+  String get delete_post_action => 'Удалить';
 
   @override
-  String get report_post_action => 'Denunciar';
+  String get report_post_action => 'Пожаловаться';
 
   @override
-  String get clear_search => 'Limpar busca';
+  String get clear_search => 'Очистить поиск';
 
   @override
-  String get month => 'mês';
+  String get month => 'месяц';
 
   @override
-  String get months => 'meses';
+  String get months => 'месяцев';
 
   @override
-  String get year => 'ano';
+  String get year => 'год';
 
   @override
-  String get years => 'anos';
+  String get years => 'лет';
 }

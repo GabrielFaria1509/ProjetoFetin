@@ -11,7 +11,7 @@ class ThemeService extends ChangeNotifier {
   bool get isLightMode => _themeMode == ThemeMode.light;
   bool get isSystemMode => _themeMode == ThemeMode.system;
   
-  String getThemeName(BuildContext context) {
+  String getThemeName(BuildContext? context) {
     // This will be handled in the UI layer with AppLocalizations
     switch (_themeMode) {
       case ThemeMode.light:
@@ -24,7 +24,7 @@ class ThemeService extends ChangeNotifier {
   }
   
   // Keep for backward compatibility
-  String get themeName => getThemeName(null as BuildContext);
+  String get themeName => getThemeName(null);
   
   ThemeService() {
     _loadTheme();

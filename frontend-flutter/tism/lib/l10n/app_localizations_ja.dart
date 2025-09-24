@@ -204,11 +204,11 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tina_intro =>
-      '🤖 **こんにちは！私はティナです！**\\n\\n私は自閉症と神経多様性に特化したバーチャルアシスタントで、専門家の学際的チームによってTISM専用に開発されました。';
+      '🤖 **こんにちは！私はティナです！**\n\n私は自閉症と神経多様性に特化したバーチャルアシスタントで、専門家の学際的チームによってTISM専用に開発されました。';
 
   @override
   String get tina_specialization =>
-      '🎯 **私の専門分野：**\\n• 🧠 発達と行動\\n• 🏫 包括的教育戦略\\n• 💬 コミュニケーションと社会的相互作用技術\\n• 🌍 環境と感覚の適応\\n• 🛠️ 日常生活の実用的リソース';
+      '🎯 **私の専門分野：**\n• 🧠 発達と行動\n• 🏫 包括的教育戦略\n• 💬 コミュニケーションと社会的相互作用技術\n• 🌍 環境と感覚の適応\n• 🛠️ 日常生活の実用的リソース';
 
   @override
   String get tina_scientific =>
@@ -226,7 +226,23 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tina_welcome =>
-      'こんにちは！私はティナ、TISMの自閉症と神経多様性専門のバーチャルアシスタントです！\\n\\n以下について個別サポートと科学的証拠に基づく情報を提供します：\\n\\n• 発達と行動\\n• 包括的教育戦略\\n• コミュニケーションと社会的相互作用技術\\n• 環境と感覚の適応\\n• 日常生活の実用的リソースとツール\\n\\n私の知識ベースは、神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者を含む学際的専門家チームによって開発されました。\\n\\n診断は行わず、医療専門家の代替ではないことを強調することが重要です - 私の役割は補完的で、家族、介護者、神経多様性のある人々に信頼できる情報と実用的サポートを提供します。\\n\\n今日はどのようにお手伝いできますか？';
+      'こんにちは！私はティナ、TISMの自閉症と神経多様性専門のバーチャルアシスタントです！\n\n以下について個別サポートと科学的証拠に基づく情報を提供します：\n\n• 発達と行動\n• 包括的教育戦略\n• コミュニケーションと社会的相互作用技術\n• 環境と感覚の適応\n• 日常生活の実用的リソースとツール\n\n私の知識ベースは、神経学者、心理学者、作業療法士、言語聴覚士、特別支援教育者を含む学際的専門家チームによって開発されました。\n\n診断は行わず、医療専門家の代替ではないことを強調することが重要です - 私の役割は補完的で、家族、介護者、神経多様性のある人々に信頼できる情報と実用的サポートを提供します。\n\n今日はどのようにお手伝いできますか？';
+
+  @override
+  String get tina_connection_error =>
+      '現在接続に問題があります。多くのユーザーがシステムを利用しています。数分後に再度お試しください！😅';
+
+  @override
+  String get tina_general_error => 'おっと！何か問題が発生しました。しばらくしてから再度お試しください！🤖';
+
+  @override
+  String get tina_api_key_error => 'APIキーが無効です。.envファイルのGeminiキーが正しいか確認してください';
+
+  @override
+  String get tina_quota_error => 'API使用制限を超えました。しばらくしてから再度お試しください。';
+
+  @override
+  String get tina_network_error => '接続エラー。インターネット接続を確認して再度お試しください。';
 
   @override
   String get diary_observations => '日記の観察';
@@ -314,7 +330,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get profile_setup_desc =>
-      'パーソナライズされたルーティンを作成するために、まず子どものプロフィールを設定しましょう。\\n\\nこれにより、年齢とサポートレベルに適したアクティビティを提案できます。';
+      'パーソナライズされたルーティンを作成するために、まず子どものプロフィールを設定しましょう。\n\nこれにより、年齢とサポートレベルに適したアクティビティを提案できます。';
 
   @override
   String get create_profile => 'プロフィール作成';
@@ -342,7 +358,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get verification_desc =>
-      'メール内のリンクをクリックしてアカウントを有効化してください。\\n自動的にリダイレクトされます。';
+      'メール内のリンクをクリックしてアカウントを有効化してください。\n自動的にリダイレクトされます。';
 
   @override
   String get already_verified => 'すでに確認済み - ログイン';
@@ -357,7 +373,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get delete_account => 'アカウント削除';
 
   @override
-  String get delete_warning => 'この操作は元に戻せません！\\n\\nすべてのデータが永久に失われます。';
+  String get delete_warning => 'この操作は元に戻せません！\n\nすべてのデータが永久に失われます。';
 
   @override
   String get delete_confirmation => '確認のため、正確に入力してください：';
@@ -557,7 +573,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get welcome_forum => '自閉症フォーラムへようこそ！💙';
 
   @override
-  String get first_post_message => '最初に経験を共有するか\\nコミュニティに質問してください';
+  String get first_post_message => '最初に経験を共有するか\nコミュニティに質問してください';
 
   @override
   String get create_first_post => '最初の投稿を作成';
@@ -598,13 +614,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get no_results_found => '結果が見つかりません';
 
   @override
-  String get try_different_keywords => '異なるキーワードを試すか\\n以下のカテゴリを探索してください';
+  String get try_different_keywords => '異なるキーワードを試すか\n以下のカテゴリを探索してください';
 
   @override
   String get type_to_search => '検索するために入力...';
 
   @override
-  String get find_posts_profiles => '自閉症コミュニティで投稿、プロフィール、\\nハッシュタグを見つける';
+  String get find_posts_profiles => '自閉症コミュニティで投稿、プロフィール、\nハッシュタグを見つける';
 
   @override
   String get how_identify_autism => '自閉症をどう識別するか？';

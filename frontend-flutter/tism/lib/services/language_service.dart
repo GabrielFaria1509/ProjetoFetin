@@ -95,17 +95,8 @@ class LanguageService extends ChangeNotifier {
   }
   
   // Obter string traduzida
-  String getString(String key, [List<dynamic>? args]) {
-    String text = _strings[key] ?? key;
-    
-    // Substituir placeholders %s, %d
-    if (args != null && args.isNotEmpty) {
-      for (int i = 0; i < args.length; i++) {
-        text = text.replaceFirst(RegExp(r'%[sd]'), args[i].toString());
-      }
-    }
-    
-    return text;
+  String getString(String key) {
+    return _strings[key] ?? key;
   }
   
   // Obter idioma atual
@@ -132,5 +123,4 @@ final languageService = LanguageService();
 // Extension para facilitar uso
 extension StringTranslation on String {
   String get tr => languageService.getString(this);
-  String trArgs(List<dynamic> args) => languageService.getString(this, args);
 }

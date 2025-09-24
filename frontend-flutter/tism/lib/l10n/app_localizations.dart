@@ -546,6 +546,36 @@ abstract class AppLocalizations {
   /// **'Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?'**
   String get tina_welcome;
 
+  /// No description provided for @tina_connection_error.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estou com dificuldades para me conectar no momento. Muitos usuários estão utilizando o sistema. Tente novamente em alguns minutos! 😅'**
+  String get tina_connection_error;
+
+  /// No description provided for @tina_general_error.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖'**
+  String get tina_general_error;
+
+  /// No description provided for @tina_api_key_error.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env'**
+  String get tina_api_key_error;
+
+  /// No description provided for @tina_quota_error.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite de uso da API excedido. Tente novamente mais tarde.'**
+  String get tina_quota_error;
+
+  /// No description provided for @tina_network_error.
+  ///
+  /// In pt, this message translates to:
+  /// **'Erro de conexão. Verifique sua internet e tente novamente.'**
+  String get tina_network_error;
+
   /// No description provided for @diary_observations.
   ///
   /// In pt, this message translates to:
@@ -624,7 +654,7 @@ abstract class AppLocalizations {
   /// **'Concluídas'**
   String get completed;
 
-  /// No description provided for @progress_count.
+  /// Progress counter
   ///
   /// In pt, this message translates to:
   /// **'Progresso: {completed}/{total}'**

@@ -101,7 +101,7 @@ class _ProfileSetupState extends State<ProfileSetup> {
       controller: _nameController,
       decoration: InputDecoration(
         labelText: AppLocalizations.of(context)!.child_name,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
     );
   }

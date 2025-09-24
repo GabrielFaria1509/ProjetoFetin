@@ -39,10 +39,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get username => 'Nome utente';
 
   @override
-  String get forgot_password => 'Password dimenticata';
+  String get forgot_password => 'Ho dimenticato la password';
 
   @override
-  String get login_success => 'Accesso riuscito';
+  String get login_success => 'Accesso effettuato con successo';
 
   @override
   String get register_success => 'Account creato con successo';
@@ -57,10 +57,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get participant => 'Partecipante';
 
   @override
-  String get participant_desc => 'Utente regolare di TISM';
+  String get participant_desc => 'Utente comune di TISM';
 
   @override
-  String get responsible => 'Caregiver';
+  String get responsible => 'Responsabile';
 
   @override
   String get responsible_desc => 'Familiare o caregiver';
@@ -81,13 +81,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get profile => 'Profilo';
 
   @override
-  String get edit_profile => 'Modifica profilo';
+  String get edit_profile => 'Modifica Profilo';
 
   @override
-  String get edit_name => 'Modifica nome';
+  String get edit_name => 'Modifica Nome';
 
   @override
-  String get edit_username => 'Modifica nome utente';
+  String get edit_username => 'Modifica Nome utente';
 
   @override
   String get full_name => 'Nome completo';
@@ -108,7 +108,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get system_theme => 'Sistema';
 
   @override
-  String get system_theme_desc => 'Segui il tema del dispositivo';
+  String get system_theme_desc => 'Segue il tema del dispositivo';
 
   @override
   String get home => 'Home';
@@ -132,7 +132,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get search => 'Cerca';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'Ciao';
 
   @override
   String hello_user(String name) {
@@ -143,16 +143,16 @@ class AppLocalizationsIt extends AppLocalizations {
   String get explore_content => 'Esplora contenuti educativi sui DSA';
 
   @override
-  String get educational_feed => 'Feed educativo';
+  String get educational_feed => 'Feed Educativo';
 
   @override
-  String get personalized_routine => 'Rotina Personalizada';
+  String get personalized_routine => 'Routine Personalizzata';
 
   @override
-  String get custom_routine => 'Routine personalizzata';
+  String get custom_routine => 'Routine Personalizzata';
 
   @override
-  String get observation_diary => 'Diario delle osservazioni';
+  String get observation_diary => 'Diario delle Osservazioni';
 
   @override
   String get tina_chatbot => 'Tina (Chatbot)';
@@ -164,10 +164,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get articles => 'Articoli';
 
   @override
-  String get digital_library => 'Biblioteca digitale';
+  String get digital_library => 'Biblioteca Digitale';
 
   @override
-  String get new_post => 'Nuovo post';
+  String get new_post => 'Nuovo Post';
 
   @override
   String get publish => 'Pubblica';
@@ -180,7 +180,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get write_something => 'Scrivi qualcosa prima di pubblicare';
 
   @override
-  String get confirm_publication => 'Conferma pubblicazione';
+  String get confirm_publication => 'Conferma Pubblicazione';
 
   @override
   String get want_to_publish => 'Vuoi pubblicare questo post nel forum?';
@@ -195,17 +195,17 @@ class AppLocalizationsIt extends AppLocalizations {
   String get tina_assistant => 'Tina - Assistente DSA';
 
   @override
-  String get thinking => 'Sto pensando...';
+  String get thinking => 'Pensando...';
 
   @override
   String get type_message => 'Scrivi il tuo messaggio...';
 
   @override
-  String get about_tina => '💙 Informazioni su Tina';
+  String get about_tina => '💙 Su Tina';
 
   @override
   String get tina_intro =>
-      '🤖 **Ciao! Sono Tina!**\n\nSono un assistente virtuale specializzato in autismo e neurodiversità, sviluppato appositamente per TISM da un team multidisciplinare di esperti.';
+      '🤖 **Ciao! Sono Tina!**\n\nSono un\'assistente virtuale specializzata in autismo e neurodiversità, sviluppata appositamente per TISM da un team multidisciplinare di esperti.';
 
   @override
   String get tina_specialization =>
@@ -228,10 +228,30 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tina_welcome =>
-      'Ciao! Sono Tina, un assistente virtuale specializzato in autismo e neurodiversità di TISM!\n\nSono qui per offrire supporto personalizzato e informazioni basate su evidenze scientifiche riguardo:\n\n• Sviluppo e comportamento\n• Strategie educative inclusive\n• Tecniche di comunicazione e interazione sociale\n• Adattamenti ambientali e sensoriali\n• Risorse e strumenti pratici per la vita quotidiana\n\nLa mia base di conoscenza è stata sviluppata da un team multidisciplinare di esperti, inclusi neurologi, psicologi, terapisti occupazionali, logopedisti ed educatori speciali.\n\nÈ importante notare che non faccio diagnosi né sostituisco i professionisti sanitari - il mio ruolo è complementare, offrendo informazioni affidabili e supporto pratico a famiglie, caregiver e persone neurodivergenti.\n\nCome posso aiutarti oggi?';
+      'Ciao! Sono Tina, un\'assistente virtuale specializzata in autismo e neurodiversità di TISM!\n\nSono qui per offrire supporto personalizzato e informazioni basate su evidenze scientifiche su:\n\n• Sviluppo e comportamento\n• Strategie educative inclusive\n• Tecniche di comunicazione e interazione sociale\n• Adattamenti ambientali e sensoriali\n• Risorse e strumenti pratici per la vita quotidiana\n\nLa mia base di conoscenza è stata sviluppata da un team multidisciplinare di esperti, inclusi neurologi, psicologi, terapisti occupazionali, logopedisti ed educatori speciali.\n\nÈ importante notare che non faccio diagnosi né sostituisco i professionisti sanitari - il mio ruolo è complementare, offrendo informazioni affidabili e supporto pratico per famiglie, caregiver e persone neurodivergenti.\n\nCome posso aiutarti oggi?';
 
   @override
-  String get diary_observations => 'Diario delle osservazioni';
+  String get tina_connection_error =>
+      'Ho difficoltà a connettermi in questo momento. Molti utenti stanno utilizzando il sistema. Riprova tra qualche minuto! 😅';
+
+  @override
+  String get tina_general_error =>
+      'Ops! Qualcosa è andato storto qui. Riprova tra qualche istante! 🤖';
+
+  @override
+  String get tina_api_key_error =>
+      'Chiave API non valida. Verifica che la chiave Gemini sia corretta nel file .env';
+
+  @override
+  String get tina_quota_error =>
+      'Limite di utilizzo dell\'API superato. Riprova più tardi.';
+
+  @override
+  String get tina_network_error =>
+      'Errore di connessione. Verifica la tua connessione internet e riprova.';
+
+  @override
+  String get diary_observations => 'Diario delle Osservazioni';
 
   @override
   String get no_observations => 'Nessuna osservazione ancora';
@@ -285,10 +305,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get clear_filters => 'Cancella filtri';
 
   @override
-  String get add_activity => 'Aggiungi attività';
+  String get add_activity => 'Aggiungi Attività';
 
   @override
-  String get edit_activity => 'Modifica attività';
+  String get edit_activity => 'Modifica Attività';
 
   @override
   String get morning => 'Mattina';
@@ -306,35 +326,35 @@ class AppLocalizationsIt extends AppLocalizations {
   String get wellness => 'Benessere';
 
   @override
-  String get night => 'Sera';
+  String get night => 'Notte';
 
   @override
   String get all => 'Tutte';
 
   @override
-  String get welcome => 'Ciao, benvenuto(a)!';
+  String get welcome => 'Ciao, benvenuto/a!';
 
   @override
   String get profile_setup_desc =>
-      'Per creare una routine personalizzata, impostiamo prima il profilo del bambino.\n\nQuesto ci aiuta a suggerire attività appropriate per l\'età e il livello di supporto.';
+      'Per creare una routine personalizzata, configuriamo prima il profilo del bambino.\n\nQuesto ci aiuta a suggerire attività appropriate per l\'età e il livello di supporto.';
 
   @override
-  String get create_profile => 'Crea profilo';
+  String get create_profile => 'Crea Profilo';
 
   @override
-  String get edit_profile_menu => 'Modifica profilo';
+  String get edit_profile_menu => 'Modifica Profilo';
 
   @override
-  String get switch_child => 'Cambia bambino';
+  String get switch_child => 'Cambia Bambino';
 
   @override
   String get new_child => 'Nuovo Bambino';
 
   @override
-  String get select_child => 'Seleziona bambino';
+  String get select_child => 'Seleziona Bambino';
 
   @override
-  String get verify_email => 'Verifica email';
+  String get verify_email => 'Verifica Email';
 
   @override
   String get verification_sent => 'Email di verifica inviata!';
@@ -344,7 +364,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get verification_desc =>
-      'Abbiamo inviato un link di verifica alla tua email. Clicca sul link per attivare il tuo account.';
+      'Clicca sul link nell\'email per attivare il tuo account.\nSarai reindirizzato automaticamente.';
 
   @override
   String get already_verified => 'Già verificato - Accedi';
@@ -356,7 +376,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get verifying => 'Verificando...';
 
   @override
-  String get delete_account => 'Elimina account';
+  String get delete_account => 'Elimina Account';
 
   @override
   String get delete_warning =>
@@ -445,10 +465,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get saved_successfully => 'Salvato con successo!';
 
   @override
-  String get welcome_message => 'Ciao, benvenuto!';
+  String get welcome_message => 'Ciao, benvenuto/a!';
 
   @override
-  String get no_account => 'Non hai un account? Registrati';
+  String get no_account => 'Non hai ancora un account? Registrati';
 
   @override
   String get fill_all_fields => 'Compila tutti i campi';
@@ -569,10 +589,10 @@ class AppLocalizationsIt extends AppLocalizations {
       'Sii il primo a condividere un\'esperienza\no fare una domanda alla comunità';
 
   @override
-  String get create_first_post => 'Crea il primo post';
+  String get create_first_post => 'Crea primo post';
 
   @override
-  String get delete_post => 'Elimina post';
+  String get delete_post => 'Elimina Post';
 
   @override
   String get delete_post_confirm =>
@@ -590,7 +610,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get report_post => 'Segnala';
 
   @override
-  String get report_post_title => 'Segnala post';
+  String get report_post_title => 'Segnala Post';
 
   @override
   String get report_post_confirm =>
@@ -610,7 +630,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get try_different_keywords =>
-      'Prova parole chiave diverse\no esplora le categorie qui sotto';
+      'Prova a usare parole chiave diverse\no esplora le categorie sotto';
 
   @override
   String get type_to_search => 'Digita per cercare...';
@@ -638,10 +658,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get child_tantrums => 'Bambino con capricci';
 
   @override
-  String get new_observation => 'Nuova osservazione';
+  String get new_observation => 'Nuova Osservazione';
 
   @override
-  String get edit_observation => 'Modifica osservazione';
+  String get edit_observation => 'Modifica Osservazione';
 
   @override
   String get observation_type => 'Tipo:';
@@ -664,7 +684,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get possible_triggers => 'Possibili trigger:';
 
   @override
-  String get delete_observation => 'Elimina osservazione';
+  String get delete_observation => 'Elimina Osservazione';
 
   @override
   String get delete_observation_confirm =>
@@ -767,7 +787,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get activity_description => 'Descrizione dell\'attività';
 
   @override
-  String get time_format => 'Ora (00:00 - 23:59)';
+  String get time_format => 'Orario (00:00 - 23:59)';
 
   @override
   String get category => 'Categoria';
@@ -790,7 +810,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get invalid_time_format =>
-      'Ora non valida. Usa il formato 24h (00:00 - 23:59)';
+      'Orario non valido. Usa formato 24h (00:00 - 23:59)';
 
   @override
   String get delete_routine => 'Elimina Routine';
@@ -801,355 +821,355 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String hello_user_name(Object name) {
-    return 'Olá, $name! 👋';
+    return 'Ciao, $name! 👋';
   }
 
   @override
-  String get statistics => 'Estatísticas';
+  String get statistics => 'Statistiche';
 
   @override
-  String get general_summary => 'Resumo Geral';
+  String get general_summary => 'Riassunto Generale';
 
   @override
-  String get total => 'Total';
+  String get total => 'Totale';
 
   @override
-  String get progress_plural => 'Progressos';
+  String get progress_plural => 'Progressi';
 
   @override
-  String get crisis_plural => 'Crises';
+  String get crisis_plural => 'Crisi';
 
   @override
-  String get type_distribution => 'Distribuição por Tipo';
+  String get type_distribution => 'Distribuzione per Tipo';
 
   @override
-  String get most_frequent_triggers => 'Gatilhos Mais Frequentes';
+  String get most_frequent_triggers => 'Trigger Più Frequenti';
 
   @override
-  String get weekly_trend => 'Tendência Semanal';
+  String get weekly_trend => 'Tendenza Settimanale';
 
   @override
   String observations_last_7_days(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return 'Osservazioni negli ultimi 7 giorni: $count';
   }
 
   @override
-  String get child_name => 'Nome da criança';
+  String get child_name => 'Nome del bambino';
 
   @override
-  String get age => 'Idade';
+  String get age => 'Età';
 
   @override
-  String get support_level_label => 'Nível de suporte';
+  String get support_level_label => 'Livello di supporto';
 
   @override
-  String get sensory_preferences => 'Preferências sensoriais';
+  String get sensory_preferences => 'Preferenze sensoriali';
 
   @override
-  String get interests => 'Interesses';
+  String get interests => 'Interessi';
 
   @override
-  String get child_name_empty => 'O nome da criança não pode estar vazio';
+  String get child_name_empty => 'Il nome del bambino non può essere vuoto';
 
   @override
   String observations_last_7_days_count(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return 'Osservazioni negli ultimi 7 giorni: $count';
   }
 
   @override
-  String get configure_profile => 'Configurar Perfil';
+  String get configure_profile => 'Configura Profilo';
 
   @override
-  String get edit_username_title => 'Editar Username';
+  String get edit_username_title => 'Modifica Nome utente';
 
   @override
-  String get account_deleted_success => 'Conta deletada com sucesso';
+  String get account_deleted_success => 'Account eliminato con successo';
 
   @override
-  String get theme_light => 'Claro';
+  String get theme_light => 'Chiaro';
 
   @override
-  String get theme_dark => 'Escuro';
+  String get theme_dark => 'Scuro';
 
   @override
   String get theme_system => 'Sistema';
 
   @override
-  String get edit_observation_action => 'Editar observação';
+  String get edit_observation_action => 'Modifica osservazione';
 
   @override
-  String get delete_observation_action => 'Deletar observação';
+  String get delete_observation_action => 'Elimina osservazione';
 
   @override
-  String get delete_observation_title => 'Deletar Observação';
+  String get delete_observation_title => 'Elimina Osservazione';
 
   @override
   String get delete_observation_message =>
-      'Tem certeza que deseja deletar esta observação?';
+      'Sei sicuro di voler eliminare questa osservazione?';
 
   @override
-  String get trigger_routine_change => 'Mudança de rotina';
+  String get trigger_routine_change => 'Cambio di routine';
 
   @override
-  String get trigger_loud_noise => 'Barulho alto';
+  String get trigger_loud_noise => 'Rumore forte';
 
   @override
-  String get trigger_crowd => 'Multidão';
+  String get trigger_crowd => 'Folla';
 
   @override
-  String get trigger_tiredness => 'Cansaço';
+  String get trigger_tiredness => 'Stanchezza';
 
   @override
-  String get trigger_hunger => 'Fome';
+  String get trigger_hunger => 'Fame';
 
   @override
-  String get trigger_frustration => 'Frustração';
+  String get trigger_frustration => 'Frustrazione';
 
   @override
-  String get trigger_transition => 'Transição';
+  String get trigger_transition => 'Transizione';
 
   @override
-  String get trigger_new_environment => 'Ambiente novo';
+  String get trigger_new_environment => 'Ambiente nuovo';
 
   @override
-  String get trigger_bright_light => 'Luz muito forte';
+  String get trigger_bright_light => 'Luce molto forte';
 
   @override
-  String get trigger_unpleasant_texture => 'Textura desagradável';
+  String get trigger_unpleasant_texture => 'Texture sgradevole';
 
   @override
-  String get trigger_strong_smell => 'Cheiro forte';
+  String get trigger_strong_smell => 'Odore forte';
 
   @override
   String get trigger_temperature => 'Temperatura';
 
   @override
-  String get trigger_tight_clothes => 'Roupa apertada';
+  String get trigger_tight_clothes => 'Vestiti stretti';
 
   @override
-  String get trigger_insufficient_sleep => 'Sono insuficiente';
+  String get trigger_insufficient_sleep => 'Sonno insufficiente';
 
   @override
-  String get trigger_physical_pain => 'Dor física';
+  String get trigger_physical_pain => 'Dolore fisico';
 
   @override
-  String get trigger_medication => 'Medicação';
+  String get trigger_medication => 'Medicazione';
 
   @override
-  String get trigger_medical_visit => 'Visita médica';
+  String get trigger_medical_visit => 'Visita medica';
 
   @override
-  String get trigger_new_school => 'Escola nova';
+  String get trigger_new_school => 'Scuola nuova';
 
   @override
-  String get trigger_substitute_teacher => 'Professor substituto';
+  String get trigger_substitute_teacher => 'Insegnante sostituto';
 
   @override
-  String get trigger_test_evaluation => 'Prova/avaliação';
+  String get trigger_test_evaluation => 'Test/valutazione';
 
   @override
   String get trigger_party_event => 'Festa/evento';
 
   @override
-  String get trigger_travel => 'Viagem';
+  String get trigger_travel => 'Viaggio';
 
   @override
-  String get trigger_rain_storm => 'Chuva/temporal';
+  String get trigger_rain_storm => 'Pioggia/temporale';
 
   @override
-  String get trigger_parents_separation => 'Separação dos pais';
+  String get trigger_parents_separation => 'Separazione dei genitori';
 
   @override
-  String get trigger_broken_toy => 'Brinquedo quebrado';
+  String get trigger_broken_toy => 'Giocattolo rotto';
 
   @override
-  String get trigger_not_getting_something => 'Não conseguir algo';
+  String get trigger_not_getting_something => 'Non ottenere qualcosa';
 
   @override
-  String get trigger_activity_interruption => 'Interrupção atividade';
+  String get trigger_activity_interruption => 'Interruzione attività';
 
   @override
-  String get trigger_waiting_too_long => 'Esperar muito tempo';
+  String get trigger_waiting_too_long => 'Aspettare troppo tempo';
 
   @override
-  String get observer_father => 'pai';
+  String get observer_father => 'padre';
 
   @override
-  String get observer_mother => 'mãe';
+  String get observer_mother => 'madre';
 
   @override
-  String get observer_grandfather => 'avô';
+  String get observer_grandfather => 'nonno';
 
   @override
-  String get observer_grandmother => 'avó';
+  String get observer_grandmother => 'nonna';
 
   @override
-  String get observer_uncle => 'tio';
+  String get observer_uncle => 'zio';
 
   @override
-  String get observer_aunt => 'tia';
+  String get observer_aunt => 'zia';
 
   @override
-  String get observer_brother => 'irmão';
+  String get observer_brother => 'fratello';
 
   @override
-  String get observer_sister => 'irmã';
+  String get observer_sister => 'sorella';
 
   @override
-  String get observer_son => 'filho';
+  String get observer_son => 'figlio';
 
   @override
-  String get observer_daughter => 'filha';
+  String get observer_daughter => 'figlia';
 
   @override
-  String get observer_grandson => 'neto';
+  String get observer_grandson => 'nipote (maschio)';
 
   @override
-  String get observer_granddaughter => 'neta';
+  String get observer_granddaughter => 'nipote (femmina)';
 
   @override
-  String get observer_nephew => 'sobrinho';
+  String get observer_nephew => 'nipote';
 
   @override
-  String get observer_niece => 'sobrinha';
+  String get observer_niece => 'nipote';
 
   @override
-  String get observer_male_cousin => 'primo';
+  String get observer_male_cousin => 'cugino';
 
   @override
-  String get observer_female_cousin => 'prima';
+  String get observer_female_cousin => 'cugina';
 
   @override
-  String get observer_male_friend => 'amigo';
+  String get observer_male_friend => 'amico';
 
   @override
-  String get observer_female_friend => 'amiga';
+  String get observer_female_friend => 'amica';
 
   @override
   String get observer_relative => 'parente';
 
   @override
-  String get observer_caregiver => 'cuidador';
+  String get observer_caregiver => 'caregiver';
 
   @override
-  String get observer_teacher => 'professor';
+  String get observer_teacher => 'insegnante';
 
   @override
-  String get observer_therapist => 'terapeuta';
+  String get observer_therapist => 'terapista';
 
   @override
-  String get observer_doctor => 'médico';
+  String get observer_doctor => 'medico';
 
   @override
-  String get observer_psychologist => 'psicólogo';
+  String get observer_psychologist => 'psicologo';
 
   @override
-  String get support_level_mild => 'leve';
+  String get support_level_mild => 'lieve';
 
   @override
-  String get support_level_moderate => 'moderado';
+  String get support_level_moderate => 'moderato';
 
   @override
   String get support_level_severe => 'severo';
 
   @override
-  String get sensory_visual => 'Visual';
+  String get sensory_visual => 'Visivo';
 
   @override
-  String get sensory_auditory => 'Auditivo';
+  String get sensory_auditory => 'Uditivo';
 
   @override
-  String get sensory_tactile => 'Tátil';
+  String get sensory_tactile => 'Tattile';
 
   @override
   String get sensory_movement => 'Movimento';
 
   @override
-  String get sensory_olfactory => 'Olfativo';
+  String get sensory_olfactory => 'Olfattivo';
 
   @override
   String get sensory_gustatory => 'Gustativo';
 
   @override
-  String get sensory_proprioceptive => 'Proprioceptivo';
+  String get sensory_proprioceptive => 'Propriocettivo';
 
   @override
-  String get sensory_vestibular => 'Vestibular';
+  String get sensory_vestibular => 'Vestibolare';
 
   @override
-  String get sensory_deep_pressure => 'Pressão Profunda';
+  String get sensory_deep_pressure => 'Pressione Profonda';
 
   @override
-  String get sensory_soft_textures => 'Texturas Suaves';
+  String get sensory_soft_textures => 'Texture Morbide';
 
   @override
-  String get sensory_rough_textures => 'Texturas Ásperas';
+  String get sensory_rough_textures => 'Texture Ruvide';
 
   @override
-  String get sensory_low_sounds => 'Sons Baixos';
+  String get sensory_low_sounds => 'Suoni Bassi';
 
   @override
-  String get sensory_high_sounds => 'Sons Altos';
+  String get sensory_high_sounds => 'Suoni Alti';
 
   @override
-  String get sensory_soft_lights => 'Luzes Suaves';
+  String get sensory_soft_lights => 'Luci Soffuse';
 
   @override
-  String get sensory_bright_lights => 'Luzes Brilhantes';
+  String get sensory_bright_lights => 'Luci Brillanti';
 
   @override
-  String get sensory_hot_temperatures => 'Temperaturas Quentes';
+  String get sensory_hot_temperatures => 'Temperature Calde';
 
   @override
-  String get sensory_cold_temperatures => 'Temperaturas Frias';
+  String get sensory_cold_temperatures => 'Temperature Fredde';
 
   @override
-  String get interest_music => 'Música';
+  String get interest_music => 'Musica';
 
   @override
-  String get interest_drawing => 'Desenho';
+  String get interest_drawing => 'Disegno';
 
   @override
-  String get interest_numbers => 'Números';
+  String get interest_numbers => 'Numeri';
 
   @override
-  String get interest_animals => 'Animais';
+  String get interest_animals => 'Animali';
 
   @override
-  String get interest_cars => 'Carros';
+  String get interest_cars => 'Auto';
 
   @override
-  String get interest_books => 'Livros';
+  String get interest_books => 'Libri';
 
   @override
-  String get interest_games => 'Jogos';
+  String get interest_games => 'Giochi';
 
   @override
-  String get interest_computer => 'Computador';
+  String get interest_computer => 'Computer';
 
   @override
   String get interest_tablet => 'Tablet';
 
   @override
-  String get interest_toys => 'Brinquedos';
+  String get interest_toys => 'Giocattoli';
 
   @override
-  String get interest_sports => 'Esportes';
+  String get interest_sports => 'Sport';
 
   @override
-  String get interest_dance => 'Dança';
+  String get interest_dance => 'Danza';
 
   @override
-  String get interest_cooking => 'Culinária';
+  String get interest_cooking => 'Cucina';
 
   @override
-  String get interest_gardening => 'Jardinagem';
+  String get interest_gardening => 'Giardinaggio';
 
   @override
-  String get interest_science => 'Ciência';
+  String get interest_science => 'Scienza';
 
   @override
-  String get interest_math => 'Matemática';
+  String get interest_math => 'Matematica';
 
   @override
   String get interest_art => 'Arte';
@@ -1158,44 +1178,44 @@ class AppLocalizationsIt extends AppLocalizations {
   String get interest_photography => 'Fotografia';
 
   @override
-  String get interest_videos => 'Vídeos';
+  String get interest_videos => 'Video';
 
   @override
-  String get interest_movies => 'Filmes';
+  String get interest_movies => 'Film';
 
   @override
-  String get interest_series => 'Séries';
+  String get interest_series => 'Serie';
 
   @override
-  String get interest_puzzles => 'Quebra-cabeças';
+  String get interest_puzzles => 'Puzzle';
 
   @override
   String get interest_lego => 'Lego';
 
   @override
-  String get interest_dolls => 'Bonecas';
+  String get interest_dolls => 'Bambole';
 
   @override
-  String get interest_superheroes => 'Super-heróis';
+  String get interest_superheroes => 'Supereroi';
 
   @override
-  String get delete_post_action => 'Deletar';
+  String get delete_post_action => 'Elimina';
 
   @override
-  String get report_post_action => 'Denunciar';
+  String get report_post_action => 'Segnala';
 
   @override
-  String get clear_search => 'Limpar busca';
+  String get clear_search => 'Cancella ricerca';
 
   @override
-  String get month => 'mês';
+  String get month => 'mese';
 
   @override
-  String get months => 'meses';
+  String get months => 'mesi';
 
   @override
-  String get year => 'ano';
+  String get year => 'anno';
 
   @override
-  String get years => 'anos';
+  String get years => 'anni';
 }

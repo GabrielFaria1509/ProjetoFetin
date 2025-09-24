@@ -85,6 +85,11 @@
   "tina_support": "💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**",
   "understood_tina": "Entendi, Tina! Vamos conversar! 😊",
   "tina_welcome": "Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?",
+  "tina_connection_error": "Estou com dificuldades para me conectar no momento. Muitos usuários estão utilizando o sistema. Tente novamente em alguns minutos! 😅",
+  "tina_general_error": "Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖",
+  "tina_api_key_error": "Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env",
+  "tina_quota_error": "Limite de uso da API excedido. Tente novamente mais tarde.",
+  "tina_network_error": "Erro de conexão. Verifique sua internet e tente novamente.",
   "diary_observations": "Diário de Observações",
   "no_observations": "Nenhuma observação ainda",
   "tap_plus_start": "Toque no + para começar",
@@ -116,7 +121,7 @@
   "completed": "Concluídas",
   "progress_count": "Progresso: {completed}/{total}",
   "@progress_count": {
-    "ddescription": "Progress counter",
+    "description": "Progress counter",
     "placeholders": {
       "completed": {
         "type": "int"

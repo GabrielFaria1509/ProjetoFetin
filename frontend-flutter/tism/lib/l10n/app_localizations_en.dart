@@ -133,7 +133,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search => 'Search';
 
   @override
-  String get hello => 'Olá';
+  String get hello => 'Hello';
 
   @override
   String hello_user(String name) {
@@ -147,7 +147,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get educational_feed => 'Educational Feed';
 
   @override
-  String get personalized_routine => 'Rotina Personalizada';
+  String get personalized_routine => 'Personalized Routine';
 
   @override
   String get custom_routine => 'Custom Routine';
@@ -233,7 +233,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'Hello! I\'m Tina, a virtual assistant specialized in autism and neurodiversity from TISM!\n\nI\'m here to offer personalized support and information based on scientific evidence about:\n\n• Development and behavior\n• Inclusive educational strategies\n• Communication and social interaction techniques\n• Environmental and sensory adaptations\n• Practical resources and tools for daily life\n\nMy knowledge base was developed by a multidisciplinary team of experts, including neurologists, psychologists, occupational therapists, speech therapists and special educators.\n\nIt\'s important to note that I don\'t make diagnoses or replace healthcare professionals - my role is complementary, offering reliable information and practical support for families, caregivers and neurodivergent people.\n\nHow can I help you today?';
 
   @override
-  String get diary_observations => 'Diary Observations';
+  String get tina_connection_error =>
+      'I\'m having trouble connecting right now. Many users are using the system. Please try again in a few minutes! 😅';
+
+  @override
+  String get tina_general_error =>
+      'Oops! Something went wrong here. Please try again in a few moments! 🤖';
+
+  @override
+  String get tina_api_key_error =>
+      'Invalid API key. Check if the Gemini key is correct in the .env file';
+
+  @override
+  String get tina_quota_error =>
+      'API usage limit exceeded. Please try again later.';
+
+  @override
+  String get tina_network_error =>
+      'Connection error. Check your internet and try again.';
+
+  @override
+  String get diary_observations => 'Observation Diary';
 
   @override
   String get no_observations => 'No observations yet';
@@ -883,314 +903,314 @@ class AppLocalizationsEn extends AppLocalizations {
       'Are you sure you want to delete this observation?';
 
   @override
-  String get trigger_routine_change => 'Mudança de rotina';
+  String get trigger_routine_change => 'Routine change';
 
   @override
-  String get trigger_loud_noise => 'Barulho alto';
+  String get trigger_loud_noise => 'Loud noise';
 
   @override
-  String get trigger_crowd => 'Multidão';
+  String get trigger_crowd => 'Crowd';
 
   @override
-  String get trigger_tiredness => 'Cansaço';
+  String get trigger_tiredness => 'Tiredness';
 
   @override
-  String get trigger_hunger => 'Fome';
+  String get trigger_hunger => 'Hunger';
 
   @override
-  String get trigger_frustration => 'Frustração';
+  String get trigger_frustration => 'Frustration';
 
   @override
-  String get trigger_transition => 'Transição';
+  String get trigger_transition => 'Transition';
 
   @override
-  String get trigger_new_environment => 'Ambiente novo';
+  String get trigger_new_environment => 'New environment';
 
   @override
-  String get trigger_bright_light => 'Luz muito forte';
+  String get trigger_bright_light => 'Bright light';
 
   @override
-  String get trigger_unpleasant_texture => 'Textura desagradável';
+  String get trigger_unpleasant_texture => 'Unpleasant texture';
 
   @override
-  String get trigger_strong_smell => 'Cheiro forte';
+  String get trigger_strong_smell => 'Strong smell';
 
   @override
-  String get trigger_temperature => 'Temperatura';
+  String get trigger_temperature => 'Temperature';
 
   @override
-  String get trigger_tight_clothes => 'Roupa apertada';
+  String get trigger_tight_clothes => 'Tight clothes';
 
   @override
-  String get trigger_insufficient_sleep => 'Sono insuficiente';
+  String get trigger_insufficient_sleep => 'Insufficient sleep';
 
   @override
-  String get trigger_physical_pain => 'Dor física';
+  String get trigger_physical_pain => 'Physical pain';
 
   @override
-  String get trigger_medication => 'Medicação';
+  String get trigger_medication => 'Medication';
 
   @override
-  String get trigger_medical_visit => 'Visita médica';
+  String get trigger_medical_visit => 'Medical visit';
 
   @override
-  String get trigger_new_school => 'Escola nova';
+  String get trigger_new_school => 'New school';
 
   @override
-  String get trigger_substitute_teacher => 'Professor substituto';
+  String get trigger_substitute_teacher => 'Substitute teacher';
 
   @override
-  String get trigger_test_evaluation => 'Prova/avaliação';
+  String get trigger_test_evaluation => 'Test/evaluation';
 
   @override
-  String get trigger_party_event => 'Festa/evento';
+  String get trigger_party_event => 'Party/event';
 
   @override
-  String get trigger_travel => 'Viagem';
+  String get trigger_travel => 'Travel';
 
   @override
-  String get trigger_rain_storm => 'Chuva/temporal';
+  String get trigger_rain_storm => 'Rain/storm';
 
   @override
-  String get trigger_parents_separation => 'Separação dos pais';
+  String get trigger_parents_separation => 'Parents separation';
 
   @override
-  String get trigger_broken_toy => 'Brinquedo quebrado';
+  String get trigger_broken_toy => 'Broken toy';
 
   @override
-  String get trigger_not_getting_something => 'Não conseguir algo';
+  String get trigger_not_getting_something => 'Not getting something';
 
   @override
-  String get trigger_activity_interruption => 'Interrupção atividade';
+  String get trigger_activity_interruption => 'Activity interruption';
 
   @override
-  String get trigger_waiting_too_long => 'Esperar muito tempo';
+  String get trigger_waiting_too_long => 'Waiting too long';
 
   @override
-  String get observer_father => 'pai';
+  String get observer_father => 'father';
 
   @override
-  String get observer_mother => 'mãe';
+  String get observer_mother => 'mother';
 
   @override
-  String get observer_grandfather => 'avô';
+  String get observer_grandfather => 'grandfather';
 
   @override
-  String get observer_grandmother => 'avó';
+  String get observer_grandmother => 'grandmother';
 
   @override
-  String get observer_uncle => 'tio';
+  String get observer_uncle => 'uncle';
 
   @override
-  String get observer_aunt => 'tia';
+  String get observer_aunt => 'aunt';
 
   @override
-  String get observer_brother => 'irmão';
+  String get observer_brother => 'brother';
 
   @override
-  String get observer_sister => 'irmã';
+  String get observer_sister => 'sister';
 
   @override
-  String get observer_son => 'filho';
+  String get observer_son => 'son';
 
   @override
-  String get observer_daughter => 'filha';
+  String get observer_daughter => 'daughter';
 
   @override
-  String get observer_grandson => 'neto';
+  String get observer_grandson => 'grandson';
 
   @override
-  String get observer_granddaughter => 'neta';
+  String get observer_granddaughter => 'granddaughter';
 
   @override
-  String get observer_nephew => 'sobrinho';
+  String get observer_nephew => 'nephew';
 
   @override
-  String get observer_niece => 'sobrinha';
+  String get observer_niece => 'niece';
 
   @override
-  String get observer_male_cousin => 'primo';
+  String get observer_male_cousin => 'cousin (male)';
 
   @override
-  String get observer_female_cousin => 'prima';
+  String get observer_female_cousin => 'cousin (female)';
 
   @override
-  String get observer_male_friend => 'amigo';
+  String get observer_male_friend => 'friend (male)';
 
   @override
-  String get observer_female_friend => 'amiga';
+  String get observer_female_friend => 'friend (female)';
 
   @override
-  String get observer_relative => 'parente';
+  String get observer_relative => 'relative';
 
   @override
-  String get observer_caregiver => 'cuidador';
+  String get observer_caregiver => 'caregiver';
 
   @override
-  String get observer_teacher => 'professor';
+  String get observer_teacher => 'teacher';
 
   @override
-  String get observer_therapist => 'terapeuta';
+  String get observer_therapist => 'therapist';
 
   @override
-  String get observer_doctor => 'médico';
+  String get observer_doctor => 'doctor';
 
   @override
-  String get observer_psychologist => 'psicólogo';
+  String get observer_psychologist => 'psychologist';
 
   @override
-  String get support_level_mild => 'leve';
+  String get support_level_mild => 'mild';
 
   @override
-  String get support_level_moderate => 'moderado';
+  String get support_level_moderate => 'moderate';
 
   @override
-  String get support_level_severe => 'severo';
+  String get support_level_severe => 'severe';
 
   @override
   String get sensory_visual => 'Visual';
 
   @override
-  String get sensory_auditory => 'Auditivo';
+  String get sensory_auditory => 'Auditory';
 
   @override
-  String get sensory_tactile => 'Tátil';
+  String get sensory_tactile => 'Tactile';
 
   @override
-  String get sensory_movement => 'Movimento';
+  String get sensory_movement => 'Movement';
 
   @override
-  String get sensory_olfactory => 'Olfativo';
+  String get sensory_olfactory => 'Olfactory';
 
   @override
-  String get sensory_gustatory => 'Gustativo';
+  String get sensory_gustatory => 'Gustatory';
 
   @override
-  String get sensory_proprioceptive => 'Proprioceptivo';
+  String get sensory_proprioceptive => 'Proprioceptive';
 
   @override
   String get sensory_vestibular => 'Vestibular';
 
   @override
-  String get sensory_deep_pressure => 'Pressão Profunda';
+  String get sensory_deep_pressure => 'Deep Pressure';
 
   @override
-  String get sensory_soft_textures => 'Texturas Suaves';
+  String get sensory_soft_textures => 'Soft Textures';
 
   @override
-  String get sensory_rough_textures => 'Texturas Ásperas';
+  String get sensory_rough_textures => 'Rough Textures';
 
   @override
-  String get sensory_low_sounds => 'Sons Baixos';
+  String get sensory_low_sounds => 'Low Sounds';
 
   @override
-  String get sensory_high_sounds => 'Sons Altos';
+  String get sensory_high_sounds => 'High Sounds';
 
   @override
-  String get sensory_soft_lights => 'Luzes Suaves';
+  String get sensory_soft_lights => 'Soft Lights';
 
   @override
-  String get sensory_bright_lights => 'Luzes Brilhantes';
+  String get sensory_bright_lights => 'Bright Lights';
 
   @override
-  String get sensory_hot_temperatures => 'Temperaturas Quentes';
+  String get sensory_hot_temperatures => 'Hot Temperatures';
 
   @override
-  String get sensory_cold_temperatures => 'Temperaturas Frias';
+  String get sensory_cold_temperatures => 'Cold Temperatures';
 
   @override
-  String get interest_music => 'Música';
+  String get interest_music => 'Music';
 
   @override
-  String get interest_drawing => 'Desenho';
+  String get interest_drawing => 'Drawing';
 
   @override
-  String get interest_numbers => 'Números';
+  String get interest_numbers => 'Numbers';
 
   @override
-  String get interest_animals => 'Animais';
+  String get interest_animals => 'Animals';
 
   @override
-  String get interest_cars => 'Carros';
+  String get interest_cars => 'Cars';
 
   @override
-  String get interest_books => 'Livros';
+  String get interest_books => 'Books';
 
   @override
-  String get interest_games => 'Jogos';
+  String get interest_games => 'Games';
 
   @override
-  String get interest_computer => 'Computador';
+  String get interest_computer => 'Computer';
 
   @override
   String get interest_tablet => 'Tablet';
 
   @override
-  String get interest_toys => 'Brinquedos';
+  String get interest_toys => 'Toys';
 
   @override
-  String get interest_sports => 'Esportes';
+  String get interest_sports => 'Sports';
 
   @override
-  String get interest_dance => 'Dança';
+  String get interest_dance => 'Dance';
 
   @override
-  String get interest_cooking => 'Culinária';
+  String get interest_cooking => 'Cooking';
 
   @override
-  String get interest_gardening => 'Jardinagem';
+  String get interest_gardening => 'Gardening';
 
   @override
-  String get interest_science => 'Ciência';
+  String get interest_science => 'Science';
 
   @override
-  String get interest_math => 'Matemática';
+  String get interest_math => 'Math';
 
   @override
-  String get interest_art => 'Arte';
+  String get interest_art => 'Art';
 
   @override
-  String get interest_photography => 'Fotografia';
+  String get interest_photography => 'Photography';
 
   @override
-  String get interest_videos => 'Vídeos';
+  String get interest_videos => 'Videos';
 
   @override
-  String get interest_movies => 'Filmes';
+  String get interest_movies => 'Movies';
 
   @override
-  String get interest_series => 'Séries';
+  String get interest_series => 'Series';
 
   @override
-  String get interest_puzzles => 'Quebra-cabeças';
+  String get interest_puzzles => 'Puzzles';
 
   @override
   String get interest_lego => 'Lego';
 
   @override
-  String get interest_dolls => 'Bonecas';
+  String get interest_dolls => 'Dolls';
 
   @override
-  String get interest_superheroes => 'Super-heróis';
+  String get interest_superheroes => 'Superheroes';
 
   @override
-  String get delete_post_action => 'Deletar';
+  String get delete_post_action => 'Delete';
 
   @override
-  String get report_post_action => 'Denunciar';
+  String get report_post_action => 'Report';
 
   @override
-  String get clear_search => 'Limpar busca';
+  String get clear_search => 'Clear search';
 
   @override
-  String get month => 'mês';
+  String get month => 'month';
 
   @override
-  String get months => 'meses';
+  String get months => 'months';
 
   @override
-  String get year => 'ano';
+  String get year => 'year';
 
   @override
-  String get years => 'anos';
+  String get years => 'years';
 }

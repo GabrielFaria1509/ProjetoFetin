@@ -554,25 +554,29 @@ class _ProfilePageState extends State<ProfilePage> {
         
         if (mounted) {
           if (result['success']) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(result['message'] ?? AppLocalizations.of(context)!.account_deleted_success),
-                backgroundColor: Colors.green,
-              ),
-            );
-            
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-              (route) => false,
-            );
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(result['message'] ?? AppLocalizations.of(context)!.account_deleted_success),
+                  backgroundColor: Colors.green,
+                ),
+              );
+              
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+                (route) => false,
+              );
+            }
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(result['error'] ?? AppLocalizations.of(context)!.error_deleting_account),
-                backgroundColor: Colors.red,
-              ),
-            );
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(result['error'] ?? AppLocalizations.of(context)!.error_deleting_account),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
           }
         }
       }
@@ -644,25 +648,27 @@ class _ProfilePageState extends State<ProfilePage> {
                 
                 if (confirm == true) {
                   final result = await UserService.updateUsername(inputUsername);
-                  if (result['success']) {
-                    setState(() => _userUsername = inputUsername.toLowerCase());
-                    if (context.mounted) {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(AppLocalizations.of(context)!.username_updated),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                    }
-                  } else {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_username),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
+                  if (mounted) {
+                    if (result['success']) {
+                      setState(() => _userUsername = inputUsername.toLowerCase());
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(AppLocalizations.of(context)!.username_updated),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      }
+                    } else {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_username),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     }
                   }
                 }

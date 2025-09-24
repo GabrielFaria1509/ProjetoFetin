@@ -85,6 +85,11 @@
   "tina_support": "💙 **我在这里用可靠的信息和同理心支持您！**",
   "understood_tina": "明白了，蒂娜！让我们聊天吧！😊",
   "tina_welcome": "你好！我是蒂娜，来自TISM的专门研究自闭症和神经多样性的虚拟助手！\n\n我在这里提供个性化支持和基于科学证据的信息，涉及：\n\n• 发展和行为\n• 包容性教育策略\n• 沟通和社交互动技巧\n• 环境和感官适应\n• 日常生活实用资源和工具\n\n我的知识库由多学科专家团队开发，包括神经学家、心理学家、职业治疗师、言语治疗师和特殊教育者。\n\n重要的是要注意，我不进行诊断或替代医疗专业人员 - 我的作用是补充性的，为家庭、照护者和神经多样性人群提供可靠信息和实用支持。\n\n今天我能如何帮助您？",
+  "tina_connection_error": "我现在连接有困难。很多用户正在使用系统。请几分钟后再试！😅",
+  "tina_general_error": "哎呀！这里出了点问题。请稍后再试！🤖",
+  "tina_api_key_error": "无效的API密钥。请检查.env文件中Gemini密钥是否正确",
+  "tina_quota_error": "API使用限制已超出。请稍后再试。",
+  "tina_network_error": "连接错误。请检查您的网络连接并再试。",
   "diary_observations": "观察日记",
   "no_observations": "还没有观察记录",
   "tap_plus_start": "点击+开始",
@@ -277,7 +282,7 @@
   "observation_title_empty": "观察标题不能为空",
   "not_defined": "未定义",
   "confirm_change": "确认更改",
-  "change_name_to": "将姓名更改为"{name}"？",
+  "change_name_to": "将姓名更改为\"{name}\"？",
   "@change_name_to": {
     "description": "Confirm name change",
     "placeholders": {

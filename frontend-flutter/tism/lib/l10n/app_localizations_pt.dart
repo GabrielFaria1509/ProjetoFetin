@@ -232,6 +232,26 @@ class AppLocalizationsPt extends AppLocalizations {
       'Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?';
 
   @override
+  String get tina_connection_error =>
+      'Estou com dificuldades para me conectar no momento. Muitos usuários estão utilizando o sistema. Tente novamente em alguns minutos! 😅';
+
+  @override
+  String get tina_general_error =>
+      'Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖';
+
+  @override
+  String get tina_api_key_error =>
+      'Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env';
+
+  @override
+  String get tina_quota_error =>
+      'Limite de uso da API excedido. Tente novamente mais tarde.';
+
+  @override
+  String get tina_network_error =>
+      'Erro de conexão. Verifique sua internet e tente novamente.';
+
+  @override
   String get diary_observations => 'Observações do Diário';
 
   @override

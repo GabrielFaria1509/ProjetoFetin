@@ -177,7 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _controller.clear();
     _scrollToBottom();
 
-    final response = await ChatbotService.sendMessage(text);
+    final response = await ChatbotService.sendMessage(text, context);
     
     String messageText = response;
     String mood = 'smile';

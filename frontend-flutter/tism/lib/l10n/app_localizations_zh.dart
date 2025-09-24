@@ -12,7 +12,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get app_name => 'TISM';
 
   @override
-  String get app_subtitle => '一键了解自闭症的一切';
+  String get app_subtitle => '一键了解自闭症谱系障碍的所有信息';
 
   @override
   String get app_title => 'TISM - 自闭症指南';
@@ -140,7 +140,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get explore_content => '探索自闭症教育内容';
+  String get explore_content => '探索关于自闭症的教育内容';
 
   @override
   String get educational_feed => '教育动态';
@@ -188,7 +188,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get post_published => '帖子发布成功！';
 
   @override
-  String get error_publishing => '发布帖子时出错';
+  String get error_publishing => '发布错误';
 
   @override
   String get tina_assistant => '蒂娜 - 自闭症助手';
@@ -204,32 +204,47 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tina_intro =>
-      '🤖 **你好！我是蒂娜！**\\n\\n我是专门研究自闭症和神经多样性的虚拟助手，由多学科专家团队专为TISM开发。';
+      '🤖 **你好！我是蒂娜！**\n\n我是专门研究自闭症和神经多样性的虚拟助手，由多学科专家团队专为TISM开发。';
 
   @override
   String get tina_specialization =>
-      '🎯 **我的专长：**\\n• 🧠 发展和行为\\n• 🏫 包容性教育策略\\n• 💬 沟通和社交互动技巧\\n• 🌍 环境和感官适应\\n• 🛠️ 日常实用资源';
+      '🎯 **我的专业领域：**\n• 🧠 发展和行为\n• 🏫 包容性教育策略\n• 💬 沟通和社交互动技巧\n• 🌍 环境和感官适应\n• 🛠️ 日常生活实用资源';
 
   @override
   String get tina_scientific =>
-      '🔬 **科学基础：** 我接受了神经学家、心理学家、职业治疗师、言语治疗师和特殊教育者验证的知识培训。';
+      '🔬 **科学基础：** 我接受了神经学家、心理学家、职业治疗师、言语治疗师和特殊教育者验证的知识训练。';
 
   @override
   String get tina_important =>
-      '⚠️ **重要：** 我不进行诊断，也不替代医疗专业人员。我的作用是补充性的，提供信息和实用支持。';
+      '⚠️ **重要提示：** 我不进行诊断，也不替代医疗专业人员。我的作用是补充性的，提供信息和实用支持。';
 
   @override
   String get tina_support => '💙 **我在这里用可靠的信息和同理心支持您！**';
 
   @override
-  String get understood_tina => '明白了，蒂娜！让我们聊聊吧！😊';
+  String get understood_tina => '明白了，蒂娜！让我们聊天吧！😊';
 
   @override
   String get tina_welcome =>
-      '你好！我是蒂娜，TISM的自闭症和神经多样性专业虚拟助手！\\n\\n我在这里提供个性化支持和基于科学证据的信息：\\n\\n• 发展和行为\\n• 包容性教育策略\\n• 沟通和社交互动技巧\\n• 环境和感官适应\\n• 日常实用资源和工具\\n\\n我的知识库由多学科专家团队开发，包括神经学家、心理学家、职业治疗师、言语治疗师和特殊教育者。\\n\\n重要的是要强调，我不进行诊断或替代医疗专业人员 - 我的作用是补充性的，为家庭、照护者和神经多样性人群提供可靠信息和实用支持。\\n\\n今天我能如何帮助您？';
+      '你好！我是蒂娜，来自TISM的专门研究自闭症和神经多样性的虚拟助手！\n\n我在这里提供个性化支持和基于科学证据的信息，涉及：\n\n• 发展和行为\n• 包容性教育策略\n• 沟通和社交互动技巧\n• 环境和感官适应\n• 日常生活实用资源和工具\n\n我的知识库由多学科专家团队开发，包括神经学家、心理学家、职业治疗师、言语治疗师和特殊教育者。\n\n重要的是要注意，我不进行诊断或替代医疗专业人员 - 我的作用是补充性的，为家庭、照护者和神经多样性人群提供可靠信息和实用支持。\n\n今天我能如何帮助您？';
 
   @override
-  String get diary_observations => '日记观察';
+  String get tina_connection_error => '我现在连接有困难。很多用户正在使用系统。请几分钟后再试！😅';
+
+  @override
+  String get tina_general_error => '哎呀！这里出了点问题。请稍后再试！🤖';
+
+  @override
+  String get tina_api_key_error => '无效的API密钥。请检查.env文件中Gemini密钥是否正确';
+
+  @override
+  String get tina_quota_error => 'API使用限制已超出。请稍后再试。';
+
+  @override
+  String get tina_network_error => '连接错误。请检查您的网络连接并再试。';
+
+  @override
+  String get diary_observations => '观察日记';
 
   @override
   String get no_observations => '还没有观察记录';
@@ -241,7 +256,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get report_copied => '报告已复制！粘贴到邮件或微信';
 
   @override
-  String get progress => '进步';
+  String get progress => '进展';
 
   @override
   String get behavior => '行为';
@@ -257,127 +272,124 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String routine_of(String name) {
-    return 'Rotina de $name';
+    return '$name的日程';
   }
 
   @override
   String support_level(String level) {
-    return 'Suporte $level';
+    return '$level支持';
   }
 
   @override
-  String get filter_category => 'Filtrar por categoria:';
+  String get filter_category => '按类别筛选：';
 
   @override
-  String get completed => 'Concluídas';
+  String get completed => '已完成';
 
   @override
   String progress_count(int completed, int total) {
-    return 'Progresso: $completed/$total';
+    return '进度：$completed/$total';
   }
 
   @override
-  String get no_activities => 'Nenhuma atividade encontrada';
+  String get no_activities => '未找到活动';
 
   @override
-  String get clear_filters => 'Limpar filtros';
+  String get clear_filters => '清除筛选';
 
   @override
-  String get add_activity => 'Adicionar Atividade';
+  String get add_activity => '添加活动';
 
   @override
-  String get edit_activity => 'Editar Atividade';
+  String get edit_activity => '编辑活动';
 
   @override
-  String get morning => 'Manhã';
+  String get morning => '上午';
 
   @override
-  String get education => 'Educação';
+  String get education => '教育';
 
   @override
-  String get food => 'Alimentação';
+  String get food => '饮食';
 
   @override
-  String get leisure => 'Lazer';
+  String get leisure => '休闲';
 
   @override
-  String get wellness => 'Bem-estar';
+  String get wellness => '健康';
 
   @override
-  String get night => 'Noite';
+  String get night => '夜晚';
 
   @override
-  String get all => 'Todas';
+  String get all => '全部';
 
   @override
-  String get welcome => 'Olá, seja bem vindo(a)!';
+  String get welcome => '你好，欢迎！';
 
   @override
   String get profile_setup_desc =>
-      'Para criar uma rotina personalizada, primeiro vamos configurar o perfil da criança.\n\nIsso nos ajuda a sugerir atividades adequadas para a idade e nível de suporte.';
+      '要创建个性化日程，让我们先设置孩子的个人资料。\n\n这有助于我们建议适合年龄和支持水平的活动。';
 
   @override
-  String get create_profile => 'Criar Perfil';
+  String get create_profile => '创建个人资料';
 
   @override
-  String get edit_profile_menu => 'Editar Perfil';
+  String get edit_profile_menu => '编辑个人资料';
 
   @override
-  String get switch_child => 'Trocar Criança';
+  String get switch_child => '切换孩子';
 
   @override
-  String get new_child => 'Nova Criança';
+  String get new_child => '新孩子';
 
   @override
-  String get select_child => 'Selecionar Criança';
+  String get select_child => '选择孩子';
 
   @override
-  String get verify_email => 'Verificar Email';
+  String get verify_email => '验证邮箱';
 
   @override
-  String get verification_sent => 'Email de verificação enviado!';
+  String get verification_sent => '验证邮件已发送！';
 
   @override
-  String get check_email => 'Verifique sua caixa de entrada';
+  String get check_email => '检查您的收件箱';
 
   @override
-  String get verification_desc =>
-      'Clique no link do email para ativar sua conta.\nVocê será redirecionado automaticamente.';
+  String get verification_desc => '点击邮件中的链接激活您的账户。\n您将自动重定向。';
 
   @override
-  String get already_verified => 'Já verifiquei - Entrar';
+  String get already_verified => '已验证 - 登录';
 
   @override
-  String get resend_verification => 'Reenviar email de verificação';
+  String get resend_verification => '重新发送验证邮件';
 
   @override
-  String get verifying => 'Verificando...';
+  String get verifying => '验证中...';
 
   @override
-  String get delete_account => 'Deletar Conta';
+  String get delete_account => '删除账户';
 
   @override
-  String get delete_warning =>
-      'Esta ação é IRREVERSÍVEL!\n\nTodos os seus dados serão perdidos permanentemente.';
+  String get delete_warning => '此操作不可逆！\n\n您的所有数据将永久丢失。';
 
   @override
-  String get delete_confirmation => 'Para confirmar, digite exatamente:';
+  String get delete_confirmation => '确认请准确输入：';
 
   @override
-  String get delete_phrase => 'DELETAR minha conta';
+  String get delete_phrase => '删除我的账户';
 
   @override
-  String get delete_input_hint => 'Digite a frase acima';
+  String get delete_input_hint => '输入上面的短语';
 
   @override
-  String get delete_incorrect =>
-      'Frase incorreta. Verifique maiúsculas e minúsculas.';
+  String get delete_incorrect => '短语错误。检查大小写。';
 
   @override
-  String get confirm_password_delete => 'Confirmar senha';
+  String get confirm_password_delete => '确认密码';
 
   @override
-  String get enter_password => 'Digite sua senha';
+  String get enter_password => '输入您的密码';
 
   @override
   String get save => '保存';
@@ -392,803 +404,789 @@ class AppLocalizationsZh extends AppLocalizations {
   String get delete => '删除';
 
   @override
-  String get edit => 'Editar';
+  String get edit => '编辑';
 
   @override
-  String get add => 'Adicionar';
+  String get add => '添加';
 
   @override
-  String get remove => 'Remover';
+  String get remove => '移除';
 
   @override
-  String get update => 'Atualizar';
+  String get update => '更新';
 
   @override
-  String get close => 'Fechar';
+  String get close => '关闭';
 
   @override
-  String get ok => 'OK';
+  String get ok => '确定';
 
   @override
-  String get yes => 'Sim';
+  String get yes => '是';
 
   @override
-  String get no => 'Não';
+  String get no => '否';
 
   @override
-  String get share => 'Compartilhar';
+  String get share => '分享';
 
   @override
-  String get success => 'Sucesso';
+  String get success => '成功';
 
   @override
-  String get error => 'Erro';
+  String get error => '错误';
 
   @override
-  String get loading => 'Carregando...';
+  String get loading => '加载中...';
 
   @override
-  String get connection_error => 'Erro de conexão';
+  String get connection_error => '连接错误';
 
   @override
-  String get try_again => 'Tente novamente';
+  String get try_again => '重试';
 
   @override
-  String get updated_successfully => 'Atualizado com sucesso!';
+  String get updated_successfully => '更新成功！';
 
   @override
-  String get deleted_successfully => 'Deletado com sucesso';
+  String get deleted_successfully => '删除成功';
 
   @override
-  String get saved_successfully => 'Salvo com sucesso!';
+  String get saved_successfully => '保存成功！';
 
   @override
-  String get welcome_message => 'Olá, seja bem vindo(a)!';
+  String get welcome_message => '你好，欢迎！';
 
   @override
-  String get no_account => 'Ainda não tem conta? Cadastre-se';
+  String get no_account => '还没有账户？注册';
 
   @override
-  String get fill_all_fields => 'Preencha todos os campos';
+  String get fill_all_fields => '填写所有字段';
 
   @override
-  String get login_error => 'Erro no login';
+  String get login_error => '登录错误';
 
   @override
   String connection_error_detail(String error) {
-    return 'Erro de conexão: $error';
+    return '连接错误：$error';
   }
 
   @override
-  String get field_required => 'Este campo é obrigatório';
+  String get field_required => '此字段为必填项';
 
   @override
-  String get invalid_email => 'Email inválido';
+  String get invalid_email => '无效邮箱';
 
   @override
-  String get password_too_short => 'Senha deve ter pelo menos 8 caracteres';
+  String get password_too_short => '密码至少需要8个字符';
 
   @override
-  String get passwords_dont_match => 'Senhas não coincidem';
+  String get passwords_dont_match => '密码不匹配';
 
   @override
-  String get username_invalid =>
-      'Username deve conter apenas letras minúsculas, números e _';
+  String get username_invalid => '用户名只能包含小写字母、数字和_';
 
   @override
-  String get name_cooldown => 'Nome pode ser alterado apenas 1 vez por dia';
+  String get name_cooldown => '姓名每天只能更改一次';
 
   @override
-  String get username_cooldown =>
-      'Username pode ser alterado apenas 1 vez a cada 3 dias';
+  String get username_cooldown => '用户名每3天只能更改一次';
 
   @override
-  String get user_type_cooldown =>
-      'Tipo de usuário pode ser alterado apenas 1 vez por dia';
+  String get user_type_cooldown => '用户类型每天只能更改一次';
 
   @override
-  String get wake_up => 'Acordar';
+  String get wake_up => '起床';
 
   @override
-  String get wake_up_desc => 'Despertar com música suave';
+  String get wake_up_desc => '用轻柔音乐起床';
 
   @override
-  String get brush_teeth => 'Escovar dentes';
+  String get brush_teeth => '刷牙';
 
   @override
-  String get brush_teeth_desc => 'Usar escova macia por 2 minutos';
+  String get brush_teeth_desc => '用软毛牙刷刷2分钟';
 
   @override
-  String get breakfast => 'Café da manhã';
+  String get breakfast => '早餐';
 
   @override
-  String get breakfast_desc => 'Comer sentado na mesa';
+  String get breakfast_desc => '坐在桌子旁吃饭';
 
   @override
-  String get educational_activity => 'Atividade educativa';
+  String get educational_activity => '教育活动';
 
   @override
-  String get educational_activity_desc => 'Jogos educativos ou escola';
+  String get educational_activity_desc => '教育游戏或学校';
 
   @override
-  String get snack => 'Lanche';
+  String get snack => '零食';
 
   @override
-  String get snack_desc => 'Fruta ou lanche saudável';
+  String get snack_desc => '水果或健康零食';
 
   @override
-  String get music => 'Música';
+  String get music => '音乐';
 
   @override
-  String get music_desc => 'Ouvir ou tocar música';
+  String get music_desc => '听音乐或演奏音乐';
 
   @override
-  String get draw => 'Desenhar';
+  String get draw => '画画';
 
   @override
-  String get draw_desc => 'Atividade de desenho livre';
+  String get draw_desc => '自由绘画活动';
 
   @override
-  String get numbers => 'Números';
+  String get numbers => '数字';
 
   @override
-  String get numbers_desc => 'Jogos com números';
+  String get numbers_desc => '数字游戏';
 
   @override
-  String get sensory_break => 'Pausa sensorial';
+  String get sensory_break => '感官休息';
 
   @override
-  String get sensory_break_desc => 'Momento de calma e autorregulação';
+  String get sensory_break_desc => '平静和自我调节的时刻';
 
   @override
-  String get dinner => 'Jantar';
+  String get dinner => '晚餐';
 
   @override
-  String get dinner_desc => 'Refeição em família';
+  String get dinner_desc => '家庭聚餐';
 
   @override
-  String get bath => 'Banho';
+  String get bath => '洗澡';
 
   @override
-  String get bath_desc => 'Água morna, esponja macia';
+  String get bath_desc => '温水，软海绵';
 
   @override
-  String get sleep => 'Dormir';
+  String get sleep => '睡觉';
 
   @override
-  String get sleep_desc => 'Música suave para dormir';
+  String get sleep_desc => '轻柔音乐助眠';
 
   @override
-  String get welcome_forum => 'Bem-vindo ao Fórum TEA! 💙';
+  String get welcome_forum => '欢迎来到自闭症论坛！💙';
 
   @override
-  String get first_post_message =>
-      'Seja o primeiro a compartilhar uma experiência\nou fazer uma pergunta para a comunidade';
+  String get first_post_message => '成为第一个分享经验\n或向社区提问的人';
 
   @override
-  String get create_first_post => 'Criar primeiro post';
+  String get create_first_post => '创建第一个帖子';
 
   @override
-  String get delete_post => 'Deletar Post';
+  String get delete_post => '删除帖子';
 
   @override
-  String get delete_post_confirm =>
-      'Tem certeza que deseja deletar este post? Esta ação não pode ser desfeita.';
+  String get delete_post_confirm => '您确定要删除这个帖子吗？此操作无法撤销。';
 
   @override
-  String get post_deleted_success => 'Post deletado com sucesso';
+  String get post_deleted_success => '帖子删除成功';
 
   @override
   String error_deleting_post(String error) {
-    return 'Erro ao deletar post: $error';
+    return '删除帖子错误：$error';
   }
 
   @override
-  String get report_post => 'Denunciar';
+  String get report_post => '举报';
 
   @override
-  String get report_post_title => 'Denunciar Post';
+  String get report_post_title => '举报帖子';
 
   @override
-  String get report_post_confirm =>
-      'Tem certeza que deseja denunciar este post?';
+  String get report_post_confirm => '您确定要举报这个帖子吗？';
 
   @override
-  String get post_reported => 'Post denunciado com sucesso';
+  String get post_reported => '帖子举报成功';
 
   @override
-  String get now => 'Agora';
+  String get now => '现在';
 
   @override
-  String get search_posts => 'Buscar posts, pessoas ou tópicos...';
+  String get search_posts => '搜索帖子、用户或话题...';
 
   @override
-  String get no_results_found => 'Nenhum resultado encontrado';
+  String get no_results_found => '未找到结果';
 
   @override
-  String get try_different_keywords =>
-      'Tente usar palavras-chave diferentes\nou explore as categorias abaixo';
+  String get try_different_keywords => '尝试使用不同的关键词\n或浏览下面的类别';
 
   @override
-  String get type_to_search => 'Digite para buscar...';
+  String get type_to_search => '输入搜索...';
 
   @override
-  String get find_posts_profiles =>
-      'Encontre posts, perfis e hashtags\nna comunidade TEA';
+  String get find_posts_profiles => '在自闭症社区中查找\n帖子、个人资料和标签';
 
   @override
-  String get how_identify_autism => 'Como identificar autismo?';
+  String get how_identify_autism => '如何识别自闭症？';
 
   @override
-  String get child_not_speaking => 'Meu filho não fala, é autismo?';
+  String get child_not_speaking => '我的孩子不说话，是自闭症吗？';
 
   @override
-  String get what_therapies_work => 'Que terapias funcionam?';
+  String get what_therapies_work => '哪些治疗有效？';
 
   @override
-  String get help_at_school => 'Como ajudar na escola?';
+  String get help_at_school => '如何在学校帮助？';
 
   @override
-  String get autism_rights => 'Direitos do autista';
+  String get autism_rights => '自闭症权利';
 
   @override
-  String get child_tantrums => 'Criança com birras';
+  String get child_tantrums => '孩子发脾气';
 
   @override
-  String get new_observation => 'Nova Observação';
+  String get new_observation => '新观察';
 
   @override
-  String get edit_observation => 'Editar Observação';
+  String get edit_observation => '编辑观察';
 
   @override
-  String get observation_type => 'Tipo:';
+  String get observation_type => '类型：';
 
   @override
-  String get title => 'Título';
+  String get title => '标题';
 
   @override
-  String get detailed_description => 'Descrição detalhada';
+  String get detailed_description => '详细描述';
 
   @override
   String intensity(int level) {
-    return 'Intensidade: $level';
+    return '强度：$level';
   }
 
   @override
-  String get observer => 'Observador:';
+  String get observer => '观察者：';
 
   @override
-  String get possible_triggers => 'Possíveis gatilhos:';
+  String get possible_triggers => '可能的触发因素：';
 
   @override
-  String get delete_observation => 'Excluir Observação';
+  String get delete_observation => '删除观察';
 
   @override
-  String get delete_observation_confirm =>
-      'Tem certeza que deseja excluir esta observação?';
+  String get delete_observation_confirm => '您确定要删除这个观察吗？';
 
   @override
-  String get observation_title_empty =>
-      'O título da observação não pode estar vazio';
+  String get observation_title_empty => '观察标题不能为空';
 
   @override
-  String get not_defined => 'Não definido';
+  String get not_defined => '未定义';
 
   @override
-  String get confirm_change => 'Confirmar alteração';
+  String get confirm_change => '确认更改';
 
   @override
   String change_name_to(String name) {
-    return 'Alterar nome para \"$name\"?';
+    return '将姓名更改为\"$name\"？';
   }
 
   @override
   String change_username_to(String oldName, String newName) {
-    return 'Alterar username de @$oldName para @$newName?';
+    return '将用户名从@$oldName更改为@$newName？';
   }
 
   @override
-  String get error_updating_name => 'Erro ao atualizar nome';
+  String get error_updating_name => '更新姓名错误';
 
   @override
-  String get error_updating_username => 'Erro ao atualizar username';
+  String get error_updating_username => '更新用户名错误';
 
   @override
-  String get error_updating_type => 'Erro ao atualizar tipo';
+  String get error_updating_type => '更新类型错误';
 
   @override
-  String get username_help => 'Apenas letras minúsculas, números e _';
+  String get username_help => '只能包含小写字母、数字和_';
 
   @override
-  String get username_cooldown_info =>
-      'Username pode ser alterado apenas 1 vez a cada 3 dias';
+  String get username_cooldown_info => '用户名每3天只能更改一次';
 
   @override
-  String get confirm_password_title => 'Confirmar senha';
+  String get confirm_password_title => '确认密码';
 
   @override
-  String get error_deleting_account => 'Erro ao deletar conta';
+  String get error_deleting_account => '删除账户错误';
 
   @override
-  String get type_updated => 'Tipo atualizado!';
+  String get type_updated => '类型已更新！';
 
   @override
-  String get name_updated => 'Nome atualizado!';
+  String get name_updated => '姓名已更新！';
 
   @override
-  String get username_updated => 'Username atualizado!';
+  String get username_updated => '用户名已更新！';
 
   @override
-  String get account_deleted => 'Conta deletada com sucesso';
+  String get account_deleted => '账户删除成功';
 
   @override
-  String get incorrect_password => 'Senha incorreta';
+  String get incorrect_password => '密码错误';
 
   @override
-  String get user_not_found => 'Usuário não encontrado';
+  String get user_not_found => '用户未找到';
 
   @override
-  String get email_not_verified => 'Email ainda não verificado';
+  String get email_not_verified => '邮箱尚未验证';
 
   @override
-  String get verification_email_sent => 'Email de verificação reenviado!';
+  String get verification_email_sent => '验证邮件重新发送！';
 
   @override
-  String get checking_verification => 'Verificando...';
+  String get checking_verification => '检查中...';
 
   @override
-  String get already_have_account => 'Já tem conta? Faça login';
+  String get already_have_account => '已有账户？登录';
 
   @override
-  String get create_account => 'Criar conta';
+  String get create_account => '创建账户';
 
   @override
-  String get account_created => 'Conta criada! Verifique seu email para ativar';
+  String get account_created => '账户已创建！检查您的邮箱进行激活';
 
   @override
   String get example123 => '示例123';
 
   @override
-  String get new_routine => 'Nova Rotina';
+  String get new_routine => '新日程';
 
   @override
-  String get edit_routine => 'Editar Rotina';
+  String get edit_routine => '编辑日程';
 
   @override
-  String get activity_title => 'Título da atividade';
+  String get activity_title => '活动标题';
 
   @override
-  String get activity_description => 'Descrição da atividade';
+  String get activity_description => '活动描述';
 
   @override
-  String get time_format => 'Horário (00:00 - 23:59)';
+  String get time_format => '时间（00:00 - 23:59）';
 
   @override
-  String get category => 'Categoria';
+  String get category => '类别';
 
   @override
-  String get icon => 'Ícone';
+  String get icon => '图标';
 
   @override
-  String get color => 'Cor';
+  String get color => '颜色';
 
   @override
-  String get create_routine => 'Criar Rotina';
+  String get create_routine => '创建日程';
 
   @override
-  String get save_changes => 'Salvar Alterações';
+  String get save_changes => '保存更改';
 
   @override
-  String get routine_title_empty => 'O título da rotina não pode estar vazio';
+  String get routine_title_empty => '日程标题不能为空';
 
   @override
-  String get invalid_time_format =>
-      'Horário inválido. Use formato 24h (00:00 - 23:59)';
+  String get invalid_time_format => '无效时间。使用24小时格式（00:00 - 23:59）';
 
   @override
-  String get delete_routine => 'Deletar Rotina';
+  String get delete_routine => '删除日程';
 
   @override
-  String get delete_routine_confirm =>
-      'Tem certeza que deseja deletar esta rotina?';
+  String get delete_routine_confirm => '您确定要删除这个日程吗？';
 
   @override
   String hello_user_name(Object name) {
-    return 'Olá, $name! 👋';
+    return '你好，$name！👋';
   }
 
   @override
-  String get statistics => 'Estatísticas';
+  String get statistics => '统计';
 
   @override
-  String get general_summary => 'Resumo Geral';
+  String get general_summary => '总体摘要';
 
   @override
-  String get total => 'Total';
+  String get total => '总计';
 
   @override
-  String get progress_plural => 'Progressos';
+  String get progress_plural => '进展';
 
   @override
-  String get crisis_plural => 'Crises';
+  String get crisis_plural => '危机';
 
   @override
-  String get type_distribution => 'Distribuição por Tipo';
+  String get type_distribution => '类型分布';
 
   @override
-  String get most_frequent_triggers => 'Gatilhos Mais Frequentes';
+  String get most_frequent_triggers => '最常见触发因素';
 
   @override
-  String get weekly_trend => 'Tendência Semanal';
+  String get weekly_trend => '周趋势';
 
   @override
   String observations_last_7_days(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return '过去7天的观察：$count';
   }
 
   @override
-  String get child_name => 'Nome da criança';
+  String get child_name => '孩子姓名';
 
   @override
-  String get age => 'Idade';
+  String get age => '年龄';
 
   @override
-  String get support_level_label => 'Nível de suporte';
+  String get support_level_label => '支持水平';
 
   @override
-  String get sensory_preferences => 'Preferências sensoriais';
+  String get sensory_preferences => '感官偏好';
 
   @override
-  String get interests => 'Interesses';
+  String get interests => '兴趣';
 
   @override
-  String get child_name_empty => 'O nome da criança não pode estar vazio';
+  String get child_name_empty => '孩子姓名不能为空';
 
   @override
   String observations_last_7_days_count(int count) {
-    return 'Observações nos últimos 7 dias: $count';
+    return '过去7天的观察：$count';
   }
 
   @override
-  String get configure_profile => 'Configurar Perfil';
+  String get configure_profile => '配置个人资料';
 
   @override
-  String get edit_username_title => 'Editar Username';
+  String get edit_username_title => '编辑用户名';
 
   @override
-  String get account_deleted_success => 'Conta deletada com sucesso';
+  String get account_deleted_success => '账户删除成功';
 
   @override
-  String get theme_light => 'Claro';
+  String get theme_light => '浅色';
 
   @override
-  String get theme_dark => 'Escuro';
+  String get theme_dark => '深色';
 
   @override
-  String get theme_system => 'Sistema';
+  String get theme_system => '系统';
 
   @override
-  String get edit_observation_action => 'Editar observação';
+  String get edit_observation_action => '编辑观察';
 
   @override
-  String get delete_observation_action => 'Deletar observação';
+  String get delete_observation_action => '删除观察';
 
   @override
-  String get delete_observation_title => 'Deletar Observação';
+  String get delete_observation_title => '删除观察';
 
   @override
-  String get delete_observation_message =>
-      'Tem certeza que deseja deletar esta observação?';
+  String get delete_observation_message => '您确定要删除这个观察吗？';
 
   @override
-  String get trigger_routine_change => 'Mudança de rotina';
+  String get trigger_routine_change => '日程变化';
 
   @override
-  String get trigger_loud_noise => 'Barulho alto';
+  String get trigger_loud_noise => '大声噪音';
 
   @override
-  String get trigger_crowd => 'Multidão';
+  String get trigger_crowd => '人群';
 
   @override
-  String get trigger_tiredness => 'Cansaço';
+  String get trigger_tiredness => '疲劳';
 
   @override
-  String get trigger_hunger => 'Fome';
+  String get trigger_hunger => '饥饿';
 
   @override
-  String get trigger_frustration => 'Frustração';
+  String get trigger_frustration => '挫折';
 
   @override
-  String get trigger_transition => 'Transição';
+  String get trigger_transition => '过渡';
 
   @override
-  String get trigger_new_environment => 'Ambiente novo';
+  String get trigger_new_environment => '新环境';
 
   @override
-  String get trigger_bright_light => 'Luz muito forte';
+  String get trigger_bright_light => '强光';
 
   @override
-  String get trigger_unpleasant_texture => 'Textura desagradável';
+  String get trigger_unpleasant_texture => '不愉快的质地';
 
   @override
-  String get trigger_strong_smell => 'Cheiro forte';
+  String get trigger_strong_smell => '强烈气味';
 
   @override
-  String get trigger_temperature => 'Temperatura';
+  String get trigger_temperature => '温度';
 
   @override
-  String get trigger_tight_clothes => 'Roupa apertada';
+  String get trigger_tight_clothes => '紧身衣服';
 
   @override
-  String get trigger_insufficient_sleep => 'Sono insuficiente';
+  String get trigger_insufficient_sleep => '睡眠不足';
 
   @override
-  String get trigger_physical_pain => 'Dor física';
+  String get trigger_physical_pain => '身体疼痛';
 
   @override
-  String get trigger_medication => 'Medicação';
+  String get trigger_medication => '药物';
 
   @override
-  String get trigger_medical_visit => 'Visita médica';
+  String get trigger_medical_visit => '医疗访问';
 
   @override
-  String get trigger_new_school => 'Escola nova';
+  String get trigger_new_school => '新学校';
 
   @override
-  String get trigger_substitute_teacher => 'Professor substituto';
+  String get trigger_substitute_teacher => '代课老师';
 
   @override
-  String get trigger_test_evaluation => 'Prova/avaliação';
+  String get trigger_test_evaluation => '测试/评估';
 
   @override
-  String get trigger_party_event => 'Festa/evento';
+  String get trigger_party_event => '聚会/活动';
 
   @override
-  String get trigger_travel => 'Viagem';
+  String get trigger_travel => '旅行';
 
   @override
-  String get trigger_rain_storm => 'Chuva/temporal';
+  String get trigger_rain_storm => '雨/暴风雨';
 
   @override
-  String get trigger_parents_separation => 'Separação dos pais';
+  String get trigger_parents_separation => '父母分离';
 
   @override
-  String get trigger_broken_toy => 'Brinquedo quebrado';
+  String get trigger_broken_toy => '破损玩具';
 
   @override
-  String get trigger_not_getting_something => 'Não conseguir algo';
+  String get trigger_not_getting_something => '得不到某物';
 
   @override
-  String get trigger_activity_interruption => 'Interrupção atividade';
+  String get trigger_activity_interruption => '活动中断';
 
   @override
-  String get trigger_waiting_too_long => 'Esperar muito tempo';
+  String get trigger_waiting_too_long => '等待太久';
 
   @override
-  String get observer_father => 'pai';
+  String get observer_father => '父亲';
 
   @override
-  String get observer_mother => 'mãe';
+  String get observer_mother => '母亲';
 
   @override
-  String get observer_grandfather => 'avô';
+  String get observer_grandfather => '祖父';
 
   @override
-  String get observer_grandmother => 'avó';
+  String get observer_grandmother => '祖母';
 
   @override
-  String get observer_uncle => 'tio';
+  String get observer_uncle => '叔叔';
 
   @override
-  String get observer_aunt => 'tia';
+  String get observer_aunt => '阿姨';
 
   @override
-  String get observer_brother => 'irmão';
+  String get observer_brother => '兄弟';
 
   @override
-  String get observer_sister => 'irmã';
+  String get observer_sister => '姐妹';
 
   @override
-  String get observer_son => 'filho';
+  String get observer_son => '儿子';
 
   @override
-  String get observer_daughter => 'filha';
+  String get observer_daughter => '女儿';
 
   @override
-  String get observer_grandson => 'neto';
+  String get observer_grandson => '孙子';
 
   @override
-  String get observer_granddaughter => 'neta';
+  String get observer_granddaughter => '孙女';
 
   @override
-  String get observer_nephew => 'sobrinho';
+  String get observer_nephew => '侄子';
 
   @override
-  String get observer_niece => 'sobrinha';
+  String get observer_niece => '侄女';
 
   @override
-  String get observer_male_cousin => 'primo';
+  String get observer_male_cousin => '表兄弟';
 
   @override
-  String get observer_female_cousin => 'prima';
+  String get observer_female_cousin => '表姐妹';
 
   @override
-  String get observer_male_friend => 'amigo';
+  String get observer_male_friend => '男性朋友';
 
   @override
-  String get observer_female_friend => 'amiga';
+  String get observer_female_friend => '女性朋友';
 
   @override
-  String get observer_relative => 'parente';
+  String get observer_relative => '亲戚';
 
   @override
-  String get observer_caregiver => 'cuidador';
+  String get observer_caregiver => '照护者';
 
   @override
-  String get observer_teacher => 'professor';
+  String get observer_teacher => '老师';
 
   @override
-  String get observer_therapist => 'terapeuta';
+  String get observer_therapist => '治疗师';
 
   @override
-  String get observer_doctor => 'médico';
+  String get observer_doctor => '医生';
 
   @override
-  String get observer_psychologist => 'psicólogo';
+  String get observer_psychologist => '心理学家';
 
   @override
-  String get support_level_mild => 'leve';
+  String get support_level_mild => '轻度';
 
   @override
-  String get support_level_moderate => 'moderado';
+  String get support_level_moderate => '中度';
 
   @override
-  String get support_level_severe => 'severo';
+  String get support_level_severe => '重度';
 
   @override
-  String get sensory_visual => 'Visual';
+  String get sensory_visual => '视觉';
 
   @override
-  String get sensory_auditory => 'Auditivo';
+  String get sensory_auditory => '听觉';
 
   @override
-  String get sensory_tactile => 'Tátil';
+  String get sensory_tactile => '触觉';
 
   @override
-  String get sensory_movement => 'Movimento';
+  String get sensory_movement => '运动';
 
   @override
-  String get sensory_olfactory => 'Olfativo';
+  String get sensory_olfactory => '嗅觉';
 
   @override
-  String get sensory_gustatory => 'Gustativo';
+  String get sensory_gustatory => '味觉';
 
   @override
-  String get sensory_proprioceptive => 'Proprioceptivo';
+  String get sensory_proprioceptive => '本体感觉';
 
   @override
-  String get sensory_vestibular => 'Vestibular';
+  String get sensory_vestibular => '前庭';
 
   @override
-  String get sensory_deep_pressure => 'Pressão Profunda';
+  String get sensory_deep_pressure => '深压';
 
   @override
-  String get sensory_soft_textures => 'Texturas Suaves';
+  String get sensory_soft_textures => '柔软质地';
 
   @override
-  String get sensory_rough_textures => 'Texturas Ásperas';
+  String get sensory_rough_textures => '粗糙质地';
 
   @override
-  String get sensory_low_sounds => 'Sons Baixos';
+  String get sensory_low_sounds => '低音';
 
   @override
-  String get sensory_high_sounds => 'Sons Altos';
+  String get sensory_high_sounds => '高音';
 
   @override
-  String get sensory_soft_lights => 'Luzes Suaves';
+  String get sensory_soft_lights => '柔和灯光';
 
   @override
-  String get sensory_bright_lights => 'Luzes Brilhantes';
+  String get sensory_bright_lights => '明亮灯光';
 
   @override
-  String get sensory_hot_temperatures => 'Temperaturas Quentes';
+  String get sensory_hot_temperatures => '高温';
 
   @override
-  String get sensory_cold_temperatures => 'Temperaturas Frias';
+  String get sensory_cold_temperatures => '低温';
 
   @override
-  String get interest_music => 'Música';
+  String get interest_music => '音乐';
 
   @override
-  String get interest_drawing => 'Desenho';
+  String get interest_drawing => '绘画';
 
   @override
-  String get interest_numbers => 'Números';
+  String get interest_numbers => '数字';
 
   @override
-  String get interest_animals => 'Animais';
+  String get interest_animals => '动物';
 
   @override
-  String get interest_cars => 'Carros';
+  String get interest_cars => '汽车';
 
   @override
-  String get interest_books => 'Livros';
+  String get interest_books => '书籍';
 
   @override
-  String get interest_games => 'Jogos';
+  String get interest_games => '游戏';
 
   @override
-  String get interest_computer => 'Computador';
+  String get interest_computer => '电脑';
 
   @override
-  String get interest_tablet => 'Tablet';
+  String get interest_tablet => '平板';
 
   @override
-  String get interest_toys => 'Brinquedos';
+  String get interest_toys => '玩具';
 
   @override
-  String get interest_sports => 'Esportes';
+  String get interest_sports => '运动';
 
   @override
-  String get interest_dance => 'Dança';
+  String get interest_dance => '舞蹈';
 
   @override
-  String get interest_cooking => 'Culinária';
+  String get interest_cooking => '烹饪';
 
   @override
-  String get interest_gardening => 'Jardinagem';
+  String get interest_gardening => '园艺';
 
   @override
-  String get interest_science => 'Ciência';
+  String get interest_science => '科学';
 
   @override
-  String get interest_math => 'Matemática';
+  String get interest_math => '数学';
 
   @override
-  String get interest_art => 'Arte';
+  String get interest_art => '艺术';
 
   @override
-  String get interest_photography => 'Fotografia';
+  String get interest_photography => '摄影';
 
   @override
-  String get interest_videos => 'Vídeos';
+  String get interest_videos => '视频';
 
   @override
-  String get interest_movies => 'Filmes';
+  String get interest_movies => '电影';
 
   @override
-  String get interest_series => 'Séries';
+  String get interest_series => '电视剧';
 
   @override
-  String get interest_puzzles => 'Quebra-cabeças';
+  String get interest_puzzles => '拼图';
 
   @override
-  String get interest_lego => 'Lego';
+  String get interest_lego => '乐高';
 
   @override
-  String get interest_dolls => 'Bonecas';
+  String get interest_dolls => '娃娃';
 
   @override
-  String get interest_superheroes => 'Super-heróis';
+  String get interest_superheroes => '超级英雄';
 
   @override
-  String get delete_post_action => 'Deletar';
+  String get delete_post_action => '删除';
 
   @override
-  String get report_post_action => 'Denunciar';
+  String get report_post_action => '举报';
 
   @override
-  String get clear_search => 'Limpar busca';
+  String get clear_search => '清除搜索';
 
   @override
-  String get month => 'mês';
+  String get month => '月';
 
   @override
-  String get months => 'meses';
+  String get months => '个月';
 
   @override
-  String get year => 'ano';
+  String get year => '年';
 
   @override
-  String get years => 'anos';
+  String get years => '岁';
 }

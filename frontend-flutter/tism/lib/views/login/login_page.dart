@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                     ? Colors.white 
                     : tismAqua,
                 ),
-                textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                textDirection: TextUtils.getTextDirection(),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                       : Text(
                           AppLocalizations.of(context)!.login,
                           style: const TextStyle(fontSize: 16, color: Colors.white),
-                          textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                          textDirection: TextUtils.getTextDirection(),
                         ),
                 ),
               ),
@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: Text(
                   AppLocalizations.of(context)!.no_account,
-                  textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                  textDirection: TextUtils.getTextDirection(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -234,7 +234,7 @@ class _LoginPageState extends State<LoginPage> {
                     ? Colors.grey[400] 
                     : Colors.black54
                 ),
-                textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
+                textDirection: TextUtils.getTextDirection(),
                 textAlign: TextAlign.center,
               ),
             ],

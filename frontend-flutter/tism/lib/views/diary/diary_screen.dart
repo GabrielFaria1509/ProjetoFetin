@@ -166,7 +166,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
-              title: Text(AppLocalizations.of(context)!.delete_observation_action, style: TextStyle(color: Colors.red)),
+              title: Text(AppLocalizations.of(context)!.delete_observation_action, style: const TextStyle(color: Colors.red)),
               onTap: () {
                 Navigator.pop(context);
                 _deleteEntry(entry);
@@ -195,7 +195,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               Navigator.pop(context);
               _loadEntries();
             },
-            child: Text(AppLocalizations.of(context)!.delete, style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
