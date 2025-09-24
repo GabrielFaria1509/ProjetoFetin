@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'dart:html' as html;
+import 'package:tism/l10n/app_localizations.dart';
+import 'package:web/web.dart' as web;
 
 class PDFViewerImpl extends StatelessWidget {
   final String title;
@@ -17,16 +18,16 @@ class PDFViewerImpl extends StatelessWidget {
           const Icon(Icons.picture_as_pdf, size: 64, color: Colors.blue),
           const SizedBox(height: 16),
           Text(
-            'Visualizar PDF: $title',
+            '${AppLocalizations.of(context)!.app_name} PDF: $title',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           ElevatedButton.icon(
             onPressed: () {
-              html.window.open(assetPath, '_blank');
+              web.window.open(assetPath, '_blank');
             },
             icon: const Icon(Icons.open_in_new),
-            label: const Text('Abrir PDF'),
+            label: Text(AppLocalizations.of(context)!.app_name),
             style: ElevatedButton.styleFrom(
               backgroundColor: tismAqua,
               foregroundColor: Colors.white,

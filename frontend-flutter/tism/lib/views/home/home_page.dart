@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/secure_storage_service.dart';
-import 'package:tism/services/language_service.dart';
 import 'package:tism/utils/text_utils.dart';
-import 'dart:math';
+import 'package:tism/l10n/app_localizations.dart';
+
 import 'package:tism/views/feed/feed_page.dart';
 import 'package:tism/views/profile/profile_page.dart';
 import 'package:tism/views/chatbot/chat_screen.dart';
@@ -24,9 +24,10 @@ class _HomePageState extends State<HomePage> {
   String _displayName = '';
   String _motivationalPhrase = '';
   
-  final List<String> _phrases = [
-    'Explore conteúdos educativos sobre o TEA'
-  ];
+  String get _phrase {
+    final l10n = AppLocalizations.of(context)!;
+    return l10n.explore_content;
+  }
 
   @override
   void initState() {
@@ -36,9 +37,8 @@ class _HomePageState extends State<HomePage> {
   }
   
   void _setRandomPhrase() {
-    final random = Random();
     setState(() {
-      _motivationalPhrase = _phrases[random.nextInt(_phrases.length)];
+      _motivationalPhrase = _phrase;
     });
   }
 
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('app_title'.tr),
+        title: Text(AppLocalizations.of(context)!.app_name),
         backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'hello'.tr}, ${_displayName.isNotEmpty ? _displayName : widget.nomeUsuario}! 👋',
+              AppLocalizations.of(context)!.hello_user(_displayName.isNotEmpty ? _displayName : widget.nomeUsuario),
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
               textAlign: TextUtils.getLeftAlignment(Localizations.localeOf(context).languageCode),
@@ -105,13 +105,13 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   _buildMenuCard(
                     context,
-                    'educational_feed'.tr,
+                    AppLocalizations.of(context)!.educational_feed,
                     Icons.article,
                     () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedPage())),
                   ),
                   _buildMenuCard(
                     context,
-                    'personalized_routine'.tr,
+                    AppLocalizations.of(context)!.custom_routine,
                     Icons.schedule,
                     () => Navigator.push(
                       context,
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCard(
                     context,
-                    'observation_diary'.tr,
+                    AppLocalizations.of(context)!.observation_diary,
                     Icons.book,
                     () => Navigator.push(
                       context,
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCardWithImage(
                     context,
-                    'tina_chatbot'.tr,
+                    AppLocalizations.of(context)!.tina_chatbot,
                     'assets/images/tinaSimpleIcon.png',
                     () => Navigator.push(
                       context,
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   _buildMenuCard(
                     context,
-                    'tea_forum'.tr,
+                    AppLocalizations.of(context)!.tea_forum,
                     Icons.forum,
                     () => Navigator.push(
                       context,
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
 
                   _buildMenuCard(
                     context,
-                    'profile'.tr,
+                    AppLocalizations.of(context)!.profile,
                     Icons.person,
                     () => Navigator.push(
                       context,

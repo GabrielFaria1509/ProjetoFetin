@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/services/language_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'routine_models.dart';
 import 'routine_service.dart';
 import 'profile_setup.dart';
@@ -36,7 +36,6 @@ class _RoutineScreenState extends State<RoutineScreen> {
       profile = savedProfile;
       _generateAndFilterActivities();
     } else {
-      // Se não tem perfil, redireciona para criar
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showFirstTimeSetup();
       });
@@ -44,13 +43,11 @@ class _RoutineScreenState extends State<RoutineScreen> {
   }
   
   void _generateAndFilterActivities() async {
-    // Tentar carregar atividades salvas primeiro
     final savedActivities = await _loadSavedActivities();
     
     if (savedActivities.isNotEmpty) {
       allActivities = savedActivities;
     } else {
-      // Gerar rotina padrão se não houver salva
       allActivities = RoutineService.generateRoutine(profile!);
     }
     
@@ -76,7 +73,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('custom_routine'.tr),
+        title: Text(AppLocalizations.of(context)!.custom_routine),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: [
@@ -106,7 +103,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   children: [
                     const Icon(Icons.edit),
                     const SizedBox(width: 8),
-                    Text('edit_profile_menu'.tr),
+                    Text(AppLocalizations.of(context)!.edit_profile_menu),
                   ],
                 ),
               ),
@@ -116,7 +113,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   children: [
                     const Icon(Icons.swap_horiz),
                     const SizedBox(width: 8),
-                    Text('switch_child'.tr),
+                    Text(AppLocalizations.of(context)!.switch_child),
                   ],
                 ),
               ),
@@ -126,7 +123,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                   children: [
                     const Icon(Icons.person_add),
                     const SizedBox(width: 8),
-                    Text('new_child'.tr),
+                    Text(AppLocalizations.of(context)!.new_child),
                   ],
                 ),
               ),
@@ -176,12 +173,12 @@ class _RoutineScreenState extends State<RoutineScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'routine_of'.trArgs([profile?.name ?? 'Criança']),
+                  AppLocalizations.of(context)!.routine_of(profile?.name ?? 'Child'),
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${profile?.ageDisplay ?? "5 anos"} • ${'support_level'.trArgs([profile?.supportLevel ?? ''])}',
+                  '${profile?.ageDisplay ?? "5 years"} • ${AppLocalizations.of(context)!.support_level(_translateSupportLevel(profile?.supportLevel ?? ''))}',
                   style: TextStyle(fontSize: 11, color: Colors.grey[600]),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -201,12 +198,11 @@ class _RoutineScreenState extends State<RoutineScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Toggle para mostrar concluídas
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text('filter_category'.tr, 
+                child: Text(AppLocalizations.of(context)!.filter_category, 
                   style: const TextStyle(fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -222,7 +218,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                     },
                   ),
                   Flexible(
-                    child: Text('completed'.tr, 
+                    child: Text(AppLocalizations.of(context)!.completed, 
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -231,14 +227,13 @@ class _RoutineScreenState extends State<RoutineScreen> {
             ],
           ),
           const SizedBox(height: 8),
-          // Chips de categoria
           SizedBox(
             height: 40,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
                 FilterChip(
-                  label: Text('${'all'.tr} (${allActivities.length})',
+                  label: Text('${AppLocalizations.of(context)!.all} (${allActivities.length})',
                     style: const TextStyle(fontSize: 12),
                   ),
                   selected: selectedCategory == null,
@@ -282,7 +277,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
             children: [
               Flexible(
                 child: Text(
-                  'progress'.trArgs([completed, total]),
+                  AppLocalizations.of(context)!.progress_count(completed, total),
                   style: const TextStyle(fontSize: 13),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -318,11 +313,11 @@ class _RoutineScreenState extends State<RoutineScreen> {
               : Colors.grey
           ),
           const SizedBox(height: 16),
-          Text('no_activities'.tr),
+          Text(AppLocalizations.of(context)!.no_activities),
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: _clearFilters,
-            child: Text('clear_filters'.tr),
+            child: Text(AppLocalizations.of(context)!.clear_filters),
           ),
         ],
       ),
@@ -401,7 +396,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
                 if (activityIndex != -1) {
                   allActivities[activityIndex] = activity.copyWith(isCompleted: value);
                   _applyFilters();
-                  _saveActivities(); // Salvar quando marcar/desmarcar
+                  _saveActivities();
                 }
               });
             },
@@ -418,17 +413,15 @@ class _RoutineScreenState extends State<RoutineScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text('👶 ${'welcome'.tr}!'),
-        content: Text(
-          'profile_setup_desc'.tr
-        ),
+        title: Text('👶 ${AppLocalizations.of(context)!.welcome}!'),
+        content: Text(AppLocalizations.of(context)!.profile_setup_desc),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _showNewProfileSetup();
             },
-            child: Text('create_profile'.tr),
+            child: Text(AppLocalizations.of(context)!.create_profile),
           ),
         ],
       ),
@@ -490,7 +483,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('select_child'.tr),
+        title: Text(AppLocalizations.of(context)!.select_child),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -529,7 +522,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('cancel'.tr),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
         ],
       ),
@@ -583,8 +576,6 @@ class _RoutineScreenState extends State<RoutineScreen> {
     );
   }
   
-
-  
   void _updateCategoryFilter(String? category) {
     selectedCategory = category;
     _applyFilters();
@@ -601,18 +592,31 @@ class _RoutineScreenState extends State<RoutineScreen> {
   }
   
   String _getCategoryDisplayName(String category) {
+    final l10n = AppLocalizations.of(context)!;
+    
     switch (category) {
-      case 'manhã': return 'morning'.tr;
-      case 'educação': return 'education'.tr;
-      case 'alimentação': return 'food'.tr;
-      case 'lazer': return 'leisure'.tr;
-      case 'bem-estar': return 'wellness'.tr;
-      case 'noite': return 'night'.tr;
-      default: return category;
+      case 'manhã':
+        return l10n.morning;
+      case 'educação':
+        return l10n.education;
+      case 'alimentação':
+        return l10n.food;
+      case 'lazer':
+        return l10n.leisure;
+      case 'bem-estar':
+        return l10n.wellness;
+      case 'noite':
+        return l10n.night;
+      default:
+        return category;
     }
   }
   
-  // Métodos de persistência
+  String _translateSupportLevel(String level) {
+    // Placeholder - should use proper localization
+    return level;
+  }
+  
   Future<void> _saveActivities() async {
     if (profile == null) return;
     
@@ -633,7 +637,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
         return activitiesJson.map((json) => RoutineActivity.fromJson(json)).toList();
       }
     } catch (e) {
-      // Se houver erro, retorna lista vazia para gerar rotina padrão
+      // Return empty list to generate default routine
     }
     
     return [];
@@ -656,7 +660,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
         return hours * 60 + minutes;
       }
     } catch (e) {
-      // Se não conseguir parsear, retorna um valor alto para ficar no final
+      // Return high value to sort at end
     }
     return 9999;
   }
@@ -666,5 +670,4 @@ class _RoutineScreenState extends State<RoutineScreen> {
     _saveActivities();
     super.dispose();
   }
-
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'routine_models.dart';
 
 class AddRoutineScreen extends StatefulWidget {
@@ -66,7 +68,14 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.activityToEdit != null ? 'Editar Rotina' : 'Nova Rotina'),
+        title: Consumer<LanguageService>(
+          builder: (context, languageService, child) {
+            final isEnglish = languageService.currentLocale.languageCode == 'en';
+            return Text(widget.activityToEdit != null 
+                ? (isEnglish ? 'Edit Routine' : 'Editar Rotina')
+                : (isEnglish ? 'New Routine' : 'Nova Rotina'));
+          },
+        ),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: widget.activityToEdit != null ? [
@@ -110,9 +119,16 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
                     backgroundColor: tismAqua,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: Text(
-                    widget.activityToEdit != null ? 'Salvar Alterações' : 'Criar Rotina',
-                    style: const TextStyle(color: Colors.white),
+                  child: Consumer<LanguageService>(
+                    builder: (context, languageService, child) {
+                      final isEnglish = languageService.currentLocale.languageCode == 'en';
+                      return Text(
+                        widget.activityToEdit != null 
+                            ? (isEnglish ? 'Save Changes' : 'Salvar Alterações')
+                            : (isEnglish ? 'Create Routine' : 'Criar Rotina'),
+                        style: const TextStyle(color: Colors.white),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -126,9 +142,9 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
   Widget _buildTitleField() {
     return TextField(
       controller: _titleController,
-      decoration: const InputDecoration(
-        labelText: 'Título da atividade',
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        labelText: context.watch<LanguageService>().currentLocale.languageCode == 'en' ? 'Activity title' : 'Título da atividade',
+        border: const OutlineInputBorder(),
       ),
     );
   }
@@ -137,9 +153,9 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return TextField(
       controller: _timeController,
       keyboardType: TextInputType.number,
-      decoration: const InputDecoration(
-        labelText: 'Horário (00:00 - 23:59)',
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        labelText: context.watch<LanguageService>().currentLocale.languageCode == 'en' ? 'Time (00:00 - 23:59)' : 'Horário (00:00 - 23:59)',
+        border: const OutlineInputBorder(),
         hintText: '08:00',
       ),
       onChanged: (value) {
@@ -158,9 +174,9 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return TextField(
       controller: _descriptionController,
       maxLines: 3,
-      decoration: const InputDecoration(
-        labelText: 'Descrição da atividade',
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        labelText: context.watch<LanguageService>().currentLocale.languageCode == 'en' ? 'Activity description' : 'Descrição da atividade',
+        border: const OutlineInputBorder(),
       ),
     );
   }
@@ -169,12 +185,30 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Categoria:', style: TextStyle(fontWeight: FontWeight.bold)),
+        Consumer<LanguageService>(
+          builder: (context, languageService, child) {
+            final isEnglish = languageService.currentLocale.languageCode == 'en';
+            return Text(isEnglish ? 'Category:' : 'Categoria:', style: const TextStyle(fontWeight: FontWeight.bold));
+          },
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           children: _categories.map((category) => ChoiceChip(
-            label: Text(category.toUpperCase()),
+            label: Consumer<LanguageService>(
+              builder: (context, languageService, child) {
+                final isEnglish = languageService.currentLocale.languageCode == 'en';
+                final categoryNames = {
+                  'manhã': isEnglish ? 'MORNING' : 'MANHÃ',
+                  'educação': isEnglish ? 'EDUCATION' : 'EDUCAÇÃO',
+                  'alimentação': isEnglish ? 'FEEDING' : 'ALIMENTAÇÃO',
+                  'lazer': isEnglish ? 'LEISURE' : 'LAZER',
+                  'bem-estar': isEnglish ? 'WELLNESS' : 'BEM-ESTAR',
+                  'noite': isEnglish ? 'NIGHT' : 'NOITE',
+                };
+                return Text(categoryNames[category] ?? category.toUpperCase());
+              },
+            ),
             selected: _selectedCategory == category,
             onSelected: (selected) {
               if (selected) {
@@ -193,7 +227,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
       children: [
         Row(
           children: [
-            const Text('Ícone:', style: TextStyle(fontWeight: FontWeight.bold)),
+            Consumer<LanguageService>(
+              builder: (context, languageService, child) {
+                final isEnglish = languageService.currentLocale.languageCode == 'en';
+                return Text(isEnglish ? 'Icon:' : 'Ícone:', style: const TextStyle(fontWeight: FontWeight.bold));
+              },
+            ),
             const SizedBox(width: 8),
             Container(
               padding: const EdgeInsets.all(8),
@@ -255,7 +294,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Cor:', style: TextStyle(fontWeight: FontWeight.bold)),
+        Consumer<LanguageService>(
+          builder: (context, languageService, child) {
+            final isEnglish = languageService.currentLocale.languageCode == 'en';
+            return Text(isEnglish ? 'Color:' : 'Cor:', style: const TextStyle(fontWeight: FontWeight.bold));
+          },
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
@@ -286,9 +330,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     // Validar se título não é apenas whitespace ou caracteres invisíveis
     final title = _titleController.text.trim();
     if (title.isEmpty || title.replaceAll(RegExp(r'\s+'), '').isEmpty) {
+      final languageService = context.read<LanguageService>();
+      final isEnglish = languageService.currentLocale.languageCode == 'en';
+      
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('O título da rotina não pode estar vazio'),
+        SnackBar(
+          content: Text(isEnglish ? 'Routine title cannot be empty' : 'O título da rotina não pode estar vazio'),
           backgroundColor: Colors.red,
         ),
       );
@@ -298,9 +345,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     // Validar horário
     final time = _timeController.text.trim();
     if (!_isValidTime(time)) {
+      final languageService = context.read<LanguageService>();
+      final isEnglish = languageService.currentLocale.languageCode == 'en';
+      
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Horário inválido. Use formato 24h (00:00 - 23:59)'),
+        SnackBar(
+          content: Text(isEnglish ? 'Invalid time. Use 24h format (00:00 - 23:59)' : 'Horário inválido. Use formato 24h (00:00 - 23:59)'),
           backgroundColor: Colors.red,
         ),
       );
@@ -333,12 +383,27 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Deletar Rotina'),
-        content: const Text('Tem certeza que deseja deletar esta rotina?'),
+        title: Consumer<LanguageService>(
+          builder: (context, languageService, child) {
+            final isEnglish = languageService.currentLocale.languageCode == 'en';
+            return Text(isEnglish ? 'Delete Routine' : 'Deletar Rotina');
+          },
+        ),
+        content: Consumer<LanguageService>(
+          builder: (context, languageService, child) {
+            final isEnglish = languageService.currentLocale.languageCode == 'en';
+            return Text(isEnglish ? 'Are you sure you want to delete this routine?' : 'Tem certeza que deseja deletar esta rotina?');
+          },
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Consumer<LanguageService>(
+              builder: (context, languageService, child) {
+                final isEnglish = languageService.currentLocale.languageCode == 'en';
+                return Text(isEnglish ? 'Cancel' : 'Cancelar');
+              },
+            ),
           ),
           TextButton(
             onPressed: () {
@@ -346,7 +411,12 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
               Navigator.pop(context); // Close edit screen
               widget.onActivityDeleted?.call();
             },
-            child: const Text('Deletar', style: TextStyle(color: Colors.red)),
+            child: Consumer<LanguageService>(
+              builder: (context, languageService, child) {
+                final isEnglish = languageService.currentLocale.languageCode == 'en';
+                return Text(isEnglish ? 'Delete' : 'Deletar', style: const TextStyle(color: Colors.red));
+              },
+            ),
           ),
         ],
       ),

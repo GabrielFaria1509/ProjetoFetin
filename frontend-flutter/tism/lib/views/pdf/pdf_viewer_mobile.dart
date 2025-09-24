@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'dart:io';
 
 class PDFViewerImpl extends StatefulWidget {
@@ -49,7 +50,7 @@ class _PDFViewerImplState extends State<PDFViewerImpl> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          errorMessage = 'Erro ao carregar PDF: $e';
+          errorMessage = '${AppLocalizations.of(context)!.error}: $e';
           isLoading = false;
         });
       }
@@ -79,7 +80,7 @@ class _PDFViewerImplState extends State<PDFViewerImpl> {
                 });
                 _loadPDF();
               },
-              child: const Text('Tentar Novamente'),
+              child: Text(AppLocalizations.of(context)!.try_again),
             ),
           ],
         ),

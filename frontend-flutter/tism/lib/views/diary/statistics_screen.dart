@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'diary_models.dart';
 import 'diary_service.dart';
 
@@ -13,7 +14,7 @@ class StatisticsScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Estatísticas'),
+        title: Text('Estatísticas'),
         backgroundColor: tismAqua,
       ),
       body: SafeArea(
@@ -43,14 +44,19 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('📊 Resumo Geral', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('📊 Resumo Geral', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildStatItem('Total', entries.length.toString(), Colors.blue),
-                _buildStatItem('Progressos', progressCount.toString(), Colors.green),
-                _buildStatItem('Crises', criseCount.toString(), Colors.red),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildStatItem('Total', entries.length.toString(), Colors.blue),
+                    _buildStatItem('Progressos', progressCount.toString(), Colors.green),
+                    _buildStatItem('Crises', criseCount.toString(), Colors.red),
+                  ],
+                ),
               ],
             ),
           ],
@@ -80,13 +86,17 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('📈 Distribuição por Tipo', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('📈 Distribuição por Tipo', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             ...distribution.entries.map((entry) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Row(
                 children: [
-                  Expanded(child: Text(entry.key.name.toUpperCase())),
+                  Expanded(
+                    child: Builder(
+                      builder: (context) => Text(_getTypeDisplayName(context, entry.key)),
+                    ),
+                  ),
                   Text('${entry.value}', style: const TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
@@ -107,7 +117,7 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('⚠️ Gatilhos Mais Frequentes', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('⚠️ Gatilhos Mais Frequentes', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             ...sortedTriggers.take(5).map((entry) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -141,7 +151,7 @@ class StatisticsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('📅 Tendência Semanal', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('📅 Tendência Semanal', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Text('Observações nos últimos 7 dias: $recentEntries'),
             const SizedBox(height: 8),
@@ -154,5 +164,19 @@ class StatisticsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getTypeDisplayName(BuildContext context, ObservationType type) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (type) {
+      case ObservationType.progresso:
+        return l10n.progress;
+      case ObservationType.comportamento:
+        return l10n.behavior;
+      case ObservationType.crise:
+        return l10n.crisis;
+      case ObservationType.dificuldade:
+        return l10n.difficulty;
+    }
   }
 }

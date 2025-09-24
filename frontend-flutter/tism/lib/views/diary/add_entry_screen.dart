@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'diary_models.dart';
 import 'diary_service.dart';
 
@@ -51,7 +52,9 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.entryToEdit != null ? 'Editar Observação' : 'Nova Observação'),
+        title: Text(widget.entryToEdit != null 
+            ? AppLocalizations.of(context)!.edit_observation
+            : AppLocalizations.of(context)!.new_observation),
         backgroundColor: tismAqua,
         foregroundColor: Colors.white,
         actions: widget.entryToEdit != null ? [
@@ -95,7 +98,7 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
                     backgroundColor: tismAqua,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text('Salvar', style: TextStyle(color: Colors.white)),
+                  child: Text(AppLocalizations.of(context)!.save, style: const TextStyle(color: Colors.white)),
                 ),
               ),
             ],
@@ -109,12 +112,12 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Tipo:', style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(AppLocalizations.of(context)!.observation_type, style: const TextStyle(fontWeight: FontWeight.bold)),
         Wrap(
           children: ObservationType.values.map((type) {
             final icons = {'progresso': '📈', 'comportamento': '👤', 'crise': '⚠️', 'dificuldade': '❌'};
             return ChoiceChip(
-              label: Text('${icons[type.name]} ${type.name.toUpperCase()}'),
+              label: Text('${icons[type.name]} ${_getTypeDisplayName(type)}'),
               selected: _type == type,
               onSelected: (selected) => setState(() => _type = type),
             );
@@ -127,9 +130,9 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
   Widget _buildTitleField() {
     return TextField(
       controller: _titleController,
-      decoration: const InputDecoration(
-        labelText: 'Título',
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        labelText: AppLocalizations.of(context)!.title,
+        border: const OutlineInputBorder(),
       ),
     );
   }
@@ -138,9 +141,9 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     return TextField(
       controller: _descriptionController,
       maxLines: 3,
-      decoration: const InputDecoration(
-        labelText: 'Descrição detalhada',
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        labelText: AppLocalizations.of(context)!.detailed_description,
+        border: const OutlineInputBorder(),
       ),
     );
   }
@@ -149,7 +152,7 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Intensidade: $_intensity', style: const TextStyle(fontWeight: FontWeight.bold)),
+        Text(AppLocalizations.of(context)!.intensity(_intensity), style: const TextStyle(fontWeight: FontWeight.bold)),
         Slider(
           value: _intensity.toDouble(),
           min: 1,
@@ -165,7 +168,7 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Observador:', style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(AppLocalizations.of(context)!.observer, style: const TextStyle(fontWeight: FontWeight.bold)),
         DropdownButton<String>(
           value: _observer,
           items: [
@@ -186,7 +189,7 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Possíveis gatilhos:', style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(AppLocalizations.of(context)!.possible_triggers, style: const TextStyle(fontWeight: FontWeight.bold)),
         Wrap(
           children: _commonTriggers.map((trigger) => FilterChip(
             label: Text(trigger),
@@ -207,8 +210,8 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     final title = _titleController.text.trim();
     if (title.isEmpty || title.replaceAll(RegExp(r'\s+'), '').isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('O título da observação não pode estar vazio'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.observation_title_empty),
           backgroundColor: Colors.red,
         ),
       );
@@ -239,12 +242,12 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Excluir Observação'),
-        content: const Text('Tem certeza que deseja excluir esta observação?'),
+        title: Text(AppLocalizations.of(context)!.delete_observation),
+        content: Text(AppLocalizations.of(context)!.delete_observation_confirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -252,10 +255,24 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
               Navigator.pop(context); // Close dialog
               Navigator.pop(context); // Close edit screen
             },
-            child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
     );
+  }
+
+  String _getTypeDisplayName(ObservationType type) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (type) {
+      case ObservationType.progresso:
+        return l10n.progress;
+      case ObservationType.comportamento:
+        return l10n.behavior;
+      case ObservationType.crise:
+        return l10n.crisis;
+      case ObservationType.dificuldade:
+        return l10n.difficulty;
+    }
   }
 }

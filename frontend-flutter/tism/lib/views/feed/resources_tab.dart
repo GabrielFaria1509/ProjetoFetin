@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/views/pdf/pdf_viewer.dart';
-
 import 'package:tism/widgets/pdf_cover_generator.dart';
 
 class ResourcesTab extends StatefulWidget {
@@ -13,7 +14,13 @@ class ResourcesTab extends StatefulWidget {
 
 class _ResourcesTabState extends State<ResourcesTab> {
   String selectedType = 'Todos';
-  final List<String> resourceTypes = ['Todos', 'Guias', 'Checklists', 'Manuais', 'Artigos'];
+  List<String> get resourceTypes {
+    final languageService = context.read<LanguageService>();
+    final isEnglish = languageService.currentLocale.languageCode == 'en';
+    return isEnglish 
+        ? ['All', 'Guides', 'Checklists', 'Manuals', 'Articles']
+        : ['Todos', 'Guias', 'Checklists', 'Manuais', 'Artigos'];
+  }
 
   final List<Map<String, dynamic>> mockResources = [
     {
@@ -124,8 +131,21 @@ class _ResourcesTabState extends State<ResourcesTab> {
   ];
 
   List<Map<String, dynamic>> get filteredResources {
-    if (selectedType == 'Todos') return mockResources;
-    return mockResources.where((resource) => resource['type'] == selectedType).toList();
+    final languageService = context.read<LanguageService>();
+    final isEnglish = languageService.currentLocale.languageCode == 'en';
+    
+    if (selectedType == 'Todos' || selectedType == 'All') return mockResources;
+    
+    // Map English types to Portuguese for filtering
+    final typeMap = {
+      'Guides': 'Guias',
+      'Checklists': 'Checklists', 
+      'Manuals': 'Manuais',
+      'Articles': 'Artigos'
+    };
+    
+    final filterType = isEnglish ? (typeMap[selectedType] ?? selectedType) : selectedType;
+    return mockResources.where((resource) => resource['type'] == filterType).toList();
   }
 
   @override
@@ -231,24 +251,29 @@ class _ResourcesTabState extends State<ResourcesTab> {
                         color: tismAqua.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.picture_as_pdf,
-                            size: 16,
-                            color: tismAqua,
-                          ),
-                          SizedBox(width: 4),
-                          Text(
-                            'Abrir PDF',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: tismAqua,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                      child: Consumer<LanguageService>(
+                        builder: (context, languageService, child) {
+                          final isEnglish = languageService.currentLocale.languageCode == 'en';
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.picture_as_pdf,
+                                size: 16,
+                                color: tismAqua,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                isEnglish ? 'Open PDF' : 'Abrir PDF',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: tismAqua,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ],

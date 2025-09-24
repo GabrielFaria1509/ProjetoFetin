@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:tism/constants/colors.dart';
-import 'package:tism/services/language_service.dart';
+import 'package:tism/l10n/app_localizations.dart';
 import 'dart:convert';
 import 'chatbot_service.dart';
 import 'quick_suggestions.dart';
@@ -18,16 +18,20 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
-  static const int _maxMessages = 30; // Otimizado para 8GB RAM
+  static const int _maxMessages = 30;
 
   @override
   void initState() {
     super.initState();
-    _messages.add(ChatMessage(
-      text: 'Olá! Sou Tina, uma assistente virtual especializada em autismo e neurodiversidade do TISM!\n\nEstou aqui para oferecer suporte personalizado e informações baseadas em evidências científicas sobre:\n\n• Desenvolvimento e comportamento\n• Estratégias educacionais inclusivas\n• Técnicas de comunicação e interação social\n• Adaptações ambientais e sensoriais\n• Recursos e ferramentas práticas para o dia a dia\n\nMinha base de conhecimento foi desenvolvida por uma equipe multidisciplinar de especialistas, incluindo neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\nÉ importante ressaltar que não realizo diagnósticos ou substituo profissionais de saúde - meu papel é complementar, oferecendo informações confiáveis e suporte prático para famílias, cuidadores e pessoas neurodivergentes.\n\nComo posso ajudar você hoje?',
-      isUser: false,
-      avatarMood: 'smile',
-    ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final l10n = AppLocalizations.of(context)!;
+      _messages.add(ChatMessage(
+        text: l10n.tina_welcome,
+        isUser: false,
+        avatarMood: 'smile',
+      ));
+      setState(() {});
+    });
   }
 
   @override
@@ -44,7 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ? const Color(0xFF121212) 
         : null,
       appBar: AppBar(
-        title: Text('tina_assistant'.tr),
+        title: Text(AppLocalizations.of(context)!.tina_assistant),
         backgroundColor: Theme.of(context).brightness == Brightness.dark 
           ? const Color(0xFF1E1E1E) 
           : tismAqua,
@@ -86,11 +90,11 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Text('thinking'.tr, style: const TextStyle(fontSize: 12)),
+                    Text(AppLocalizations.of(context)!.thinking, style: const TextStyle(fontSize: 12)),
                   ],
                 ),
               ),
-            if (_messages.length <= 1) // Mostra sugestões apenas no início
+            if (_messages.length <= 1)
               QuickSuggestions(onSuggestionTap: _sendMessage),
             _buildInputArea(),
           ],
@@ -120,7 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 textCapitalization: TextCapitalization.sentences,
                 onSubmitted: _isLoading ? null : _sendMessage,
                 decoration: InputDecoration(
-                  hintText: 'type_message'.tr,
+                  hintText: AppLocalizations.of(context)!.type_message,
                   hintStyle: TextStyle(color: Colors.grey[500], fontSize: 13),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -161,7 +165,6 @@ class _ChatScreenState extends State<ChatScreen> {
   void _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
 
-    // Limita histórico para economizar memória
     if (_messages.length >= _maxMessages) {
       _messages.removeRange(0, _messages.length - _maxMessages + 2);
     }
@@ -176,14 +179,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
     final response = await ChatbotService.sendMessage(text);
     
-    // Parse JSON response
     String messageText = response;
     String mood = 'smile';
     
     try {
       String jsonStr = response.trim();
       
-      // Extrair JSON se houver texto extra
       int jsonStart = jsonStr.indexOf('{');
       int jsonEnd = jsonStr.lastIndexOf('}');
       
@@ -197,7 +198,6 @@ class _ChatScreenState extends State<ChatScreen> {
       
       const validMoods = ['grimacing', 'smile', 'happy', 'eyebrow', 'sweat', 'wink'];
       if (!validMoods.contains(mood)) mood = 'smile';
-      
       
     } catch (e) {
       messageText = response;
@@ -232,28 +232,20 @@ class _ChatScreenState extends State<ChatScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('about_tina'.tr),
-        content: MarkdownBody(
-          data: '🤖 **Olá! Eu sou a Tina!**\n\n'
-          'Sou uma assistente virtual especializada em autismo e neurodiversidade, desenvolvida especialmente para o TISM por uma equipe multidisciplinar de especialistas.\n\n'
-          '🎯 **Minha especialização:**\n'
-          '• 🧠 Desenvolvimento e comportamento\n'
-          '• 🏫 Estratégias educacionais inclusivas\n'
-          '• 💬 Técnicas de comunicação e interação social\n'
-          '• 🌍 Adaptações ambientais e sensoriais\n'
-          '• 🛠️ Recursos práticos para o dia a dia\n\n'
-          '🔬 **Base científica:** Fui treinada com conhecimento validado por neurologistas, psicólogos, terapeutas ocupacionais, fonoaudiólogos e educadores especiais.\n\n'
-          '⚠️ **Importante:** Não realizo diagnósticos nem substituo profissionais de saúde. Meu papel é complementar, oferecendo suporte informativo e prático.\n\n'
-          '💙 **Estou aqui para apoiar você com informações confiáveis e empatia!**',
-          styleSheet: MarkdownStyleSheet(
-            p: const TextStyle(fontSize: 14, height: 1.4),
-            strong: const TextStyle(fontWeight: FontWeight.bold, color: tismAqua),
+        title: Text(AppLocalizations.of(context)!.about_tina),
+        content: SingleChildScrollView(
+          child: MarkdownBody(
+            data: '${AppLocalizations.of(context)!.tina_intro}\n\n${AppLocalizations.of(context)!.tina_specialization}\n\n${AppLocalizations.of(context)!.tina_scientific}\n\n${AppLocalizations.of(context)!.tina_important}\n\n${AppLocalizations.of(context)!.tina_support}',
+            styleSheet: MarkdownStyleSheet(
+              p: const TextStyle(fontSize: 14, height: 1.4),
+              strong: const TextStyle(fontWeight: FontWeight.bold, color: tismAqua),
+            ),
           ),
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('understood_tina'.tr),
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(AppLocalizations.of(context)!.understood_tina),
           ),
         ],
       ),
@@ -261,7 +253,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-// Classe otimizada para economizar memória
 class ChatMessage {
   final String text;
   final bool isUser;
@@ -402,7 +393,6 @@ class ChatBubble extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 6),
-
         ],
       ),
     );

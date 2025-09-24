@@ -3,8 +3,8 @@ import 'package:tism/constants/colors.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/views/login/register_page.dart';
 import 'package:tism/services/auth_integration_service.dart';
-import 'package:tism/services/language_service.dart';
 import 'package:tism/utils/text_utils.dart';
+import 'package:tism/l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     if (email.isEmpty || senha.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('field_required'.tr),
+          content: Text(AppLocalizations.of(context)!.fill_all_fields),
           backgroundColor: Colors.red,
         ),
       );
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('invalid_email'.tr),
+          content: Text(AppLocalizations.of(context)!.invalid_email),
           backgroundColor: Colors.red,
         ),
       );
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
     if (senha.length < 8) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('password_too_short'.tr),
+          content: Text(AppLocalizations.of(context)!.password_too_short),
           backgroundColor: Colors.red,
         ),
       );
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(result['error'] ?? 'login_error'.tr),
+                content: Text(result['error'] ?? AppLocalizations.of(context)!.login_error),
                 backgroundColor: Colors.red,
               ),
             );
@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('connection_error_detail'.trArgs([e])),
+            content: Text(AppLocalizations.of(context)!.connection_error_detail(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 24),
               Text(
-                'welcome'.tr,
+                AppLocalizations.of(context)!.welcome,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: 'email'.tr,
+                  labelText: AppLocalizations.of(context)!.email,
                   prefixIcon: const Icon(Icons.email),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: 'password'.tr,
+                  labelText: AppLocalizations.of(context)!.password,
                   prefixIcon: const Icon(Icons.lock),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         )
                       : Text(
-                          'login'.tr,
+                          AppLocalizations.of(context)!.login,
                           style: const TextStyle(fontSize: 16, color: Colors.white),
                           textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
                         ),
@@ -221,13 +221,13 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 },
                 child: Text(
-                  'no_account'.tr,
+                  AppLocalizations.of(context)!.no_account,
                   textDirection: TextUtils.getTextDirection(Localizations.localeOf(context).languageCode),
                 ),
               ),
               const SizedBox(height: 16),
               Text(
-                'app_subtitle'.tr,
+                AppLocalizations.of(context)!.app_subtitle,
                 style: TextStyle(
                   fontSize: 12, 
                   color: Theme.of(context).brightness == Brightness.dark 

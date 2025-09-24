@@ -1,49 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:tism/l10n/app_localizations.dart';
 
 class QuickSuggestions extends StatelessWidget {
   final Function(String) onSuggestionTap;
   
   const QuickSuggestions({super.key, required this.onSuggestionTap});
 
-  static const List<Map<String, String>> _suggestions = [
-    {
-      'text': 'Como identificar autismo?',
-      'icon': '🔍',
-    },
-    {
-      'text': 'Meu filho não fala, é autismo?',
-      'icon': '🗣️',
-    },
-    {
-      'text': 'Que terapias funcionam?',
-      'icon': '🎯',
-    },
-    {
-      'text': 'Como ajudar na escola?',
-      'icon': '🏫',
-    },
-    {
-      'text': 'Direitos do autista',
-      'icon': '⚖️',
-    },
-    {
-      'text': 'Criança com birras',
-      'icon': '😤',
-    },
-  ];
+  List<Map<String, String>> _getSuggestions(AppLocalizations l10n) {
+    return [
+      {
+        'text': l10n.how_identify_autism,
+        'icon': '🔍',
+      },
+      {
+        'text': l10n.child_not_speaking,
+        'icon': '🗣️',
+      },
+      {
+        'text': l10n.what_therapies_work,
+        'icon': '🎯',
+      },
+      {
+        'text': l10n.help_at_school,
+        'icon': '🏫',
+      },
+      {
+        'text': l10n.autism_rights,
+        'icon': '⚖️',
+      },
+      {
+        'text': l10n.child_tantrums,
+        'icon': '😤',
+      },
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    final l10n = AppLocalizations.of(context)!;
+    final suggestions = _getSuggestions(l10n);
     
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: _suggestions.length,
+        itemCount: suggestions.length,
         itemBuilder: (context, index) {
-          final suggestion = _suggestions[index];
+          final suggestion = suggestions[index];
           return Container(
             margin: const EdgeInsets.only(left: 8, right: 4),
             child: ActionChip(
@@ -65,5 +71,6 @@ class QuickSuggestions extends StatelessWidget {
         },
       ),
     );
+
   }
 }
