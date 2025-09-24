@@ -1,0 +1,93 @@
+name: Deploy TISM PWA
+
+on:
+  push:
+    branches: [ main, production ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.0'
+        channel: 'stable'
+        
+    - name: Enable web support
+      run: flutter config --enable-web
+      
+    - name: Get dependencies
+      run: flutter pub get
+      working-directory: ./frontend-flutter/tism
+      
+    - name: Analyze code
+      run: flutter analyze
+      working-directory: ./frontend-flutter/tism
+      
+    - name: Run tests
+      run: flutter test
+      working-directory: ./frontend-flutter/tism
+      
+    - name: Build PWA
+      run: |
+        flutter build web --release \
+          --web-renderer canvaskit \
+          --dart-define=FLUTTER_WEB_USE_SKIA=true \
+          --dart-define=FLUTTER_WEB_AUTO_DETECT=true \
+          --source-maps \
+          --tree-shake-icons
+      working-directory: ./frontend-flutter/tism
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Lighthouse
+      run: npm install -g lighthouse
+      
+    - name: Run Lighthouse audit
+      run: |
+        cd frontend-flutter/tism/build/web
+        python3 -m http.server 8080 &
+        sleep 5
+        lighthouse http://localhost:8080 \
+          --output json \
+          --output-path ../../lighthouse-report.json \
+          --chrome-flags="--headless --no-sandbox"
+        pkill -f "python3 -m http.server"
+        
+    - name: Check Lighthouse scores
+      run: |
+        cd frontend-flutter/tism
+        PERFORMANCE=$(cat lighthouse-report.json | jq '.categories.performance.score * 100')
+        PWA=$(cat lighthouse-report.json | jq '.categories.pwa.score * 100')
+        
+        echo "Performance Score: $PERFORMANCE"
+        echo "PWA Score: $PWA"
+        
+        if (( $(echo "$PERFORMANCE < 90" | bc -l) )); then
+          echo "❌ Performance score too low: $PERFORMANCE (required: 90+)"
+          exit 1
+        fi
+        
+        if (( $(echo "$PWA < 100" | bc -l) )); then
+          echo "❌ PWA score too low: $PWA (required: 100)"
+          exit 1
+        fi
+        
+        echo "✅ All Lighthouse checks passed!"
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: tism-pwa-build
+        path: frontend-flutter/tism/build/web/
+        retention-days: 30

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tism/constants/theme.dart';
 import 'package:tism/services/theme_service.dart';
 import 'package:tism/services/language_service.dart';
+import 'package:tism/services/pwa_service.dart' 
+    if (dart.library.html) 'package:tism/services/pwa_service.dart'
+    if (dart.library.io) 'package:tism/services/pwa_service_stub.dart';
 import 'package:tism/views/login/login_startup.dart';
 import 'package:tism/views/home/home_page.dart';
 import 'package:tism/services/secure_storage_service.dart';
+import 'package:tism/widgets/pwa_status_widget.dart';
 import 'package:tism/l10n/app_localizations.dart';
 
 void main() async {
@@ -19,8 +24,13 @@ void main() async {
     // Erro ao carregar .env silencioso
   }
   
-  // Inicializar serviço de idiomas
+  // Inicializar serviços
   await languageService.initialize();
+  
+  // Inicializar PWA service apenas na web
+  if (kIsWeb) {
+    await PWAService().initialize();
+  }
   
   runApp(
     MultiProvider(
@@ -40,8 +50,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer2<ThemeService, LanguageService>(
       builder: (context, themeService, languageService, child) {
-        return MaterialApp(
-          title: 'TISM App',
+        final app = MaterialApp(
+          title: 'TISM - Tudo sobre TEA',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeService.themeMode,
@@ -70,6 +80,11 @@ class MyApp extends StatelessWidget {
           home: const InitialScreen(),
           debugShowCheckedModeBanner: false,
         );
+        
+        // Envolver com PWA status widget apenas na web
+        return kIsWeb 
+          ? PWAStatusWidget(child: app)
+          : app;
       },
     );
   }

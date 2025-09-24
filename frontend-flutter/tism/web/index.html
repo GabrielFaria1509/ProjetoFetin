@@ -1,111 +1,239 @@
-<!DOCTYPE html><html><head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
   <base href="$FLUTTER_BASE_HREF">
-
+  
+  <!-- Meta básicas -->
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="TISM - Tudo o que você precisa saber sobre o TEA em um clique">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  
+  <!-- SEO e descrição -->
+  <title>TISM - Tudo sobre TEA em um clique 💙</title>
+  <meta name="description" content="Plataforma completa para a comunidade TEA. Diário de observações, fórum, chatbot TINA e recursos educacionais. Desenvolvido com amor para inclusão digital.">
+  <meta name="keywords" content="TEA, autismo, espectro autista, diário, observações, fórum, comunidade, inclusão, TISM, TINA">
+  <meta name="author" content="Equipe TISM">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tism.app/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tism.app/">
+  <meta property="og:title" content="TISM - Tudo sobre TEA em um clique">
+  <meta property="og:description" content="Plataforma completa para a comunidade TEA com diário, fórum e recursos educacionais">
+  <meta property="og:image" content="https://tism.app/icons/Icon-512.png">
+  <meta property="og:locale" content="pt_BR">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://tism.app/">
+  <meta property="twitter:title" content="TISM - Tudo sobre TEA em um clique">
+  <meta property="twitter:description" content="Plataforma completa para a comunidade TEA">
+  <meta property="twitter:image" content="https://tism.app/icons/Icon-512.png">
+  
+  <!-- PWA Meta Tags -->
   <meta name="theme-color" content="#00BCD4">
-
-  <!-- PWA meta tags -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00BCD4">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0097A7">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="TISM">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
-
-  <title>TISM - Guia TEA</title>
+  <meta name="msapplication-TileColor" content="#00BCD4">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  
+  <!-- Ícones PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/Icon-192.png">
+  <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#00BCD4">
+  
+  <!-- Manifest -->
   <link rel="manifest" href="manifest.json">
+  
+  <!-- Preload crítico -->
+  <link rel="preload" href="main.dart.js" as="script">
+  <link rel="preload" href="flutter.js" as="script">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' https:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://apis.google.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: https: blob:;
+    connect-src 'self' https: wss: ws:;
+    media-src 'self' https: blob:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+  <!-- Splash Screen Otimizado -->
   <style id="splash-screen-style">
     html {
-      height: 100%
+      height: 100%;
+      font-display: swap;
     }
-
+    
     body {
       margin: 0;
       min-height: 100%;
-      background-color: #FFFFFF;
-          background-size: 100% 100%;
+      background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
     }
-
+    
+    .splash-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%);
+      z-index: 9999;
+    }
+    
+    .splash-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 24px;
+      animation: pulse 2s infinite;
+    }
+    
+    .splash-title {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .splash-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .splash-loader {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
     .center {
       margin: 0;
       position: absolute;
       top: 50%;
       left: 50%;
-      -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
-
+    
     .contain {
-      display:block;
-      width:100%; height:100%;
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
-
-    .stretch {
-      display:block;
-      width:100%; height:100%;
+    
+    /* Performance otimizations */
+    * {
+      -webkit-tap-highlight-color: transparent;
     }
-
-    .cover {
-      display:block;
-      width:100%; height:100%;
-      object-fit: cover;
-    }
-
-    .bottom {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      -ms-transform: translate(-50%, 0);
-      transform: translate(-50%, 0);
-    }
-
-    .bottomLeft {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-
-    .bottomRight {
-      position: absolute;
-      bottom: 0;
-      right: 0;
+    
+    img {
+      image-rendering: -webkit-optimize-contrast;
     }
   </style>
+  <!-- Scripts críticos -->
   <script id="splash-screen-script">
-    function removeSplashFromWeb() {
-      document.getElementById("splash")?.remove();
-      document.getElementById("splash-branding")?.remove();
-      document.body.style.background = "transparent";
+    // Performance timing
+    window.tismPerformance = {
+      startTime: performance.now(),
+      marks: {}
+    };
+    
+    function markPerformance(name) {
+      window.tismPerformance.marks[name] = performance.now();
     }
+    
+    function removeSplashFromWeb() {
+      const splash = document.getElementById("splash");
+      const splashContainer = document.querySelector(".splash-container");
+      
+      if (splash) splash.remove();
+      if (splashContainer) splashContainer.remove();
+      
+      document.body.style.background = "transparent";
+      markPerformance('splashRemoved');
+    }
+    
+    // Service Worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered:', registration);
+            markPerformance('swRegistered');
+          })
+          .catch(error => {
+            console.log('SW registration failed:', error);
+          });
+      });
+    }
+    
+    // Install prompt
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      markPerformance('installPromptReady');
+    });
+    
+    // Preload crítico
+    const preloadScript = document.createElement('link');
+    preloadScript.rel = 'preload';
+    preloadScript.as = 'script';
+    preloadScript.href = 'flutter_bootstrap.js';
+    document.head.appendChild(preloadScript);
   </script>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 </head>
 <body>
-  <picture id="splash">
-      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
-      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
-      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
-  </picture>
-  <script src="flutter_bootstrap.js" async=""></script>
-
-
-</body></html>
+  <!-- Splash Screen Customizado -->
+  <div class="splash-container" id="splash">
+    <img src="icons/Icon-192.png" alt="TISM Logo" class="splash-logo">
+    <h1 class="splash-title">TISM</h1>
+    <p class="splash-subtitle">Tudo sobre TEA em um clique 💙</p>
+    <div class="splash-loader"></div>
+  </div>
+  
+  <!-- Fallback para navegadores antigos -->
+  <noscript>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+      <h2>JavaScript é necessário</h2>
+      <p>Por favor, habilite o JavaScript para usar o TISM.</p>
+    </div>
+  </noscript>
+  
+  <!-- Flutter App -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
