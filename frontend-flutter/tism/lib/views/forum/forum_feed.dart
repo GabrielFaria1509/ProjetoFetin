@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/services/forum_service.dart';
+import 'package:tism/utils/text_utils.dart';
 import 'package:tism/services/secure_storage_service.dart';
 import 'post_widget.dart';
 import 'comments_screen.dart';
@@ -98,7 +99,7 @@ class _ForumFeedState extends State<ForumFeed> {
           ),
           const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context)!.first_post_message,
+            TextUtils.processLineBreaks(AppLocalizations.of(context)!.first_post_message),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,

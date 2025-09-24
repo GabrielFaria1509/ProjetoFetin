@@ -1,6 +1,13 @@
 {
+  "@@locale": "en",
   "app_name": "TISM",
+  "@app_name": {
+    "description": "Application name"
+  },
   "app_subtitle": "Everything you need to know about ASD in one click",
+  "@app_subtitle": {
+    "description": "Application subtitle"
+  },
   "app_title": "TISM - ASD Guide",
   "login": "Login",
   "register": "Register",
@@ -40,9 +47,19 @@
   "dashboard": "Dashboard",
   "feed": "Feed",
   "search": "Search",
+  "hello": "Hello",
   "hello_user": "Hello, {name}! 👋",
+  "@hello_user": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "explore_content": "Explore educational content about ASD",
   "educational_feed": "Educational Feed",
+  "personalized_routine": "Personalized Routine",
   "custom_routine": "Custom Routine",
   "observation_diary": "Observation Diary",
   "tina_chatbot": "Tina (Chatbot)",
@@ -78,10 +95,37 @@
   "difficulty": "Difficulty",
   "triggers": "Triggers",
   "routine_of": "{name}'s Routine",
+  "@routine_of": {
+    "description": "Routine title with child name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "support_level": "{level} Support",
+  "@support_level": {
+    "description": "Support level text",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "filter_category": "Filter by category:",
   "completed": "Completed",
   "progress_count": "Progress: {completed}/{total}",
+  "@progress_count": {
+    "description": "Progress counter",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "no_activities": "No activities found",
   "clear_filters": "Clear filters",
   "add_activity": "Add Activity",
@@ -141,6 +185,14 @@
   "fill_all_fields": "Fill all fields",
   "login_error": "Login error",
   "connection_error_detail": "Connection error: {error}",
+  "@connection_error_detail": {
+    "description": "Connection error with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "field_required": "This field is required",
   "invalid_email": "Invalid email",
   "password_too_short": "Password must be at least 8 characters",
@@ -180,6 +232,14 @@
   "delete_post_confirm": "Are you sure you want to delete this post? This action cannot be undone.",
   "post_deleted_success": "Post deleted successfully",
   "error_deleting_post": "Error deleting post: {error}",
+  "@error_deleting_post": {
+    "description": "Error deleting post",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "report_post": "Report",
   "report_post_title": "Report Post",
   "report_post_confirm": "Are you sure you want to report this post?",
@@ -190,14 +250,6 @@
   "try_different_keywords": "Try using different keywords\nor explore the categories below",
   "type_to_search": "Type to search...",
   "find_posts_profiles": "Find posts, profiles and hashtags\nin the ASD community",
-  "popular_categories": "Popular Categories",
-  "recent_searches": "Recent Searches",
-  "searches_appear_here": "Your searches will appear here",
-  "general": "General",
-  "tips": "Tips",
-  "experiences": "Experiences",
-  "questions": "Questions",
-  "resources": "Resources",
   "how_identify_autism": "How to identify autism?",
   "child_not_speaking": "My child doesn't speak, is it autism?",
   "what_therapies_work": "What therapies work?",
@@ -210,6 +262,14 @@
   "title": "Title",
   "detailed_description": "Detailed description",
   "intensity": "Intensity: {level}",
+  "@intensity": {
+    "description": "Intensity level",
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "observer": "Observer:",
   "possible_triggers": "Possible triggers:",
   "delete_observation": "Delete Observation",
@@ -218,7 +278,26 @@
   "not_defined": "Not defined",
   "confirm_change": "Confirm change",
   "change_name_to": "Change name to \"{name}\"?",
+  "@change_name_to": {
+    "description": "Confirm name change",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "change_username_to": "Change username from @{oldName} to @{newName}?",
+  "@change_username_to": {
+    "description": "Confirm username change",
+    "placeholders": {
+      "oldName": {
+        "type": "String"
+      },
+      "newName": {
+        "type": "String"
+      }
+    }
+  },
   "error_updating_name": "Error updating name",
   "error_updating_username": "Error updating username",
   "error_updating_type": "Error updating type",
@@ -253,7 +332,6 @@
   "invalid_time_format": "Invalid time. Use 24h format (00:00 - 23:59)",
   "delete_routine": "Delete Routine",
   "delete_routine_confirm": "Are you sure you want to delete this routine?",
-  "new_child": "New Child",
   "hello_user_name": "Hello, {name}! 👋",
   "statistics": "Statistics",
   "general_summary": "General Summary",
@@ -278,14 +356,6 @@
   "sensory_preferences": "Sensory preferences",
   "interests": "Interests",
   "child_name_empty": "Child's name cannot be empty",
-  "statistics": "Statistics",
-  "general_summary": "General Summary",
-  "total": "Total",
-  "progress_plural": "Progress",
-  "crisis_plural": "Crises",
-  "type_distribution": "Type Distribution",
-  "most_frequent_triggers": "Most Frequent Triggers",
-  "weekly_trend": "Weekly Trend",
   "observations_last_7_days_count": "Observations in the last 7 days: {count}",
   "@observations_last_7_days_count": {
     "description": "Observations count in last 7 days",
@@ -296,41 +366,8 @@
     }
   },
   "configure_profile": "Configure Profile",
-  "create_routine": "Create Routine",
-  "not_defined": "Not defined",
-  "confirm_change": "Confirm change",
-  "change_name_to": "Change name to \"{name}\"?",
-  "@change_name_to": {
-    "description": "Confirm name change",
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "error_updating_name": "Error updating name",
-  "error_updating_type": "Error updating type",
   "edit_username_title": "Edit Username",
-  "username_help": "Only lowercase letters, numbers and _",
-  "username_cooldown_info": "Username can only be changed once every 3 days",
-  "change_username_to": "Change username from @{oldName} to @{newName}?",
-  "@change_username_to": {
-    "description": "Confirm username change",
-    "placeholders": {
-      "oldName": {
-        "type": "String"
-      },
-      "newName": {
-        "type": "String"
-      }
-    }
-  },
-  "error_updating_username": "Error updating username",
-  "confirm_password_title": "Confirm password",
-  "enter_password": "Enter your password",
-  "delete_incorrect": "Incorrect phrase. Check uppercase and lowercase.",
   "account_deleted_success": "Account deleted successfully",
-  "error_deleting_account": "Error deleting account",
   "theme_light": "Light",
   "theme_dark": "Dark",
   "theme_system": "System",
@@ -338,13 +375,108 @@
   "delete_observation_action": "Delete observation",
   "delete_observation_title": "Delete Observation",
   "delete_observation_message": "Are you sure you want to delete this observation?",
-  "report_copied": "Report copied! Paste in email or WhatsApp",
-  "confirm": "Confirm",
-  "save": "Save",
-  "example123": "example123",
-  "diary_observations": "Diary Observations",
-  "no_observations": "No observations yet",
-  "tap_plus_start": "Tap + to start",
-  "triggers": "Triggers",
-  "@@locale": "en"
+  "trigger_routine_change": "Routine change",
+  "trigger_loud_noise": "Loud noise",
+  "trigger_crowd": "Crowd",
+  "trigger_tiredness": "Tiredness",
+  "trigger_hunger": "Hunger",
+  "trigger_frustration": "Frustration",
+  "trigger_transition": "Transition",
+  "trigger_new_environment": "New environment",
+  "trigger_bright_light": "Bright light",
+  "trigger_unpleasant_texture": "Unpleasant texture",
+  "trigger_strong_smell": "Strong smell",
+  "trigger_temperature": "Temperature",
+  "trigger_tight_clothes": "Tight clothes",
+  "trigger_insufficient_sleep": "Insufficient sleep",
+  "trigger_physical_pain": "Physical pain",
+  "trigger_medication": "Medication",
+  "trigger_medical_visit": "Medical visit",
+  "trigger_new_school": "New school",
+  "trigger_substitute_teacher": "Substitute teacher",
+  "trigger_test_evaluation": "Test/evaluation",
+  "trigger_party_event": "Party/event",
+  "trigger_travel": "Travel",
+  "trigger_rain_storm": "Rain/storm",
+  "trigger_parents_separation": "Parents separation",
+  "trigger_broken_toy": "Broken toy",
+  "trigger_not_getting_something": "Not getting something",
+  "trigger_activity_interruption": "Activity interruption",
+  "trigger_waiting_too_long": "Waiting too long",
+  "observer_father": "father",
+  "observer_mother": "mother",
+  "observer_grandfather": "grandfather",
+  "observer_grandmother": "grandmother",
+  "observer_uncle": "uncle",
+  "observer_aunt": "aunt",
+  "observer_brother": "brother",
+  "observer_sister": "sister",
+  "observer_son": "son",
+  "observer_daughter": "daughter",
+  "observer_grandson": "grandson",
+  "observer_granddaughter": "granddaughter",
+  "observer_nephew": "nephew",
+  "observer_niece": "niece",
+  "observer_male_cousin": "cousin (male)",
+  "observer_female_cousin": "cousin (female)",
+  "observer_male_friend": "friend (male)",
+  "observer_female_friend": "friend (female)",
+  "observer_relative": "relative",
+  "observer_caregiver": "caregiver",
+  "observer_teacher": "teacher",
+  "observer_therapist": "therapist",
+  "observer_doctor": "doctor",
+  "observer_psychologist": "psychologist",
+  "support_level_mild": "mild",
+  "support_level_moderate": "moderate",
+  "support_level_severe": "severe",
+  "sensory_visual": "Visual",
+  "sensory_auditory": "Auditory",
+  "sensory_tactile": "Tactile",
+  "sensory_movement": "Movement",
+  "sensory_olfactory": "Olfactory",
+  "sensory_gustatory": "Gustatory",
+  "sensory_proprioceptive": "Proprioceptive",
+  "sensory_vestibular": "Vestibular",
+  "sensory_deep_pressure": "Deep Pressure",
+  "sensory_soft_textures": "Soft Textures",
+  "sensory_rough_textures": "Rough Textures",
+  "sensory_low_sounds": "Low Sounds",
+  "sensory_high_sounds": "High Sounds",
+  "sensory_soft_lights": "Soft Lights",
+  "sensory_bright_lights": "Bright Lights",
+  "sensory_hot_temperatures": "Hot Temperatures",
+  "sensory_cold_temperatures": "Cold Temperatures",
+  "interest_music": "Music",
+  "interest_drawing": "Drawing",
+  "interest_numbers": "Numbers",
+  "interest_animals": "Animals",
+  "interest_cars": "Cars",
+  "interest_books": "Books",
+  "interest_games": "Games",
+  "interest_computer": "Computer",
+  "interest_tablet": "Tablet",
+  "interest_toys": "Toys",
+  "interest_sports": "Sports",
+  "interest_dance": "Dance",
+  "interest_cooking": "Cooking",
+  "interest_gardening": "Gardening",
+  "interest_science": "Science",
+  "interest_math": "Math",
+  "interest_art": "Art",
+  "interest_photography": "Photography",
+  "interest_videos": "Videos",
+  "interest_movies": "Movies",
+  "interest_series": "Series",
+  "interest_puzzles": "Puzzles",
+  "interest_lego": "Lego",
+  "interest_dolls": "Dolls",
+  "interest_superheroes": "Superheroes",
+  "delete_post_action": "Delete",
+  "report_post_action": "Report",
+  "clear_search": "Clear search",
+  "month": "month",
+  "months": "months",
+  "year": "year",
+  "years": "years"
 }

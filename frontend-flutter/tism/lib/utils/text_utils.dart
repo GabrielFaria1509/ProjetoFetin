@@ -1,24 +1,9 @@
-import 'package:flutter/material.dart';
-
+/// Utility functions for text processing
 class TextUtils {
-  static bool isArabic(String locale) {
-    return locale.startsWith('ar');
-  }
-  
-  static TextDirection getTextDirection(String locale) {
-    return isArabic(locale) ? TextDirection.rtl : TextDirection.ltr;
-  }
-  
-  static TextAlign getLeftAlignment(String locale) {
-    return TextAlign.left; // Always left-aligned, even for Arabic
-  }
-  
-  static TextAlign getAlignment(String locale, TextAlign defaultAlign) {
-    // For left-aligned text, force left even for Arabic
-    if (defaultAlign == TextAlign.left) {
-      return TextAlign.left;
-    }
-    // For center and right, keep original alignment
-    return defaultAlign;
+  /// Ensures line breaks work correctly in Text widgets across all languages
+  static String processLineBreaks(String text) {
+    return text
+        .replaceAll('\\\\n', '\n')  // Convert escaped \n to actual line breaks
+        .replaceAll('\\n', '\n');   // Ensure single \n stays as line breaks
   }
 }

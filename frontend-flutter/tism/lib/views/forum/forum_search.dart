@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/forum_service.dart';
+import 'package:tism/utils/text_utils.dart';
 import 'post_widget.dart';
 
 class ForumSearch extends StatefulWidget {
@@ -213,7 +214,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context)!.try_different_keywords,
+            TextUtils.processLineBreaks(AppLocalizations.of(context)!.try_different_keywords),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -246,7 +247,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context)!.find_posts_profiles,
+            TextUtils.processLineBreaks(AppLocalizations.of(context)!.find_posts_profiles),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -279,7 +280,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
           const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context)!.find_posts_profiles,
+            TextUtils.processLineBreaks(AppLocalizations.of(context)!.find_posts_profiles),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
