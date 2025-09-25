@@ -1278,7 +1278,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'डॉ. कार्ला मेंडेस - शैक्षिक मनोवैज्ञानिक';
 
   @override
-  String get language => 'Idioma';
+  String get language => 'भाषा';
 
   @override
   String get article_sensory_processing_title => 'ऑटिज्म में संवेदी प्रसंस्करण';

@@ -1246,7 +1246,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get article_school_inclusion_author => '카를라 멘데스 박사 - 교육 심리학자';
 
   @override
-  String get language => 'Idioma';
+  String get language => '언어';
 
   @override
   String get article_sensory_processing_title => '자폐증에서의 감각 처리';

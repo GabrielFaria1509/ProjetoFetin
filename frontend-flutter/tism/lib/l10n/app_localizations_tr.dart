@@ -1277,7 +1277,7 @@ class AppLocalizationsTr extends AppLocalizations {
       'Dr. Carla Mendes - Eğitim Psikoloğu';
 
   @override
-  String get language => 'Idioma';
+  String get language => 'Dil';
 
   @override
   String get article_sensory_processing_title => 'OSB\'de Duyusal İşleme';

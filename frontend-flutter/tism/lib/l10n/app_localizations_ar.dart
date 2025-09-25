@@ -1269,7 +1269,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'د. كارلا مينديس - عالمة نفس تربوية';
 
   @override
-  String get language => 'Idioma';
+  String get language => 'اللغة';
 
   @override
   String get article_sensory_processing_title => 'المعالجة الحسية في التوحد';

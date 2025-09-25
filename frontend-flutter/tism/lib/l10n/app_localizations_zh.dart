@@ -1243,7 +1243,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get article_school_inclusion_author => '卡尔拉·门德斯博士 - 教育心理学家';
 
   @override
-  String get language => 'Idioma';
+  String get language => '语言';
 
   @override
   String get article_sensory_processing_title => '自闭症中的感觉处理';

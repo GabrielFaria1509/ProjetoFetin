@@ -1275,7 +1275,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get article_school_inclusion_author => 'Pädagogin Carla Lima';
 
   @override
-  String get language => 'Idioma';
+  String get language => 'Sprache';
 
   @override
   String get article_sensory_processing_title =>

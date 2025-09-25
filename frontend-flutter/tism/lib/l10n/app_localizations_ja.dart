@@ -1245,7 +1245,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get article_school_inclusion_author => 'カルラ・メンデス博士 - 教育心理学者';
 
   @override
-  String get language => 'Idioma';
+  String get language => '言語';
 
   @override
   String get article_sensory_processing_title => '自閉症における感覚処理';

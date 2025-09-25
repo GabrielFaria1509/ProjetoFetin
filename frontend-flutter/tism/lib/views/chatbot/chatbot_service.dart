@@ -24,7 +24,7 @@ Enquanto isso, você pode usar o fórum para tirar dúvidas com a comunidade!'''
       }
       
       final model = GenerativeModel(
-        model: 'gemini-1.5-flash',
+        model: 'gemini-1.5-pro',
         apiKey: apiKey,
         generationConfig: GenerationConfig(
           temperature: 0.7,

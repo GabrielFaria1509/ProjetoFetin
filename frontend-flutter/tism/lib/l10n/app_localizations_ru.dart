@@ -1274,7 +1274,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Др. Карла Мендес - педагогический психолог';
 
   @override
-  String get language => 'Idioma';
+  String get language => 'Язык';
 
   @override
   String get article_sensory_processing_title => 'Сенсорная обработка при РАС';
