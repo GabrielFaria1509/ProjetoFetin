@@ -13,7 +13,7 @@ class GeminiService {
     final apiKey = dotenv.env['GEMINI_API_KEY'];
     
     _model = GenerativeModel(
-      model: 'gemini-1.5-flash',
+      model: 'gemini-1.5-pro',
       apiKey: apiKey!,
       generationConfig: GenerationConfig(
         temperature: 0.7,
