@@ -1216,4 +1216,93 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get years => 'años';
+
+  @override
+  String get search_articles => 'Buscar artículos...';
+
+  @override
+  String get all_categories => 'Todas las categorías';
+
+  @override
+  String get no_articles_found => 'No se encontraron artículos';
+
+  @override
+  String get no_articles_available => 'No hay artículos disponibles';
+
+  @override
+  String get article_early_signs_title => 'Señales Tempranas del TEA';
+
+  @override
+  String get article_early_signs_body =>
+      'Identificar las primeras señales del autismo puede marcar toda la diferencia en el desarrollo del niño. Los principales indicadores incluyen:\n\n• Dificultades en la comunicación verbal y no verbal\n• Patrones repetitivos de comportamiento\n• Intereses restringidos e intensos\n• Dificultades en la interacción social\n• Sensibilidad sensorial alterada\n\nEs importante observar que cada niño es único y puede presentar diferentes combinaciones de estas señales. El diagnóstico temprano permite intervenciones más eficaces.';
+
+  @override
+  String get article_early_signs_author => 'Dr. María Silva';
+
+  @override
+  String get article_aba_therapy_title => 'Terapia ABA: Cómo Funciona';
+
+  @override
+  String get article_aba_therapy_body =>
+      'El Análisis del Comportamiento Aplicado (ABA) es una de las terapias más eficaces para niños con TEA. Este enfoque científico se basa en principios del comportamiento para enseñar habilidades y reducir comportamientos problemáticos.\n\nPrincipios fundamentales del ABA:\n• Refuerzo positivo para comportamientos deseados\n• División de habilidades complejas en pasos menores\n• Recolección de datos para monitorear progreso\n• Individualización del programa para cada niño\n\nLa terapia ABA puede ayudar en el desarrollo de habilidades de comunicación, sociales, académicas y de vida diaria.';
+
+  @override
+  String get article_aba_therapy_author => 'Psicóloga Ana Costa';
+
+  @override
+  String get article_routines_title => 'Rutinas y Estructura en el TEA';
+
+  @override
+  String get article_routines_body =>
+      'Establecer rutinas claras ayuda a los niños con autismo a sentirse más seguros y organizados. La previsibilidad reduce la ansiedad y facilita la participación en actividades diarias.\n\nEstrategias para crear rutinas eficaces:\n• Use apoyos visuales como calendarios y horarios\n• Mantenga horarios consistentes para comidas y sueño\n• Prepare al niño para cambios con anticipación\n• Cree rituales de transición entre actividades\n• Establezca lugares específicos para diferentes actividades\n\nRecuerde que la flexibilidad también es importante - ajuste las rutinas según sea necesario.';
+
+  @override
+  String get article_routines_author => 'Terapeuta João Santos';
+
+  @override
+  String get article_school_inclusion_title =>
+      'Inclusión Escolar: Derechos y Prácticas';
+
+  @override
+  String get article_school_inclusion_body =>
+      'La inclusión escolar es un derecho garantizado por ley en Brasil. La Ley Brasileña de Inclusión (LBI) asegura el acceso a educación de calidad para personas con discapacidad.\n\nPrincipales derechos:\n• Matrícula en escuela regular\n• Atención educacional especializada\n• Adaptaciones curriculares cuando sea necesario\n• Profesional de apoyo escolar\n• Materiales didácticos accesibles\n\nPara una inclusión efectiva, es esencial la colaboración entre familia, escuela y profesionales especializados. El ambiente escolar debe ser acogedor y preparado para atender las necesidades específicas de cada estudiante.';
+
+  @override
+  String get article_school_inclusion_author => 'Pedagoga Carla Lima';
+
+  @override
+  String get article_sensory_processing_title =>
+      'Procesamiento Sensorial en TEA';
+
+  @override
+  String get article_sensory_processing_body =>
+      'Muchas personas con TEA presentan diferencias en el procesamiento sensorial, pudiendo ser hipersensibles o hiposensibles a estímulos del ambiente.\n\nTipos de sensibilidades:\n• Táctil: texturas, temperaturas, presión\n• Auditiva: sonidos fuertes, frecuencias específicas\n• Visual: luces brillantes, patrones visuales\n• Olfativa: olores fuertes o específicos\n• Gustativa: sabores, texturas alimentarias\n• Propioceptiva: conciencia corporal\n• Vestibular: equilibrio y movimiento\n\nLas estrategias de apoyo incluyen ambientes sensoriales controlados, pausas regulares y uso de herramientas sensoriales como audífonos u objetos fidget.';
+
+  @override
+  String get article_sensory_processing_author =>
+      'Terapeuta Ocupacional Fernanda Rocha';
+
+  @override
+  String get article_family_support_title =>
+      'Apoyo Familiar: Cuidando a Quien Cuida';
+
+  @override
+  String get article_family_support_body =>
+      'Las familias de personas con TEA enfrentan desafíos únicos y necesitan apoyo continuo. El autocuidado de los cuidadores es fundamental para el bienestar de toda la familia.\n\nEstrategias de apoyo:\n• Buscar grupos de apoyo locales o en línea\n• Mantener tiempo para actividades personales\n• Dividir responsabilidades entre familiares\n• Buscar ayuda profesional cuando sea necesario\n• Celebrar pequeños logros\n• Mantener comunicación abierta en la familia\n\nRecuerda: cuidarte a ti mismo no es egoísmo, es necesidad. Una familia equilibrada ofrece mejor apoyo.';
+
+  @override
+  String get article_family_support_author =>
+      'Psicóloga Familiar Beatriz Almeida';
+
+  @override
+  String get article_communication_strategies_title =>
+      'Estrategias de Comunicación Eficaz';
+
+  @override
+  String get article_communication_strategies_body =>
+      'La comunicación con personas en el espectro autista puede facilitarse a través de estrategias específicas que respetan sus necesidades y preferencias.\n\nConsejos importantes:\n• Usa lenguaje claro y directo\n• Evita metáforas y expresiones idiomáticas\n• Da tiempo para procesar la información\n• Usa apoyos visuales cuando sea posible\n• Mantiene contacto visual respetuoso\n• Sé paciente con repeticiones\n• Valida sentimientos y experiencias\n\nCada persona es única - observa y adapta tu comunicación a las preferencias individuales. La comunicación eficaz construye confianza y relaciones positivas.';
+
+  @override
+  String get article_communication_strategies_author =>
+      'Fonoaudióloga Patricia Mendes';
 }

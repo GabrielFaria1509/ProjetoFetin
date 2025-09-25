@@ -1217,4 +1217,96 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get years => 'yaş';
+
+  @override
+  String get search_articles => 'Makale ara...';
+
+  @override
+  String get all_categories => 'Tüm kategoriler';
+
+  @override
+  String get no_articles_found => 'Makale bulunamadı';
+
+  @override
+  String get no_articles_available => 'Mevcut makale yok';
+
+  @override
+  String get article_early_signs_title =>
+      'Otizmin Erken Belirtileri: Nelere Dikkat Edilmeli';
+
+  @override
+  String get article_early_signs_body =>
+      'Otizm spektrum bozukluğunun (OSB) erken teşhisi çocuğun gelişimi için son derece önemlidir. İlk belirtiler yaşamın ilk aylarında ortaya çıkabilir. Başlıca göstergeler şunları içerir: göz teması kurmaktan kaçınma, ismine yanıt vermeme veya ilginç nesneleri işaret etmeme gibi sosyal iletişim zorlukları; ellerin stereotipik hareketleri veya belirli nesnelere odaklanma gibi tekrarlayan davranış kalıpları; sesler, dokunma veya ışığa aşırı veya yetersiz tepki gibi duyusal hassasiyetler; 12 ayda gevezelik veya 16 ayda kelimeler olmaması dahil dil gelişiminde gecikme. Her çocuğun benzersiz olduğunu ve bu belirtilerin farklı kombinasyonlarını gösterebileceğini hatırlamak önemlidir. Bu davranışlardan bazılarını fark ederseniz, uygun değerlendirme için nitelikli bir uzmanın rehberliğini isteyin.';
+
+  @override
+  String get article_early_signs_author => 'Dr. Anna Silva - Çocuk Nöroloğu';
+
+  @override
+  String get article_aba_therapy_title =>
+      'Uygulamalı Davranış Analizi (ABA): İlkeler ve Faydalar';
+
+  @override
+  String get article_aba_therapy_body =>
+      'Uygulamalı Davranış Analizi (ABA), otizmli kişiler için en çok araştırılan ve etkili müdahalelerden biridir. Davranışın bilimsel ilkelerine dayanan ABA, becerileri öğretmek ve sorunlu davranışları azaltmak için sistematik teknikler kullanır. Ana bileşenler şunları içerir: davranışların nedenlerini belirlemek için işlevsel davranış değerlendirmesi; sosyal, iletişim ve akademik becerilerin yapılandırılmış öğretimi; istenen davranışları motive etmek ve sürdürmek için pozitif pekiştirmenin kullanımı; ilerlemeyi izlemek için veri toplama; edinilen becerilerin farklı ortamlara genellenmesi. ABA tedavisi, her bireyin özel ihtiyaçlarını göz önünde bulundurarak bireyselleştirilmelidir. Nitelikli uzmanlar tarafından uygulandığında, iletişim, sosyal etkileşim, uyumlu davranışlar ve genel yaşam kalitesinde önemli iyileştirmelere yol açabilir.';
+
+  @override
+  String get article_aba_therapy_author =>
+      'Dr. Maria Santos - Davranış Analisti';
+
+  @override
+  String get article_routines_title => 'Otizmli Kişiler İçin Rutinlerin Önemi';
+
+  @override
+  String get article_routines_body =>
+      'Yapılandırılmış rutinler otizmli kişilerin refahı için temeldir ve kaotik görünebilecek bir dünyada öngörülebilirlik ve güvenlik sağlar. Rutinlerin faydaları şunları içerir: öngörülebilirlik yoluyla kaygının azaltılması; bağımsızlık ve özerkliğin geliştirilmesi; zamansal ve mekansal organizasyonun iyileştirilmesi; yeni becerilerin öğrenilmesinin kolaylaştırılması; zorlu davranışların azaltılması. Etkili bir rutin uygulamak için: takvimler ve zaman çizelgeleri gibi görsel destekleri kullanın; zaman ve etkinliklerde tutarlılığı koruyun; kişiyi değişikliklere önceden hazırlayın; rutine keyifli etkinlikleri dahil edin; gerektiğinde esnek olun ve değişiklikleri kademeli olarak tanıtın. Her kişinin kendine özgü ihtiyaçları ve tercihleri olduğunu unutmayın. Amaç, strese neden olan katılık değil, gelişimi ve refahı destekleyen bir yapı oluşturmaktır.';
+
+  @override
+  String get article_routines_author =>
+      'Prof. João Oliveira - Meslek Terapisti';
+
+  @override
+  String get article_school_inclusion_title =>
+      'Okul Entegrasyonu: Başarı Stratejileri';
+
+  @override
+  String get article_school_inclusion_body =>
+      'Otizmli öğrencilerin okul entegrasyonu, akademik ve sosyal başarıyı sağlamak için dikkatli planlama ve özel stratejiler gerektirir. Temel unsurlar şunları içerir: net ve öngörülebilir rutinlerle yapılandırılmış ortam; öğrencinin öğrenme stilini saygı gösteren müfredat uyarlamaları; görsel ve teknolojik desteğin kullanımı; yönlendirilmiş etkinlikler yoluyla sosyal becerilerin geliştirilmesi; aile, okul ve uzmanlar arasında işbirliği; otizm hakkında öğretmenlerin sürekli eğitimi. Pratik stratejiler: öz-düzenleme anları için sessiz alan oluşturma; günlük etkinlikler için görsel programların kullanımı; gerektiğinde duyusal molalar uygulama; akranlarla olumlu sosyal etkileşimleri teşvik etme; gerekirse alternatif iletişim sistemleri kurma. Entegrasyonun başarısı, tüm okul topluluğunun her öğrencinin bireysel ihtiyaçlarına uyum sağlayan misafirperver bir ortam yaratma konusundaki bağlılığına bağlıdır.';
+
+  @override
+  String get article_school_inclusion_author =>
+      'Dr. Carla Mendes - Eğitim Psikoloğu';
+
+  @override
+  String get article_sensory_processing_title => 'OSB\'de Duyusal İşleme';
+
+  @override
+  String get article_sensory_processing_body =>
+      'OSB\'li birçok kişi duyusal işlemede farklılıklar gösterir ve çevresel uyaranlara karşı aşırı duyarlı veya az duyarlı olabilir.\n\nDuyarlılık türleri:\n• Dokunsal: dokular, sıcaklıklar, basınç\n• İşitsel: yüksek sesler, belirli frekanslar\n• Görsel: parlak ışıklar, görsel desenler\n• Koku alma: güçlü veya belirli kokular\n• Tat alma: tatlar, yiyecek dokuları\n• Proprioseptif: vücut farkındalığı\n• Vestibüler: denge ve hareket\n\nDestek stratejileri kontrollü duyusal ortamlar, düzenli molalar ve kulaklık veya fidget nesneleri gibi duyusal araçların kullanımını içerir.';
+
+  @override
+  String get article_sensory_processing_author =>
+      'Meslek Terapisti Fernanda Rocha';
+
+  @override
+  String get article_family_support_title =>
+      'Aile Desteği: Bakım Verenlere Bakım';
+
+  @override
+  String get article_family_support_body =>
+      'OSB\'li kişilerin aileleri benzersiz zorluklarla karşılaşır ve sürekli desteğe ihtiyaç duyar. Bakım verenlerin öz bakımı tüm ailenin refahı için temeldir.\n\nDestek stratejileri:\n• Yerel veya çevrimiçi destek grupları arayın\n• Kişisel etkinlikler için zaman ayırın\n• Sorumlulukları aile üyeleri arasında paylaştırın\n• Gerektiğinde profesyonel yardım isteyin\n• Küçük başarıları kutlayın\n• Ailede açık iletişimi sürdürün\n\nUnutmayın: kendinize bakmak bencillik değil, gerekliliktir. Dengeli bir aile daha iyi destek sunar.';
+
+  @override
+  String get article_family_support_author => 'Aile Psikoloğu Beatriz Almeida';
+
+  @override
+  String get article_communication_strategies_title =>
+      'Etkili İletişim Stratejileri';
+
+  @override
+  String get article_communication_strategies_body =>
+      'Otizm spektrumundaki kişilerle iletişim, onların ihtiyaçlarını ve tercihlerini saygı gösteren özel stratejilerle kolaylaştırılabilir.\n\nÖnemli ipuçları:\n• Net ve doğrudan dil kullanın\n• Metaforlar ve deyimlerden kaçının\n• Bilgiyi işlemek için zaman verin\n• Mümkün olduğunda görsel destekleri kullanın\n• Saygılı göz teması kurun\n• Tekrarlarla sabırlı olun\n• Duyguları ve deneyimleri doğrulayın\n\nHer kişi benzersizdir - gözlemleyin ve iletişiminizi bireysel tercihlere uyarlayın. Etkili iletişim güven ve olumlu ilişkiler kurar.';
+
+  @override
+  String get article_communication_strategies_author =>
+      'Konuşma Terapisti Patricia Mendes';
 }

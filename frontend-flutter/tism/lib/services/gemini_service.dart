@@ -9,7 +9,7 @@ class GeminiService {
   static Future<void> _initialize() async {
     if (_initialized) return;
     
-    await dotenv.load(fileName: ".env");
+    await dotenv.load(fileName: '.env');
     final apiKey = dotenv.env['GEMINI_API_KEY'];
     
     _model = GenerativeModel(

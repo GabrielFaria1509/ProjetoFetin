@@ -255,28 +255,22 @@ class _ProfileSetupState extends State<ProfileSetup> {
   }
 
   void _createProfile() {
-    final name = _nameController.text.trim();
-    
-    // Validar se nome não é apenas whitespace ou caracteres invisíveis
-    if (name.isEmpty || name.replaceAll(RegExp(r'\s+'), '').isEmpty) {
+    if (_nameController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.child_name_empty),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(AppLocalizations.of(context)!.child_name_empty)),
       );
       return;
     }
-    
+
     final profile = ChildProfile(
-      name: _capitalizeName(name),
+      name: _capitalizeName(_nameController.text.trim()),
       ageDisplay: _ageDisplay,
       ageInMonths: _ageInMonths,
       supportLevel: _supportLevel,
       sensoryPreferences: _sensoryPreferences.toList(),
       interests: _interests.toList(),
     );
+
     widget.onProfileCreated(profile);
-    Navigator.pop(context);
   }
 }

@@ -1225,4 +1225,93 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get years => 'ans';
+
+  @override
+  String get search_articles => 'Rechercher des articles...';
+
+  @override
+  String get all_categories => 'Toutes les catégories';
+
+  @override
+  String get no_articles_found => 'Aucun article trouvé';
+
+  @override
+  String get no_articles_available => 'Aucun article disponible';
+
+  @override
+  String get article_early_signs_title => 'Signes Précoces du TSA';
+
+  @override
+  String get article_early_signs_body =>
+      'Identifier les premiers signes de l\'autisme peut faire toute la différence dans le développement de l\'enfant. Les principaux indicateurs incluent:\n\n• Difficultés dans la communication verbale et non verbale\n• Schémas comportementaux répétitifs\n• Intérêts restreints et intenses\n• Difficultés dans l\'interaction sociale\n• Sensibilité sensorielle altérée\n\nIl est important d\'observer que chaque enfant est unique et peut présenter différentes combinaisons de ces signes. Le diagnostic précoce permet des interventions plus efficaces.';
+
+  @override
+  String get article_early_signs_author => 'Dr. Maria Silva';
+
+  @override
+  String get article_aba_therapy_title => 'Thérapie ABA: Comment Ça Marche';
+
+  @override
+  String get article_aba_therapy_body =>
+      'L\'Analyse du Comportement Appliquée (ABA) est l\'une des thérapies les plus efficaces pour les enfants avec TSA. Cette approche scientifique se base sur les principes du comportement pour enseigner des compétences et réduire les comportements problématiques.\n\nPrincipes fondamentaux de l\'ABA:\n• Renforcement positif pour les comportements désirés\n• Division des compétences complexes en étapes plus petites\n• Collecte de données pour surveiller les progrès\n• Individualisation du programme pour chaque enfant\n\nLa thérapie ABA peut aider au développement des compétences de communication, sociales, académiques et de vie quotidienne.';
+
+  @override
+  String get article_aba_therapy_author => 'Psychologue Ana Costa';
+
+  @override
+  String get article_routines_title => 'Routines et Structure dans le TSA';
+
+  @override
+  String get article_routines_body =>
+      'Établir des routines claires aide les enfants avec autisme à se sentir plus en sécurité et organisés. La prévisibilité réduit l\'anxiété et facilite la participation aux activités quotidiennes.\n\nStratégies pour créer des routines efficaces:\n• Utilisez des supports visuels comme calendriers et horaires\n• Maintenez des horaires cohérents pour les repas et le sommeil\n• Préparez l\'enfant aux changements à l\'avance\n• Créez des rituels de transition entre activités\n• Établissez des lieux spécifiques pour différentes activités\n\nRappelez-vous que la flexibilité est aussi importante - ajustez les routines selon les besoins.';
+
+  @override
+  String get article_routines_author => 'Thérapeute João Santos';
+
+  @override
+  String get article_school_inclusion_title =>
+      'Inclusion Scolaire: Droits et Pratiques';
+
+  @override
+  String get article_school_inclusion_body =>
+      'L\'inclusion scolaire est un droit garanti par la loi au Brésil. La Loi Brésilienne d\'Inclusion (LBI) assure l\'accès à une éducation de qualité pour les personnes handicapées.\n\nPrincipaux droits:\n• Inscription dans une école régulière\n• Assistance éducationnelle spécialisée\n• Adaptations curriculaires si nécessaire\n• Professionnel de soutien scolaire\n• Matériels didactiques accessibles\n\nPour une inclusion efficace, la collaboration entre famille, école et professionnels spécialisés est essentielle. L\'environnement scolaire doit être accueillant et préparé pour répondre aux besoins spécifiques de chaque étudiant.';
+
+  @override
+  String get article_school_inclusion_author => 'Éducatrice Carla Lima';
+
+  @override
+  String get article_sensory_processing_title =>
+      'Traitement Sensoriel dans les TSA';
+
+  @override
+  String get article_sensory_processing_body =>
+      'Beaucoup de personnes avec TSA présentent des différences dans le traitement sensoriel, pouvant être hypersensibles ou hyposensibles aux stimuli de l\'environnement.\n\nTypes de sensibilités :\n• Tactile : textures, températures, pression\n• Auditive : sons forts, fréquences spécifiques\n• Visuelle : lumières vives, motifs visuels\n• Olfactive : odeurs fortes ou spécifiques\n• Gustative : goûts, textures alimentaires\n• Proprioceptive : conscience corporelle\n• Vestibulaire : équilibre et mouvement\n\nLes stratégies de soutien incluent des environnements sensoriels contrôlés, des pauses régulières et l\'utilisation d\'outils sensoriels comme des écouteurs ou des objets fidget.';
+
+  @override
+  String get article_sensory_processing_author =>
+      'Ergothérapeute Fernanda Rocha';
+
+  @override
+  String get article_family_support_title =>
+      'Soutien Familial : Prendre Soin de Ceux Qui Soignent';
+
+  @override
+  String get article_family_support_body =>
+      'Les familles de personnes avec TSA font face à des défis uniques et ont besoin d\'un soutien continu. L\'auto-soin des soignants est fondamental pour le bien-être de toute la famille.\n\nStratégies de soutien :\n• Chercher des groupes de soutien locaux ou en ligne\n• Maintenir du temps pour des activités personnelles\n• Partager les responsabilités entre membres de la famille\n• Chercher de l\'aide professionnelle quand nécessaire\n• Célébrer les petites réussites\n• Maintenir une communication ouverte dans la famille\n\nRappelez-vous : prendre soin de soi n\'est pas de l\'égoïsme, c\'est une nécessité. Une famille équilibrée offre un meilleur soutien.';
+
+  @override
+  String get article_family_support_author =>
+      'Psychologue Familiale Beatriz Almeida';
+
+  @override
+  String get article_communication_strategies_title =>
+      'Stratégies de Communication Efficace';
+
+  @override
+  String get article_communication_strategies_body =>
+      'La communication avec les personnes du spectre autistique peut être facilitée par des stratégies spécifiques qui respectent leurs besoins et préférences.\n\nConseils importants :\n• Utilisez un langage clair et direct\n• Évitez les métaphores et expressions idiomatiques\n• Donnez du temps pour traiter l\'information\n• Utilisez des supports visuels quand possible\n• Maintenez un contact visuel respectueux\n• Soyez patient avec les répétitions\n• Validez les sentiments et expériences\n\nChaque personne est unique - observez et adaptez votre communication aux préférences individuelles. Une communication efficace construit la confiance et des relations positives.';
+
+  @override
+  String get article_communication_strategies_author =>
+      'Orthophoniste Patricia Mendes';
 }

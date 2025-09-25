@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 // Imports condicionais para web
-import 'package:web/web.dart' as web;
-import 'dart:js_interop';
+// import 'package:web/web.dart' as web;
+// import 'dart:js_interop';
 
 class PWAService {
   static final PWAService _instance = PWAService._internal();
@@ -32,7 +32,7 @@ class PWAService {
   Future<void> initialize() async {
     // PROTEÇÃO: Só executa na web
     if (!kIsWeb) {
-      print('[PWA] Skipping PWA initialization on mobile platform');
+      debugPrint('[PWA] Skipping PWA initialization on mobile platform');
       return;
     }
 
@@ -41,7 +41,7 @@ class PWAService {
     await _registerServiceWorker();
     await _setupNotifications();
     
-    print('[PWA] Service initialized successfully');
+    debugPrint('[PWA] Service initialized successfully');
   }
 
   /// Configurar listener de conectividade
@@ -65,7 +65,7 @@ class PWAService {
         _syncOfflineData();
       }
       
-      print('[PWA] Connectivity changed: ${isOnline ? 'Online' : 'Offline'}');
+      debugPrint('[PWA] Connectivity changed: ${isOnline ? 'Online' : 'Offline'}');
     }
   }
 
@@ -76,7 +76,7 @@ class PWAService {
     // Implementação simplificada para web
     _isInstallable = true;
     onInstallPromptReady?.call();
-    print('[PWA] Install prompt ready');
+    debugPrint('[PWA] Install prompt ready');
   }
 
   /// Mostrar prompt de instalação
@@ -90,7 +90,7 @@ class PWAService {
       _isInstallable = false;
       return true;
     } catch (e) {
-      print('[PWA] Install prompt error: $e');
+      debugPrint('[PWA] Install prompt error: $e');
       return false;
     }
   }
@@ -101,9 +101,9 @@ class PWAService {
     
     try {
       // Implementação simplificada para web
-      print('[PWA] Service Worker registered');
+      debugPrint('[PWA] Service Worker registered');
     } catch (e) {
-      print('[PWA] Service Worker registration failed: $e');
+      debugPrint('[PWA] Service Worker registration failed: $e');
     }
   }
 
@@ -111,7 +111,7 @@ class PWAService {
   Future<void> _setupNotifications() async {
     if (!kIsWeb) return;
     
-    print('[PWA] Notifications configured');
+    debugPrint('[PWA] Notifications configured');
   }
 
   /// Mostrar notificação local
@@ -124,9 +124,9 @@ class PWAService {
     if (!kIsWeb) return;
     
     try {
-      print('[PWA] Notification: $title - $body');
+      debugPrint('[PWA] Notification: $title - $body');
     } catch (e) {
-      print('[PWA] Notification error: $e');
+      debugPrint('[PWA] Notification error: $e');
     }
   }
 
@@ -144,9 +144,9 @@ class PWAService {
       };
       
       await prefs.setString('offline_data', json.encode(allData));
-      print('[PWA] Offline data saved: $key');
+      debugPrint('[PWA] Offline data saved: $key');
     } catch (e) {
-      print('[PWA] Save offline data error: $e');
+      debugPrint('[PWA] Save offline data error: $e');
     }
   }
 
@@ -159,7 +159,7 @@ class PWAService {
       
       return allData[key]?['data'];
     } catch (e) {
-      print('[PWA] Get offline data error: $e');
+      debugPrint('[PWA] Get offline data error: $e');
       return null;
     }
   }
@@ -179,7 +179,7 @@ class PWAService {
       
       if (unsyncedData.isEmpty) return;
       
-      print('[PWA] Syncing ${unsyncedData.length} offline items');
+      debugPrint('[PWA] Syncing ${unsyncedData.length} offline items');
       
       for (final entry in unsyncedData) {
         await _syncDataItem(entry.key, entry.value['data']);
@@ -187,10 +187,10 @@ class PWAService {
       }
       
       await prefs.setString('offline_data', json.encode(allData));
-      print('[PWA] Offline data sync completed');
+      debugPrint('[PWA] Offline data sync completed');
       
     } catch (e) {
-      print('[PWA] Sync offline data error: $e');
+      debugPrint('[PWA] Sync offline data error: $e');
     }
   }
 
@@ -206,12 +206,12 @@ class PWAService {
 
   Future<void> _syncDiaryEntry(Map<String, dynamic> data) async {
     // Implementar sincronização de entrada do diário
-    print('[PWA] Syncing diary entry: ${data['title']}');
+    debugPrint('[PWA] Syncing diary entry: ${data['title']}');
   }
 
   Future<void> _syncForumPost(Map<String, dynamic> data) async {
     // Implementar sincronização de post do fórum
-    print('[PWA] Syncing forum post: ${data['title']}');
+    debugPrint('[PWA] Syncing forum post: ${data['title']}');
   }
 
 
@@ -219,15 +219,15 @@ class PWAService {
   /// Verificar se há atualizações
   Future<bool> checkForUpdates() async {
     if (!kIsWeb) {
-      print('[PWA] Updates check skipped on mobile');
+      debugPrint('[PWA] Updates check skipped on mobile');
       return false;
     }
 
     try {
-      print('[PWA] Checking for updates');
+      debugPrint('[PWA] Checking for updates');
       return true;
     } catch (e) {
-      print('[PWA] Check updates error: $e');
+      debugPrint('[PWA] Check updates error: $e');
       return false;
     }
   }
@@ -235,14 +235,14 @@ class PWAService {
   /// Limpar cache
   Future<void> clearCache() async {
     if (!kIsWeb) {
-      print('[PWA] Cache clear skipped on mobile');
+      debugPrint('[PWA] Cache clear skipped on mobile');
       return;
     }
 
     try {
-      print('[PWA] Cache cleared');
+      debugPrint('[PWA] Cache cleared');
     } catch (e) {
-      print('[PWA] Clear cache error: $e');
+      debugPrint('[PWA] Clear cache error: $e');
     }
   }
 

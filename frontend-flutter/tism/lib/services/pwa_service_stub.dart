@@ -1,5 +1,6 @@
 // Stub para plataformas não-web (mobile)
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 
 class PWAService {
   static final PWAService _instance = PWAService._internal();
@@ -17,7 +18,7 @@ class PWAService {
 
   // Métodos que não fazem nada no mobile
   Future<void> initialize() async {
-    print('[PWA] Mobile platform - PWA features disabled');
+    debugPrint('[PWA] Mobile platform - PWA features disabled');
   }
 
   Future<bool> showInstallPrompt() async => false;

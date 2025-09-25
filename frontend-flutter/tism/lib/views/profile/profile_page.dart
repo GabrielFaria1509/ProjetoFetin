@@ -261,7 +261,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   final result = await UserService.updateName(inputName);
                   if (result['success']) {
                     setState(() => _userName = inputName);
-                    if (context.mounted) {
+                    if (mounted && context.mounted) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -271,7 +271,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       );
                     }
                   } else {
-                    if (context.mounted) {
+                    if (mounted && context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_name),
@@ -518,7 +518,7 @@ class _ProfilePageState extends State<ProfilePage> {
     
     if (confirm == true) {
       final user = await UserService.getUser();
-      if (user != null) {
+      if (user != null && mounted) {
         final passwordController = TextEditingController();
         final password = await showDialog<String>(
           context: context,
@@ -554,7 +554,7 @@ class _ProfilePageState extends State<ProfilePage> {
         
         if (mounted) {
           if (result['success']) {
-            if (mounted) {
+            if (mounted && context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(result['message'] ?? AppLocalizations.of(context)!.account_deleted_success),
@@ -569,7 +569,7 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             }
           } else {
-            if (mounted) {
+            if (mounted && context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(result['error'] ?? AppLocalizations.of(context)!.error_deleting_account),
@@ -651,7 +651,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   if (mounted) {
                     if (result['success']) {
                       setState(() => _userUsername = inputUsername.toLowerCase());
-                      if (context.mounted) {
+                      if (mounted && context.mounted) {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -661,7 +661,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         );
                       }
                     } else {
-                      if (context.mounted) {
+                      if (mounted && context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(result['error'] ?? AppLocalizations.of(context)!.error_updating_username),

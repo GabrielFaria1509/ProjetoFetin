@@ -61,25 +61,25 @@ Pergunta: $message''';
       return responseText;
     } on GenerativeAIException catch (e) {
       if (e.message.contains('API_KEY_INVALID')) {
-        final l10n = context != null ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_api_key_error ?? "Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env";
+        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
+        final message = l10n?.tina_api_key_error ?? 'Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env';
         return '{"message": "$message", "mood": "sweat"}';
       } else if (e.message.contains('QUOTA_EXCEEDED')) {
-        final l10n = context != null ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_quota_error ?? "Limite de uso da API excedido. Tente novamente mais tarde.";
+        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
+        final message = l10n?.tina_quota_error ?? 'Limite de uso da API excedido. Tente novamente mais tarde.';
         return '{"message": "$message", "mood": "sweat"}';
       } else if (e.message.contains('Server Error')) {
-        final l10n = context != null ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_connection_error ?? "Estou com dificuldades para me conectar no momento. Muitos usuários estão utilizando o sistema. Tente novamente em alguns minutos! 😅";
+        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
+        final message = l10n?.tina_connection_error ?? 'Estou com dificuldades para me conectar no momento. Muitos usuários estão utilizando o sistema. Tente novamente em alguns minutos! 😅';
         return '{"message": "$message", "mood": "sweat"}';
       } else {
-        final l10n = context != null ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_general_error ?? "Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖";
+        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
+        final message = l10n?.tina_general_error ?? 'Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖';
         return '{"message": "$message", "mood": "grimacing"}';
       }
     } catch (e) {
-      final l10n = context != null ? AppLocalizations.of(context) : null;
-      final message = l10n?.tina_network_error ?? "Erro de conexão. Verifique sua internet e tente novamente.";
+      final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
+      final message = l10n?.tina_network_error ?? 'Erro de conexão. Verifique sua internet e tente novamente.';
       return '{"message": "$message", "mood": "sweat"}';
     }
   }

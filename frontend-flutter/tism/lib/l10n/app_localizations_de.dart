@@ -1220,4 +1220,93 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get years => 'Jahre';
+
+  @override
+  String get search_articles => 'Artikel suchen...';
+
+  @override
+  String get all_categories => 'Alle Kategorien';
+
+  @override
+  String get no_articles_found => 'Keine Artikel gefunden';
+
+  @override
+  String get no_articles_available => 'Keine Artikel verfügbar';
+
+  @override
+  String get article_early_signs_title => 'Frühe Anzeichen von ASS';
+
+  @override
+  String get article_early_signs_body =>
+      'Die Identifizierung der ersten Anzeichen von Autismus kann einen entscheidenden Unterschied in der Entwicklung des Kindes machen. Die wichtigsten Indikatoren umfassen:\n\n• Schwierigkeiten in der verbalen und nonverbalen Kommunikation\n• Wiederholende Verhaltensmuster\n• Eingeschränkte und intensive Interessen\n• Schwierigkeiten in der sozialen Interaktion\n• Veränderte sensorische Sensibilität\n\nEs ist wichtig zu beachten, dass jedes Kind einzigartig ist und verschiedene Kombinationen dieser Anzeichen zeigen kann. Eine frühe Diagnose ermöglicht wirksamere Interventionen.';
+
+  @override
+  String get article_early_signs_author => 'Dr. Maria Silva';
+
+  @override
+  String get article_aba_therapy_title => 'ABA-Therapie: Wie sie funktioniert';
+
+  @override
+  String get article_aba_therapy_body =>
+      'Die Angewandte Verhaltensanalyse (ABA) ist eine der wirksamsten Therapien für Kinder mit ASS. Dieser wissenschaftliche Ansatz basiert auf Verhaltensprinzipien, um Fähigkeiten zu lehren und problematische Verhaltensweisen zu reduzieren.\n\nGrundprinzipien der ABA:\n• Positive Verstärkung für erwünschte Verhaltensweisen\n• Aufteilung komplexer Fähigkeiten in kleinere Schritte\n• Datensammlung zur Überwachung des Fortschritts\n• Individualisierung des Programms für jedes Kind\n\nDie ABA-Therapie kann bei der Entwicklung von Kommunikations-, sozialen, akademischen und alltäglichen Lebensfertigkeiten helfen.';
+
+  @override
+  String get article_aba_therapy_author => 'Psychologin Ana Costa';
+
+  @override
+  String get article_routines_title => 'Routinen und Struktur bei ASS';
+
+  @override
+  String get article_routines_body =>
+      'Das Etablieren klarer Routinen hilft Kindern mit Autismus, sich sicherer und organisierter zu fühlen. Vorhersagbarkeit reduziert Angst und erleichtert die Teilnahme an täglichen Aktivitäten.\n\nStrategien für effektive Routinen:\n• Verwenden Sie visuelle Hilfsmittel wie Kalender und Zeitpläne\n• Halten Sie konsistente Zeiten für Mahlzeiten und Schlaf ein\n• Bereiten Sie das Kind im Voraus auf Veränderungen vor\n• Schaffen Sie Übergangsrituale zwischen Aktivitäten\n• Bestimmen Sie spezifische Orte für verschiedene Aktivitäten\n\nDenken Sie daran, dass Flexibilität auch wichtig ist - passen Sie Routinen nach Bedarf an.';
+
+  @override
+  String get article_routines_author => 'Therapeut João Santos';
+
+  @override
+  String get article_school_inclusion_title =>
+      'Schulische Inklusion: Rechte und Praktiken';
+
+  @override
+  String get article_school_inclusion_body =>
+      'Schulische Inklusion ist ein gesetzlich garantiertes Recht in Brasilien. Das Brasilianische Inklusionsgesetz (LBI) gewährleistet den Zugang zu qualitativ hochwertiger Bildung für Menschen mit Behinderungen.\n\nHauptrechte:\n• Anmeldung in einer regulären Schule\n• Spezialisierte pädagogische Betreuung\n• Curriculare Anpassungen bei Bedarf\n• Schulische Unterstützungsfachkraft\n• Zugängliche didaktische Materialien\n\nFür eine effektive Inklusion ist die Zusammenarbeit zwischen Familie, Schule und spezialisierten Fachkräften unerlässlich. Das schulische Umfeld muss einladend und darauf vorbereitet sein, die spezifischen Bedürfnisse jedes Schülers zu erfüllen.';
+
+  @override
+  String get article_school_inclusion_author => 'Pädagogin Carla Lima';
+
+  @override
+  String get article_sensory_processing_title =>
+      'Sensorische Verarbeitung bei ASS';
+
+  @override
+  String get article_sensory_processing_body =>
+      'Viele Menschen mit ASS zeigen Unterschiede in der sensorischen Verarbeitung und können hypersensibel oder hyposensibel auf Umweltreize reagieren.\n\nArten von Sensibilitäten:\n• Taktil: Texturen, Temperaturen, Druck\n• Auditiv: laute Geräusche, spezifische Frequenzen\n• Visuell: helle Lichter, visuelle Muster\n• Olfaktorisch: starke oder spezifische Gerüche\n• Gustatorisch: Geschmäcker, Nahrungstexturen\n• Propriozeptiv: Körperbewusstsein\n• Vestibulär: Gleichgewicht und Bewegung\n\nUnterstützungsstrategien umfassen kontrollierte sensorische Umgebungen, regelmäßige Pausen und die Verwendung sensorischer Hilfsmittel wie Kopfhörer oder Fidget-Objekte.';
+
+  @override
+  String get article_sensory_processing_author =>
+      'Ergotherapeutin Fernanda Rocha';
+
+  @override
+  String get article_family_support_title =>
+      'Familienunterstützung: Für die Pflegenden sorgen';
+
+  @override
+  String get article_family_support_body =>
+      'Familien von Menschen mit ASS stehen vor einzigartigen Herausforderungen und benötigen kontinuierliche Unterstützung. Die Selbstfürsorge der Pflegenden ist grundlegend für das Wohlbefinden der ganzen Familie.\n\nUnterstützungsstrategien:\n• Suchen Sie lokale oder Online-Selbsthilfegruppen\n• Bewahren Sie Zeit für persönliche Aktivitäten\n• Teilen Sie Verantwortlichkeiten unter Familienmitgliedern\n• Suchen Sie professionelle Hilfe bei Bedarf\n• Feiern Sie kleine Erfolge\n• Halten Sie offene Kommunikation in der Familie aufrecht\n\nDenken Sie daran: Sich um sich selbst zu kümmern ist kein Egoismus, es ist eine Notwendigkeit. Eine ausgeglichene Familie bietet bessere Unterstützung.';
+
+  @override
+  String get article_family_support_author =>
+      'Familienpsychologin Beatriz Almeida';
+
+  @override
+  String get article_communication_strategies_title =>
+      'Effektive Kommunikationsstrategien';
+
+  @override
+  String get article_communication_strategies_body =>
+      'Die Kommunikation mit Menschen im Autismus-Spektrum kann durch spezifische Strategien erleichtert werden, die ihre Bedürfnisse und Präferenzen respektieren.\n\nWichtige Tipps:\n• Verwenden Sie klare und direkte Sprache\n• Vermeiden Sie Metaphern und Redewendungen\n• Geben Sie Zeit zur Informationsverarbeitung\n• Nutzen Sie visuelle Hilfsmittel wenn möglich\n• Halten Sie respektvollen Augenkontakt\n• Seien Sie geduldig mit Wiederholungen\n• Validieren Sie Gefühle und Erfahrungen\n\nJede Person ist einzigartig - beobachten Sie und passen Sie Ihre Kommunikation an individuelle Präferenzen an. Effektive Kommunikation baut Vertrauen und positive Beziehungen auf.';
+
+  @override
+  String get article_communication_strategies_author =>
+      'Logopädin Patricia Mendes';
 }

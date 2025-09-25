@@ -2423,6 +2423,156 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'anos'**
   String get years;
+
+  /// No description provided for @search_articles.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar artigos...'**
+  String get search_articles;
+
+  /// No description provided for @all_categories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todas as categorias'**
+  String get all_categories;
+
+  /// No description provided for @no_articles_found.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum artigo encontrado'**
+  String get no_articles_found;
+
+  /// No description provided for @no_articles_available.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum artigo disponível'**
+  String get no_articles_available;
+
+  /// No description provided for @article_early_signs_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sinais Precoces do TEA'**
+  String get article_early_signs_title;
+
+  /// No description provided for @article_early_signs_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'Identificar os primeiros sinais do autismo pode fazer toda a diferença no desenvolvimento da criança. Os principais indicadores incluem:\n\n• Dificuldades na comunicação verbal e não-verbal\n• Padrões repetitivos de comportamento\n• Interesses restritos e intensos\n• Dificuldades na interação social\n• Sensibilidade sensorial alterada\n\nÉ importante observar que cada criança é única e pode apresentar diferentes combinações destes sinais. O diagnóstico precoce permite intervenções mais eficazes.'**
+  String get article_early_signs_body;
+
+  /// No description provided for @article_early_signs_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dr. Maria Silva'**
+  String get article_early_signs_author;
+
+  /// No description provided for @article_aba_therapy_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Terapia ABA: Como Funciona'**
+  String get article_aba_therapy_title;
+
+  /// No description provided for @article_aba_therapy_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'A Análise do Comportamento Aplicada (ABA) é uma das terapias mais eficazes para crianças com TEA. Esta abordagem científica baseia-se em princípios do comportamento para ensinar habilidades e reduzir comportamentos problemáticos.\n\nPrincípios fundamentais da ABA:\n• Reforço positivo para comportamentos desejados\n• Quebra de habilidades complexas em passos menores\n• Coleta de dados para monitorar progresso\n• Individualização do programa para cada criança\n\nA terapia ABA pode ajudar no desenvolvimento de habilidades de comunicação, sociais, acadêmicas e de vida diária.'**
+  String get article_aba_therapy_body;
+
+  /// No description provided for @article_aba_therapy_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Psicóloga Ana Costa'**
+  String get article_aba_therapy_author;
+
+  /// No description provided for @article_routines_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rotinas e Estrutura no TEA'**
+  String get article_routines_title;
+
+  /// No description provided for @article_routines_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estabelecer rotinas claras ajuda crianças com autismo a se sentirem mais seguras e organizadas. A previsibilidade reduz a ansiedade e facilita a participação em atividades diárias.\n\nEstratégias para criar rotinas eficazes:\n• Use apoios visuais como calendários e cronogramas\n• Mantenha horários consistentes para refeições e sono\n• Prepare a criança para mudanças com antecedência\n• Crie rituais de transição entre atividades\n• Estabeleça locais específicos para diferentes atividades\n\nLembre-se de que flexibilidade também é importante - ajuste as rotinas conforme necessário.'**
+  String get article_routines_body;
+
+  /// No description provided for @article_routines_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Terapeuta João Santos'**
+  String get article_routines_author;
+
+  /// No description provided for @article_school_inclusion_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inclusão Escolar: Direitos e Práticas'**
+  String get article_school_inclusion_title;
+
+  /// No description provided for @article_school_inclusion_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'A inclusão escolar é um direito garantido por lei no Brasil. A Lei Brasileira de Inclusão (LBI) assegura o acesso à educação de qualidade para pessoas com deficiência.\n\nPrincipais direitos:\n• Matrícula em escola regular\n• Atendimento educacional especializado\n• Adaptações curriculares quando necessárias\n• Profissional de apoio escolar\n• Materiais didáticos acessíveis\n\nPara uma inclusão efetiva, é essencial a colaboração entre família, escola e profissionais especializados. O ambiente escolar deve ser acolhedor e preparado para atender às necessidades específicas de cada estudante.'**
+  String get article_school_inclusion_body;
+
+  /// No description provided for @article_school_inclusion_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedagoga Carla Lima'**
+  String get article_school_inclusion_author;
+
+  /// No description provided for @article_sensory_processing_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Processamento Sensorial no TEA'**
+  String get article_sensory_processing_title;
+
+  /// No description provided for @article_sensory_processing_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'Muitas pessoas com TEA apresentam diferenças no processamento sensorial, podendo ser hipersensíveis ou hiposensíveis a estímulos do ambiente.\n\nTipos de sensibilidades:\n• Tátil: texturas, temperaturas, pressão\n• Auditiva: sons altos, frequências específicas\n• Visual: luzes brilhantes, padrões visuais\n• Olfativa: cheiros fortes ou específicos\n• Gustativa: sabores, texturas alimentares\n• Proprioceptiva: consciência corporal\n• Vestibular: equilíbrio e movimento\n\nEstratégias de apoio incluem ambientes sensoriais controlados, pausas regulares e uso de ferramentas sensoriais como fones de ouvido ou objetos fidget.'**
+  String get article_sensory_processing_body;
+
+  /// No description provided for @article_sensory_processing_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Terapeuta Ocupacional Fernanda Rocha'**
+  String get article_sensory_processing_author;
+
+  /// No description provided for @article_family_support_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apoio Familiar: Cuidando de Quem Cuida'**
+  String get article_family_support_title;
+
+  /// No description provided for @article_family_support_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'Famílias de pessoas com TEA enfrentam desafios únicos e precisam de apoio contínuo. O autocuidado dos cuidadores é fundamental para o bem-estar de toda a família.\n\nEstratégias de apoio:\n• Buscar grupos de apoio locais ou online\n• Manter tempo para atividades pessoais\n• Dividir responsabilidades entre familiares\n• Procurar ajuda profissional quando necessário\n• Celebrar pequenas conquistas\n• Manter comunicação aberta na família\n\nLembre-se: cuidar de si mesmo não é egoísmo, é necessidade. Uma família equilibrada oferece melhor suporte.'**
+  String get article_family_support_body;
+
+  /// No description provided for @article_family_support_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Psicóloga Familiar Beatriz Almeida'**
+  String get article_family_support_author;
+
+  /// No description provided for @article_communication_strategies_title.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estratégias de Comunicação Eficaz'**
+  String get article_communication_strategies_title;
+
+  /// No description provided for @article_communication_strategies_body.
+  ///
+  /// In pt, this message translates to:
+  /// **'A comunicação com pessoas no espectro autista pode ser facilitada através de estratégias específicas que respeitam suas necessidades e preferências.\n\nDicas importantes:\n• Use linguagem clara e direta\n• Evite metáforas e expressões idiomáticas\n• Dê tempo para processamento da informação\n• Use apoios visuais quando possível\n• Mantenha contato visual respeitoso\n• Seja paciente com repetições\n• Valide sentimentos e experiências\n\nCada pessoa é única - observe e adapte sua comunicação às preferências individuais. A comunicação eficaz constrói confiança e relacionamentos positivos.'**
+  String get article_communication_strategies_body;
+
+  /// No description provided for @article_communication_strategies_author.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fonoaudióloga Patrícia Mendes'**
+  String get article_communication_strategies_author;
 }
 
 class _AppLocalizationsDelegate
