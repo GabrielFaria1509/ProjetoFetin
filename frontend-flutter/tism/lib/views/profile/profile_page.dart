@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tism/constants/colors.dart';
 import 'package:tism/services/user_service.dart';
 import 'package:tism/services/theme_service.dart';
+import 'package:tism/services/language_service.dart';
 import 'package:tism/l10n/app_localizations.dart';
 import 'package:tism/views/login/login_page.dart';
 
@@ -177,6 +178,20 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _showThemeDialog,
+            ),
+          ),
+
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.language),
+              title: Text(AppLocalizations.of(context)!.language ?? 'Idioma'),
+              subtitle: Consumer<LanguageService>(
+                builder: (context, languageService, child) {
+                  return Text(languageService.currentLanguageName);
+                },
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: _showLanguageDialog,
             ),
           ),
 
@@ -442,6 +457,52 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
               ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showLanguageDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.language ?? 'Idioma'),
+        content: Consumer<LanguageService>(
+          builder: (context, languageService, child) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  RadioListTile<String>(
+                    title: const Text('System'),
+                    subtitle: const Text('Idioma do dispositivo'),
+                    value: 'system',
+                    groupValue: languageService.currentLanguage == 'system' ? 'system' : languageService.currentLanguage,
+                    onChanged: (value) async {
+                      if (value == 'system') {
+                        await languageService.initialize(context);
+                      }
+                      if (context.mounted) Navigator.pop(context);
+                    },
+                  ),
+                  const Divider(),
+                  ...LanguageService.availableLanguages.entries.map((entry) {
+                    return RadioListTile<String>(
+                      title: Text(entry.value),
+                      value: entry.key,
+                      groupValue: languageService.currentLanguage,
+                      onChanged: (value) async {
+                        if (value != null) {
+                          await languageService.setLanguage(value);
+                          if (context.mounted) Navigator.pop(context);
+                        }
+                      },
+                    );
+                  }).toList(),
+                ],
+              ),
             );
           },
         ),
