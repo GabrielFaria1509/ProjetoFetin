@@ -16,7 +16,7 @@ if "%GEMINI_API_KEY%"=="" (
 echo ✅ Chave API encontrada: %GEMINI_API_KEY:~0,10%...
 
 REM Build para web com a chave API
-flutter build web --dart-define=GEMINI_API_KEY=%GEMINI_API_KEY% --release
+flutter build web --dart-define=GEMINI_API_KEY=%GEMINI_API_KEY% --release --no-wasm-dry-run
 
 if %ERRORLEVEL% EQU 0 (
     echo.
