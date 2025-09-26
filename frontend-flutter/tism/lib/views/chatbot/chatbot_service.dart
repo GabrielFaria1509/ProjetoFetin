@@ -25,8 +25,9 @@ class ChatbotService {
 Enquanto isso, você pode usar o fórum para tirar dúvidas com a comunidade!''';
       }
       
+      // Usar gemini-2.5-pro que foi testado e funciona
       final model = GenerativeModel(
-        model: 'gemini-1.5-pro',
+        model: 'gemini-2.5-pro',
         apiKey: apiKey,
         generationConfig: GenerationConfig(
           temperature: 0.8,
@@ -41,6 +42,7 @@ Enquanto isso, você pode usar o fórum para tirar dúvidas com a comunidade!'''
           SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.low),
         ],
       );
+
 
       final prompt = '''${ChatbotConfig.customPrompt}
 
@@ -61,7 +63,7 @@ SEU ESTILO DE COMUNICAÇÃO:
 - Mantenha um tom conversacional e natural
 - Seja encorajadora e positiva sempre que possível
 
-Suas respostas devem ter NO MÍNIMO 2000 caracteres (cerca de 300-400 palavras) para garantir profundidade, qualidade e demonstrar seu cuidado genuíno com cada pessoa.
+Suas respostas devem ter NO MÍNIMO 1100 caracteres (cerca de 225-300 palavras) para garantir profundidade, qualidade e demonstrar seu cuidado genuíno com cada pessoa.
 
 Moods disponíveis:
 - grimacing: situações polêmicas, "eita!", temas delicados
@@ -89,11 +91,15 @@ Resposta (formato JSON):''';
       
       return responseText;
     } on GenerativeAIException catch (e) {
-      final errorLog = 'ERRO CHATBOT: ${e.message} | Stack: ${e.toString()} | API: ${apiKey?.substring(0, 10)}...';
-      return '{"message": "$errorLog", "mood": "grimacing"}';
+      if (e.message.contains('Quota exceeded')) {
+        return '{"message": "Estou temporariamente indisponível devido ao alto volume de uso. Tente novamente em alguns minutos! 😊", "mood": "smile"}';
+      } else if (e.message.contains('API_KEY_INVALID')) {
+        return '{"message": "Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env", "mood": "grimacing"}';
+      } else {
+        return '{"message": "Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖", "mood": "grimacing"}';
+      }
     } catch (e) {
-      final errorLog = 'ERRO GERAL: ${e.toString()} | Tipo: ${e.runtimeType} | API: ${apiKey?.substring(0, 10)}... | Dotenv: ${dotenv.isInitialized}';
-      return '{"message": "$errorLog", "mood": "grimacing"}';
+      return '{"message": "Erro de conexão. Verifique sua internet e tente novamente.", "mood": "grimacing"}';
     }
   }
 
