@@ -22,10 +22,10 @@ class GeminiService {
         maxOutputTokens: 1024,
       ),
       safetySettings: [
-        SafetySetting(HarmCategory.harassment, HarmBlockThreshold.medium),
-        SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.medium),
-        SafetySetting(HarmCategory.sexuallyExplicit, HarmBlockThreshold.medium),
-        SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.medium),
+        SafetySetting(HarmCategory.harassment, HarmBlockThreshold.low),
+        SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.low),
+        SafetySetting(HarmCategory.sexuallyExplicit, HarmBlockThreshold.low),
+        SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.low),
       ],
     );
     
