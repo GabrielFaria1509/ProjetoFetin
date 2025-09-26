@@ -205,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
-                value: _userType,
+                initialValue: _userType,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.user_type,
                   prefixIcon: const Icon(Icons.work),

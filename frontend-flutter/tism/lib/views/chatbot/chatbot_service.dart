@@ -1,7 +1,6 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
-import 'package:tism/l10n/app_localizations.dart';
 
 class ChatbotService {
   static Future<String> sendMessage(String message, [BuildContext? context]) async {

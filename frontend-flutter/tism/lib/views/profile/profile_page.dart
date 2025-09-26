@@ -500,7 +500,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         }
                       },
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             );

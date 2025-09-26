@@ -219,7 +219,7 @@ class _CreatePostEnhancedState extends State<CreatePostEnhanced> with TickerProv
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: _selectedCategory,
+            initialValue: _selectedCategory,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
             ),
