@@ -102,7 +102,6 @@
       width: 120px;
       height: 120px;
       margin-bottom: 24px;
-      animation: pulse 2s infinite;
     }
     
     .splash-title {
@@ -208,18 +207,14 @@
       markPerformance('installPromptReady');
     });
     
-    // Preload crítico
-    const preloadScript = document.createElement('link');
-    preloadScript.rel = 'preload';
-    preloadScript.as = 'script';
-    preloadScript.href = 'flutter_bootstrap.js';
-    document.head.appendChild(preloadScript);
+    // Service Worker Version
+    const serviceWorkerVersion = null;
   </script>
 </head>
 <body>
   <!-- Splash Screen Customizado -->
   <div class="splash-container" id="splash">
-    <img src="icons/Icon-192.png" alt="TISM Logo" class="splash-logo">
+    <div class="splash-logo" style="width: 120px; height: 120px; background: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin-bottom: 24px;">🧩</div>
     <h1 class="splash-title">TISM</h1>
     <p class="splash-subtitle">Tudo sobre TEA em um clique 💙</p>
     <div class="splash-loader"></div>
@@ -234,6 +229,23 @@
   </noscript>
   
   <!-- Flutter App -->
-  <script src="flutter_bootstrap.js" async></script>
+  <script src="flutter.js" defer></script>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+            // Remove splash screen after app loads
+            setTimeout(removeSplashFromWeb, 500);
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

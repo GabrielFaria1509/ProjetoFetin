@@ -56,6 +56,10 @@ class _ChatScreenState extends State<ChatScreen> {
         elevation: Theme.of(context).brightness == Brightness.dark ? 0 : 4,
         actions: [
           IconButton(
+            icon: const Icon(Icons.bug_report, color: Colors.white),
+            onPressed: () => _testApiConnection(),
+          ),
+          IconButton(
             icon: const Icon(Icons.info_outline, color: Colors.white),
             onPressed: () => _showInfoDialog(),
           ),
@@ -228,6 +232,106 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
   
+  void _testApiConnection() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        title: Text('🔧 Testando API'),
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 16),
+            Text('Verificando conexão...'),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      final response = await ChatbotService.sendMessage('teste', context);
+      Navigator.of(context).pop();
+      
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('✅ Resultado do Teste'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Status: Conexão OK', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                const Text('Resposta da API:', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    response.length > 200 ? '${response.substring(0, 200)}...' : response,
+                    style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      Navigator.of(context).pop();
+      
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('❌ Erro no Teste'),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Status: Falha na conexão', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              const Text('Erro:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 4),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.red[50],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  e.toString(),
+                  style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text('Verifique:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('• Chave API no arquivo .env'),
+              const Text('• Conexão com internet'),
+              const Text('• Cota da API Gemini'),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   void _showInfoDialog() {
     showDialog(
       context: context,
