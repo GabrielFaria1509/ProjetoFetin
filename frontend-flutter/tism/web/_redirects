@@ -1,0 +1,13 @@
+# Redirects para PWA no Netlify
+
+# SPA - todas as rotas devem retornar index.html
+/*    /index.html   200
+
+# Redirects para HTTPS (se necessário)
+http://tism.netlify.app/*    https://tism.netlify.app/:splat    301!
+
+# Redirects para domínio personalizado (quando configurado)
+# http://seu-dominio.com/*    https://seu-dominio.com/:splat    301!
+
+# Fallback para recursos não encontrados
+/api/*    /index.html    404

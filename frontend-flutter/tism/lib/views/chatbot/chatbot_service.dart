@@ -5,13 +5,14 @@ import 'package:tism/l10n/app_localizations.dart';
 
 class ChatbotService {
   static Future<String> sendMessage(String message, [BuildContext? context]) async {
+    String? apiKey;
     try {
       // Verificar se o .env foi carregado
       if (!dotenv.isInitialized) {
         await dotenv.load();
       }
       
-      final apiKey = dotenv.env['GEMINI_API_KEY'];
+      apiKey = dotenv.env['GEMINI_API_KEY'];
       
       if (apiKey == null || apiKey.isEmpty || apiKey == 'your_gemini_api_key_here') {
         return '''Para usar o chatbot, você precisa:
@@ -24,7 +25,7 @@ Enquanto isso, você pode usar o fórum para tirar dúvidas com a comunidade!'''
       }
       
       final model = GenerativeModel(
-        model: 'gemini-1.5-pro',
+        model: 'gemini-2.0-flash-exp',
         apiKey: apiKey,
         generationConfig: GenerationConfig(
           temperature: 0.7,
@@ -60,27 +61,11 @@ Pergunta: $message''';
       
       return responseText;
     } on GenerativeAIException catch (e) {
-      if (e.message.contains('API_KEY_INVALID')) {
-        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_api_key_error ?? 'Chave da API inválida. Verifique se a chave do Gemini está correta no arquivo .env';
-        return '{"message": "$message", "mood": "sweat"}';
-      } else if (e.message.contains('QUOTA_EXCEEDED')) {
-        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_quota_error ?? 'Limite de uso da API excedido. Tente novamente mais tarde.';
-        return '{"message": "$message", "mood": "sweat"}';
-      } else if (e.message.contains('Server Error')) {
-        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_connection_error ?? 'Estou com dificuldades para me conectar no momento. Muitos usuários estão utilizando o sistema. Tente novamente em alguns minutos! 😅';
-        return '{"message": "$message", "mood": "sweat"}';
-      } else {
-        final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
-        final message = l10n?.tina_general_error ?? 'Ops! Algo deu errado por aqui. Tente novamente em alguns instantes! 🤖';
-        return '{"message": "$message", "mood": "grimacing"}';
-      }
+      final errorLog = 'ERRO CHATBOT: ${e.message} | Stack: ${e.toString()} | API: ${apiKey?.substring(0, 10)}...';
+      return '{"message": "$errorLog", "mood": "grimacing"}';
     } catch (e) {
-      final l10n = context != null && context.mounted ? AppLocalizations.of(context) : null;
-      final message = l10n?.tina_network_error ?? 'Erro de conexão. Verifique sua internet e tente novamente.';
-      return '{"message": "$message", "mood": "sweat"}';
+      final errorLog = 'ERRO GERAL: ${e.toString()} | Tipo: ${e.runtimeType} | API: ${apiKey?.substring(0, 10)}... | Dotenv: ${dotenv.isInitialized}';
+      return '{"message": "$errorLog", "mood": "grimacing"}';
     }
   }
 
